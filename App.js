@@ -29,7 +29,6 @@ export default App = StackNavigator({
   Home: {
     screen: Home,
     navigationOptions: {
-      title: "Home"
     }
   },
   Screen: {
@@ -47,10 +46,7 @@ export default App = StackNavigator({
   Main: {
     screen: Main,
     navigationOptions: {
-      title: "Menu",
-      justifyContent: "center",
-      alignItems: "center",
-      textAlign: "center"
+      
     }
   }
 });
