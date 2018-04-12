@@ -5,26 +5,24 @@ import {
   Platform, 
   ScrollView, 
   StyleSheet, 
-  View 
+  View,
+  Search 
 } from "react-native";
-
 import { StackNavigator } from "react-navigation";
 
 const { width, height } = Dimensions.get("window");
 
 import Button from "./Button";
 import Main from "./Main";
+import { COLOR_PRIMARY } from "../styles/common";
 
 export default class OnboardingScreens extends Component {
   static navigationOptions = {
     headerStyle: {
-      backgroundColor: "#16a085",
+      backgroundColor: COLOR_PRIMARY,
       elevation: null
     },
-    footerStyle: {
-      backgroundColor: "#2B78AC",
-      elevation: null
-    }
+    header: null
   };
   // Props for ScrollView component
   static defaultProps = {
