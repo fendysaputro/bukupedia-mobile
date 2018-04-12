@@ -5,11 +5,19 @@ import TabNavigator from "react-native-tab-navigator";
 import BottomNavigation, { Tab } from "react-native-material-bottom-navigation";
 
 export default class Basket extends Component {
+  static navigationOptions = {
+    headerStyle: {
+      backgroundColor: COLOR_PRIMARY,
+      elevation: null
+    },
+    headerLeft: null,
+  }
   render () {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
-          Basket
+          This is Basket
+          ini adalah keranjang
         </Text>
       </View>
     )

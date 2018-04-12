@@ -5,11 +5,19 @@ import TabNavigator from "react-native-tab-navigator";
 import BottomNavigation, { Tab } from "react-native-material-bottom-navigation";
 
 export default class Account extends Component {
+  static navigationOptions = {
+    headerStyle: {
+      backgroundColor: COLOR_PRIMARY,
+      elevation: null
+    },
+    headerLeft: null,
+  }
   render () {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
-          Account
+          This is Account
+          ini adalah akun
         </Text>
       </View>
     )

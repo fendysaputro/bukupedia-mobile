@@ -5,11 +5,19 @@ import TabNavigator from "react-native-tab-navigator";
 import BottomNavigation, { Tab } from "react-native-material-bottom-navigation";
 
 export default class Category extends Component {
+  static navigationOptions = {
+    headerStyle: {
+      backgroundColor: COLOR_PRIMARY,
+      elevation: null
+    },
+    headerLeft: null,
+  }
   render () {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
-          Category
+          This is Category
+          ini adalah kategori
         </Text>
       </View>
     )

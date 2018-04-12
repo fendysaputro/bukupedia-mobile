@@ -5,11 +5,19 @@ import TabNavigator from "react-native-tab-navigator";
 import BottomNavigation, { Tab } from "react-native-material-bottom-navigation";
 
 export default class Home extends Component {
+  static navigationOptions = {
+    headerStyle: {
+      backgroundColor: COLOR_PRIMARY,
+      elevation: null
+    },
+    headerLeft: null,
+  }
   render () {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
-          Home
+          This is Home
+          ini adalah Beranda
         </Text>
       </View>
     )
@@ -28,4 +36,4 @@ const styles = StyleSheet.create({
   }
 });
 
-AppRegistry.registerComponent("Beranda", () => Home);
+AppRegistry.registerComponent("Home", () => Home);
