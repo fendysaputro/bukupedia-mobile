@@ -1,5 +1,16 @@
 import React, { Component } from "react";
-import { AppRegistry, StyleSheet, Text, View, Image, Search, TouchableOpacity, Button, List } from "react-native";
+import { 
+  AppRegistry, 
+  StyleSheet, 
+  Text, 
+  View, 
+  Image, 
+  Search, 
+  TouchableOpacity, 
+  TouchableNativeFeedback, 
+  Button, 
+  ListView, 
+  DataSource } from "react-native";
 import { COLOR_PRIMARY } from "../styles/common";
 import TabNavigator from "react-native-tab-navigator";
 import { ListItem } from "react-native-elements";
@@ -19,14 +30,6 @@ export default class Account extends Component {
     headerLeft: null
   }
 
-  stateOne = {
-    listOne: [
-      {
-        id: 0,
-        name: 'Hi, Selamat Datang!',
-      }
-    ]
-  }
   stateTwo = {
     listTwo: [
       {
@@ -43,27 +46,47 @@ export default class Account extends Component {
       }
     ]
   }
+  alertItemName = (itemOne, index) => {
+    alert(itemOne.name)
+  }
+  alertItemTitle = (itemTwo, index) => {
+    alert(itemTwo.title)
+  }
+
+  // constructor() {
+  //   super();
+  //   const ds = new ListView.DataSource({rowHasChanged: (r1, r2, r3, r4) => r1 !== r2 !== r3 !==r4});
+  //   this.state = {
+  //     dataSource: ds.cloneWithRows(['row 1', 'row 2', 'row 3', 'row 4']),
+  //   };
+  // }
 
   render () {
     return (
-      <View>
+     <View>
         {
-          this.stateOne.listOne.map((itemOne, index) => (
-            <TouchableOpacity
-              key = {itemOne.id}
-              style = {styles.containerOne}
-            >
-              <Text style = {styles.text}>
-                {itemOne.name}
-              </Text>
-            </TouchableOpacity>
-          ))
+        <TouchableOpacity
+          key = '1'
+          style = {styles.containerOne}
+          onPress = {() => this.alertItemName("Hi, Selamat Datang!")}
+        >
+          <Text style = {styles.text}>
+            Hi, Selamat Datang!
+          </Text>
+          <Button style = {styles.button}
+            onPress = {() => this.alertItemName("Hi, Selamat Datang!")}
+            title = "Masuk"
+            color = "yellow"
+            titleColor = "black"
+          />
+        </TouchableOpacity>
         }
         {
           this.stateTwo.listTwo.map((itemTwo, index) => (
             <TouchableOpacity
               key = {itemTwo.id}
               style = {styles.containerTwo}
+              onPress = {() => this.alertItemTitle(itemTwo)}
             >
               <Text style = {styles.text}>
                 {itemTwo.title}
@@ -75,6 +98,7 @@ export default class Account extends Component {
     )
   }
 }
+
 const styles = StyleSheet.create({
   containerOne: {
     padding: 10,
@@ -95,6 +119,11 @@ const styles = StyleSheet.create({
     textAlign: 'right'
   },
   button: {
+    flexDirection: 'column',
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end',
+    marginLeft: '70%',
+    flex: 1,
     color: 'yellow'
   },
   buttonText: {

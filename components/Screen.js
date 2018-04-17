@@ -13,18 +13,27 @@ export default class Screen extends Component {
                 <View style={styles.slide}>
                     <Text style={styles.header}>Pencarian Buku</Text>
                     <Text style={styles.headerText}>Semakin Mudah</Text>
-                    <Text style={styles.text}>Slide 1</Text>
+                    <Image 
+                        source={require('../styles/icon/icon-logo.png')} 
+                        style={{ width: 100, height: 100 }}>
+                    </Image>
                 </View>
                 { /* Second screen */}
                 <View style={styles.slide}>
                     <Text style={styles.header}>Gratis Ongkos Kirim</Text>
                     <Text style={styles.headerText}>Seluruh Wilayah Indonesia</Text>
-                    <Text style={styles.text}>Slide 2</Text>
+                    <Image 
+                        source={require('../styles/icon/icon-logo.png')} 
+                        style={{ width: 100, height: 100 }}>
+                    </Image>
                 </View>
                 {/* Third screen */}
                 <View style={styles.slide}>
                     <Text style={styles.header}>Pencarian Buku</Text>
-                    <Text style={styles.text}>Slide 3</Text>
+                    <Image 
+                        source={require('../styles/icon/icon-logo.png')} 
+                        style={{ width: 100, height: 100 }}>
+                    </Image>
                 </View>
             </Swiper>
         );
