@@ -1,4 +1,4 @@
-# bukupedia_mobile
+Bukupedia Mobile Apps IOS dan Android.
 
 # Install API Bukupeida
 setting Host supaya bisa terkoneksi sama API 
