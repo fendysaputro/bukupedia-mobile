@@ -8,12 +8,11 @@ import {
   Search, 
   TouchableOpacity, 
   TouchableNativeFeedback, 
-  Button, 
   ListView, 
   DataSource } from "react-native";
 import { COLOR_PRIMARY } from "../styles/common";
 import TabNavigator from "react-native-tab-navigator";
-import { ListItem } from "react-native-elements";
+import Button from "react-native-button";
 
 export default class Account extends Component {
   static navigationOptions = {
@@ -53,6 +52,9 @@ export default class Account extends Component {
     alert(itemTwo.title)
   }
 
+  constructor(props, context){
+    super(props, context);
+  }
   // constructor() {
   //   super();
   //   const ds = new ListView.DataSource({rowHasChanged: (r1, r2, r3, r4) => r1 !== r2 !== r3 !==r4});
@@ -68,17 +70,22 @@ export default class Account extends Component {
         <TouchableOpacity
           key = '1'
           style = {styles.containerOne}
-          onPress = {() => this.alertItemName("Hi, Selamat Datang!")}
         >
-          <Text style = {styles.text}>
-            Hi, Selamat Datang!
-          </Text>
-          <Button style = {styles.button}
-            onPress = {() => this.alertItemName("Hi, Selamat Datang!")}
-            title = "Masuk"
-            color = "yellow"
-            titleColor = "black"
-          />
+          <Button 
+            style = {{
+              position: 'relative',
+              fontSize: 15, 
+              color: 'black', 
+              backgroundColor: '#FBAD19', 
+              width: '25%',  
+              alignSelf: 'flex-end'
+            }}
+            onPress = {() => this.alertItemName("fendy")}>
+            <Text style = {styles.text}>
+              Hi, Selamat Datang!
+            </Text>
+            Masuk  
+          </Button> 
         </TouchableOpacity>
         }
         {
@@ -117,14 +124,6 @@ const styles = StyleSheet.create({
   symbol:{
     color: 'black',
     textAlign: 'right'
-  },
-  button: {
-    flexDirection: 'column',
-    justifyContent: 'flex-end',
-    alignItems: 'flex-end',
-    marginLeft: '70%',
-    flex: 1,
-    color: 'yellow'
   },
   buttonText: {
     color: 'black',
