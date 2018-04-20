@@ -13,6 +13,7 @@ import {
 import { COLOR_PRIMARY } from "../styles/common";
 import TabNavigator from "react-native-tab-navigator";
 import Button from "react-native-button";
+import { ListItem } from "react-native-elements";
 
 export default class Account extends Component {
   static navigationOptions = {
@@ -41,10 +42,11 @@ export default class Account extends Component {
       },
       {
         id: 2,
-        title: 'Bantuan                                                                                   >'
+        title: 'Bantuan                                                                          >'
       }
     ]
   }
+
   alertItemName = (itemOne, index) => {
     alert(itemOne.name)
   }
@@ -55,13 +57,6 @@ export default class Account extends Component {
   constructor(props, context){
     super(props, context);
   }
-  // constructor() {
-  //   super();
-  //   const ds = new ListView.DataSource({rowHasChanged: (r1, r2, r3, r4) => r1 !== r2 !== r3 !==r4});
-  //   this.state = {
-  //     dataSource: ds.cloneWithRows(['row 1', 'row 2', 'row 3', 'row 4']),
-  //   };
-  // }
 
   render () {
     return (
@@ -108,7 +103,7 @@ export default class Account extends Component {
 
 const styles = StyleSheet.create({
   containerOne: {
-    padding: 10,
+    padding: 12,
     marginBottom: 15, 
     backgroundColor: 'white'
   },
@@ -119,7 +114,8 @@ const styles = StyleSheet.create({
   },
   text: {
     color: 'black',
-    textAlign: 'left'
+    textAlign: 'left',
+    marginLeft: '5%'
   },
   symbol:{
     color: 'black',
