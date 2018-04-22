@@ -20,8 +20,18 @@ export default class Orders extends Component {
     headerLeft: null
   }
 
-  alertItemName = () => {
-    alert("Masuk")
+  state = {
+    email: '',
+    invoice: ''
+  }
+  handleEmail = (text) => {
+    this.setState({ email: text })
+  }
+  handleInvoice = (text) => {
+    this.setState({ invoice: text })
+  }
+  cari = (email, invoice) => {
+    alert('email: ' + email + 'invoice: ' + invoice)
   }
 
   render () {
@@ -55,19 +65,26 @@ export default class Orders extends Component {
         <TextInput style={styles.input}
           placeHolder = "Email"
           underlineColorAndroid = "transparent"
-        >
-        </TextInput>
+          placeholderTextColor = "black"
+          autoCapitalize = "none"
+          onChangeText = {this.handleEmail}
+        />
         <Text style={styles.textLogin}>
           Nomor Invoice
         </Text>
         <TextInput style={styles.input}
           placeHolder = "Invoice"
           underlineColorAndroid = "transparent"
-        >
-        </TextInput>
+          placeholderTextColor = "black"
+          autoCapitalize = "none"
+          onChangeText = {this.handleInvoice}
+        />
         <TouchableOpacity
-          style = {styles.submitButton}>
-          <Text style = {styles.submitButtonText}> Cari </Text>
+          style = {styles.submitButton}
+          onPress = {() => this.cari(this.state.email, this.state.invoice)}>
+            <Text style = {styles.submitButtonText}> 
+              Cari 
+            </Text>
         </TouchableOpacity>
       </View>
     )
