@@ -60,7 +60,7 @@ export default class Account extends Component {
 
   render () {
     return (
-     <View>
+     <View style = {styles.container}>
         {
         <TouchableOpacity
           key = '1'
@@ -102,6 +102,9 @@ export default class Account extends Component {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: "#EDF8FE"
+  },
   containerOne: {
     padding: 12,
     marginBottom: 15, 

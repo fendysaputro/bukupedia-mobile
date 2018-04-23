@@ -119,10 +119,10 @@ const styles = StyleSheet.create({
     width: 285,
     alignSelf: "flex-start",
     marginLeft: "10%",
-    backgroundColor: "#D3D3D3"
+    backgroundColor: "#F1F3F2"
   },
   submitButton: {
-    backgroundColor: COLOR_PRIMARY,
+    backgroundColor: "#00AEF2",
     padding: 10,
     margin: 15,
     height: 35,
