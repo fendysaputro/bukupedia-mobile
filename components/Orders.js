@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { AppRegistry, StyleSheet, Text, View, Image, Search, TextInput, TouchableOpacity } from "react-native";
+import { AppRegistry, StyleSheet, Text, View, Image, Search, TextInput, TouchableOpacity, TouchableHighlight } from "react-native";
 import { COLOR_PRIMARY } from "../styles/common";
 import TabNavigator from "react-native-tab-navigator";
 import BottomNavigation, { Tab } from "react-native-material-bottom-navigation";
@@ -53,7 +53,7 @@ export default class Orders extends Component {
             marginTop: 10,
             paddingTop: 3 
           }}
-          onPress = {() => this.alertItemName("Masuk")}>
+          onPress = {() => this.props.navigation.navigate("Login")}>
             Masuk
         </Button>
         <Text style={styles.lineText}>
@@ -87,9 +87,10 @@ export default class Orders extends Component {
             </Text>
         </TouchableOpacity>
       </View>
-    )
+    );
   }
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

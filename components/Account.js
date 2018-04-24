@@ -14,6 +14,7 @@ import { COLOR_PRIMARY } from "../styles/common";
 import TabNavigator from "react-native-tab-navigator";
 import Button from "react-native-button";
 import { ListItem } from "react-native-elements";
+import Login from "./Login"
 
 export default class Account extends Component {
   static navigationOptions = {
@@ -75,7 +76,7 @@ export default class Account extends Component {
               width: '25%',  
               alignSelf: 'flex-end'
             }}
-            onPress = {() => this.alertItemName("fendy")}>
+            onPress = {() => this.props.navigation.navigate("Login")}>
             <Text style = {styles.text}>
               Hi, Selamat Datang!
             </Text>

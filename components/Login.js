@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Alert, Button, TextInput, View, StyleSheet } from "react-native";
+import { Text, Alert, Button, TextInput, View, StyleSheet } from "react-native";
 import { COLOR_PRIMARY, COLOR_SECONDARY } from "../styles/common";
 
 export default class Login extends Component {
@@ -21,25 +21,7 @@ export default class Login extends Component {
     render() {
         return(
             <View style={styles.container}>
-                <TextInput
-                    value={this.state.username}
-                    onChangeText={(username) => this.setState
-                        ({ username })}
-                    placeholder={'Username'}
-                    style={styles.input}
-                />
-                <TextInput
-                    value={this.state.password}
-                    onChangeText={(password) => this.setState
-                        ({password})}
-                    placeholder={'Password'}
-                    style={styles.input}
-                />
-                <Button
-                    title={'Login'}
-                    style={styles.input}
-                    onPress={this.onLogin.bind(this)}
-                />
+                <Text>Login</Text>
             </View>
         );
     }
@@ -50,7 +32,6 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: COLOR_PRIMARY,
     },
     input: {
         width: 200,
