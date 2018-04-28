@@ -1,8 +1,23 @@
 import React, { Component } from "react";
-import { Text, Alert, Button, TextInput, View, StyleSheet } from "react-native";
-import { COLOR_PRIMARY, COLOR_SECONDARY } from "../styles/common";
+import { AppRegistry, StyleSheet, Text, View, Image, Search, TextInput, TouchableOpacity, TouchableHighlight } from "react-native";
+import { COLOR_PRIMARY } from "../styles/common";
+import TabNavigator from "react-native-tab-navigator";
+import BottomNavigation, { Tab } from "react-native-material-bottom-navigation";
+import Button from "react-native-button";
+import Icon from "react-native-vector-icons";
 
 export default class Login extends Component {
+    static navigationOptions = {
+        headerStyle: {
+          backgroundColor: COLOR_PRIMARY,
+          elevation: null,
+        },
+        headerTitleStyle: {
+          color: 'white',
+          width: '90%',
+          textAlign: 'center'
+        }
+      }
     constructor(props) {
         super(props);
 
@@ -21,7 +36,18 @@ export default class Login extends Component {
     render() {
         return(
             <View style={styles.container}>
-                <Text>Login</Text>
+                <Button style = {styles.buttonStyleFb}
+                    Icon name = "facebook" backgroundColor = "#3b5998"
+                    onPress = {() => this.alert("Masuk")}>
+                        Login with Facebook
+                </Button>
+                <Button style = {styles.buttonStyleGoogle}
+                    onPress = {() => this.alert("Masuk")}>
+                        Login with Google+ 
+                </Button>
+                <Text style={styles.lineText}>
+                    ─────────────  Atau  ─────────────
+                </Text>
             </View>
         );
     }
@@ -29,17 +55,71 @@ export default class Login extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
+      flex: 1,
+      alignItems: "center",
+      borderTopWidth: 4,
+      borderTopColor: "#F1F3F2"
+    },
+    text: {
+      fontSize: 15,
+      textAlign: "center",
+      marginTop: "15%"
+    },
+    lineText: {
+      fontSize: 13,
+      textAlign: "center",
+      marginTop: "5%"
+    },
+    textLogin: {
+      fontSize: 15,
+      textAlign: "left",
+      alignSelf: "flex-start",
+      marginLeft: "10%",
+      marginTop: "1%",
+      paddingTop: 10,
+      fontWeight: "bold"
     },
     input: {
-        width: 200,
-        height: 44,
-        padding: 10,
-        borderWidth: 1,
-        borderColor: 'black',
-        marginBottom: 10,
+      height: 30,
+      width: 285,
+      alignSelf: "flex-start",
+      marginLeft: "10%",
+      backgroundColor: "#F1F3F2"
     },
+    submitButton: {
+      backgroundColor: "#00AEF2",
+      padding: 10,
+      margin: 15,
+      height: 35,
+      width: 290
+   },
+   submitButtonText:{
+      color: "white",
+      textAlign: "center"
+   },
+   buttonStyleFb: {
+        fontSize: 15, 
+        color: 'white', 
+        backgroundColor: 'blue',
+        alignSelf: "center",
+        width: 290,
+        height: 35,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: 60,
+        paddingTop: 7.5
+   },
+   buttonStyleGoogle: {
+        fontSize: 15, 
+        color: 'white', 
+        backgroundColor: 'red',
+        alignSelf: "center",
+        width: 290,
+        height: 35,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: 15,
+        paddingTop: 7.5
+   }
 });
 

@@ -6,7 +6,7 @@ import { COLOR_PRIMARY, COLOR_SECONDARY } from "./styles/common";
 import Screen from "./components/Screen";
 import Swiper from "./components/Swiper";
 import Main from "./components/Main";
-import Login from "./components/Login";
+import LoginMain from "./components/LoginMain";
 
 class Home extends Component {
   static navigationOptions = {
@@ -50,8 +50,11 @@ export default App = StackNavigator({
       
     }
   },
-  Login: {
-    screen: Login
+  LoginMain: {
+    screen: LoginMain,
+    navigationOptions: {
+      title: "Login/Daftar"
+    }
   }
 });
 

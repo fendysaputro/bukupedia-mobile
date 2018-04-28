@@ -76,7 +76,7 @@ export default class Account extends Component {
               width: '25%',  
               alignSelf: 'flex-end'
             }}
-            onPress = {() => this.props.navigation.navigate("Login")}>
+            onPress = {() => this.props.navigation.navigate("LoginMain")}>
             <Text style = {styles.text}>
               Hi, Selamat Datang!
             </Text>

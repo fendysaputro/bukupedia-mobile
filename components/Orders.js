@@ -50,10 +50,10 @@ export default class Orders extends Component {
             height: 35,
             alignItems: 'center',
             justifyContent: 'center',
-            marginTop: 10,
-            paddingTop: 3 
+            marginTop: 15,
+            paddingTop: 7.5 
           }}
-          onPress = {() => this.props.navigation.navigate("Login")}>
+          onPress = {() => this.props.navigation.navigate("LoginMain")}>
             Masuk
         </Button>
         <Text style={styles.lineText}>
