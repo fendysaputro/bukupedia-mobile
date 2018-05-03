@@ -1,5 +1,2 @@
-export default class Global extends Component {
-
-}
-
-AppRegistry.registerComponent("Global", () => Global);
+export const API = 'https://bmcdev-api.bukupedia.com/api/v1/';
+export const BANNER = 'banner';
