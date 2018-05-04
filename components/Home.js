@@ -11,7 +11,7 @@ export default class Home extends Component {
   constructor (props) {
       super(props);
       this.state = {
-          // entries: [
+          entries: [
           //     {
           //       title: 'Beautiful and dramatic Antelope Canyon',
           //       subtitle: 'Lorem ipsum dolor sit amet et nuncat mergitur',
@@ -42,7 +42,7 @@ export default class Home extends Component {
           //         subtitle: 'Lorem ipsum dolor sit amet',
           //         illustration: 'https://i.imgur.com/lceHsT6l.jpg'
           //     }
-          // ]
+          ]
       };
   }
 
@@ -63,9 +63,9 @@ export default class Home extends Component {
   _renderItem ({item, index}) {
     return (
         <View style={styles.slide}>
-            <Text style={styles.title}>{ item.title }</Text>
+            <Text style={styles.title}>{ item.attributes.picture }</Text>
             <Image  style={{width: 400, height: 200}}
-                    source={{uri: item.illustration}}/>
+                    source={{uri: item.attributes.picture}}/>
         </View>
     );
   }
