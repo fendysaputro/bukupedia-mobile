@@ -63,8 +63,7 @@ export default class Home extends Component {
   _renderItem ({item, index}) {
     return (
         <View style={styles.slide}>
-            <Text style={styles.title}>{ item.attributes.picture }</Text>
-            <Image  style={{width: 400, height: 200}}
+            <Image  style={{width: 600, height: 200}}
                     source={{uri: item.attributes.picture}}/>
         </View>
     );

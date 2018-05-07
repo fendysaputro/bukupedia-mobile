@@ -26,6 +26,15 @@ export default class Login extends Component {
             password: '',
         };
     }
+    handleEmail = (text) => {
+        this.setState({ email: text })
+    }
+    handlePassword = (text) => {
+        this.setState({ password: text })
+    }
+      cari = (email, password) => {
+        alert('email: ' + email + 'password: ' + password)
+    }
 
     onLogin(){
         const { username, password } = this.state;
@@ -48,6 +57,26 @@ export default class Login extends Component {
                 <Text style={styles.lineText}>
                     ─────────────  Atau  ─────────────
                 </Text>
+                <TextInput style={styles.input}
+                    value = "Username"
+                    placeHolder = "Username"
+                    underlineColorAndroid = "transparent"
+                    placeholderTextColor = "red"
+                    autoCapitalize = "none"
+                    onChangeText = {this.handleEmail}
+                />
+                <TextInput style={styles.input}
+                    value = "Password"
+                    placeHolder = "Password"
+                    underlineColorAndroid = "transparent"
+                    placeholderTextColor = "red"
+                    autoCapitalize = "none"
+                    onChangeText = {this.Password}
+                />
+                <Button style = {styles.submitButton}
+                    onPress = {() => this.alert("Masuk")}>
+                        Masuk
+                </Button>
             </View>
         );
     }
@@ -68,7 +97,8 @@ const styles = StyleSheet.create({
     lineText: {
       fontSize: 13,
       textAlign: "center",
-      marginTop: "5%"
+      marginTop: "5%",
+      marginBottom: "5%"
     },
     textLogin: {
       fontSize: 15,
@@ -84,14 +114,20 @@ const styles = StyleSheet.create({
       width: 285,
       alignSelf: "flex-start",
       marginLeft: "10%",
-      backgroundColor: "#F1F3F2"
+      backgroundColor: "white",
+      marginTop: "5%"
     },
     submitButton: {
-      backgroundColor: "#00AEF2",
-      padding: 10,
-      margin: 15,
-      height: 35,
-      width: 290
+        fontSize: 15, 
+        color: 'black', 
+        backgroundColor: '#FBAD19',
+        alignSelf: "center",
+        width: 290,
+        height: 35,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: 15,
+        paddingTop: 7.5
    },
    submitButtonText:{
       color: "white",
