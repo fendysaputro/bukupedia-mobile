@@ -22,7 +22,7 @@ export default class Login extends Component {
         super(props);
 
         this.state = {
-            username: '',
+            email: '',
             password: '',
         };
     }
@@ -37,41 +37,44 @@ export default class Login extends Component {
     }
 
     onLogin(){
-        const { username, password } = this.state;
+        const { email, password } = this.state;
 
-        Alert.alert('testing', `${username} + ${password}`);
+        Alert.alert('testing', `${email} + ${password}`);
     }
 
     render() {
         return(
             <View style={styles.container}>
-                <Button style = {styles.buttonStyleFb}
-                    Icon name = "facebook" backgroundColor = "#3b5998"
-                    onPress = {() => this.alert("Masuk")}>
-                        Login with Facebook
-                </Button>
-                <Button style = {styles.buttonStyleGoogle}
-                    onPress = {() => this.alert("Masuk")}>
-                        Login with Google+ 
-                </Button>
+                <TouchableOpacity style = {styles.buttonStyleFb}>
+                    <Image 
+                        source={require('../styles/icon/facebook.png')} 
+                        style={{ width: 24, height: 24, alignSelf: 'flex-start', marginLeft: '3%'}}/>
+                    <Text style = {styles.submitButtonText}>Login With Facebook</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style = {styles.buttonStyleGoogle}>
+                    <Image      
+                        source={require('../styles/icon/google-plus.png')} 
+                        style={{ width: 24, height: 24, alignSelf: 'flex-start', marginLeft: '3%'}}/>
+                    <Text style = {styles.submitButtonText}>Login With Google+</Text> 
+                </TouchableOpacity>
                 <Text style={styles.lineText}>
                     ─────────────  Atau  ─────────────
                 </Text>
                 <TextInput style={styles.input}
-                    value = "Username"
                     placeHolder = "Username"
                     underlineColorAndroid = "transparent"
                     placeholderTextColor = "red"
+                    value = {this.state.email}
                     autoCapitalize = "none"
-                    onChangeText = {this.handleEmail}
+                    onChangeText = {(text) => this.setState({email: text})}
                 />
                 <TextInput style={styles.input}
-                    value = "Password"
                     placeHolder = "Password"
                     underlineColorAndroid = "transparent"
                     placeholderTextColor = "red"
+                    value = {this.state.password}
                     autoCapitalize = "none"
-                    onChangeText = {this.Password}
+                    onChangeText = {(text) => this.setState({password: text})}
                 />
                 <Button style = {styles.submitButton}
                     onPress = {() => this.alert("Masuk")}>
@@ -133,11 +136,8 @@ const styles = StyleSheet.create({
       color: "white",
       textAlign: "center"
    },
-   buttonStyleFb: {
-        fontSize: 15, 
-        color: 'white', 
-        backgroundColor: 'blue',
-        alignSelf: "center",
+   buttonStyleFb: { 
+        backgroundColor: '#344685',
         width: 290,
         height: 35,
         alignItems: 'center',
@@ -145,11 +145,8 @@ const styles = StyleSheet.create({
         marginTop: 60,
         paddingTop: 7.5
    },
-   buttonStyleGoogle: {
-        fontSize: 15, 
-        color: 'white', 
-        backgroundColor: 'red',
-        alignSelf: "center",
+   buttonStyleGoogle: {  
+        backgroundColor: '#CD583F',
         width: 290,
         height: 35,
         alignItems: 'center',
