@@ -64,7 +64,7 @@ export default class Home extends Component {
     return (
         <View style={styles.slide}>
             <Image  style={{width: 600, height: 200}}
-                    source={{uri: item.attributes.picture}}/>
+                    source={{uri: item.picture}}/>
         </View>
     );
   }

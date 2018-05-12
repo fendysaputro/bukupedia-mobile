@@ -46,16 +46,18 @@ export default class Login extends Component {
         return(
             <View style={styles.container}>
                 <TouchableOpacity style = {styles.buttonStyleFb}>
+                <Text style = {styles.submitButtonText}>Login With Facebook</Text>
                     <Image 
+                        style = {styles.image}
                         source={require('../styles/icon/facebook.png')} 
-                        style={{ width: 24, height: 24, alignSelf: 'flex-start', marginLeft: '3%'}}/>
-                    <Text style = {styles.submitButtonText}>Login With Facebook</Text>
+                    />
                 </TouchableOpacity>
                 <TouchableOpacity style = {styles.buttonStyleGoogle}>
-                    <Image      
+                <Text style = {styles.submitButtonText}>Login With Google+</Text>
+                    <Image
+                        style = {styles.image}      
                         source={require('../styles/icon/google-plus.png')} 
-                        style={{ width: 24, height: 24, alignSelf: 'flex-start', marginLeft: '3%'}}/>
-                    <Text style = {styles.submitButtonText}>Login With Google+</Text> 
+                    /> 
                 </TouchableOpacity>
                 <Text style={styles.lineText}>
                     ─────────────  Atau  ─────────────
@@ -134,7 +136,9 @@ const styles = StyleSheet.create({
    },
    submitButtonText:{
       color: "white",
-      textAlign: "center"
+      textAlign: "center",
+      justifyContent: "center",
+      marginBottom: '-3%'
    },
    buttonStyleFb: { 
         backgroundColor: '#344685',
@@ -153,6 +157,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         marginTop: 15,
         paddingTop: 7.5
+   },
+   image: {
+        width: 24,
+        height: 24,
+        marginLeft: '3%',
+        marginTop: '-6%',
+        alignSelf: 'flex-start'
    }
 });
 
