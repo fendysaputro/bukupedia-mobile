@@ -1,55 +1,29 @@
 import React, { Component } from "react";
-import { AppRegistry, StyleSheet, Text, View, Image, Search, Button } from "react-native";
+import { AppRegistry, StyleSheet, Text, View, Image, Search, Button, Dimensions } from "react-native";
 import { COLOR_PRIMARY, sliderWidth, itemWidth } from "../styles/common";
-import { API, BANNER } from "../components/Global";
+import { API, BANNER, BANNER_SMALL, BANNER_FOOTER, NEW_PRODUCT } from "../components/Global";
 import TabNavigator from "react-native-tab-navigator";
 import BottomNavigation, { Tab } from "react-native-material-bottom-navigation";
 import Carousel from 'react-native-snap-carousel';
+
+var { height } = Dimensions.get('window');
+var box_count = 3;
+var box_height = height / box_count;
 
 export default class Home extends Component {
 
   constructor (props) {
       super(props);
       this.state = {
-          entries: [
-          //     {
-          //       title: 'Beautiful and dramatic Antelope Canyon',
-          //       subtitle: 'Lorem ipsum dolor sit amet et nuncat mergitur',
-          //       illustration: 'https://i.imgur.com/UYiroysl.jpg'
-          //     },
-          //     {
-          //         title: 'Earlier this morning, NYC',
-          //         subtitle: 'Lorem ipsum dolor sit amet',
-          //         illustration: 'https://i.imgur.com/UPrs1EWl.jpg'
-          //     },
-          //     {
-          //         title: 'White Pocket Sunset',
-          //         subtitle: 'Lorem ipsum dolor sit amet et nuncat ',
-          //         illustration: 'https://i.imgur.com/MABUbpDl.jpg'
-          //     },
-          //     {
-          //         title: 'Acrocorinth, Greece',
-          //         subtitle: 'Lorem ipsum dolor sit amet et nuncat mergitur',
-          //         illustration: 'https://i.imgur.com/KZsmUi2l.jpg'
-          //     },
-          //     {
-          //         title: 'The lone tree, majestic landscape of New Zealand',
-          //         subtitle: 'Lorem ipsum dolor sit amet',
-          //         illustration: 'https://i.imgur.com/2nCt3Sbl.jpg'
-          //     },
-          //     {
-          //         title: 'Middle Earth, Germany',
-          //         subtitle: 'Lorem ipsum dolor sit amet',
-          //         illustration: 'https://i.imgur.com/lceHsT6l.jpg'
-          //     }
-          ]
+          banners: [],
+          banners_small: []
       };
   }
 
   componentDidMount() {
     fetch(API + BANNER)
       .then(response => response.json())
-      .then(data => this.setState({ entries: data.d }));
+      .then(data => this.setState({ banners: data.d }));
   }
 
   static navigationOptions = {
@@ -71,32 +45,36 @@ export default class Home extends Component {
 
   render () {
     return (
-      <Carousel
+      <View style={styles.container}>
+        <View style={[styles.box, styles.box1]}>
+          <Carousel
               ref={(c) => { this._carousel = c; }}
-              data={this.state.entries}
+              data={this.state.banners}
               renderItem={this._renderItem}
               sliderWidth={sliderWidth}
-              itemWidth={itemWidth}
-            />
-      //<View style={styles.container}>
-      //  <Text style={styles.welcome}>
-      //    This is Home
-      //    ini adalah Beranda
-      //  </Text>
-      //</View>
+              itemWidth={itemWidth}/>  
+        </View>
+        <View style={[styles.box, styles.box2]}></View>
+        <View style={[styles.box, styles.box3]}></View>
+      </View>
     )
   }
 }
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    flexDirection: 'column'
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: "center",
-    margin: 10
+  box: {
+    height: box_height
+  },
+  box1: {
+  },
+  box2: {
+    backgroundColor: '#8BC34A'
+  },
+  box3: {
+    backgroundColor: '#e3aa1a'
   }
 });
 
