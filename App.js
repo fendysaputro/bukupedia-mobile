@@ -7,6 +7,7 @@ import Screen from "./components/Screen";
 import Swiper from "./components/Swiper";
 import Main from "./components/Main";
 import LoginMain from "./components/LoginMain";
+import Password from "./components/Password";
 
 class Home extends Component {
   static navigationOptions = {
@@ -55,24 +56,30 @@ export default App = StackNavigator({
     navigationOptions: {
       title: "Login/Daftar"
     }
+  },
+  Password: {
+    screen: Password,
+    navigationOptions: {
+      title: "Password"
+    }
   }
 });
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: COLOR_PRIMARY
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center",
+      backgroundColor: COLOR_PRIMARY
   },
   welcome: {
-    fontSize: 20,
-    textAlign: "center",
-    margin: 10
+      fontSize: 20,
+      textAlign: "center",
+      margin: 10
   },
   instructions: {
-    textAlign: "center",
-    color: "#333333",
-    marginBottom: 5
+      textAlign: "center",
+      color: "#333333",
+      marginBottom: 5
   }
 });

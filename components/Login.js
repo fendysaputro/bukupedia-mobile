@@ -5,6 +5,9 @@ import TabNavigator from "react-native-tab-navigator";
 import BottomNavigation, { Tab } from "react-native-material-bottom-navigation";
 import Button from "react-native-button";
 import Icon from "react-native-vector-icons";
+import { CheckBox } from "react-native-elements";
+
+import Password from "./Password";
 
 export default class Login extends Component {
     static navigationOptions = {
@@ -78,6 +81,14 @@ export default class Login extends Component {
                     autoCapitalize = "none"
                     onChangeText = {(text) => this.setState({password: text})}
                 />
+                {/* <CheckBox style = {styles.check} 
+                    title='Ingat Saya'
+                    checked={this.state.checked}
+                /> */}
+                <Button style = {styles.buttonLine}
+                    onPress={() => this.props.navigation.navigate("Password")}>
+                    Lupa Password?
+                </Button> 
                 <Button style = {styles.submitButton}
                     onPress = {() => this.alert("Masuk")}>
                         Masuk
@@ -89,38 +100,38 @@ export default class Login extends Component {
 
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
-      alignItems: "center",
-      borderTopWidth: 4,
-      borderTopColor: "#F1F3F2"
+        flex: 1,
+        alignItems: "center",
+        borderTopWidth: 4,
+        borderTopColor: "#F1F3F2"
     },
     text: {
-      fontSize: 15,
-      textAlign: "center",
-      marginTop: "15%"
+        fontSize: 15,
+        textAlign: "center",
+        marginTop: "15%"
     },
     lineText: {
-      fontSize: 13,
-      textAlign: "center",
-      marginTop: "5%",
-      marginBottom: "5%"
+        fontSize: 13,
+        textAlign: "center",
+        marginTop: "5%",
+        marginBottom: "2%"
     },
     textLogin: {
-      fontSize: 15,
-      textAlign: "left",
-      alignSelf: "flex-start",
-      marginLeft: "10%",
-      marginTop: "1%",
-      paddingTop: 10,
-      fontWeight: "bold"
+        fontSize: 15,
+        textAlign: "left",
+        alignSelf: "flex-start",
+        marginLeft: "10%",
+        marginTop: "1%",
+        paddingTop: 10,
+        fontWeight: "bold"
     },
     input: {
-      height: 30,
-      width: 285,
-      alignSelf: "flex-start",
-      marginLeft: "10%",
-      backgroundColor: "white",
-      marginTop: "5%"
+        height: 30,
+        width: 285,
+        alignSelf: "flex-start",
+        marginLeft: "10%",
+        backgroundColor: "white",
+        marginTop: "3%"
     },
     submitButton: {
         fontSize: 15, 
@@ -135,10 +146,10 @@ const styles = StyleSheet.create({
         paddingTop: 7.5
    },
    submitButtonText:{
-      color: "white",
-      textAlign: "center",
-      justifyContent: "center",
-      marginBottom: '-3%'
+        color: "white",
+        textAlign: "center",
+        justifyContent: "center",
+        marginBottom: -3
    },
    buttonStyleFb: { 
         backgroundColor: '#344685',
@@ -162,8 +173,23 @@ const styles = StyleSheet.create({
         width: 24,
         height: 24,
         marginLeft: '3%',
-        marginTop: '-6%',
+        marginTop: -18,
         alignSelf: 'flex-start'
+   },
+   buttonLine: {
+        fontSize: 10, 
+        color: 'black', 
+        backgroundColor: 'transparent',
+        textAlign: 'right',
+        width: 290,
+        alignItems: 'flex-end',
+        marginTop: 5,
+        paddingTop: 2
    }
+//    check: {
+//        fontSize: 10,
+//        position: 'absolute',
+//        alignSelf: 'flex-start'
+//    }
 });
 
