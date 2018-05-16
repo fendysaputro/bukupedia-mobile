@@ -27,6 +27,7 @@ export default class Login extends Component {
         this.state = {
             email: '',
             password: '',
+            checked: false
         };
     }
     handleEmail = (text) => {
@@ -81,14 +82,17 @@ export default class Login extends Component {
                     autoCapitalize = "none"
                     onChangeText = {(text) => this.setState({password: text})}
                 />
-                {/* <CheckBox style = {styles.check} 
-                    title='Ingat Saya'
-                    checked={this.state.checked}
-                /> */}
-                <Button style = {styles.buttonLine}
-                    onPress={() => this.props.navigation.navigate("Password")}>
-                    Lupa Password?
-                </Button> 
+                <View style = {styles.check}>
+                    <CheckBox
+                        title='Ingat Saya'
+                        checked={this.state.checked}
+                        onPress={() => this.setState({ checked: !this.state.checked})}
+                    />
+                    <Button style = {styles.buttonLine}
+                        onPress={() => this.props.navigation.navigate("Password")}>
+                        Lupa Password?
+                    </Button>
+                </View> 
                 <Button style = {styles.submitButton}
                     onPress = {() => this.alert("Masuk")}>
                         Masuk
@@ -103,7 +107,8 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: "center",
         borderTopWidth: 4,
-        borderTopColor: "#F1F3F2"
+        borderTopColor: "#F1F3F2",
+        backgroundColor: "#EDF8FE"
     },
     text: {
         fontSize: 15,
@@ -177,19 +182,23 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-start'
    },
    buttonLine: {
-        fontSize: 10, 
+        flexDirection: 'row',
+        position: 'relative',
+        fontSize: 13, 
         color: 'black', 
         backgroundColor: 'transparent',
         textAlign: 'right',
-        width: 290,
-        alignItems: 'flex-end',
-        marginTop: 5,
+        width: 150,
+        right: 0,
+        marginTop: 7,
         paddingTop: 2
+   },
+   check: {
+       flexDirection: 'row',
+       backgroundColor: '#F1F3F2',
+       start: '5%',
+       alignSelf: 'flex-start',
+       backgroundColor: 'transparent' 
    }
-//    check: {
-//        fontSize: 10,
-//        position: 'absolute',
-//        alignSelf: 'flex-start'
-//    }
 });
 
