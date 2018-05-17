@@ -81,7 +81,8 @@ export default class Orders extends Component {
         />
         <TouchableOpacity
           style = {styles.submitButton}
-          onPress = {() => this.cari(this.state.email, this.state.invoice)}>
+          //onPress = {() => this.cari(this.state.email, this.state.invoice)}>
+          onPress = {() => this.props.navigation.navigate("PaymentWaiting")}>
             <Text style = {styles.submitButtonText}> 
               Cari 
             </Text>

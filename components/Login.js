@@ -69,16 +69,14 @@ export default class Login extends Component {
                 <TextInput style={styles.input}
                     placeHolder = "Username"
                     underlineColorAndroid = "transparent"
-                    placeholderTextColor = "red"
-                    value = {this.state.email}
+                    value = {this.state.placeHolder}
                     autoCapitalize = "none"
                     onChangeText = {(text) => this.setState({email: text})}
                 />
                 <TextInput style={styles.input}
                     placeHolder = "Password"
                     underlineColorAndroid = "transparent"
-                    placeholderTextColor = "red"
-                    value = {this.state.password}
+                    value = {this.state.placeHolder}
                     autoCapitalize = "none"
                     onChangeText = {(text) => this.setState({password: text})}
                 />

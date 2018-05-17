@@ -8,6 +8,7 @@ import Swiper from "./components/Swiper";
 import Main from "./components/Main";
 import LoginMain from "./components/LoginMain";
 import Password from "./components/Password";
+import MyOrderMain from "./components/MyOrderMain";
 
 class Home extends Component {
   static navigationOptions = {
@@ -61,6 +62,12 @@ export default App = StackNavigator({
     screen: Password,
     navigationOptions: {
       title: "Password"
+    }
+  },
+  MyOrderMain: {
+    screen: MyOrderMain,
+    navigationOptions: {
+      title: "Pesanan Saya"
     }
   }
 });

@@ -3,12 +3,13 @@ import { AppRegistry, StyleSheet, Text, View, Image, Search } from "react-native
 import { TabNavigator } from "react-navigation";
 import { COLOR_PRIMARY, COLOR_SECONDARY, FONT_NORMAL } from '../styles/common';
 
-import Login from "./Login";
-import Register from "./Register";
+import PaymentWaiting from "./PaymentWaiting";
+import PaymentReceived from "./PaymentReceived";
+import Main from "./Main";
 
-const LoginMain = TabNavigator({
-    Login: {screen: Login},
-    Register: {screen: Register}
+const MyOrderMain = TabNavigator({
+    PaymentWaiting: {screen: PaymentWaiting},
+    PaymentReceived: {screen: PaymentReceived}
 },
 {
     tabBarOptions: {
@@ -22,11 +23,11 @@ const LoginMain = TabNavigator({
             backgroundColor: COLOR_PRIMARY,
         },
         tabs: {
-            Login: {
-                label: "Login",
+            PaymentWaiting: {
+                label: "Menunggu Pembayaran",
             },
-            Register: {
-                label: "Daftar",
+            PaymentReceived: {
+                label: "Pembayaran Diterima",
             }
         }
     }
@@ -40,6 +41,6 @@ const styles = StyleSheet.create({
     }
 });
 
-export default LoginMain;
+export default MyOrderMain;
 
-AppRegistry.registerComponent("LoginMain", () => LoginMain);
+AppRegistry.registerComponent("MyOrderMain", () => MyOrderMain);
