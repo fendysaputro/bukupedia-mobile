@@ -76,6 +76,11 @@ export default class Home extends Component {
               renderItem={this._renderItem}
               sliderWidth={sliderWidth}
               itemWidth={itemWidth}
+              inactiveSlideScale={1.0}
+              inactiveSlideOpacity={0.0}
+              autoplay={true}
+              autoplayDelay={500}
+              autoplayInterval={3000}
               onSnapToItem={(index) => this.setState({ activeSlide: index }) }/>  
           { this.pagination }
         </View>
