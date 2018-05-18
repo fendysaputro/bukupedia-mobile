@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Platform, StyleSheet, StatusBar, Text, View } from "react-native";
+import { Platform, StyleSheet, StatusBar, Text, View, AsyncStorage } from "react-native";
 import { StackNavigator } from "react-navigation";
 import { COLOR_PRIMARY, COLOR_SECONDARY } from "./styles/common";
 
@@ -10,7 +10,14 @@ import LoginMain from "./components/LoginMain";
 import Password from "./components/Password";
 import MyOrderMain from "./components/MyOrderMain";
 
-class Home extends Component {
+class App extends Component {
+
+  componentDidMount() {
+    AsyncStorage.getItem('id_token').then((token) => {
+      this.setState({ hasToken: token !== null, isLoaded: true })
+    });
+  }
+
   static navigationOptions = {
     headerStyle: {
       backgroundColor: "#16a085",
@@ -18,6 +25,7 @@ class Home extends Component {
     },
     header: null
   };
+
   render() {
     return (
       <View style={styles.container}>
@@ -30,7 +38,7 @@ class Home extends Component {
 
 export default App = StackNavigator({
   Home: {
-    screen: Home,
+    screen: App,
     navigationOptions: {
     }
   },

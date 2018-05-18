@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { AppRegistry, StyleSheet, Text, View, Image, Search, Button, Dimensions } from "react-native";
+import { AppRegistry, StyleSheet, Text, View, Image, Search, Button, Dimensions, ScrollView } from "react-native";
 import { COLOR_PRIMARY, sliderWidth, itemWidth } from "../styles/common";
 import { API, BANNER, BANNER_SMALL, BANNER_FOOTER, NEW_PRODUCT } from "../components/Global";
 import TabNavigator from "react-native-tab-navigator";
@@ -16,7 +16,7 @@ export default class Home extends Component {
       super(props);
       this.state = {
           banners: [],
-          banners_small: []
+          banners_small: [],
       };
   }
 
@@ -49,8 +49,8 @@ export default class Home extends Component {
             <Pagination
               dotsLength={banners.length}
               activeDotIndex={activeSlide}
-              containerStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.75)' }}
-              dotStyle={{
+              
+              dotStyle={{  
                   width: 10,
                   height: 10,
                   borderRadius: 5,
@@ -69,23 +69,25 @@ export default class Home extends Component {
   render () {
     return (
       <View style={styles.container}>
-        <View style={[styles.box, styles.box1]}>
-          <Carousel
-              ref={(c) => { this._carousel = c; }}
-              data={this.state.banners}
-              renderItem={this._renderItem}
-              sliderWidth={sliderWidth}
-              itemWidth={itemWidth}
-              inactiveSlideScale={1.0}
-              inactiveSlideOpacity={0.0}
-              autoplay={true}
-              autoplayDelay={500}
-              autoplayInterval={3000}
-              onSnapToItem={(index) => this.setState({ activeSlide: index }) }/>  
-          { this.pagination }
-        </View>
-        <View style={[styles.box, styles.box2]}></View>
-        <View style={[styles.box, styles.box3]}></View>
+        <ScrollView>
+          <View style={[styles.box, styles.box1]}>
+            <Carousel
+                ref={(c) => { this._carousel = c; }}
+                data={this.state.banners}
+                renderItem={this._renderItemWithParallax}
+                sliderWidth={1}
+                itemWidth={600}
+                inactiveSlideScale={1.0}
+                inactiveSlideOpacity={0.0}
+                autoplay={true}
+                autoplayDelay={500}
+                autoplayInterval={3000}
+                onSnapToItem={(index) => this.setState({ activeSlide: index }) }/>  
+            { this.pagination }
+          </View>
+          <View style={[styles.box, styles.box2]}></View>
+          <View style={[styles.box, styles.box3]}></View>
+        </ScrollView>
       </View>
     )
   }
@@ -99,7 +101,6 @@ const styles = StyleSheet.create({
     height: box_height
   },
   box1: {
-    height: 300
   },
   box2: {
     backgroundColor: '#8BC34A'
