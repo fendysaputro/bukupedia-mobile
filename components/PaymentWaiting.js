@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import { AppRegistry, StyleSheet, Text, View, Image, Search, TouchableOpacity } from "react-native";
+import { Footer, AppRegistry, StyleSheet, Text, View, Image, Search, TouchableOpacity } from "react-native";
 import { COLOR_PRIMARY } from "../styles/common";
 import TabNavigator from "react-native-tab-navigator";
 import BottomNavigation, { Tab } from "react-native-material-bottom-navigation";
+import {tabs} from "./Main";
 
 export default class PaymentWaiting extends Component {
   static navigationOptions = {
@@ -43,9 +44,10 @@ export default class PaymentWaiting extends Component {
             </Text>
         </TouchableOpacity>
       </View>
-    )
+    );
   }
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

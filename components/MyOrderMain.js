@@ -1,11 +1,12 @@
 import React, { Component } from "react";
-import { AppRegistry, StyleSheet, Text, View, Image, Search } from "react-native";
+import { AppRegistry, StyleSheet, Text, View, Image, Search, Footer} from "react-native";
 import { TabNavigator } from "react-navigation";
 import { COLOR_PRIMARY, COLOR_SECONDARY, FONT_NORMAL } from '../styles/common';
 
 import PaymentWaiting from "./PaymentWaiting";
 import PaymentReceived from "./PaymentReceived";
-import Main from "./Main";
+import {tabs} from "./Main";
+import {FooterBar} from "./Footer";
 
 const MyOrderMain = TabNavigator({
     PaymentWaiting: {screen: PaymentWaiting},
@@ -22,7 +23,7 @@ const MyOrderMain = TabNavigator({
         indicatorStyle: {
             backgroundColor: COLOR_PRIMARY,
         },
-        tabs: {
+        tabss: {
             PaymentWaiting: {
                 label: "Menunggu Pembayaran",
             },

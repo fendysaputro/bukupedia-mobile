@@ -15,6 +15,7 @@ const { width, height } = Dimensions.get("window");
 import Button from "./Button";
 import Main from "./Main";
 import { COLOR_PRIMARY } from "../styles/common";
+import Home from "./Home";
 
 export default class OnboardingScreens extends Component {
   static navigationOptions = {
@@ -242,6 +243,7 @@ export default class OnboardingScreens extends Component {
        */
   renderButton = () => {
     const lastScreen = this.state.index === this.state.total - 1;
+    console.log(lastScreen);
     return (
       <View
         pointerEvents="box-none"
@@ -251,12 +253,14 @@ export default class OnboardingScreens extends Component {
           // Show this button on the last screen
           // TODO: Add a handler that would send a user to your app after onboarding is complete
           <Button
-            text="Lewati>"
+            text="Fendy" 
             onPress={() => this.props.navigation.navigate("Main")}
           />
         ) : (
           // Or this one otherwise
-          <Button text="Lewati>" onPress={() => this.swipe()} />
+          <Button 
+            text={lastScreen} 
+            onPress={() => this.props.navigation.navigate("Main")} />
         )}
       </View>
     );

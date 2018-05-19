@@ -26,7 +26,7 @@ const LoginMain = TabNavigator({
                 label: "Login",
             },
             Register: {
-                label: "Daftar",
+                label: "Register",
             }
         }
     }

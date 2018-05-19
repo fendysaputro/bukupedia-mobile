@@ -1,11 +1,20 @@
 import React, { Component } from "react";
-import { AppRegistry, StyleSheet, Text, View, Image, Search, TextInput, TouchableOpacity, TouchableHighlight } from "react-native";
+import { AppRegistry, 
+        StyleSheet, 
+        Text, 
+        View, 
+        Image, 
+        Search, 
+        TextInput, 
+        TouchableOpacity, 
+        TouchableHighlight, 
+        CheckBox } from "react-native";
 import { COLOR_PRIMARY } from "../styles/common";
 import TabNavigator from "react-native-tab-navigator";
 import BottomNavigation, { Tab } from "react-native-material-bottom-navigation";
 import Button from "react-native-button";
 import Icon from "react-native-vector-icons";
-import { CheckBox } from "react-native-elements";
+// import { CheckBox } from "react-native-elements";
 
 import Password from "./Password";
 
@@ -27,7 +36,9 @@ export default class Login extends Component {
         this.state = {
             email: '',
             password: '',
-            checked: false
+            checked: false,
+            trueCheckBoxIsOn: true,
+            falseCheckBoxIsOn: false
         };
     }
     handleEmail = (text) => {
@@ -81,10 +92,11 @@ export default class Login extends Component {
                     onChangeText = {(text) => this.setState({password: text})}
                 />
                 <View style = {styles.check}>
-                    <CheckBox
-                        title='Ingat Saya'
-                        checked={this.state.checked}
-                        onPress={() => this.setState({ checked: !this.state.checked})}
+                    <CheckBox label= "Ingat Saya"
+                        onValueChange={value => this.setState({falseCheckBoxIsOn: value})}
+                        value={this.state.falseCheckBoxIsOn}
+                        // checked={this.state.checked}
+                        // onPress={() => this.setState({ checked: !this.state.checked})}
                     />
                     <Button style = {styles.buttonLine}
                         onPress={() => this.props.navigation.navigate("Password")}>
@@ -194,7 +206,7 @@ const styles = StyleSheet.create({
    check: {
        flexDirection: 'row',
        backgroundColor: '#F1F3F2',
-       start: '5%',
+       start: '6%',
        alignSelf: 'flex-start',
        backgroundColor: 'transparent' 
    }
