@@ -6,7 +6,7 @@ import TabNavigator from "react-native-tab-navigator";
 import BottomNavigation, { Tab } from "react-native-material-bottom-navigation";
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 
-var { height } = Dimensions.get('window');
+var { height, width } = Dimensions.get('window');
 var box_count = 3;
 var box_height = height / box_count;
 
@@ -21,9 +21,11 @@ export default class Home extends Component {
   }
 
   componentDidMount() {
-    fetch(API + BANNER)
-      .then(response => response.json())
-      .then(data => this.setState({ banners: data.d }));
+    // fetch(API + BANNER)
+    //   .then(response => response.json())
+    //   .then(data => 
+    //     this.setState({ banners: data.d })
+    //   );
   }
 
   static navigationOptions = {
@@ -37,7 +39,7 @@ export default class Home extends Component {
   _renderItem ({item, index}) {
     return (
         <View style={styles.slide}>
-            <Image  style={{width: 600, height: 200}}
+            <Image  style={{width: width, height: 200}}
                     source={{uri: item.picture}}/>
         </View>
     );
@@ -48,7 +50,7 @@ export default class Home extends Component {
     return (
             <Pagination
               dotsLength={banners.length}
-              activeDotIndex={activeSlide}
+              activeDotIndex={0}
               
               dotStyle={{  
                   width: 10,
@@ -74,7 +76,7 @@ export default class Home extends Component {
             <Carousel
                 ref={(c) => { this._carousel = c; }}
                 data={this.state.banners}
-                renderItem={this._renderItemWithParallax}
+                renderItem={this._renderItem}
                 sliderWidth={1}
                 itemWidth={600}
                 inactiveSlideScale={1.0}

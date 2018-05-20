@@ -6,7 +6,8 @@ import {
   ScrollView, 
   StyleSheet, 
   View,
-  Search 
+  Search,
+  AsyncStorage
 } from "react-native";
 import { StackNavigator } from "react-navigation";
 
@@ -238,29 +239,34 @@ export default class OnboardingScreens extends Component {
     );
   };
 
+  _closeButtonPress = () => {
+    try {
+      console.log('set AsyncStorage firstime= '+JSON.stringify(false));
+      AsyncStorage.setItem('firstime', JSON.stringify(false));
+    } catch (error) {
+      // console.log(error);
+    }
+    this.props.navigation.navigate("Main");
+  }
+
   /**
        * Render Continue or Done button
        */
   renderButton = () => {
     const lastScreen = this.state.index === this.state.total - 1;
-    console.log(lastScreen);
     return (
       <View
         pointerEvents="box-none"
-        style={[styles.buttonWrapper, styles.fullScreen]}
-      >
+        style={[styles.buttonWrapper, styles.fullScreen]}>
         {lastScreen ? (
-          // Show this button on the last screen
-          // TODO: Add a handler that would send a user to your app after onboarding is complete
           <Button
-            text="Fendy" 
-            onPress={() => this.props.navigation.navigate("Main")}
+            text="Tutup" 
+            onPress={() => this._closeButtonPress() }
           />
         ) : (
-          // Or this one otherwise
           <Button 
-            text={lastScreen} 
-            onPress={() => this.props.navigation.navigate("Main")} />
+            text="Lewat"
+            onPress={() => this._closeButtonPress() } />
         )}
       </View>
     );

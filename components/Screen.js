@@ -16,18 +16,14 @@ export default class Screen extends Component {
     }
 
     componentDidMount() {
-        AsyncStorage.getItem('firstime').then((firstime) => {
-          console.log(firstime);  
-            if (firstime !== 'null') {
-                this.setState({ firstime: true })
-            }else{
-                this.setState({ firstime: false })
-            }
+        AsyncStorage.getItem('firstime').then((ft) => {
+            firstime = JSON.parse(ft);
+            this.setState({ firstime: firstime })
         });
     }
 
     render(){
-        if (this.state.firstime) {
+        if (!this.state.firstime) {
             return (
                 <Swiper navigation={this.props.navigation}>
                     {/* First screen */}
