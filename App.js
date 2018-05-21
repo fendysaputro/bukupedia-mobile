@@ -9,6 +9,7 @@ import Main from "./components/Main";
 import LoginMain from "./components/LoginMain";
 import Password from "./components/Password";
 import MyOrderMain from "./components/MyOrderMain";
+import SplashScreen from "./components/SplashScreen";
 
 class App extends Component {
 
@@ -31,6 +32,7 @@ class App extends Component {
       <View style={styles.container}>
         <StatusBar barStyle="light-content" backgroundColor="#16a085" />
         <Screen navigation={this.props.navigation} />
+        {/* <SplashScreen/> */}
       </View>
     );
   }
