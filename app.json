@@ -2,9 +2,10 @@
   "expo": {
     "sdkVersion": "25.0.0",
     "splash": {
-      "image": "./styles/icon/icon-logo.png",
       "backgroundColor": "#2B78AC",
-      "resizeMode": "contain"
+      "image": "./styles/icon/icon-logo.png",
+      "width": 24,
+      "height": 24
     }
   }
 }

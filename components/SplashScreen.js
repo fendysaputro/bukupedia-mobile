@@ -1,40 +1,37 @@
-import React from 'react';
-import { Image, Text, View } from 'react-native';
+import React, { Component } from 'react';
+import { Image, Text, View, StyleSheet } from 'react-native';
 import { Asset, AppLoading } from 'expo';
+import { COLOR_PRIMARY } from '../styles/common';
 
-export default class SplashScreen extends React.Component {
-    constructor(props){
-        super(props)
-        this.state = { timer: 0}
-        setInterval(()=> {
-            this.setState({ timer: this.state.timer + 1 })
-        }, 1000)
+export default class SplashScreen extends Component {
+    static navigationOptions = {
+        headerStyle: {
+        },
+        header: null
+      };    
+
+    componentWillMount(){
+        setTimeout(() => {
+            this.props.navigation.navigate('app');
+        },10000)
     }
 
     render(){
-        // if (!this.state.isReady){
-        //     return (
-        //         <AppLoading
-        //             startAsync={this._cacheResourcesAsync}
-        //             onFinish={()=> this.setState({isReady: true})}
-        //             onError={console.warn}
-        //         />
-        //     );
-        // }
         return (
-            <View style={{ flex:1 }}>
-                <Image source={require('../styles/icon/icon-logo.png')} />
+            <View style={styles.container}>
+                <Image source={require('../styles/icon/icon-logo.png')} 
+                       style={{width: 50, height: 50}}/>
+                <Text>SplashScreen</Text>
             </View>
         );
     }
-    // async _cacheResourcesAsync(){
-    //     const images = [
-    //         require('../styles/icon/icon-logo.png')
-    //     ];
-
-    //     const cacheImages = images.map((image) => {
-    //         return Asset.fromModule(image).downloadAsync();
-    //     });
-    //     return Promise.all(cacheImages)
-    // }
 }
+
+const styles = StyleSheet.create({
+    container: {
+        backgroundColor: COLOR_PRIMARY,
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
+    }
+})

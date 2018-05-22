@@ -32,7 +32,6 @@ class App extends Component {
       <View style={styles.container}>
         <StatusBar barStyle="light-content" backgroundColor="#16a085" />
         <Screen navigation={this.props.navigation} />
-        {/* <SplashScreen/> */}
       </View>
     );
   }
@@ -40,6 +39,11 @@ class App extends Component {
 
 export default App = StackNavigator({
   Home: {
+    screen: SplashScreen,
+    navigationOptions: {
+    }
+  },
+  app: {
     screen: App,
     navigationOptions: {
     }
