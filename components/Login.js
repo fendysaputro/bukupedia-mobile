@@ -7,14 +7,14 @@ import { AppRegistry,
         Search, 
         TextInput, 
         TouchableOpacity, 
-        TouchableHighlight, 
-        CheckBox } from "react-native";
+        TouchableHighlight,
+        SafeAreaView, KeyboardAvoidingView } from "react-native";
 import { COLOR_PRIMARY } from "../styles/common";
 import TabNavigator from "react-native-tab-navigator";
 import BottomNavigation, { Tab } from "react-native-material-bottom-navigation";
 import Button from "react-native-button";
 import Icon from "react-native-vector-icons";
-// import { CheckBox } from "react-native-elements";
+import { CheckBox } from "react-native-elements";
 
 import Password from "./Password";
 
@@ -32,7 +32,6 @@ export default class Login extends Component {
       }
     constructor(props) {
         super(props);
-
         this.state = {
             email: '',
             password: '',
@@ -61,42 +60,41 @@ export default class Login extends Component {
         return(
             <View style={styles.container}>
                 <TouchableOpacity style = {styles.buttonStyleFb}>
-                <Text style = {styles.submitButtonText}>Login With Facebook</Text>
-                    <Image 
-                        style = {styles.image}
-                        source={require('../styles/icon/facebook.png')} 
-                    />
+                    <Text style = {styles.submitButtonText}>Login With Facebook</Text>
+                        <Image 
+                            style = {styles.image}
+                            source={require('../styles/icon/facebook.png')} 
+                        />
                 </TouchableOpacity>
                 <TouchableOpacity style = {styles.buttonStyleGoogle}>
-                <Text style = {styles.submitButtonText}>Login With Google+</Text>
-                    <Image
-                        style = {styles.image}      
-                        source={require('../styles/icon/google-plus.png')} 
-                    /> 
+                    <Text style = {styles.submitButtonText}>Login With Google+</Text>
+                        <Image
+                            style = {styles.image}      
+                            source={require('../styles/icon/google-plus.png')} 
+                        /> 
                 </TouchableOpacity>
                 <Text style={styles.lineText}>
                     ─────────────  Atau  ─────────────
                 </Text>
                 <TextInput style={styles.input}
-                    placeHolder = "Username"
+                    placeholder = "Username"
+                    placeholderTextColor="#696969"
                     underlineColorAndroid = "transparent"
-                    value = {this.state.placeHolder}
                     autoCapitalize = "none"
                     onChangeText = {(text) => this.setState({email: text})}
                 />
                 <TextInput style={styles.input}
-                    placeHolder = "Password"
+                    placeholder = "Password"
+                    placeholderTextColor="#696969"
                     underlineColorAndroid = "transparent"
-                    value = {this.state.placeHolder}
                     autoCapitalize = "none"
                     onChangeText = {(text) => this.setState({password: text})}
                 />
                 <View style = {styles.check}>
-                    <CheckBox label= "Ingat Saya"
-                        onValueChange={value => this.setState({falseCheckBoxIsOn: value})}
-                        value={this.state.falseCheckBoxIsOn}
-                        // checked={this.state.checked}
-                        // onPress={() => this.setState({ checked: !this.state.checked})}
+                    <CheckBox 
+                        title= 'Ingat Saya'
+                        checked={this.state.checked}
+                        onPress={() => this.setState({ checked: !this.state.checked})}
                     />
                     <Button style = {styles.buttonLine}
                         onPress={() => this.props.navigation.navigate("Password")}>
@@ -209,6 +207,6 @@ const styles = StyleSheet.create({
        start: '6%',
        alignSelf: 'flex-start',
        backgroundColor: 'transparent' 
-   }
+   },
 });
 

@@ -13,14 +13,14 @@ export default class SplashScreen extends Component {
     componentWillMount(){
         setTimeout(() => {
             this.props.navigation.navigate('app');
-        },10000)
+        },5000)
     }
 
     render(){
         return (
             <View style={styles.container}>
                 <Image source={require('../styles/icon/icon-logo.png')} 
-                       style={{width: 50, height: 50}}/>
+                       style={{width: 100, height: 100}}/>
                 <Text>SplashScreen</Text>
             </View>
         );
@@ -29,7 +29,7 @@ export default class SplashScreen extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: COLOR_PRIMARY,
+        backgroundColor: 'white',
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center'

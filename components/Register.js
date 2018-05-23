@@ -24,7 +24,6 @@ export default class Register extends Component {
               placeHolder = "firtsName"
               underlineColorAndroid = "transparent"
               placeholderTextColor = "red"
-              value = "first name"
               autoCapitalize = "none"
               onChangeText = {(text) => this.setState({email: text})}
           />
@@ -32,7 +31,6 @@ export default class Register extends Component {
               placeHolder = "lastName"
               underlineColorAndroid = "transparent"
               placeholderTextColor = "red"
-              value = "last name"
               autoCapitalize = "none"
               onChangeText = {(text) => this.setState({password: text})}
           />
@@ -40,7 +38,6 @@ export default class Register extends Component {
               placeHolder = "Email"
               underlineColorAndroid = "transparent"
               placeholderTextColor = "red"
-              value = "email"
               autoCapitalize = "none"
               onChangeText = {(text) => this.setState({password: text})}
           />
@@ -48,7 +45,6 @@ export default class Register extends Component {
               placeHolder = "no_hp"
               underlineColorAndroid = "transparent"
               placeholderTextColor = "red"
-              value = "handphone"
               autoCapitalize = "none"
               onChangeText = {(text) => this.setState({password: text})}
           />
@@ -56,7 +52,6 @@ export default class Register extends Component {
               placeHolder = "password"
               underlineColorAndroid = "transparent"
               placeholderTextColor = "red"
-              value = "password"
               autoCapitalize = "none"
               onChangeText = {(text) => this.setState({password: text})}
           />

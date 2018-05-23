@@ -6,9 +6,14 @@ import BottomNavigation, { Tab } from "react-native-material-bottom-navigation";
 
 export default class Category extends Component {
   static navigationOptions = {
+    title: "Pilih Kategori Buku",
     headerStyle: {
-      backgroundColor: COLOR_PRIMARY,
+      backgroundColor: "white",
       elevation: null
+    },
+    headerTitleStyle: {
+      width: '90%',
+      textAlign: 'center'
     },
     headerLeft: null,
   }
