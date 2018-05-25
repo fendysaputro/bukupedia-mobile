@@ -3,7 +3,6 @@ import { AppRegistry,
           StyleSheet, 
           Text, 
           View, 
-          Image, 
           Search, 
           Button, 
           Dimensions, 
@@ -14,11 +13,11 @@ import BottomNavigation, { Tab } from "react-native-material-bottom-navigation";
 import SideSwipe from 'react-native-sideswipe';
 import { getBanner, getBannerSmall } from '../services/FetchBanner';
 import { getNewProduct } from '../services/FetchProduct';
+import Image from 'react-native-scalable-image';
 
 var { height, width } = Dimensions.get('window');
-var box_count = 3;
+var box_count = 2;
 var box_height = height / box_count;
-var bsmall_width = width / 3;
 
 export default class Home extends Component {
 
@@ -81,10 +80,11 @@ export default class Home extends Component {
   render () {
     const { width } = Dimensions.get('window');
     const contentOffset = 0;
+    const spaceBetween = 2;
     return (
       <View style={styles.container}>
         <ScrollView>
-          <View style={[styles.box, styles.box1]}>
+          <View style={[styles.box1, styles.box1]}>
             <SideSwipe
               index={this.state.currentIndex}
               itemWidth={width}
@@ -95,7 +95,7 @@ export default class Home extends Component {
                 this.setState(() => ({ currentIndex: index }))
               }
               renderItem={({ itemIndex, currentIndex, item, animatedValue }) => (
-                <Image  style={{width: width, height: 230}}
+                <Image  width={Dimensions.get('window').width} //style={{width: width, height: 230}}
                     source={{uri: item.picture}}/>
               )}
             />  
@@ -106,17 +106,19 @@ export default class Home extends Component {
               itemWidth={width}
               style={{ width }}
               data={this.state.banners_small}
-              contentOffset={2}
+              contentOffset={contentOffset}
               onIndexChange={index =>
                 this.setState(() => ({ currentIndex: index }))
               }
               renderItem={({ itemIndex, currentIndex, item, animatedValue }) => (
-                <Image  style={{width: bsmall_width - 10, height: 101}}
+                <Image  width={Dimensions.get('window').width / 3} //style={{width: bsmall_width - 10, height: 101}}
                     source={{uri: item.picture}}/>
               )}
             />  
           </View>
-          <View style={[styles.box, styles.box3]}></View>
+          <View style={[styles.box, styles.box3]}>
+            
+          </View>
         </ScrollView>
       </View>
     )
@@ -124,15 +126,19 @@ export default class Home extends Component {
 }
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    flexDirection: 'column'
+    flex: .37,
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    marginBottom: 10
   },
   box: {
-    height: box_height
   },
   box1: {
+    flex: 1,
+    backgroundColor: '#2196F3'
   },
   box2: {
+    flex: 1,
     backgroundColor: '#8BC34A'
   },
   box3: {
