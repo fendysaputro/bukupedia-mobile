@@ -80,10 +80,21 @@ export default class Home extends Component {
   //   );
   // }
 
+  getAuthorsText(authorObj) {
+    return authorObj.results.map(function(author){
+      author + ' ';
+    });
+    // authors = this.state.list.results.map(function (item) {
+    //     return (
+    //       <View key={item.user.email} style={ styles.content }>
+    //         <Text>{item.user.email}</Text>
+    //       </View>
+    //     );
+    //  });
+  }
+
   render () {
-    const { width } = Dimensions.get('window');
     const contentOffset = 0;
-    // const spaceBetween = 2;
     let screenHeight = Dimensions.get('window').height;
     return (
         <View style={styles.root}>
@@ -128,8 +139,13 @@ export default class Home extends Component {
                 style={styles.gridView}
                 renderItem={item => (
                   <View style={[styles.itemContainer]}>
-                    <Text style={styles.itemName}>{item.title}</Text>
-                    <Text style={styles.itemCode}>Author: </Text>
+                    <Image width={Dimensions.get('window').width / 3} 
+                      source={require('../styles/icon/book_cover_ex.jpg')}/>
+                    <View style={styles.itemCaption}>
+                      <Text style={styles.itemTitle}>{item.title}</Text>
+                      <Text style={styles.itemAuthor}> {item.authors[0]}</Text>
+                      <Text style={styles.itemPrice}>Rp. {item.price}</Text>
+                    </View>
                   </View>
                 )}
               />  
@@ -158,8 +174,7 @@ const styles = StyleSheet.create({
     flex: 1
   },
   box3: {
-    height: 200,
-    backgroundColor: 'red'
+    flex: 1
   },
   gridView: {
     paddingTop: 25,
@@ -167,19 +182,30 @@ const styles = StyleSheet.create({
   },
   itemContainer: {
     justifyContent: 'flex-start',
+    alignItems: 'center',
     borderRadius: 5,
     padding: 10,
-    height: 150,
+    height: 250,
+    borderWidth: 0.5,
+    borderColor: '#d6d7da'
   },
-  itemName: {
-    fontSize: 16,
-    color: '#fff',
+  itemCaption: {
+
+  },
+  itemTitle: {
+    fontSize: 14,
+    color: '#1791c5',
     fontWeight: '600',
   },
-  itemCode: {
+  itemAuthor: {
     fontWeight: '600',
+    fontSize: 11,
+    color: '#49aedd'
+  },
+  itemPrice: {
     fontSize: 12,
-    color: '#fff',
+    color: '#e7ad46',
+    fontWeight: '600',
   }
 });
 
