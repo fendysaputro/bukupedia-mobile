@@ -36,8 +36,8 @@ export default class Screen extends Component {
                         <Text style={styles.header}>Pencarian Buku</Text>
                         <Text style={styles.headerText}>Semakin Mudah</Text>
                         <Image 
-                            source={require('../styles/icon/icon-logo.png')} 
-                            style={{ width: 100, height: 100 }}>
+                            source={require('../styles/icon/onboarding1image.jpg')} 
+                            style={{ width: 250, height: 250 }}>
                         </Image>
                     </View>
                     { /* Second screen */}
@@ -45,21 +45,23 @@ export default class Screen extends Component {
                         <Text style={styles.header}>Gratis Ongkos Kirim</Text>
                         <Text style={styles.headerText}>Seluruh Wilayah Indonesia</Text>
                         <Image 
-                            source={require('../styles/icon/icon-logo.png')} 
-                            style={{ width: 100, height: 100 }}>
+                            source={require('../styles/icon/onboarding2image.jpg')} 
+                            style={{ width: 250, height: 250 }}>
                         </Image>
                     </View>
                     {/* Third screen */}
                     <View style={styles.slide}>
-                        <Text style={styles.header}>Pencarian Buku</Text>
+                        <Text style={styles.header}>Jaminan Buku Asli</Text>
+                        <Text style={styles.headerText}>Langsung dari Gudang Penerbit</Text>
                         <Image 
-                            source={require('../styles/icon/icon-logo.png')} 
-                            style={{ width: 100, height: 100 }}>
+                            source={require('../styles/icon/onboarding3imageonly.jpg')} 
+                            style={{ width: 250, height: 250 }}>
                         </Image>
                     </View>
                 </Swiper>
             );
-        }else{
+        }
+        else{
             return ( this.props.navigation.navigate("Main") );
         }
     }
@@ -75,7 +77,7 @@ const styles = StyleSheet.create({
     header: {
         color: '#fff',
         position: 'absolute',
-        top: 40,
+        top: 80,
         fontSize: 30,
         fontWeight: 'bold',
         marginVertical: 15
@@ -84,7 +86,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         color: '#fff',
         fontSize: 12,
-        top: 100,
+        top: 140,
         textAlign: 'center'
     },
     text: {
