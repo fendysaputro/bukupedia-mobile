@@ -23,6 +23,13 @@ export default class Screen extends Component {
         });
     }
 
+    // componentWillmount() {
+    //     AsyncStorage.getItem('firstime').then((ft) => {
+    //         firstime = JSON.parse(ft);
+    //         this.setState({ firstime: firstime, isMounted: true });
+    //     });
+    // }
+
     componentWillUnmount() {
         this.setState();
     }
