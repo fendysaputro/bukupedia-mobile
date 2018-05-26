@@ -19,9 +19,9 @@ export default class SplashScreen extends Component {
     render(){
         return (
             <View style={styles.container}>
-                <Image source={require('../styles/icon/icon-logo.png')} 
-                       style={{width: 100, height: 100}}/>
-                <Text>SplashScreen</Text>
+                <Image source={require('../styles/icon/splash.png')} 
+                       style={{width: 200, height: 100}}
+                />
             </View>
         );
     }
