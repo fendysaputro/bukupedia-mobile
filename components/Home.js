@@ -6,7 +6,7 @@ import { AppRegistry,
           Search, 
           Button, 
           Dimensions, 
-          ScrollView } from "react-native";
+          ScrollView, TouchableOpacity } from "react-native";
 import { COLOR_PRIMARY, sliderWidth, itemWidth } from "../styles/common";
 import TabNavigator from "react-native-tab-navigator";
 import BottomNavigation, { Tab } from "react-native-material-bottom-navigation";
@@ -14,6 +14,7 @@ import SideSwipe from 'react-native-sideswipe';
 import { getBanner, getBannerSmall } from '../services/FetchBanner';
 import { getNewProduct } from '../services/FetchProduct';
 import Image from 'react-native-scalable-image';
+import GridView from 'react-native-super-grid';
 
 var { height, width } = Dimensions.get('window');
 var box_count = 2;
@@ -26,11 +27,12 @@ export default class Home extends Component {
       this.state = {
           banners: [],
           banners_small: [],
-          new_products: []
-      };
+          new_products: [],
+          height: 100
+      }
   }
 
-  componentDidMount() {
+  componentWillMount() {
     getBanner()
           .then((res) => {
               this.setState({ banners: res.d });
@@ -44,6 +46,7 @@ export default class Home extends Component {
     getNewProduct()
           .then((res) => {
             this.setState({ new_products: res.d });
+            console.log(this.state.new_products);
           });
   }
 
@@ -80,69 +83,103 @@ export default class Home extends Component {
   render () {
     const { width } = Dimensions.get('window');
     const contentOffset = 0;
-    const spaceBetween = 2;
+    // const spaceBetween = 2;
+    let screenHeight = Dimensions.get('window').height;
     return (
-      <View style={styles.container}>
-        <ScrollView>
-          <View style={[styles.box1, styles.box1]}>
-            <SideSwipe
-              index={this.state.currentIndex}
-              itemWidth={width}
-              style={{ width }}
-              data={this.state.banners}
-              contentOffset={contentOffset}
-              onIndexChange={index =>
-                this.setState(() => ({ currentIndex: index }))
-              }
-              renderItem={({ itemIndex, currentIndex, item, animatedValue }) => (
-                <Image  width={Dimensions.get('window').width} //style={{width: width, height: 230}}
-                    source={{uri: item.picture}}/>
-              )}
-            />  
-          </View>
-          <View style={[styles.box, styles.box2]}>
-            <SideSwipe
-              index={this.state.currentIndex}
-              itemWidth={width}
-              style={{ width }}
-              data={this.state.banners_small}
-              contentOffset={contentOffset}
-              onIndexChange={index =>
-                this.setState(() => ({ currentIndex: index }))
-              }
-              renderItem={({ itemIndex, currentIndex, item, animatedValue }) => (
-                <Image  width={Dimensions.get('window').width / 3} //style={{width: bsmall_width - 10, height: 101}}
-                    source={{uri: item.picture}}/>
-              )}
-            />  
-          </View>
-          <View style={[styles.box, styles.box3]}>
-            
-          </View>
-        </ScrollView>
+        <View style={styles.root}>
+        <View style={{ height: (screenHeight - this.state.height), borderColor: 'green', borderWidth: 0 }}>
+          <ScrollView>
+            <View style={styles.box1}>
+              <SideSwipe
+                index={this.state.currentIndex}
+                itemWidth={width}
+                style={{ width }}
+                data={this.state.banners}
+                contentOffset={contentOffset}
+                onIndexChange={index =>
+                  this.setState(() => ({ currentIndex: index }))
+                }
+                renderItem={({ itemIndex, currentIndex, item, animatedValue }) => (
+                  <Image  width={Dimensions.get('window').width} //style={{width: width, height: 230}}
+                      source={{uri: item.picture}}/>
+                )}
+              /> 
+            </View>
+            <View style={styles.box2}>
+              <SideSwipe
+                index={this.state.currentIndex}
+                itemWidth={width}
+                style={{ width }}
+                data={this.state.banners_small}
+                contentOffset={contentOffset}
+                onIndexChange={index =>
+                  this.setState(() => ({ currentIndex: index }))
+                }
+                renderItem={({ itemIndex, currentIndex, item, animatedValue }) => (
+                  <Image  width={Dimensions.get('window').width / 3} 
+                      source={{uri: item.picture}}/>
+                )}
+              />
+            </View>
+            <View style={styles.box3}>
+              <GridView
+                itemDimension={130}
+                items={this.state.new_products}
+                style={styles.gridView}
+                renderItem={item => (
+                  <View style={[styles.itemContainer]}>
+                    <Text style={styles.itemName}>{item.title}</Text>
+                    <Text style={styles.itemCode}>Author: </Text>
+                  </View>
+                )}
+              />  
+            </View>
+          </ScrollView>
+        </View>
+        <View style={{ height: this.state.height, backgroundColor: 'red' }}>
+          <TouchableOpacity onPress={() => this.setState({ height: this.state.height + 10 })}>
+            <Text>Click</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     )
   }
 }
 const styles = StyleSheet.create({
-  container: {
-    flex: .37,
+  root: {
+    flex: 1,
     flexDirection: 'column',
-    justifyContent: 'space-between',
-    marginBottom: 10
-  },
-  box: {
+    backgroundColor: '#fff',
   },
   box1: {
-    flex: 1,
-    backgroundColor: '#2196F3'
+    flex: 1
   },
   box2: {
-    flex: 1,
-    backgroundColor: '#8BC34A'
+    flex: 1
   },
   box3: {
-    backgroundColor: '#e3aa1a'
+    height: 200,
+    backgroundColor: 'red'
+  },
+  gridView: {
+    paddingTop: 25,
+    flex: 1,
+  },
+  itemContainer: {
+    justifyContent: 'flex-start',
+    borderRadius: 5,
+    padding: 10,
+    height: 150,
+  },
+  itemName: {
+    fontSize: 16,
+    color: '#fff',
+    fontWeight: '600',
+  },
+  itemCode: {
+    fontWeight: '600',
+    fontSize: 12,
+    color: '#fff',
   }
 });
 
