@@ -15,6 +15,7 @@ import { getBanner, getBannerSmall } from '../services/FetchBanner';
 import { getNewProduct } from '../services/FetchProduct';
 import Image from 'react-native-scalable-image';
 import GridView from 'react-native-super-grid';
+import { SearchBar, Icon, Header } from "react-native-elements";
 
 var { height, width } = Dimensions.get('window');
 var box_count = 2;
@@ -51,6 +52,14 @@ export default class Home extends Component {
   }
 
   static navigationOptions = {
+    headerTitle: 
+      <SearchBar
+        lightTheme
+        // onChangeText={someMethod}
+        // onClearText={someMethod}
+        placeholder='Bukupedia' 
+        containerStyle={{width: '85%', backgroundColor: COLOR_PRIMARY}}
+      />,
     headerStyle: {
       backgroundColor: COLOR_PRIMARY,
       elevation: null

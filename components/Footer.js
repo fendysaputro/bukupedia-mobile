@@ -12,7 +12,11 @@ import Account from "./Account";
 
 class Footer extends Component {
     render () {
-        return< FooterBar/>
+      return (
+        <View>
+          < FooterBar/>
+        </View>
+      )
     }
 }
 
