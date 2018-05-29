@@ -6,7 +6,9 @@ import { AppRegistry,
           Search, 
           Button, 
           Dimensions, 
-          ScrollView, TouchableOpacity } from "react-native";
+          ScrollView, 
+          TouchableOpacity, 
+          TouchableHighlight } from "react-native";
 import { COLOR_PRIMARY, sliderWidth, itemWidth } from "../styles/common";
 import TabNavigator from "react-native-tab-navigator";
 import BottomNavigation, { Tab } from "react-native-material-bottom-navigation";
@@ -102,6 +104,10 @@ export default class Home extends Component {
     //  });
   }
 
+  handleOnTouchProduct(item) {
+    console.log("pressed! "+item);
+  }
+
   render () {
     const contentOffset = 0;
     let screenHeight = Dimensions.get('window').height;
@@ -147,15 +153,17 @@ export default class Home extends Component {
                 items={this.state.new_products}
                 style={styles.gridView}
                 renderItem={item => (
-                  <View style={[styles.itemContainer]}>
-                    <Image width={Dimensions.get('window').width / 3} 
-                      source={require('../styles/icon/book_cover_ex.jpg')}/>
-                    <View style={styles.itemCaption}>
-                      <Text style={styles.itemTitle}>{item.title}</Text>
-                      <Text style={styles.itemAuthor}> {item.authors[0]}</Text>
-                      <Text style={styles.itemPrice}>Rp. {item.price}</Text>
+                  <TouchableHighlight onPress={this.handleOnTouchProduct}>
+                    <View style={[styles.itemContainer]}>
+                      <Image width={Dimensions.get('window').width / 3} 
+                        source={{uri: item.image}}/>
+                      <View style={styles.itemCaption}>
+                        <Text style={styles.itemTitle}>{item.title}</Text>
+                        <Text style={styles.itemAuthor}> {item.authors[0]}</Text>
+                        <Text style={styles.itemPrice}>Rp. {item.price}</Text>
+                      </View>
                     </View>
-                  </View>
+                  </TouchableHighlight>
                 )}
               />  
             </View>
