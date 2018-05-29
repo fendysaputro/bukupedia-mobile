@@ -39,25 +39,25 @@ export default class Register extends Component {
               ─────────────  Atau  ─────────────
           </Text>
           <TextInput style={styles.input}
-              placeholder = "Username"
+              placeholder = "Name"
+              placeholderTextColor="#696969"
+              underlineColorAndroid = "transparent"
+              autoCapitalize = "none"
+              onChangeText = {(text) => this.setState({name: text})}
+          />
+          <TextInput style={styles.input}
+              placeholder = "Email"
               placeholderTextColor="#696969"
               underlineColorAndroid = "transparent"
               autoCapitalize = "none"
               onChangeText = {(text) => this.setState({email: text})}
           />
           <TextInput style={styles.input}
-              placeholder = "Password"
-              placeholderTextColor="#696969"
-              underlineColorAndroid = "transparent"
-              autoCapitalize = "none"
-              onChangeText = {(text) => this.setState({password: text})}
-          />
-          <TextInput style={styles.input}
-              placeholder = "Confirm Password"
+              placeholder = "Nomor Handphone"
               placeholderTextColor = "#696969"
               underlineColorAndroid = "transparent"
               autoCapitalize = "none"
-              onChangeText = {(text) => this.setState({confirmPsw: text})}
+              onChangeText = {(text) => this.setState({no_Hp: text})}
           />
           <Button style = {styles.submitButton}
             onPress = {() => this.alert("Daftar")}>

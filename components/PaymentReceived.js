@@ -1,43 +1,84 @@
 import React, { Component } from "react";
-import { AppRegistry, StyleSheet, Text, View, Image, Search } from "react-native";
+import { Footer, AppRegistry, StyleSheet, Text, View, Image, Search, TouchableOpacity } from "react-native";
 import { COLOR_PRIMARY } from "../styles/common";
 import TabNavigator from "react-native-tab-navigator";
 import BottomNavigation, { Tab } from "react-native-material-bottom-navigation";
+import {tabs} from "./Main";
+
+import Main from "./Main";
 
 export default class PaymentReceived extends Component {
-    static navigationOptions = {
-        title: 'Pembayaran Diterima',
-        headerStyle: {
-          backgroundColor: COLOR_PRIMARY,
-          elevation: null,
-        },
-        headerTitleStyle: {
-          color: 'white',
-          width: '90%',
-          textAlign: 'center'
-        },
-        headerLeft: null
-    }
+  static navigationOptions = {
+    title: 'Pembayaran Berhasil',
+    headerStyle: {
+      backgroundColor: COLOR_PRIMARY,
+      elevation: null,
+    },
+    headerTitleStyle: {
+      color: 'white',
+      width: '90%',
+      textAlign: 'center'
+    },
+  }
+
+  alertItemName = () => {
+    alert()
+  }
+
   render () {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Your Payment is received
+        <Image 
+          source={require('../styles/icon/pembayaranberhasil.png')}
+          style={{width: 170, height: 170}}>
+        </Image>
+        <Text style={styles.text}>
+          Pembayaran Anda Telah Kami Terima
         </Text>
+        <Text style={styles.smallText}>
+          Pesanan Anda akan segera kami proses
+        </Text>
+        <TouchableOpacity style={styles.button}
+          onPress = {() => this.props.navigation.navigate("Main")}>
+            <Text style={styles.buttonText}>
+              Kembali Ke beranda
+            </Text>
+        </TouchableOpacity>
       </View>
-    )
+    );
   }
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    marginTop: "20%",
+    alignItems: "center"
   },
-  welcome: {
-    fontSize: 20,
+  text: {
+    fontSize: 17,
     textAlign: "center",
-    margin: 10
+    marginTop: "2%",
+    fontWeight: "bold" 
+  },
+  smallText: {
+    fontSize: 13,
+    marginTop: "3%",
+    textAlign: "center"
+  },
+  button: {
+    backgroundColor: "#00AEF2",
+    marginTop: "15%",
+    padding: 5,
+    margin: 15,
+    height: 35,
+    width: "60%"
+  },
+  buttonText: {
+    fontSize: 15,
+    color: "white",
+    textAlign: "center",
+    fontWeight: "bold"
   }
 });
 

@@ -51,21 +51,29 @@ export default class Home extends Component {
           });
   }
 
-  static navigationOptions = {
+  static navigationOptions = ({navigation}) => ({
     headerTitle: 
       <SearchBar
         lightTheme
         // onChangeText={someMethod}
         // onClearText={someMethod}
         placeholder='Bukupedia' 
-        containerStyle={{width: '85%', backgroundColor: COLOR_PRIMARY}}
+        containerStyle={{width: '100%', backgroundColor: COLOR_PRIMARY}}
       />,
     headerStyle: {
       backgroundColor: COLOR_PRIMARY,
       elevation: null
     },
     headerLeft: null,
-  }
+    headerRight:
+      <TouchableOpacity onPress={() => navigation.navigate("Login")}
+        style={{margin:10, padding: 10, width: 50, height: 70}}>
+        <Image
+          source={require('../styles/icon/notification.png')}
+        />
+      </TouchableOpacity>
+  })
+    
 
   // get pagination () {
   //   const { banners, activeSlide } = this.state;
@@ -215,7 +223,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: '#e7ad46',
     fontWeight: '600',
-  }
+  },
 });
 
 AppRegistry.registerComponent("Home", () => Home);
