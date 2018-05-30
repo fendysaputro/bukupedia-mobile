@@ -22,14 +22,14 @@ export default class Register extends Component {
       return (
         <View style={styles.container}>
           <TouchableOpacity style = {styles.buttonStyleFb}>
-              <Text style = {styles.submitButtonText}>Login With Facebook</Text>
+              <Text style = {styles.submitButtonText}>Register With Facebook</Text>
                   <Image 
                       style = {styles.image}
                       source={require('../styles/icon/facebook.png')} 
                   />
           </TouchableOpacity>
           <TouchableOpacity style = {styles.buttonStyleGoogle}>
-              <Text style = {styles.submitButtonText}>Login With Google+</Text>
+              <Text style = {styles.submitButtonText}>Register With Google+</Text>
                   <Image
                       style = {styles.image}      
                       source={require('../styles/icon/google-plus.png')} 
@@ -51,6 +51,20 @@ export default class Register extends Component {
               underlineColorAndroid = "transparent"
               autoCapitalize = "none"
               onChangeText = {(text) => this.setState({email: text})}
+          />
+          <TextInput style={styles.input}
+              placeholder = "Password"
+              placeholderTextColor="#696969"
+              underlineColorAndroid = "transparent"
+              autoCapitalize = "none"
+              onChangeText = {(text) => this.setState({password: text})}
+          />
+          <TextInput style={styles.input}
+              placeholder = "Confirm Password"
+              placeholderTextColor="#696969"
+              underlineColorAndroid = "transparent"
+              autoCapitalize = "none"
+              onChangeText = {(text) => this.setState({confirmPwd: text})}
           />
           <TextInput style={styles.input}
               placeholder = "Nomor Handphone"
