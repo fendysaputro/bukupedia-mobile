@@ -22,23 +22,16 @@ import { StackNavigator } from 'react-navigation';
 import { ProductDetail } from '../components/ProductDetail';
 
 var { height, width } = Dimensions.get('window');
-var box_count = 2;
-var box_height = height / box_count;
 
 export default class Home extends Component {
 
   constructor (props) {
       super(props);
-      this.state = {
-          banners: [],
-          banners_small: [],
-          new_products: [],
-          height: 100
-      }
       this.handleOnTouchProduct = this.handleOnTouchProduct.bind(this);
   }
 
   componentWillMount() {
+    this.setState({ banners: [], banners_small: [], new_products: []});
     getBanner()
           .then((res) => {
               this.setState({ banners: res.d });
@@ -52,7 +45,6 @@ export default class Home extends Component {
     getNewProduct()
           .then((res) => {
             this.setState({ new_products: res.d });
-            console.log(this.state.new_products);
           });
   }
 
@@ -62,7 +54,7 @@ export default class Home extends Component {
         lightTheme
         // onChangeText={someMethod}
         // onClearText={someMethod}
-        placeholder='Bukupedia' 
+        placeholder='Search' 
         containerStyle={{width: '100%', backgroundColor: COLOR_PRIMARY}}
       />,
     headerStyle: {
@@ -116,7 +108,6 @@ export default class Home extends Component {
   }
 
   handleOnTouchProduct(item) {
-    console.log("pressed! "+item);
     this.props.navigation.navigate('ProductDetail', {url: item.link});
   }
 
@@ -124,12 +115,12 @@ export default class Home extends Component {
     const contentOffset = 0;
     let screenHeight = Dimensions.get('window').height;
     return (
-        <View style={styles.root}>
-        <View style={{ height: (screenHeight - this.state.height), borderColor: 'green', borderWidth: 0 }}>
+      <View style={styles.root}>
+        <View style={{ height: (screenHeight - 100), borderColor: 'green', borderWidth: 0 }}>
           <ScrollView>
             <View style={styles.box1}>
               <SideSwipe
-                index={this.state.currentIndex}
+                index={0}
                 itemWidth={width}
                 style={{ width }}
                 data={this.state.banners}
@@ -138,7 +129,7 @@ export default class Home extends Component {
                   this.setState(() => ({ currentIndex: index }))
                 }
                 renderItem={({ itemIndex, currentIndex, item, animatedValue }) => (
-                  <Image  width={Dimensions.get('window').width} //style={{width: width, height: 230}}
+                  <Image  width={Dimensions.get('window').width} 
                       source={{uri: item.picture}}/>
                 )}
               /> 
@@ -180,12 +171,7 @@ export default class Home extends Component {
               />  
             </View>
           </ScrollView>
-        </View>
-        <View style={{ height: this.state.height, backgroundColor: 'red' }}>
-          <TouchableOpacity onPress={() => this.setState({ height: this.state.height + 10 })}>
-            <Text>Click</Text>
-          </TouchableOpacity>
-        </View>
+        </View>  
       </View>
     )
   }
