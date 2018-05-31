@@ -10,6 +10,7 @@ import LoginMain from "./components/LoginMain";
 import Password from "./components/Password";
 import MyOrderMain from "./components/MyOrderMain";
 import SplashScreen from "./components/SplashScreen";
+import ProductDetail from "./components/ProductDetail";
 
 class App extends Component {
 
@@ -62,6 +63,12 @@ export default App = StackNavigator({
   },
   Main: {
     screen: Main,
+    navigationOptions: {
+      
+    }
+  },
+  ProductDetail: {
+    screen: ProductDetail,
     navigationOptions: {
       
     }

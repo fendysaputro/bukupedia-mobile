@@ -18,6 +18,8 @@ import { getNewProduct } from '../services/FetchProduct';
 import Image from 'react-native-scalable-image';
 import GridView from 'react-native-super-grid';
 import { SearchBar, Icon, Header } from "react-native-elements";
+import { StackNavigator } from 'react-navigation';
+import { ProductDetail } from '../components/ProductDetail';
 
 var { height, width } = Dimensions.get('window');
 var box_count = 2;
@@ -33,6 +35,7 @@ export default class Home extends Component {
           new_products: [],
           height: 100
       }
+      this.handleOnTouchProduct = this.handleOnTouchProduct.bind(this);
   }
 
   componentWillMount() {
@@ -114,6 +117,7 @@ export default class Home extends Component {
 
   handleOnTouchProduct(item) {
     console.log("pressed! "+item);
+    this.props.navigation.navigate('ProductDetail', {url: item.link});
   }
 
   render () {
