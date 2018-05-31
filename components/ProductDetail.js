@@ -3,6 +3,8 @@ import {  AppRegistry,
 		  Text, 
           View, Image, TouchableOpacity, Button } from "react-native";
 import { COLOR_PRIMARY, sliderWidth, itemWidth } from "../styles/common";
+import HeaderButtons from "react-navigation-header-buttons";
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 export default class ProductDetail extends Component {
     static navigationOptions = ({navigation}) => ({
@@ -16,20 +18,23 @@ export default class ProductDetail extends Component {
           textAlign: 'center',
           color: 'white'
         },
-        headerRight:
-            <TouchableOpacity onPress={() => navigation.navigate("Login")}
-                style={{marginTop:2, width:24, height:24}}>
-                <Image
-                    source={require('../styles/icon/menu.png')}
+        headerRight: (
+            <HeaderButtons 
+                IconComponent={MaterialIcons} 
+                OverflowIcon={<MaterialIcons name="more-vert" size={24} color="white" />}
+                iconSize={24} 
+                color="white">
+                <HeaderButtons.Item 
+                    title="search" 
+                    iconName="search" 
+                    onPress={() => navigation.navigate("Login")} 
                 />
-            </TouchableOpacity>,
-        Button:
-            <TouchableOpacity onPress={() => navigation.navigate("Login")}
-                style={{marginTop:2, marginLeft:10, width:24, height:24}}>
-                <Image
-                    source={require('../styles/icon/searchhh.png')}
+                <HeaderButtons.Item 
+                    show="never"  
+                    onPress={() => navigation.navigate("Login")} 
                 />
-            </TouchableOpacity>
+            </HeaderButtons>
+        ),
     })
 	render() {
 		const { navigation } = this.props;
@@ -38,6 +43,7 @@ export default class ProductDetail extends Component {
 		return (
 			<View>
 				<Text>{url}</Text>
+                <Text>This is Detail Product</Text>
 			</View>
 		)
 	}
