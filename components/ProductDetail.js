@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import {  AppRegistry,
 		  Text, 
-          View, Image, TouchableOpacity, Button } from "react-native";
+          StyleSheet, View, Image, TouchableOpacity, Button, Dimensions } from "react-native";
 import { COLOR_PRIMARY, sliderWidth, itemWidth } from "../styles/common";
 import HeaderButtons from "react-navigation-header-buttons";
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+
+var { height, width } = Dimensions.get('window');
 
 export default class ProductDetail extends Component {
     static navigationOptions = ({navigation}) => ({
@@ -41,12 +43,80 @@ export default class ProductDetail extends Component {
     	const url = navigation.getParam('url', '');
     	console.log(url);
 		return (
-			<View>
+			<View style={styles.container}>
 				<Text>{url}</Text>
-                <Text>This is Detail Product</Text>
+                <View style={[styles.footer]}>
+                    <TouchableOpacity style={styles.image}>
+                        <Image
+                            source={require('../styles/icon/keranjang-aktif.png')}
+                        />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.buttonOne}>
+                        <Text style={styles.textOne}>
+                            { "Tambahkan ke\n Keranjang" }
+                        </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.buttonTwo}>
+                        <Text style={styles.textTwo}>
+                            Beli
+                        </Text>
+                    </TouchableOpacity>
+                </View>
 			</View>
 		)
 	}
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'center'
+    },
+    footer: {
+        height: 50,
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        bottom:0,
+        backgroundColor: COLOR_PRIMARY
+    },
+    textOne: {
+        fontSize: 15,
+        color: 'white',
+        textAlign: 'left',
+        marginLeft: 2,
+        justifyContent: 'center'   
+    },
+    textTwo: {
+        fontSize: 20,
+        color: 'white',
+        textAlign: 'center',
+        justifyContent: 'center'
+    },
+    buttonOne: {
+        height: 40,
+        position: 'absolute',
+        bottom: 5,
+        width: 130,
+        left: '30%',
+        backgroundColor: 'orange'
+    },
+    buttonTwo: {
+        height: 40,
+        position: 'absolute',
+        bottom: 5,
+        width: 100,
+        left : '70%',
+        backgroundColor: '#3bafff'
+    },
+    image:{
+        position: 'absolute',
+        bottom: 5,
+        left: '5%',
+        width: 80,
+        height: 45
+    }
+})
 
 AppRegistry.registerComponent("ProductDetail", () => ProductDetail);
