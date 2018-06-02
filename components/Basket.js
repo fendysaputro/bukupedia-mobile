@@ -3,6 +3,9 @@ import { AppRegistry, StyleSheet, Text, View, Image, Search, TouchableOpacity } 
 import { COLOR_PRIMARY } from "../styles/common";
 import TabNavigator from "react-native-tab-navigator";
 import BottomNavigation, { Tab } from "react-native-material-bottom-navigation";
+import { StackNavigator } from 'react-navigation'; 
+
+import Main from '../components/Main';
 
 export default class Basket extends Component {
   static navigationOptions = {
@@ -36,8 +39,7 @@ export default class Basket extends Component {
         <Text style={styles.smallText}>
           Semua belanjaan Anda akan masuk di sini
         </Text>
-        <TouchableOpacity style={styles.button}
-          onPress = {() => this.alertItemName("fendy")}>
+        <TouchableOpacity style={styles.button}>
             <Text style={styles.buttonText}>
               Mulai Belanja
             </Text>

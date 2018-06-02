@@ -11,6 +11,7 @@ import Password from "./components/Password";
 import MyOrderMain from "./components/MyOrderMain";
 import SplashScreen from "./components/SplashScreen";
 import ProductDetail from "./components/ProductDetail";
+import Basket from "./components/Basket";
 
 class App extends Component {
 
@@ -89,6 +90,12 @@ export default App = StackNavigator({
     screen: MyOrderMain,
     navigationOptions: {
       title: "Pesanan Saya"
+    }
+  },
+  Basket: {
+    screen: Basket,
+    navigationOptions: {
+      
     }
   }
 });

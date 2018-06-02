@@ -5,6 +5,7 @@ import {  AppRegistry,
 import { COLOR_PRIMARY, sliderWidth, itemWidth } from "../styles/common";
 import HeaderButtons from "react-navigation-header-buttons";
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import Basket from "../components/Basket";
 
 var { height, width } = Dimensions.get('window');
 
@@ -31,7 +32,8 @@ export default class ProductDetail extends Component {
                     iconName="search" 
                     onPress={() => navigation.navigate("Login")} 
                 />
-                <HeaderButtons.Item 
+                <HeaderButtons.Item
+                    title="setting" 
                     show="never"  
                     onPress={() => navigation.navigate("Login")} 
                 />
@@ -44,14 +46,21 @@ export default class ProductDetail extends Component {
     	console.log(url);
 		return (
 			<View style={styles.container}>
-				<Text>{url}</Text>
+				<Text>{url}</Text>  
+                <TouchableOpacity style={styles.wishList}
+                    onPress={() => {console.log("pressed")}}>
+                        <Image 
+                            source={require('../styles/icon/wishlist.png')}
+                        />
+                </TouchableOpacity>
                 <View style={[styles.footer]}>
                     <TouchableOpacity style={styles.image}>
                         <Image
                             source={require('../styles/icon/keranjang-aktif.png')}
                         />
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.buttonOne}>
+                    <TouchableOpacity style={styles.buttonOne}
+                        onPress={() => navigation.navigate("Basket")}>
                         <Text style={styles.textOne}>
                             { "Tambahkan ke\n Keranjang" }
                         </Text>
@@ -116,6 +125,13 @@ const styles = StyleSheet.create({
         left: '5%',
         width: 80,
         height: 45
+    },
+    wishList:{
+        position: 'absolute',
+        right: '5%',
+        top: 20,
+        width: 47,
+        height: 47
     }
 })
 
