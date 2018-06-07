@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import {  AppRegistry,
 		  Text, 
           StyleSheet, View, Image, TouchableOpacity, Button, Dimensions } from "react-native";
-import { COLOR_PRIMARY, sliderWidth, itemWidth } from "../styles/common";
+import { COLOR_PRIMARY, sliderWidth, itemWidth, COLOR_SECONDARY } from "../styles/common";
 import HeaderButtons from "react-navigation-header-buttons";
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Basket from "../components/Basket";
@@ -12,14 +12,14 @@ var { height, width } = Dimensions.get('window');
 export default class ProductDetail extends Component {
     static navigationOptions = ({navigation}) => ({
         title: "Detail Produk",
+        headerTintColor : 'white',
         headerStyle: {
           backgroundColor: COLOR_PRIMARY,
           elevation: null
         },
         headerTitleStyle: {
           width: '90%',
-          textAlign: 'center',
-          color: 'white'
+          textAlign: 'center'
         },
         headerRight: (
             <HeaderButtons 
@@ -38,7 +38,7 @@ export default class ProductDetail extends Component {
                     onPress={() => navigation.navigate("Login")} 
                 />
             </HeaderButtons>
-        ),
+        )
     })
 	render() {
 		const { navigation } = this.props;
@@ -93,13 +93,14 @@ const styles = StyleSheet.create({
     textOne: {
         fontSize: 15,
         color: 'white',
-        textAlign: 'left',
+        textAlign: 'center',
         marginLeft: 2,
         justifyContent: 'center'   
     },
     textTwo: {
         fontSize: 20,
         color: 'white',
+        top: 2,
         textAlign: 'center',
         justifyContent: 'center'
     },

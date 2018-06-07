@@ -20,12 +20,12 @@ import Password from "./Password";
 
 export default class Login extends Component {
     static navigationOptions = {
+        headerTintColor : 'white',
         headerStyle: {
           backgroundColor: COLOR_PRIMARY,
           elevation: null,
         },
         headerTitleStyle: {
-          color: 'white',
           width: '90%',
           textAlign: 'center'
         }
