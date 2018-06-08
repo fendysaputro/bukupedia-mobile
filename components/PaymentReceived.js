@@ -10,12 +10,12 @@ import Main from "./Main";
 export default class PaymentReceived extends Component {
   static navigationOptions = {
     title: 'Pembayaran Berhasil',
+    headerTintColor: 'white',
     headerStyle: {
       backgroundColor: COLOR_PRIMARY,
       elevation: null,
     },
     headerTitleStyle: {
-      color: 'white',
       width: '90%',
       textAlign: 'center'
     },

@@ -69,7 +69,8 @@ export default class ProductDetail extends Component {
                         />
                 </TouchableOpacity>
                 <View style={[styles.footer]}>
-                    <TouchableOpacity style={styles.image}>
+                    <TouchableOpacity style={styles.image}
+                        onPress={() => navigation.navigate("Basket")}>
                         <Image
                             source={require('../styles/icon/keranjang-aktif.png')}
                         />

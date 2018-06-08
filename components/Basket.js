@@ -10,16 +10,15 @@ import Main from '../components/Main';
 export default class Basket extends Component {
   static navigationOptions = {
     title: 'Keranjang Belanja',
+    headerTintColor: 'white',
     headerStyle: {
       backgroundColor: COLOR_PRIMARY,
       elevation: null,
     },
     headerTitleStyle: {
-      color: 'white',
       width: '90%',
       textAlign: 'center'
     },
-    headerLeft: null
   }
 
   alertItemName = () => {
