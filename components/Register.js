@@ -8,12 +8,12 @@ import Button from "react-native-button";
 export default class Register extends Component {
   static navigationOptions = {
     title: "Daftar",
+    headerTintColor: "white",
     headerStyle: {
       backgroundColor: COLOR_PRIMARY,
       elevation: null,
     },
     headerTitleStyle: {
-      color: 'white',
       width: '90%',
       textAlign: 'center'
     }

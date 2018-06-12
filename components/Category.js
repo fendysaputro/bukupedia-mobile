@@ -7,8 +7,9 @@ import BottomNavigation, { Tab } from "react-native-material-bottom-navigation";
 export default class Category extends Component {
   static navigationOptions = {
     title: "Pilih Kategori Buku",
+    headerTintColor: "white",
     headerStyle: {
-      backgroundColor: "white",
+      backgroundColor: COLOR_PRIMARY,
       elevation: null
     },
     headerTitleStyle: {

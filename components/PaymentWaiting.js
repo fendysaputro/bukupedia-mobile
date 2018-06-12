@@ -8,16 +8,15 @@ import {tabs} from "./Main";
 export default class PaymentWaiting extends Component {
   static navigationOptions = {
     title: 'Menunggu Pembayaran',
+    headerTintColor: "white",
     headerStyle: {
       backgroundColor: COLOR_PRIMARY,
       elevation: null,
     },
     headerTitleStyle: {
-      color: 'white',
       width: '90%',
       textAlign: 'center'
-    },
-    headerLeft: null
+    }
   }
 
   alertItemName = () => {
