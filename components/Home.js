@@ -70,41 +70,11 @@ export default class Home extends Component {
         />
       </TouchableOpacity>
   })
-    
-
-  // get pagination () {
-  //   const { banners, activeSlide } = this.state;
-  //   return (
-  //           <Pagination
-  //             dotsLength={banners.length}
-  //             activeDotIndex={0}
-  //             dotStyle={{  
-  //                 width: 10,
-  //                 height: 10,
-  //                 borderRadius: 5,
-  //                 marginHorizontal: 8,
-  //                 backgroundColor: 'rgba(255, 255, 255, 0.92)'
-  //             }}
-  //             inactiveDotStyle={{
-  //                 // Define styles for inactive dots here
-  //             }}
-  //             inactiveDotOpacity={0.4}
-  //             inactiveDotScale={0.6}
-  //           />
-  //   );
-  // }
 
   getAuthorsText(authorObj) {
     return authorObj.results.map(function(author){
       author + ' ';
     });
-    // authors = this.state.list.results.map(function (item) {
-    //     return (
-    //       <View key={item.user.email} style={ styles.content }>
-    //         <Text>{item.user.email}</Text>
-    //       </View>
-    //     );
-    //  });
   }
 
   handleOnTouchProduct(item) {
@@ -156,7 +126,7 @@ export default class Home extends Component {
                 items={this.state.new_products}
                 style={styles.gridView}
                 renderItem={item => (
-                  <TouchableHighlight onPress={this.handleOnTouchProduct}>
+                  <TouchableHighlight onPress={() => this.handleOnTouchProduct(item)}>
                     <View style={[styles.itemContainer]}>
                       <Image width={Dimensions.get('window').width / 3} 
                         source={{uri: item.image}}/>

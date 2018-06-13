@@ -6,6 +6,8 @@ import { COLOR_PRIMARY, sliderWidth, itemWidth, COLOR_SECONDARY } from "../style
 import HeaderButtons from "react-navigation-header-buttons";
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Basket from "../components/Basket";
+// import { getProductDetail } from '../services/FetchProduct';
+import Image from 'react-native-scalable-image';
 
 var { height, width } = Dimensions.get('window');
 
@@ -57,15 +59,21 @@ export default class ProductDetail extends Component {
     })
 	render() {
 		const { navigation } = this.props;
-    	const url = navigation.getParam('url', '');
-    	console.log(url);
+    	const url = navigation.getParam('url', 'no link');
+        // getProductDetail(url)
+        //     .then((res) => {
+        //         this.setState({ data: res.d });
+        // });
+
 		return (
 			<View style={styles.container}>
-				<Text>{url}</Text>  
+				<Image 
+                    source={{uri: this.state.data.image}}
+                />  
                 <TouchableOpacity style={styles.wishList}
                     onPress={() => {console.log("pressed")}}>
                         <Image 
-                            source={require('../styles/icon/wishlist.png')}
+                            source={url('../styles/icon/wishlist.png')}
                         />
                 </TouchableOpacity>
                 <View style={[styles.footer]}>
@@ -95,8 +103,7 @@ export default class ProductDetail extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        flexDirection: 'column',
-        justifyContent: 'center'
+        flexDirection: 'column'
     },
     footer: {
         height: 50,

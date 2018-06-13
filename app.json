@@ -1,6 +1,15 @@
 {
   "expo": {
+    "name":"Bukupedia Mobile",
+    "icon":"./styles/icon/icon-logo.png",
     "sdkVersion": "25.0.0",
+    "version": "1.0.0",
+    "android": {
+      "package": "com.bukupedia.mobile"
+    },
+    "ios":{
+      "bundleIdentifier":"com.bukupedia.mobile"
+    },
     "splash": {
       "backgroundColor": "#2B78AC",
       "image": "./styles/icon/icon-logo.png",
