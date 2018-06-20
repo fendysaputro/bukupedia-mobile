@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import {  AppRegistry,
-		  Text, 
-          StyleSheet, View, Image, TouchableOpacity, Button, Dimensions } from "react-native";
+          Text, 
+          ScrollView,
+          FlatList,
+          WebView,
+          StyleSheet, View, TouchableOpacity, Button, Dimensions } from "react-native";
 import { COLOR_PRIMARY, sliderWidth, itemWidth, COLOR_SECONDARY } from "../styles/common";
 import HeaderButtons from "react-navigation-header-buttons";
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import Basket from "../components/Basket";
-// import { getProductDetail } from '../services/FetchProduct';
+import { getProductDetail } from '../services/FetchProduct';
 import Image from 'react-native-scalable-image';
 
 var { height, width } = Dimensions.get('window');
@@ -57,23 +59,71 @@ export default class ProductDetail extends Component {
             </HeaderButtons>
         )
     })
-	render() {
-		const { navigation } = this.props;
-    	const url = navigation.getParam('url', 'no link');
-        // getProductDetail(url)
-        //     .then((res) => {
-        //         this.setState({ data: res.d });
-        // });
 
+    constructor (props) {
+        super(props);
+        this.state = {
+            data: {}, 
+            isDataLoaded: false
+        };
+    }
+
+    componentDidMount() {
+        const { state } = this.props.navigation;
+        console.log(state.params.url);
+        getProductDetail(state.params.url)
+            .then((res) => {
+                this.setState({ data: res.d, isDataLoaded: true });
+                console.log(this.state.data);
+        });
+    }
+
+	render() {
+        let screenHeight = Dimensions.get('window').height;
+        let sreadyStock = '';
+        if (this.state.data.stock > 0) {
+            sreadyStock = 'Buku ready stock di kirim dalam waktu '+this.state.data.estimated_shipment;
+        }else{
+            sreadyStock = 'Buku tidak tersedia'
+        }
 		return (
-			<View style={styles.container}>
-				<Image 
-                    source={{uri: this.state.data.image}}
-                />  
+			<View style={styles.root}>
+                <View style={{ height: (screenHeight - 100), borderColor: 'green', borderWidth: 0 }}>
+                    <ScrollView>
+                        <View style={styles.box1}>
+                            <Image 
+                                width={200}
+                                source={{uri: this.state.data.image}}
+                            />
+                        </View>
+                        <Text style={styles.textRegister}>  </Text>
+                        <View style={styles.box2}>
+                            <Text style={styles.itemTitle}>{this.state.data.title}</Text>
+                            <Text style={styles.itemAuthor}> {this.state.data.authors}</Text>
+                            <Text style={styles.itemPrice}>Rp. {this.state.data.price}</Text>
+                        </View>
+                        <Text style={styles.textRegister}>  </Text>
+                        <View style={styles.box3}>
+                            <FlatList
+                                data={[
+                                    {key: sreadyStock},
+                                    {key: 'Jaminan buku asli'},
+                                    {key: 'Transaksi 100% aman'}
+                                ]}
+                                renderItem={({item}) => <Text style={styles.itemStock}>{'\u2022 ' + item.key}</Text>}
+                                />
+                        </View>
+                        <Text style={styles.textRegister}>  </Text>
+                        <View style={styles.box3}>
+                            <Text>Deskripsi</Text>
+                            <Text>{this.state.data.desc}</Text>
+                        </View>
+                    </ScrollView>
+                </View>
                 <TouchableOpacity style={styles.wishList}
                     onPress={() => {console.log("pressed")}}>
                         <Image 
-                            source={url('../styles/icon/wishlist.png')}
+                            source={require('../styles/icon/wishlist.png')}
                         />
                 </TouchableOpacity>
                 <View style={[styles.footer]}>
@@ -93,7 +143,7 @@ export default class ProductDetail extends Component {
                         <Text style={styles.textTwo}>
                             Beli
                         </Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity> 
                 </View>
 			</View>
 		)
@@ -101,9 +151,47 @@ export default class ProductDetail extends Component {
 }
 
 const styles = StyleSheet.create({
-    container: {
+    root: {
         flex: 1,
-        flexDirection: 'column'
+        flexDirection: 'column',
+        backgroundColor: '#fff',
+        justifyContent: 'space-around'
+    },
+    box1: {
+        flex: 1,
+        top: 20,
+        alignItems: 'center'
+    },
+    box2: {
+        flex: 1,
+        top: 20,
+        paddingLeft: 20,
+        paddingRight: 10
+    },
+    box3: {
+        flex: 1,
+        top: 20,
+        paddingLeft: 20,
+        paddingRight: 10
+    },
+    itemTitle: {
+        fontSize: 14,
+        color: '#1791c5',
+        fontWeight: '600',
+    },
+    itemAuthor: {
+        fontWeight: '600',
+        fontSize: 11,
+        color: '#49aedd'
+    },
+    itemPrice: {
+        fontSize: 12,
+        color: '#e7ad46',
+        fontWeight: '600',
+    },
+    itemStock: {
+        fontSize: 10,
+        fontWeight: '600',
     },
     footer: {
         height: 50,
