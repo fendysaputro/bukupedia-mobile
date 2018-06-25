@@ -3,13 +3,14 @@ import { Footer, AppRegistry, StyleSheet, Text, View, Image, Search, TouchableOp
 import { COLOR_PRIMARY } from "../styles/common";
 import TabNavigator from "react-native-tab-navigator";
 import BottomNavigation, { Tab } from "react-native-material-bottom-navigation";
-import {tabs} from "./Main";
+// import FooterBar from "./Footer";
+import Main from "./Main";
 
 export default class PaymentWaiting extends Component {
   static navigationOptions = {
     title: 'Menunggu Pembayaran',
     headerTintColor: "white",
-    headerStyle: {
+    headerStyle: { 
       backgroundColor: COLOR_PRIMARY,
       elevation: null,
     },

@@ -9,12 +9,6 @@
     },
     "ios":{
       "bundleIdentifier":"com.bukupedia.mobile"
-    },
-    "splash": {
-      "backgroundColor": "#2B78AC",
-      "image": "./styles/icon/icon-logo.png",
-      "width": 24,
-      "height": 24
     }
   }
 }
