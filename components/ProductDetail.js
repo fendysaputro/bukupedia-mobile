@@ -9,6 +9,7 @@ import { COLOR_PRIMARY, sliderWidth, itemWidth, COLOR_SECONDARY } from "../style
 import HeaderButtons from "react-navigation-header-buttons";
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { getProductDetail } from '../services/FetchProduct';
+import { getPaymentMethod } from '../services/FetchPayment';
 import Image from 'react-native-scalable-image';
 
 var { height, width } = Dimensions.get('window');
@@ -139,7 +140,8 @@ export default class ProductDetail extends Component {
                             { "Tambahkan ke\n Keranjang" }
                         </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.buttonTwo}>
+                    <TouchableOpacity style={styles.buttonTwo}
+                        onPress={() => this.props.navigation.navigate("Login", {})}>
                         <Text style={styles.textTwo}>
                             Beli
                         </Text>
