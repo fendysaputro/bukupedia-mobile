@@ -128,13 +128,13 @@ export default class ProductDetail extends Component {
                 </TouchableOpacity>
                 <View style={[styles.footer]}>
                     <TouchableOpacity style={styles.image}
-                        onPress={() => navigation.navigate("Basket")}>
+                        onPress={() => this.props.navigation.navigate("Basket")}>
                         <Image
                             source={require('../styles/icon/keranjang-aktif.png')}
                         />
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.buttonOne}
-                        onPress={() => navigation.navigate("Basket")}>
+                        onPress={() => this.props.navigation.navigate("Basket")}>
                         <Text style={styles.textOne}>
                             { "Tambahkan ke\n Keranjang" }
                         </Text>
