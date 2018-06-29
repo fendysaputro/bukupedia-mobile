@@ -5,3 +5,7 @@ export const BANNER_FOOTER = 'banner-footer';
 export const NEW_PRODUCT = 'new-product';
 export const PAYMENT_METHOD = 'payment-method';
 export const SHIPMENT_METHOD = 'shipment-method';
+export const CATEGORY = 'category';
+export const REGISTER = 'register';
+export const LIST_ORDER = 'order';
+export const ADDRESS = 'address';

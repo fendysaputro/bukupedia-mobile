@@ -11,6 +11,8 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { getProductDetail } from '../services/FetchProduct';
 import { getPaymentMethod } from '../services/FetchPayment';
 import Image from 'react-native-scalable-image';
+import Modal from 'react-native-modalbox';
+import Slider from 'react-native-slider';
 
 var { height, width } = Dimensions.get('window');
 
@@ -246,6 +248,9 @@ const styles = StyleSheet.create({
         top: 20,
         width: 47,
         height: 47
+    },
+    modal:{
+        height: 300
     }
 })
 
