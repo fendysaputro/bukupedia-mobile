@@ -1,23 +1,46 @@
 import React, { Component } from "react";
-import { AppRegistry, StyleSheet, Text, View, Image, Search, TextInput, TouchableOpacity } from "react-native";
+import { AppRegistry, 
+    StyleSheet, Text, View, 
+    Image, Search, TextInput, 
+    TouchableOpacity,
+    Alert } from "react-native";
 import { COLOR_PRIMARY } from "../styles/common";
 import TabNavigator from "react-native-tab-navigator";
 import BottomNavigation, { Tab } from "react-native-material-bottom-navigation";
 import Button from "react-native-button";
+import { postRegister } from "../services/FetchRegister";
 
 export default class Register extends Component {
-  static navigationOptions = {
-    title: "Daftar",
-    headerTintColor: "white",
-    headerStyle: {
-      backgroundColor: COLOR_PRIMARY,
-      elevation: null,
-    },
-    headerTitleStyle: {
-      width: '90%',
-      textAlign: 'center'
+    static navigationOptions = {
+        title: "Daftar",
+        headerTintColor: "white",
+        headerStyle: {
+        backgroundColor: COLOR_PRIMARY,
+        elevation: null,
+        },
+        headerTitleStyle: {
+        width: '90%',
+        textAlign: 'center'
+        }
     }
-  }
+
+    doClickRegister() {
+        var params = {name: 'test', email: 'test@email.com', password: 'test123'};
+        postRegister(params)
+            .then((res) => {
+                Alert.alert(
+                    'Alert Title',
+                    'Result of register',
+                    [
+                      {text: 'Ask me later', onPress: () => console.log(JSON.stringify(res.d))},
+                      {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+                      {text: 'OK', onPress: () => console.log('OK Pressed')},
+                    ],
+                    { cancelable: false }
+                  )
+            });
+    }
+
     render () {
       return (
         <View style={styles.container}>
@@ -36,7 +59,7 @@ export default class Register extends Component {
                   /> 
           </TouchableOpacity>
           <Text style={styles.lineText}>
-              ─────────────  Atau  ─────────────
+              ────────  Atau  ────────
           </Text>
           <TextInput style={styles.input}
               placeholder = "Name"
@@ -74,7 +97,7 @@ export default class Register extends Component {
               onChangeText = {(text) => this.setState({no_Hp: text})}
           />
           <Button style = {styles.submitButton}
-            onPress = {() => this.alert("Daftar")}>
+            onPress = {() => this.doClickRegister()}>
                 Daftar
           </Button>     
         </View>

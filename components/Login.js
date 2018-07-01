@@ -74,7 +74,7 @@ export default class Login extends Component {
                         /> 
                 </TouchableOpacity>
                 <Text style={styles.lineText}>
-                    ─────────────  Atau  ─────────────
+                    ────────  Atau  ────────
                 </Text>
                 <TextInput style={styles.input}
                     placeholder = "Username"
