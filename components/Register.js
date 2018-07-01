@@ -28,6 +28,7 @@ export default class Register extends Component {
         var params = {name: 'test', email: 'test@email.com', password: 'test123'};
         postRegister(params)
             .then((res) => {
+                
                 Alert.alert(
                     'Alert Title',
                     'Result of register',
