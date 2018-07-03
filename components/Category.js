@@ -1,8 +1,11 @@
 import React, { Component } from "react";
-import { AppRegistry, StyleSheet, Text, View, Image, Search, ListView, TouchableOpacity } from "react-native";
+import { AppRegistry, StyleSheet, Text, View, Image, Search, ListView, TouchableOpacity, Dimensions } from "react-native";
 import { COLOR_PRIMARY } from "../styles/common";
 import TabNavigator from "react-native-tab-navigator";
 import BottomNavigation, { Tab } from "react-native-material-bottom-navigation";
+import { getCategory, getSubCategory, getProductByCategory } from "../services/FetchCategory";
+
+var { height, width } = Dimensions.get('window');
 
 export default class Category extends Component {
   static navigationOptions = {
@@ -19,43 +22,29 @@ export default class Category extends Component {
     headerLeft: null,
   }
 
-  stateList = {
-    list: [
-      {
-        id: 0,
-        title: 'Semua Kategori'
-      },
-      {
-        id: 1,
-        title: 'Bahasa dan Kamus'
-      },
-      {
-        id: 2,
-        title: 'Desain dan Seni'
-      },
-      {
-        id: 3,
-        title: 'E-Book'
-      }
-    ]
+  constructor (props){
+    super(props);
   }
 
-  alertItemName = (list, index) => {
-    alert(list.title)
+  componentWillMount(){
+    this.setState({ categories : []});
+    getCategory()
+          .then((res) => {
+            this.setState({ categories: res.d });
+          })
   }
 
   render () {
     return (
       <View style={styles.container}>
         {
-          this.stateList.list.map((list, index) => (
+          this.state.categories.map((category) => (
             <TouchableOpacity
-              key = {list.id}
+              key = {this.state.categories}
               style = {styles.containerTwo}
-              onPress = {() => this.alertItemName(list)}
             >
               <Text style = {styles.text}>
-                {list.title}
+                {category.name}
               </Text>
             </TouchableOpacity>
           ))
