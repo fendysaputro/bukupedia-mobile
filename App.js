@@ -12,6 +12,8 @@ import MyOrderMain from "./components/MyOrderMain";
 import SplashScreen from "./components/SplashScreen";
 import ProductDetail from "./components/ProductDetail";
 import Basket from "./components/Basket";
+import { CategoryTwo } from "./components/Category";
+import ProductCategory from "./components/ProductCategory";
 
 class App extends Component {
 
@@ -94,6 +96,12 @@ export default App = StackNavigator({
   },
   Basket: {
     screen: Basket,
+    navigationOptions: {
+      
+    }
+  },
+  ProductCategory: {
+    screen: ProductCategory,
     navigationOptions: {
       
     }
