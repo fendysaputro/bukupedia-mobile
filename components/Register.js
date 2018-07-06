@@ -3,6 +3,7 @@ import { AppRegistry,
     StyleSheet, Text, View, 
     Image, Search, TextInput, 
     TouchableOpacity,
+    AsyncStorage,
     Alert } from "react-native";
 import { COLOR_PRIMARY } from "../styles/common";
 import TabNavigator from "react-native-tab-navigator";
@@ -24,21 +25,35 @@ export default class Register extends Component {
         }
     }
 
-    doClickRegister() {
-        var params = {name: 'test', email: 'test@email.com', password: 'test123'};
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            name: '',
+            email: '',
+            password: '',
+            phone: ''
+          }
+    }
+
+    doClickRegister(params) {
+        console.log(params);
         postRegister(params)
             .then((res) => {
-                
-                Alert.alert(
-                    'Alert Title',
-                    'Result of register',
+                console.log(res);
+                if (typeof res.d != 'undefined') {
+                    AsyncStorage.setItem('token', JSON.stringify(false));
+                    Alert.alert(
+                    'Message',
+                    'Register success.',
                     [
-                      {text: 'Ask me later', onPress: () => console.log(JSON.stringify(res.d))},
-                      {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-                      {text: 'OK', onPress: () => console.log('OK Pressed')},
+                      {text: 'OK', onPress: () => this.props.navigation.navigate("Login")},
                     ],
                     { cancelable: false }
-                  )
+                  )    
+                }else{
+
+                }    
             });
     }
 
@@ -68,7 +83,8 @@ export default class Register extends Component {
               underlineColorAndroid = "transparent"
               autoCapitalize = "none"
               onChangeText = {(text) => this.setState({name: text})}
-          />
+
+/>
           <TextInput style={styles.input}
               placeholder = "Email"
               placeholderTextColor="#696969"
@@ -95,10 +111,10 @@ export default class Register extends Component {
               placeholderTextColor = "#696969"
               underlineColorAndroid = "transparent"
               autoCapitalize = "none"
-              onChangeText = {(text) => this.setState({no_Hp: text})}
+              onChangeText = {(text) => this.setState({phone: text})}
           />
           <Button style = {styles.submitButton}
-            onPress = {() => this.doClickRegister()}>
+            onPress = {() => this.doClickRegister(this.state) }>
                 Daftar
           </Button>     
         </View>
