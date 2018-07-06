@@ -42,20 +42,35 @@ export default class ProductCategory extends Component {
         let link =''
         getProductLink(state.params.url)
             .then((res) => {
-                console.log(res.d[0].product_link);
+                getProductByCategory(res.d[0].product_link)
+                    .then((res) => {
+                        console.log(res.d[0]);
+                })
             })
-        // getProductByCategory(state.params.url)
-        //     .then((res) => {
-        //         this.setState({ data: res.d, isDataLoaded: true });
-        //         console.log(this.state.data);
-        //     })
     }
 
     render (){
-        // console.log(this.state.getProductByCategory)
+        // console.log(res.d[0])
         return(
-            <View>
-                <Text>This is ProductCategory</Text>
+            <View style={styles.box3}>
+              {/* <GridView
+                itemDimension={130}
+                // items={getProductByCategory.res.d[0]}
+                style={styles.gridView}
+                renderItem={item => (
+                  <TouchableHighlight onPress={() => this.handleOnTouchProduct(item)}>
+                    <View style={[styles.itemContainer]}>
+                      <Image width={Dimensions.get('window').width / 3} 
+                        source={{uri: item.image}}/>
+                      <View style={styles.itemCaption}>
+                        <Text style={styles.itemTitle}>{item.title}</Text>
+                        <Text style={styles.itemAuthor}> {item.authors[0]}</Text>
+                        <Text style={styles.itemPrice}>Rp. {item.price}</Text>
+                      </View>
+                    </View>
+                  </TouchableHighlight>
+                )}
+              />   */}
             </View>
         )
     }
@@ -73,5 +88,36 @@ const styles = StyleSheet.create({
         top: 20,
         paddingLeft: 20,
         paddingRight: 10
-    }
-})
+    },
+    gridView: {
+        paddingTop: 25,
+        flex: 1,
+      },
+      itemContainer: {
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        borderRadius: 5,
+        padding: 10,
+        height: 250,
+        borderWidth: 0.5,
+        borderColor: '#d6d7da'
+      },
+      itemCaption: {
+    
+      },
+      itemTitle: {
+        fontSize: 14,
+        color: '#1791c5',
+        fontWeight: '600',
+      },
+      itemAuthor: {
+        fontWeight: '600',
+        fontSize: 11,
+        color: '#49aedd'
+      },
+      itemPrice: {
+        fontSize: 12,
+        color: '#e7ad46',
+        fontWeight: '600',
+      },    
+});
