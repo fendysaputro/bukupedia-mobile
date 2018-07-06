@@ -25,6 +25,7 @@ export default class Category extends Component {
 
   constructor (props){
     super(props);
+    this.handleTouchCategory = this.handleTouchCategory.bind(this);
   }
 
   componentWillMount(){
@@ -37,15 +38,21 @@ export default class Category extends Component {
     getSubCategory()
           .then((res) => {
             this.setState({ subCategories: res.d});
-          })
+          });
   }
 
   onSelectedItemsChange = (subCategories) => {
     this.setState({ subCategories });
   }
 
+  handleTouchCategory(link) {
+    console.log(link)
+    this.props.navigation.navigate('ProductCategory', {url: link});
+  }
+
+
   render () {
-    console.log(this.state.subCategories)
+    // console.log(this.state.subCategories)
     let sections = [];
     let section = {};
     
@@ -65,7 +72,8 @@ export default class Category extends Component {
               renderItem={({item, index, section}) => 
               <TouchableOpacity
                   //key = {this.state.categories}
-                  onPress = {() => this.props.navigation.navigate("ProductCategory")}
+                  // onPress = {() => this.props.navigation.navigate("ProductCategory")}
+                    onPress = {() => this.handleTouchCategory(item.link)}
                   style = {styles.containerTwo}>
                 <Text>{item.name}</Text>
               </TouchableOpacity>}
