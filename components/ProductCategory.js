@@ -4,7 +4,8 @@ import {  AppRegistry,
           ScrollView,
           FlatList,
           WebView,
-          StyleSheet, View, TouchableOpacity, Button, Dimensions } from "react-native";
+          StyleSheet, View, TouchableOpacity, Button, Dimensions,
+          TouchableHighlight } from "react-native";
 import { COLOR_PRIMARY, sliderWidth, itemWidth, COLOR_SECONDARY } from "../styles/common";
 import HeaderButtons from "react-navigation-header-buttons";
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -31,7 +32,7 @@ export default class ProductCategory extends Component {
 
     constructor (props){
         super(props);
-        this.handleOnTouchCategory = this.handleOnTouchCategory.bind(this);
+        this.handleOnTouchProduct = this.handleOnTouchProduct.bind(this);
         this.state = {
             data: {},
             isDataLoaded: false
@@ -50,13 +51,11 @@ export default class ProductCategory extends Component {
             })
     }
 
-    handleOnTouchCategory(item) {
+    handleOnTouchProduct(item) {
       this.props.navigation.navigate('ProductDetail', {url: item.link});
     }
 
     render (){
-        console.log("products")
-        console.log(this.state.products)
         let isLoaded = false;
         if (typeof this.state.products != 'undefined' ){
           isLoaded = true;
@@ -64,16 +63,23 @@ export default class ProductCategory extends Component {
         const sg = <GridView
             itemDimension={130}
             items={this.state.products}
-            style={styles.gridView}
             renderItem={item => (
-                <Text style={styles.itemTitle}>{item.title}</Text>
-              )}
+              <TouchableHighlight onPress={() => this.handleOnTouchProduct(item)}>
+              <View style={[styles.itemContainer]}>
+                <Image width={Dimensions.get('window').width / 3} 
+                  source={{uri: item.image}}/>
+                <View style={styles.itemCaption}>
+                  <Text style={styles.itemTitle}>{item.title}</Text>
+                  <Text style={styles.itemAuthor}> {item.authors[0]}</Text>
+                  <Text style={styles.itemPrice}>Rp. {item.price}</Text>
+                </View>
+              </View>
+            </TouchableHighlight>)}
             />
-         
         let messages;
         if (isLoaded){
           messages = sg;
-          console.log(isLoaded);
+          console.log(isLoaded)
         }
         else{
           messages = <Text>Kosong</Text>;
