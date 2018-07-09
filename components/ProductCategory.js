@@ -31,6 +31,7 @@ export default class ProductCategory extends Component {
 
     constructor (props){
         super(props);
+        this.handleOnTouchCategory = this.handleOnTouchCategory.bind(this);
         this.state = {
             data: {},
             isDataLoaded: false
@@ -44,34 +45,42 @@ export default class ProductCategory extends Component {
             .then((res) => {
                 getProductByCategory(res.d[0].product_link)
                     .then((res) => {
-                        console.log(res.d[0]);
+                        this.setState({products: res.d})
                 })
             })
     }
 
+    handleOnTouchCategory(item) {
+      this.props.navigation.navigate('ProductDetail', {url: item.link});
+    }
+
     render (){
-        // console.log(res.d[0])
+        console.log("products")
+        console.log(this.state.products)
+        let isLoaded = false;
+        if (typeof this.state.products != 'undefined' ){
+          isLoaded = true;
+        }
+        const sg = <GridView
+            itemDimension={130}
+            items={this.state.products}
+            style={styles.gridView}
+            renderItem={item => (
+                <Text style={styles.itemTitle}>{item.title}</Text>
+              )}
+            />
+         
+        let messages;
+        if (isLoaded){
+          messages = sg;
+          console.log(isLoaded);
+        }
+        else{
+          messages = <Text>Kosong</Text>;
+        }
+
         return(
-            <View style={styles.box3}>
-              {/* <GridView
-                itemDimension={130}
-                // items={getProductByCategory.res.d[0]}
-                style={styles.gridView}
-                renderItem={item => (
-                  <TouchableHighlight onPress={() => this.handleOnTouchProduct(item)}>
-                    <View style={[styles.itemContainer]}>
-                      <Image width={Dimensions.get('window').width / 3} 
-                        source={{uri: item.image}}/>
-                      <View style={styles.itemCaption}>
-                        <Text style={styles.itemTitle}>{item.title}</Text>
-                        <Text style={styles.itemAuthor}> {item.authors[0]}</Text>
-                        <Text style={styles.itemPrice}>Rp. {item.price}</Text>
-                      </View>
-                    </View>
-                  </TouchableHighlight>
-                )}
-              />   */}
-            </View>
+          <View>{messages}</View>
         )
     }
 }
