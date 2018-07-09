@@ -1,10 +1,9 @@
 import React, { Component } from "react";
-import {  AppRegistry,
-          Text, 
-          ScrollView,
-          FlatList,
-          WebView,
-          StyleSheet, View, TouchableOpacity, Button, Dimensions } from "react-native";
+import {  AppRegistry, Text, ScrollView, FlatList,
+          WebView,StyleSheet, View, TouchableOpacity, 
+          Button, Dimensions, PanResponder, Animated,
+          TouchableWithoutFeedback, Easing, BackAndroid,
+          BackHandler, Platform, Keyboard } from "react-native";
 import { COLOR_PRIMARY, sliderWidth, itemWidth, COLOR_SECONDARY } from "../styles/common";
 import HeaderButtons from "react-navigation-header-buttons";
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -13,6 +12,7 @@ import { getPaymentMethod } from '../services/FetchPayment';
 import Image from 'react-native-scalable-image';
 import Modal from 'react-native-modalbox';
 import Slider from 'react-native-slider';
+import PopupDialog, { SlideAnimation } from 'react-native-popup-dialog';
 
 var { height, width } = Dimensions.get('window');
 
@@ -131,7 +131,7 @@ export default class ProductDetail extends Component {
                 </TouchableOpacity>
                 <View style={[styles.footer]}>
                     <TouchableOpacity style={styles.image}
-                        onPress={() => this.props.navigation.navigate("Basket")}>
+                        onPress={() => this.props.navigation.navigate()}>
                         <Image
                             source={require('../styles/icon/keranjang-aktif.png')}
                         />
