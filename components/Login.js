@@ -90,7 +90,7 @@ export default class Login extends Component {
                     placeholderTextColor="#696969"
                     underlineColorAndroid = "transparent"
                     autoCapitalize = "none"
-                    secureTextEntry = "true"
+                    secureTextEntry = { true }
                     onChangeText = {(text) => this.setState({password: text})}
                 />
                 <View style = {styles.check}>

@@ -15,9 +15,8 @@ import TabNavigator from "react-native-tab-navigator";
 import Button from "react-native-button";
 import { ListItem } from "react-native-elements";
 import Login from "./Login"
-import { Header } from "react-native-elements";
 
-export default class AccountAfterLogin extends Component {
+export default class WelcomeAccount extends Component {
   static navigationOptions = {
     title: 'Akun',
     headerStyle: {
@@ -29,42 +28,23 @@ export default class AccountAfterLogin extends Component {
       width: '90%',
       textAlign: 'center'
     },
-    headerLeft: null,
-    headerRight:
-      <TouchableOpacity onPress={() => navigation.navigate("Login")}
-        style={{margin:10, padding: 10, width: 50, height: 70}}>
-        <Image
-          source={require('../styles/icon/akunsetting.png')}
-        />
-      </TouchableOpacity>
+    headerLeft: null
   }
 
   stateTwo = {
     listTwo: [
       {
         id: 0,
-        title: 'Wishlist                                                                          >'
-      },
-      {
-        id: 1,
-        title: 'Buku Poin                                                                       >'
-      },
-      {
-        id: 2,
-        title: 'Blog Kami'
-      },
-      {
-        id: 3,
         title: 'Rating Aplikasi'
       },
       {
-        id: 4,
-        title: 'Bantuan                                                                         >'
+        id: 1,
+        title: 'Blog Kami'
       },
       {
-        id: 5,
-        title: 'Alamat                                                                           >'
-      },
+        id: 2,
+        title: 'Bantuan                                                                          >'
+      }
     ]
   }
 
@@ -98,8 +78,9 @@ export default class AccountAfterLogin extends Component {
             }}
             onPress = {() => this.props.navigation.navigate("LoginMain")}>
             <Text style = {styles.text}>
-              Hi, User!
-            </Text>  
+              Hi, Selamat Datang!
+            </Text>
+            Masuk  
           </Button> 
         </TouchableOpacity>
         }
@@ -150,4 +131,4 @@ const styles = StyleSheet.create({
   }
 });
 
-AppRegistry.registerComponent("AccountAfterLogin", () => AccountAfterLogin);
+AppRegistry.registerComponent("WelcomeAccount", () => WelcomeAccount);

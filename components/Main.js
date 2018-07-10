@@ -8,15 +8,16 @@ import Home from "./Home";
 import Category from "./Category";
 import Basket from "./Basket";
 import Orders from "./Orders";
+import WelcomeAccount from "./WelcomeAccount";
 import Account from "./Account";
 
-const Main = TabNavigator(
+const Main = TabNavigator( 
   {
     Home: { screen: Home },
     Category: { screen: Category },
     Basket: { screen: Basket },
     Orders: { screen: Orders},
-    Account: { screen: Account}
+    WelcomeAccount: { screen: WelcomeAccount}
   },
   {
     tabBarComponent: NavigationComponent,
@@ -53,7 +54,7 @@ const Main = TabNavigator(
             labelColor: 'white',
             icon:<Image source={require('../styles/icon/pesanan.png')} style={{ width: 24, height: 24 }} />
           },
-          Account: {
+          WelcomeAccount: {
             barBackgroundColor: COLOR_PRIMARY,
             label: 'Akun',
             labelColor: 'white',

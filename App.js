@@ -14,13 +14,16 @@ import ProductDetail from "./components/ProductDetail";
 import Basket from "./components/Basket";
 import { CategoryTwo } from "./components/Category";
 import ProductCategory from "./components/ProductCategory";
-import AccountAfterLogin from "./components/AccountAfterLogin";
+import WelcomeAccount from "./components/WelcomeAccount";
+import Account from "./components/Account";
 
 class App extends Component {
 
   componentDidMount() {
     AsyncStorage.getItem('id_token').then((token) => {
-      this.setState({ hasToken: token !== null, isLoaded: true })
+      this.setState({ hasToken: token !== null, isLoaded: true });
+      console.log("ambil token1");
+      console.log(this.state.hasToken);
     });
   }
 
@@ -42,6 +45,12 @@ class App extends Component {
   }
 }
 
+console.log("ambil token");
+AsyncStorage.getItem('id_token').then((token) => {
+  console.log(token)
+});
+const test = WelcomeAccount;
+
 export default App = StackNavigator({
   Home: {
     screen: SplashScreen,
@@ -49,7 +58,7 @@ export default App = StackNavigator({
     }
   },
   app: {
-    screen: App,
+    screen: Main,
     navigationOptions: {
     }
   },
@@ -63,12 +72,6 @@ export default App = StackNavigator({
     screen: Swiper,
     navigationOptions: {
       title: "Swiper"
-    }
-  },
-  Main: {
-    screen: Main,
-    navigationOptions: {
-      
     }
   },
   ProductDetail: {
@@ -107,10 +110,10 @@ export default App = StackNavigator({
       
     }
   },
-  AccountAfterLogin: {
-    screen: AccountAfterLogin,
+  WelcomeAccount: {
+    screen: test,
     navigationOptions: {
-      
+
     }
   }
 });

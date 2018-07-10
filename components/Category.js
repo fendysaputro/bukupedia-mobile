@@ -52,7 +52,6 @@ export default class Category extends Component {
 
 
   render () {
-    // console.log(this.state.subCategories)
     let sections = [];
     let section = {};
     
@@ -71,8 +70,6 @@ export default class Category extends Component {
             <SectionList
               renderItem={({item, index, section}) => 
               <TouchableOpacity
-                  //key = {this.state.categories}
-                  // onPress = {() => this.props.navigation.navigate("ProductCategory")}
                     onPress = {() => this.handleTouchCategory(item.link)}
                   style = {styles.containerTwo}>
                 <Text>{item.name}</Text>
@@ -88,28 +85,6 @@ export default class Category extends Component {
               }
               keyExtractor={(item, index) => item + index}/>
           </View>
-          // this.state.categories.map((category) => (
-          //   <TouchableOpacity
-          //     key = {this.state.categories}
-          //     style = {styles.containerTwo}
-          //     // onPress = {() => this.props.navigation.navigate("LoginMain")}
-              
-          //   >
-          //   <View>
-          //   {/* <SectionedMultiSelect
-          //       items={this.state.categories}
-          //       showDropDowns={true}
-          //       readOnlyHeadings={true}
-          //       onSelectedItemsChange = {this.onSelectedItemsChange}
-          //       selectedItems = {this.state.categories}
-          //     /> */}
-              
-          //   </View>
-          //     <Text style = {styles.text}>
-          //       {category.name}
-          //     </Text>
-          //   </TouchableOpacity>
-          // ))
         }
       </View>
     )
@@ -127,8 +102,7 @@ const styles = StyleSheet.create({
   containerThree: {
     padding: 10,
     marginTop: 3,
-    backgroundColor: '#F1F3F2',
-    fontWeight: 'bold' 
+    backgroundColor: '#F1F3F2' 
   },
   text: {
     color: 'black',

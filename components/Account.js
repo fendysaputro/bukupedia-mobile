@@ -15,6 +15,7 @@ import TabNavigator from "react-native-tab-navigator";
 import Button from "react-native-button";
 import { ListItem } from "react-native-elements";
 import Login from "./Login"
+import { Header } from "react-native-elements";
 
 export default class Account extends Component {
   static navigationOptions = {
@@ -28,23 +29,42 @@ export default class Account extends Component {
       width: '90%',
       textAlign: 'center'
     },
-    headerLeft: null
+    headerLeft: null,
+    headerRight:
+      <TouchableOpacity onPress={() => navigation.navigate("Login")}
+        style={{margin:10, padding: 10, width: 30, height: 30}}>
+        <Image
+          source={require('../styles/icon/akunsetting.png')}
+        />
+      </TouchableOpacity>
   }
 
   stateTwo = {
     listTwo: [
       {
         id: 0,
-        title: 'Rating Aplikasi'
+        title: 'Wishlist'
       },
       {
         id: 1,
-        title: 'Blog Kami'
+        title: 'Buku Poin'
       },
       {
         id: 2,
-        title: 'Bantuan                                                                          >'
-      }
+        title: 'Blog Kami'
+      },
+      {
+        id: 3,
+        title: 'Rating Aplikasi'
+      },
+      {
+        id: 4,
+        title: 'Bantuan'
+      },
+      {
+        id: 5,
+        title: 'Alamat'
+      },
     ]
   }
 
@@ -66,22 +86,11 @@ export default class Account extends Component {
         <TouchableOpacity
           key = '1'
           style = {styles.containerOne}
-        >
-          <Button 
-            style = {{
-              position: 'relative',
-              fontSize: 15, 
-              color: 'black', 
-              backgroundColor: '#FBAD19', 
-              width: '25%',  
-              alignSelf: 'flex-end'
-            }}
             onPress = {() => this.props.navigation.navigate("LoginMain")}>
-            <Text style = {styles.text}>
-              Hi, Selamat Datang!
-            </Text>
-            Masuk  
-          </Button> 
+            <Image source={require('../styles/icon/edit-foto.png')} style={{ width: 24, height: 24, alignItems: 'flex-start' }}/> 
+            <Text style = {styles.textNew}>
+              Hi, User!
+            </Text>   
         </TouchableOpacity>
         }
         {
@@ -119,7 +128,7 @@ const styles = StyleSheet.create({
   text: {
     color: 'black',
     textAlign: 'left',
-    marginLeft: '5%'
+    marginLeft: '5%',
   },
   symbol:{
     color: 'black',
@@ -128,7 +137,11 @@ const styles = StyleSheet.create({
   buttonText: {
     color: 'black',
     textAlign: 'center'
-  }
+  },
+  textNew: {
+    color: 'black',
+    textAlign: 'left'
+  },
 });
 
 AppRegistry.registerComponent("Account", () => Account);

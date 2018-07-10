@@ -67,7 +67,8 @@ export default class ProductDetail extends Component {
         super(props);
         this.state = {
             data: {}, 
-            isDataLoaded: false
+            isDataLoaded: false,
+            visibleModal: null
         };
     }
 
@@ -81,13 +82,20 @@ export default class ProductDetail extends Component {
         });
     }
 
-    // _renderButton = (text, onPress) => (
-    //     <TouchableOpacity onPress={onPress}>
-    //       <View style={styles.button}>
-    //         <Text>{text}</Text>
-    //       </View>
-    //     </TouchableOpacity>
-    //   );
+    _renderButton = (text, onPress) => (
+        <TouchableOpacity onPress={onPress}>
+          <View style={styles.button}>
+            <Text>{text}</Text>
+          </View>
+        </TouchableOpacity>
+      );
+
+      _renderModalContent = () => (
+        <View style={styles.modalContent}>
+          <Text>Hello!</Text>
+          {this._renderButton("Close", () => this.setState({ visibleModal: null }))}
+        </View>
+      );
 
 	render() {
         let screenHeight = Dimensions.get('window').height;
@@ -149,13 +157,22 @@ export default class ProductDetail extends Component {
                         <Text style={styles.textOne}>
                             { "Tambahkan ke\n Keranjang" }
                         </Text>
+                            {this._renderButton("Bottom half modal", () =>
+                                this.setState({ visibleModal: 5 })
+                            )}
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.buttonTwo}
                         onPress={() => this.props.navigation.navigate("Login", {})}>
                         <Text style={styles.textTwo}>
                             Beli
                         </Text>
-                    </TouchableOpacity> 
+                    </TouchableOpacity>
+                    <Modal
+                        isVisible={this.state.visibleModal === 5}
+                        style={styles.bottomModal}
+                    >
+                        {this._renderModalContent()}
+                    </Modal> 
                 </View>
 			</View>
 		)
@@ -263,7 +280,15 @@ const styles = StyleSheet.create({
     bottomModal:{
         justifyContent: "flex-end",
         margin: 0
-    }
+    },
+    modalContent: {
+        backgroundColor: "white",
+        padding: 22,
+        justifyContent: "center",
+        alignItems: "center",
+        borderRadius: 4,
+        borderColor: "rgba(0, 0, 0, 0.1)"
+      },
 })
 
 AppRegistry.registerComponent("ProductDetail", () => ProductDetail);
