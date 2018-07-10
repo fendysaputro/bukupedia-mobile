@@ -102,7 +102,7 @@ export default class Login extends Component {
                     </Button>
                 </View> 
                 <Button style = {styles.submitButton}
-                    onPress = {() => this.alert("Masuk")}>
+                    onPress = {() => this.props.navigation.navigate("AccountAfterLogin")}>
                         Masuk
                 </Button>
             </View>

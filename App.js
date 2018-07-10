@@ -14,6 +14,7 @@ import ProductDetail from "./components/ProductDetail";
 import Basket from "./components/Basket";
 import { CategoryTwo } from "./components/Category";
 import ProductCategory from "./components/ProductCategory";
+import AccountAfterLogin from "./components/AccountAfterLogin";
 
 class App extends Component {
 
@@ -102,6 +103,12 @@ export default App = StackNavigator({
   },
   ProductCategory: {
     screen: ProductCategory,
+    navigationOptions: {
+      
+    }
+  },
+  AccountAfterLogin: {
+    screen: AccountAfterLogin,
     navigationOptions: {
       
     }

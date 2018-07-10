@@ -3,7 +3,7 @@ import {  AppRegistry, Text, ScrollView, FlatList,
           WebView,StyleSheet, View, TouchableOpacity, 
           Button, Dimensions, PanResponder, Animated,
           TouchableWithoutFeedback, Easing, BackAndroid,
-          BackHandler, Platform, Keyboard, Modal } from "react-native";
+          BackHandler, Platform, Keyboard } from "react-native";
 import { COLOR_PRIMARY, sliderWidth, itemWidth, COLOR_SECONDARY } from "../styles/common";
 import HeaderButtons from "react-navigation-header-buttons";
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -80,6 +80,14 @@ export default class ProductDetail extends Component {
                 console.log(this.state.data);
         });
     }
+
+    // _renderButton = (text, onPress) => (
+    //     <TouchableOpacity onPress={onPress}>
+    //       <View style={styles.button}>
+    //         <Text>{text}</Text>
+    //       </View>
+    //     </TouchableOpacity>
+    //   );
 
 	render() {
         let screenHeight = Dimensions.get('window').height;
