@@ -5,3 +5,8 @@ export const getProvince = async () => {
     return fetch(URL)
             .then((res) => res.json());
 }
+
+export const getProvinceById = async () => {
+    return fetch (url)
+            .then((res) => res.json());     
+}
