@@ -54,7 +54,7 @@ export default class Home extends Component {
         lightTheme
         // onChangeText={someMethod}
         // onClearText={someMethod}
-        placeholder='Search' 
+        placeholder='Bukupedia App' 
         containerStyle={{width: '100%', backgroundColor: COLOR_PRIMARY}}
       />,
     headerStyle: {

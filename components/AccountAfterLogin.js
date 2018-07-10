@@ -15,6 +15,7 @@ import TabNavigator from "react-native-tab-navigator";
 import Button from "react-native-button";
 import { ListItem } from "react-native-elements";
 import Login from "./Login"
+import { Header } from "react-native-elements";
 
 export default class AccountAfterLogin extends Component {
   static navigationOptions = {
@@ -28,7 +29,14 @@ export default class AccountAfterLogin extends Component {
       width: '90%',
       textAlign: 'center'
     },
-    headerLeft: null
+    headerLeft: null,
+    headerRight:
+      <TouchableOpacity onPress={() => navigation.navigate("Login")}
+        style={{margin:10, padding: 10, width: 50, height: 70}}>
+        <Image
+          source={require('../styles/icon/akunsetting.png')}
+        />
+      </TouchableOpacity>
   }
 
   stateTwo = {
