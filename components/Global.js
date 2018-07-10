@@ -15,3 +15,4 @@ export const CONTENT_FAQ = 'faq';
 export const CONTENT_SHOP = 'how-to-shop';
 export const CONTENT_PAY = 'how-to-payment';
 export const PROFILE = 'profile';
+export const CART = 'cart';

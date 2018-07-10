@@ -3,7 +3,7 @@ import {  AppRegistry, Text, ScrollView, FlatList,
           WebView,StyleSheet, View, TouchableOpacity, 
           Button, Dimensions, PanResponder, Animated,
           TouchableWithoutFeedback, Easing, BackAndroid,
-          BackHandler, Platform, Keyboard } from "react-native";
+          BackHandler, Platform, Keyboard, Modal } from "react-native";
 import { COLOR_PRIMARY, sliderWidth, itemWidth, COLOR_SECONDARY } from "../styles/common";
 import HeaderButtons from "react-navigation-header-buttons";
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -251,6 +251,10 @@ const styles = StyleSheet.create({
     },
     modal:{
         height: 300
+    },
+    bottomModal:{
+        justifyContent: "flex-end",
+        margin: 0
     }
 })
 
