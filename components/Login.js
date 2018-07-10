@@ -105,11 +105,7 @@ export default class Login extends Component {
                     </Button>
                 </View> 
                 <Button style = {styles.submitButton}
-<<<<<<< HEAD
-                    onPress = {() => this.onLogin(this.state)}>
-=======
                     onPress = {() => this.props.navigation.navigate("AccountAfterLogin")}>
->>>>>>> c56d134d1803366b1ec9529787c2f9ec434caf04
                         Masuk
                 </Button>
             </View>
