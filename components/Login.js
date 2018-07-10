@@ -15,6 +15,7 @@ import BottomNavigation, { Tab } from "react-native-material-bottom-navigation";
 import Button from "react-native-button";
 import Icon from "react-native-vector-icons";
 import { CheckBox } from "react-native-elements";
+import { postLogin } from "../services/FetchLogin";
 
 import Password from "./Password";
 
@@ -50,10 +51,11 @@ export default class Login extends Component {
         alert('email: ' + email + 'password: ' + password)
     }
 
-    onLogin(){
-        const { email, password } = this.state;
-
-        Alert.alert('testing', `${email} + ${password}`);
+    onLogin(params){
+        postLogin(params)
+            .then((res) => {
+                console.log(res);
+            });
     }
 
     render() {
@@ -88,6 +90,7 @@ export default class Login extends Component {
                     placeholderTextColor="#696969"
                     underlineColorAndroid = "transparent"
                     autoCapitalize = "none"
+                    secureTextEntry = "true"
                     onChangeText = {(text) => this.setState({password: text})}
                 />
                 <View style = {styles.check}>
@@ -102,7 +105,7 @@ export default class Login extends Component {
                     </Button>
                 </View> 
                 <Button style = {styles.submitButton}
-                    onPress = {() => this.alert("Masuk")}>
+                    onPress = {() => this.onLogin(this.state)}>
                         Masuk
                 </Button>
             </View>

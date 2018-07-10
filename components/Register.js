@@ -44,15 +44,22 @@ export default class Register extends Component {
                 if (typeof res.d != 'undefined') {
                     AsyncStorage.setItem('token', JSON.stringify(false));
                     Alert.alert(
-                    'Message',
-                    'Register success.',
-                    [
-                      {text: 'OK', onPress: () => this.props.navigation.navigate("Login")},
-                    ],
-                    { cancelable: false }
-                  )    
+                        'Message',
+                        'Register success.',
+                        [
+                            {text: 'OK', onPress: () => this.props.navigation.navigate("Login")},
+                        ],
+                        { cancelable: false }
+                    )    
                 }else{
-
+                    Alert.alert(
+                        'Error',
+                        res.message,
+                        [
+                            {text: 'OK', onPress: () => console.log(res)},
+                        ],
+                        { cancelable: false }
+                    ) 
                 }    
             });
     }
@@ -97,6 +104,7 @@ export default class Register extends Component {
               placeholderTextColor="#696969"
               underlineColorAndroid = "transparent"
               autoCapitalize = "none"
+              secureTextEntry = {true}
               onChangeText = {(text) => this.setState({password: text})}
           />
           <TextInput style={styles.input}
@@ -104,6 +112,7 @@ export default class Register extends Component {
               placeholderTextColor="#696969"
               underlineColorAndroid = "transparent"
               autoCapitalize = "none"
+              secureTextEntry = {true}
               onChangeText = {(text) => this.setState({confirmPwd: text})}
           />
           <TextInput style={styles.input}
