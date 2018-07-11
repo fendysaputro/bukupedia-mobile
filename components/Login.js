@@ -8,7 +8,9 @@ import { AppRegistry,
         TextInput, 
         TouchableOpacity, 
         TouchableHighlight,
-        SafeAreaView, KeyboardAvoidingView } from "react-native";
+        SafeAreaView, 
+        KeyboardAvoidingView,
+        AsyncStorage } from "react-native";
 import { COLOR_PRIMARY } from "../styles/common";
 import TabNavigator from "react-native-tab-navigator";
 import BottomNavigation, { Tab } from "react-native-material-bottom-navigation";
@@ -55,6 +57,9 @@ export default class Login extends Component {
         postLogin(params)
             .then((res) => {
                 console.log(res);
+                AsyncStorage.setItem('id_token', res.d.token, function(){
+
+                });
             });
     }
 
@@ -105,7 +110,7 @@ export default class Login extends Component {
                     </Button>
                 </View> 
                 <Button style = {styles.submitButton}
-                    onPress = {() => this.props.navigation.navigate("AccountAfterLogin")}>
+                    onPress = {() => this.onLogin(this.state)}>
                         Masuk
                 </Button>
             </View>
