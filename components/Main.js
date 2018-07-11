@@ -17,7 +17,7 @@ const Main = TabNavigator(
     Category: { screen: Category },
     Basket: { screen: Basket },
     Orders: { screen: Orders},
-    WelcomeAccount: { screen: WelcomeAccount}
+    Account: { screen: Account}
   },
   {
     tabBarComponent: NavigationComponent,
@@ -54,7 +54,7 @@ const Main = TabNavigator(
             labelColor: 'white',
             icon:<Image source={require('../styles/icon/pesanan.png')} style={{ width: 24, height: 24 }} />
           },
-          WelcomeAccount: {
+          Account: {
             barBackgroundColor: COLOR_PRIMARY,
             label: 'Akun',
             labelColor: 'white',
