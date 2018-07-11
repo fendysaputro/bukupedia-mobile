@@ -169,6 +169,7 @@ export default class ProductDetail extends Component {
                     >
                     <View style={styles.dialogContentView}>
                         <Button style={styles.buttonDialog}
+                                onPress={() => console.log('press')}
                                 color="orange"
                                 title="Tambahkan ke keranjang">
                         </Button>

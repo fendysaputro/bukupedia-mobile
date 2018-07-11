@@ -57,7 +57,7 @@ export default class Orders extends Component {
             Masuk
         </Button>
         <Text style={styles.lineText}>
-          ─────────────  Atau  ─────────────
+          ─────────  Atau  ─────────
         </Text>
         <Text style={styles.textLogin}>
           Email

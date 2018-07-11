@@ -37,7 +37,7 @@ export default class Account extends Component {
   componentDidMount() {
     AsyncStorage.getItem('id_token').then((token) => {
       this.setState({ hasToken: token !== null, isLoaded: true });
-      if (!this.state.hasToken) {
+      if (this.state.hasToken) {
         AsyncStorage.getItem('user').then((user) => {
           var userObj = JSON.parse(user);
           this.setState(userObj);
