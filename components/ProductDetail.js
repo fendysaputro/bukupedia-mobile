@@ -3,18 +3,25 @@ import {  AppRegistry, Text, ScrollView, FlatList,
           WebView,StyleSheet, View, TouchableOpacity, 
           Button, Dimensions, PanResponder, Animated,
           TouchableWithoutFeedback, Easing, BackAndroid,
-          BackHandler, Platform, Keyboard } from "react-native";
+          BackHandler, Platform, Keyboard, Modal } from "react-native";
 import { COLOR_PRIMARY, sliderWidth, itemWidth, COLOR_SECONDARY } from "../styles/common";
 import HeaderButtons from "react-navigation-header-buttons";
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { getProductDetail } from '../services/FetchProduct';
 import { getPaymentMethod } from '../services/FetchPayment';
 import Image from 'react-native-scalable-image';
-import Modal from 'react-native-modalbox';
 import Slider from 'react-native-slider';
-import PopupDialog, { SlideAnimation } from 'react-native-popup-dialog';
+import PopupDialog, {
+    DialogTitle,
+    DialogButton,
+    SlideAnimation,
+    ScaleAnimation,
+    FadeAnimation,} from 'react-native-popup-dialog';
 
 var { height, width } = Dimensions.get('window');
+const slideAnimation = new SlideAnimation({ slideFrom: 'bottom' });
+const scaleAnimation = new ScaleAnimation();
+const fadeAnimation = new FadeAnimation({ animationDuration: 150 });
 
 export default class ProductDetail extends Component {
     static navigationOptions = ({navigation}) => ({
@@ -68,7 +75,7 @@ export default class ProductDetail extends Component {
         this.state = {
             data: {}, 
             isDataLoaded: false,
-            visibleModal: null
+            dialogShow: false
         };
     }
 
@@ -82,20 +89,9 @@ export default class ProductDetail extends Component {
         });
     }
 
-    _renderButton = (text, onPress) => (
-        <TouchableOpacity onPress={onPress}>
-          <View style={styles.button}>
-            <Text>{text}</Text>
-          </View>
-        </TouchableOpacity>
-      );
-
-      _renderModalContent = () => (
-        <View style={styles.modalContent}>
-          <Text>Hello!</Text>
-          {this._renderButton("Close", () => this.setState({ visibleModal: null }))}
-        </View>
-      );
+    showFadeAnimationDialog = () => {
+        this.fadeAnimationDialog.show();
+      }
 
 	render() {
         let screenHeight = Dimensions.get('window').height;
@@ -152,28 +148,33 @@ export default class ProductDetail extends Component {
                             source={require('../styles/icon/keranjang-aktif.png')}
                         />
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.buttonOne}
-                        onPress={() => this.props.navigation.navigate("Basket")}>
-                        <Text style={styles.textOne}>
-                            { "Tambahkan ke\n Keranjang" }
-                        </Text>
-                            {this._renderButton("Bottom half modal", () =>
-                                this.setState({ visibleModal: 5 })
-                            )}
+                    <TouchableOpacity style={styles.buttonOne}>
+                        <DialogButton onPress={this.showFadeAnimationDialog}> 
+                            <Text style={styles.textOne}>
+                            {"Tambahkan ke\n Keranjang"}
+                            </Text>
+                        </DialogButton>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.buttonTwo}
                         onPress={() => this.props.navigation.navigate("Login", {})}>
                         <Text style={styles.textTwo}>
                             Beli
                         </Text>
-                    </TouchableOpacity>
-                    <Modal
-                        isVisible={this.state.visibleModal === 5}
-                        style={styles.bottomModal}
-                    >
-                        {this._renderModalContent()}
-                    </Modal> 
+                    </TouchableOpacity> 
                 </View>
+                <PopupDialog
+                    ref={(fadeAnimationDialog) => {
+                        this.fadeAnimationDialog = fadeAnimationDialog;
+                    }}
+                    dialogTitle={<DialogTitle title=" " />}
+                    >
+                    <View style={styles.dialogContentView}>
+                        <Button style={styles.buttonDialog}
+                                color="orange"
+                                title="Tambahkan ke keranjang">
+                        </Button>
+                    </View>
+                </PopupDialog>
 			</View>
 		)
 	}
@@ -289,6 +290,13 @@ const styles = StyleSheet.create({
         borderRadius: 4,
         borderColor: "rgba(0, 0, 0, 0.1)"
       },
+      dialogContentView: {
+        position:"absolute",
+        alignItems: 'center',
+        justifyContent: 'flex-end',
+        width:360,
+        bottom:30
+      }
 })
 
 AppRegistry.registerComponent("ProductDetail", () => ProductDetail);
