@@ -1,24 +1,16 @@
 import React, { Component } from "react";
-import { AppRegistry, 
-        StyleSheet, 
+import { StyleSheet, 
         Text, 
         View, 
         Image, 
-        Search, 
         TextInput, 
         TouchableOpacity, 
-        TouchableHighlight,
-        SafeAreaView, 
-        KeyboardAvoidingView,
         AsyncStorage } from "react-native";
 import { COLOR_PRIMARY } from "../styles/common";
-import TabNavigator from "react-native-tab-navigator";
-import BottomNavigation, { Tab } from "react-native-material-bottom-navigation";
 import Button from "react-native-button";
-import Icon from "react-native-vector-icons";
 import { CheckBox } from "react-native-elements";
 import { postLogin } from "../services/FetchLogin";
-
+import Account from "../components/Account";
 import Password from "./Password";
 
 export default class Login extends Component {
@@ -57,9 +49,10 @@ export default class Login extends Component {
         postLogin(params)
             .then((res) => {
                 console.log(res);
-                AsyncStorage.setItem('id_token', res.d.token, function(){
+                AsyncStorage.setItem('id_token', res.d.token);
+                AsyncStorage.setItem('user', JSON.stringify(res.d));
 
-                });
+                this.props.navigation.navigate("Account");
             });
     }
 

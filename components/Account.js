@@ -5,11 +5,8 @@ import {
   Text, 
   View, 
   Image, 
-  Search, 
   TouchableOpacity, 
-  TouchableNativeFeedback, 
-  ListView, 
-  DataSource } from "react-native";
+  AsyncStorage } from "react-native";
 import { COLOR_PRIMARY } from "../styles/common";
 import TabNavigator from "react-native-tab-navigator";
 import Button from "react-native-button";
@@ -18,6 +15,47 @@ import Login from "./Login"
 import { Header } from "react-native-elements";
 
 export default class Account extends Component {
+
+  constructor (props) {
+    super(props);
+    this.state = {
+      user: {}
+    }
+  }
+
+  async retrieveUser() {
+    try {
+      const retrievedUser =  await AsyncStorage.getItem('user');
+      const user = JSON.parse(retrievedUser);
+      return user;
+    } catch (error) {
+      console.log(error.message);
+    }
+    return
+  }
+
+  componentDidMount() {
+    AsyncStorage.getItem('id_token').then((token) => {
+      this.setState({ hasToken: token !== null, isLoaded: true });
+      if (!this.state.hasToken) {
+        AsyncStorage.getItem('user').then((user) => {
+          var userObj = JSON.parse(user);
+          this.setState(userObj);
+        })
+      }else{
+        this.replaceScreen();
+      }
+    });
+  }
+
+  replaceScreen = () => {
+    this.props.navigation.dispatch({
+      key: 'WelcomeAccount',
+      type: 'ReplaceCurrentScreen',
+      routeName: 'WelcomeAccount'
+    });
+  };
+
   static navigationOptions = {
     title: 'Akun',
     headerStyle: {
@@ -75,10 +113,6 @@ export default class Account extends Component {
     alert(itemTwo.title)
   }
 
-  constructor(props, context){
-    super(props, context);
-  }
-
   render () {
     return (
      <View style = {styles.container}>
@@ -89,7 +123,7 @@ export default class Account extends Component {
             onPress = {() => this.props.navigation.navigate("LoginMain")}>
             <Image source={require('../styles/icon/edit-foto.png')} style={{ width: 24, height: 24, alignItems: 'flex-start' }}/> 
             <Text style = {styles.textNew}>
-              Hi, User!
+              Hi, {this.state.user.name}
             </Text>   
         </TouchableOpacity>
         }

@@ -19,10 +19,10 @@ import Account from "./components/Account";
 
 class App extends Component {
 
-  componentDidMount() {
+  componentWillMount() {
     AsyncStorage.getItem('id_token').then((token) => {
       this.setState({ hasToken: token !== null, isLoaded: true });
-      console.log("ambil token1");
+      console.log("token");
       console.log(this.state.hasToken);
     });
   }
@@ -45,11 +45,16 @@ class App extends Component {
   }
 }
 
-console.log("ambil token");
-AsyncStorage.getItem('id_token').then((token) => {
-  console.log(token)
-});
-const test = WelcomeAccount;
+// var acc = WelcomeAccount;
+// var token = '';
+// AsyncStorage.getItem('id_token').then((tokn) => {
+//   token = tokn;
+// })
+// console.log("get token");
+// console.log(token);
+// if (token != null) {
+//   acc = Account;
+// }
 
 export default App = StackNavigator({
   Home: {
@@ -111,12 +116,32 @@ export default App = StackNavigator({
     }
   },
   WelcomeAccount: {
-    screen: test,
+    screen: WelcomeAccount,
+    navigationOptions: {
+
+    }
+  },
+  Account: {
+    screen: Account,
     navigationOptions: {
 
     }
   }
 });
+
+const prevGetStateForActionApp = App.router.getStateForAction;
+App.router.getStateForAction = (action, state) => {
+  if (state && action.type === 'ReplaceCurrentScreen') {
+      const routes = state.routes.slice(0, state.routes.length - 1);
+      routes.push(action);
+      return {
+        ...state,
+        routes,
+        index: routes.length - 1,
+      };
+  }
+  return prevGetStateForActionApp(action, state);
+};
 
 const styles = StyleSheet.create({
   container: {
