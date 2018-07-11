@@ -28,6 +28,7 @@
     "react-native-material-bottom-navigation": "^0.9.0",
     "react-native-material-design": "^0.3.7",
     "react-native-modalbox": "^1.5.0",
+    "react-native-number-spinner": "^1.1.3",
     "react-native-popup-dialog": "^0.14.52",
     "react-native-scalable-image": "^0.4.0",
     "react-native-sectioned-multi-select": "^0.5.1",

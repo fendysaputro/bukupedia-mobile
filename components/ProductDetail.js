@@ -148,12 +148,11 @@ export default class ProductDetail extends Component {
                             source={require('../styles/icon/keranjang-aktif.png')}
                         />
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.buttonOne}>
-                        <DialogButton onPress={this.showFadeAnimationDialog}> 
-                            <Text style={styles.textOne}>
-                            {"Tambahkan ke\n Keranjang"}
-                            </Text>
-                        </DialogButton>
+                    <TouchableOpacity style={styles.buttonOne}
+                         onPress={this.showFadeAnimationDialog}> 
+                        <Text style={styles.textOne}>
+                            Tambahkan ke Keranjang
+                        </Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.buttonTwo}
                         onPress={() => this.props.navigation.navigate("Login", {})}>
