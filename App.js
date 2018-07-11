@@ -45,17 +45,6 @@ class App extends Component {
   }
 }
 
-// var acc = WelcomeAccount;
-// var token = '';
-// AsyncStorage.getItem('id_token').then((tokn) => {
-//   token = tokn;
-// })
-// console.log("get token");
-// console.log(token);
-// if (token != null) {
-//   acc = Account;
-// }
-
 export default App = StackNavigator({
   Home: {
     screen: SplashScreen,
@@ -112,21 +101,23 @@ export default App = StackNavigator({
   ProductCategory: {
     screen: ProductCategory,
     navigationOptions: {
-      
+      title: "Category"
     }
   },
   WelcomeAccount: {
     screen: WelcomeAccount,
     navigationOptions: {
-
+      title: "Welcome"
     }
   },
   Account: {
     screen: Account,
     navigationOptions: {
-
+      title: "Account"
     }
   }
+},{
+  headerMode: 'screen'
 });
 
 const prevGetStateForActionApp = App.router.getStateForAction;

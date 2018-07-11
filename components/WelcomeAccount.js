@@ -55,8 +55,8 @@ export default class WelcomeAccount extends Component {
     alert(itemTwo.title)
   }
 
-  constructor(props, context){
-    super(props, context);
+  constructor(props){
+    super(props);
   }
 
   render () {
