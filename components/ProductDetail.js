@@ -8,12 +8,9 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { getProductDetail } from '../services/FetchProduct';
 import Image from 'react-native-scalable-image';
 import PopupDialog, {
-    DialogTitle,
-    SlideAnimation,
-    ScaleAnimation,
-    FadeAnimation,} from 'react-native-popup-dialog';
+    DialogTitle} from 'react-native-popup-dialog';
 import postCreateShoppingCart from '../services/FetchCreateShoppingCart';
-import NumericInput from 'react-numeric-input';
+import NumericInput from 'react-native-numeric-input'
 
 export default class ProductDetail extends Component {
     static navigationOptions = ({navigation}) => ({
@@ -169,7 +166,7 @@ export default class ProductDetail extends Component {
                     dialogTitle={<DialogTitle title=" " />}>
 
                     <View style={styles.dialogContentView}>
-                        {/* <NumericInput min={1} max={100} value={1}/> */}
+                        <NumericInput type='up-down' onChange={value => console.log(value)} />
                         <Button style={styles.buttonDialog}
                                 onPress={() => this.doAddToBasket(this.state)}
                                 color="orange"
