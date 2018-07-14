@@ -17,6 +17,7 @@ import PopupDialog, {
     SlideAnimation,
     ScaleAnimation,
     FadeAnimation,} from 'react-native-popup-dialog';
+import postCreateShoppingCart from '../services/FetchCreateShoppingCart';
 
 var { height, width } = Dimensions.get('window');
 const slideAnimation = new SlideAnimation({ slideFrom: 'bottom' });
@@ -91,7 +92,15 @@ export default class ProductDetail extends Component {
 
     showFadeAnimationDialog = () => {
         this.fadeAnimationDialog.show();
-      }
+    }
+
+    doAddToBasket(params) {
+        console.log('press');
+        postCreateShoppingCart(params).
+            then((res) => {
+
+            });
+    }
 
 	render() {
         let screenHeight = Dimensions.get('window').height;
@@ -165,15 +174,16 @@ export default class ProductDetail extends Component {
                     ref={(fadeAnimationDialog) => {
                         this.fadeAnimationDialog = fadeAnimationDialog;
                     }}
-                    dialogTitle={<DialogTitle title=" " />}
-                    >
+                    dialogTitle={<DialogTitle title=" " />}>
+
                     <View style={styles.dialogContentView}>
                         <Button style={styles.buttonDialog}
-                                onPress={() => console.log('press')}
+                                onPress={() => this.doAddToBasket(this.state)}
                                 color="orange"
                                 title="Tambahkan ke keranjang">
                         </Button>
                     </View>
+
                 </PopupDialog>
 			</View>
 		)
