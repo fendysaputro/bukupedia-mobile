@@ -1,7 +1,7 @@
 import { API, CART } from '../components/Global';
 
-export const addShoppingCart = (params) => {
-    const URL = API + CART;
+export const addShoppingCart = (params, token) => {
+    const URL = API + CART + '?token=' + token;
     return fetch(URL, {
         method: 'POST',
         headers: {

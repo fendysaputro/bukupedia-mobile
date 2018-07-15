@@ -76,7 +76,7 @@ export default class ProductDetail extends Component {
             var userObj = JSON.parse(sUser);
             this.setState({ user: userObj });
         });
-        AsyncStorage.getItem('token_id').then((token) => {
+        AsyncStorage.getItem('id_token').then((token) => {
             this.setState({ token: token });
         });
         const { state } = this.props.navigation;
@@ -92,10 +92,10 @@ export default class ProductDetail extends Component {
     }
 
     doAddToBasket(params) {
+        // params['token'] = this.state.token;
         console.log('press');
         console.log(params);
-        params['token'] = this.state.token;
-        addShoppingCart(params).
+        addShoppingCart(params, this.state.token).
             then((res) => {
                 console.log(res);
             });
