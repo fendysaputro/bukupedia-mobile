@@ -1,16 +1,12 @@
 import React, { Component } from "react";
 import {  AppRegistry, Text, ScrollView, FlatList,
-          WebView,StyleSheet, View, TouchableOpacity, 
-          Button, Dimensions, PanResponder, Animated,
-          TouchableWithoutFeedback, Easing, BackAndroid,
-          BackHandler, Platform, Keyboard, Modal } from "react-native";
-import { COLOR_PRIMARY, sliderWidth, itemWidth, COLOR_SECONDARY } from "../styles/common";
+          StyleSheet, View, TouchableOpacity, 
+          Button, Dimensions } from "react-native";
+import { COLOR_PRIMARY } from "../styles/common";
 import HeaderButtons from "react-navigation-header-buttons";
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { getProductDetail } from '../services/FetchProduct';
-import { getPaymentMethod } from '../services/FetchPayment';
 import Image from 'react-native-scalable-image';
-import Slider from 'react-native-slider';
 import PopupDialog, {
     DialogTitle,
     DialogButton,
@@ -19,10 +15,13 @@ import PopupDialog, {
     FadeAnimation,} from 'react-native-popup-dialog';
 import Basket from './Basket';
 
-var { height, width } = Dimensions.get('window');
 const slideAnimation = new SlideAnimation({ slideFrom: 'bottom' });
 const scaleAnimation = new ScaleAnimation();
 const fadeAnimation = new FadeAnimation({ animationDuration: 150 });
+
+var { height, width } = Dimensions.get('windows');
+import postCreateShoppingCart from '../services/FetchCreateShoppingCart';
+import NumericInput from 'react-native-numeric-input';
 
 export default class ProductDetail extends Component {
     static navigationOptions = ({navigation}) => ({
@@ -92,7 +91,16 @@ export default class ProductDetail extends Component {
 
     showFadeAnimationDialog = () => {
         this.fadeAnimationDialog.show();
-      }
+    }
+
+    doAddToBasket(params) {
+        console.log('press');
+        console.log(params);
+        postCreateShoppingCart(params).
+            then((res) => {
+
+            });
+    }
 
 	render() {
         let screenHeight = Dimensions.get('window').height;
@@ -166,15 +174,20 @@ export default class ProductDetail extends Component {
                     ref={(fadeAnimationDialog) => {
                         this.fadeAnimationDialog = fadeAnimationDialog;
                     }}
-                    dialogTitle={<DialogTitle title=" " />}
-                    >
+                    dialogTitle={<DialogTitle title=" " />}>
+
                     <View style={styles.dialogContentView}>
+                        <NumericInput type='up-down' onChange={value => console.log(value)} />
                         <Button style={styles.buttonDialog}
-                                onPress={() => this.props.navigation.navigate("Basket", {})}
+// <<<<<<< HEAD
+//                                 onPress={() => this.props.navigation.navigate("Basket", {})}
+// =======
+                                onPress={() => this.doAddToBasket(this.state)}
                                 color="orange"
                                 title="Tambahkan ke keranjang">
                         </Button>
                     </View>
+
                 </PopupDialog>
 			</View>
 		)
