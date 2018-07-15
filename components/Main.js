@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { AppRegistry, StyleSheet, Text, View, Image, Search } from "react-native";
 import { TabNavigator } from "react-navigation";
-// import { NavigationComponent } from "react-native-material-bottom-navigation";
+import { NavigationComponent } from "react-native-material-bottom-navigation";
 import { COLOR_PRIMARY, COLOR_SECONDARY, FONT_NORMAL } from '../styles/common';
 
 import Home from "./Home";
@@ -20,7 +20,7 @@ const Main = TabNavigator(
     Account: { screen: Account}
   },
   {
-    // tabBarComponent: NavigationComponent,
+    tabBarComponent: NavigationComponent,
     tabBarPosition: 'bottom',
     swipeEnabled: true,
     tabBarOptions: {

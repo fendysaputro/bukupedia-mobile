@@ -17,6 +17,7 @@ import PopupDialog, {
     SlideAnimation,
     ScaleAnimation,
     FadeAnimation,} from 'react-native-popup-dialog';
+import Basket from './Basket';
 
 var { height, width } = Dimensions.get('window');
 const slideAnimation = new SlideAnimation({ slideFrom: 'bottom' });
@@ -169,6 +170,7 @@ export default class ProductDetail extends Component {
                     >
                     <View style={styles.dialogContentView}>
                         <Button style={styles.buttonDialog}
+                                onPress={() => this.props.navigation.navigate("Basket", {})}
                                 color="orange"
                                 title="Tambahkan ke keranjang">
                         </Button>
