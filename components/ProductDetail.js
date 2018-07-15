@@ -13,13 +13,11 @@ import PopupDialog, {
     SlideAnimation,
     ScaleAnimation,
     FadeAnimation,} from 'react-native-popup-dialog';
-import Basket from './Basket';
 
 const slideAnimation = new SlideAnimation({ slideFrom: 'bottom' });
 const scaleAnimation = new ScaleAnimation();
 const fadeAnimation = new FadeAnimation({ animationDuration: 150 });
 
-var { height, width } = Dimensions.get('windows');
 import {addShoppingCart, getListShoppingCart} from '../services/FetchShoppingCart';
 import NumericInput from 'react-native-numeric-input';
 
