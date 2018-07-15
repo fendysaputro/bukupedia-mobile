@@ -20,7 +20,7 @@ const scaleAnimation = new ScaleAnimation();
 const fadeAnimation = new FadeAnimation({ animationDuration: 150 });
 
 var { height, width } = Dimensions.get('windows');
-import postCreateShoppingCart from '../services/FetchCreateShoppingCart';
+import {addShoppingCart, getListShoppingCart} from '../services/FetchShoppingCart';
 import NumericInput from 'react-native-numeric-input';
 
 
@@ -90,6 +90,12 @@ export default class ProductDetail extends Component {
         });
         AsyncStorage.getItem('id_token').then((token) => {
             this.setState({ token: token });
+            if (this.state.token != 'null') {
+                getListShoppingCart()
+                    .then((res) => {
+                        
+                    });
+            }
         });
         const { state } = this.props.navigation;
         getProductDetail(state.params.url)
