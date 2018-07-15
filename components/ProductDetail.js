@@ -8,9 +8,21 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { getProductDetail } from '../services/FetchProduct';
 import Image from 'react-native-scalable-image';
 import PopupDialog, {
-    DialogTitle} from 'react-native-popup-dialog';
-import { addShoppingCart } from '../services/FetchCreateShoppingCart';
-import NumericInput from 'react-native-numeric-input'
+    DialogTitle,
+    DialogButton,
+    SlideAnimation,
+    ScaleAnimation,
+    FadeAnimation,} from 'react-native-popup-dialog';
+import Basket from './Basket';
+
+const slideAnimation = new SlideAnimation({ slideFrom: 'bottom' });
+const scaleAnimation = new ScaleAnimation();
+const fadeAnimation = new FadeAnimation({ animationDuration: 150 });
+
+var { height, width } = Dimensions.get('windows');
+import postCreateShoppingCart from '../services/FetchCreateShoppingCart';
+import NumericInput from 'react-native-numeric-input';
+
 
 export default class ProductDetail extends Component {
     static navigationOptions = ({navigation}) => ({

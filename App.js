@@ -16,6 +16,7 @@ import { CategoryTwo } from "./components/Category";
 import ProductCategory from "./components/ProductCategory";
 import WelcomeAccount from "./components/WelcomeAccount";
 import Account from "./components/Account";
+// import { MainStack } from "./config/Router";
 
 class App extends Component {
 
@@ -41,6 +42,7 @@ class App extends Component {
         <StatusBar barStyle="light-content" backgroundColor="#16a085" />
         <Screen navigation={this.props.navigation} />
       </View>
+      // <MainStack/>
     );
   }
 }
