@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import {  AppRegistry, Text, ScrollView, FlatList,
           StyleSheet, View, TouchableOpacity, 
-          Button, Dimensions } from "react-native";
+          Button, Dimensions, AsyncStorage } from "react-native";
 import { COLOR_PRIMARY } from "../styles/common";
 import HeaderButtons from "react-navigation-header-buttons";
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -9,7 +9,7 @@ import { getProductDetail } from '../services/FetchProduct';
 import Image from 'react-native-scalable-image';
 import PopupDialog, {
     DialogTitle} from 'react-native-popup-dialog';
-import postCreateShoppingCart from '../services/FetchCreateShoppingCart';
+import { addShoppingCart } from '../services/FetchCreateShoppingCart';
 import NumericInput from 'react-native-numeric-input'
 
 export default class ProductDetail extends Component {
@@ -64,13 +64,22 @@ export default class ProductDetail extends Component {
         this.state = {
             data: {}, 
             isDataLoaded: false,
-            dialogShow: false
+            dialogShow: false,
+            quantity: 1,
+            user: {}
         };
+        this.doAddToBasket = this.doAddToBasket.bind(this);
     }
 
     componentDidMount() {
+        AsyncStorage.getItem('user').then((sUser) => {
+            var userObj = JSON.parse(sUser);
+            this.setState({ user: userObj });
+        });
+        AsyncStorage.getItem('token_id').then((token) => {
+            this.setState({ token: token });
+        });
         const { state } = this.props.navigation;
-        console.log(state.params.url);
         getProductDetail(state.params.url)
             .then((res) => {
                 this.setState({ data: res.d, isDataLoaded: true });
@@ -85,13 +94,15 @@ export default class ProductDetail extends Component {
     doAddToBasket(params) {
         console.log('press');
         console.log(params);
-        postCreateShoppingCart(params).
+        params['token'] = this.state.token;
+        addShoppingCart(params).
             then((res) => {
-
+                console.log(res);
             });
     }
 
 	render() {
+        console.log(this.state);
         let screenHeight = Dimensions.get('window').height;
         let sreadyStock = '';
         if (this.state.data.stock > 0) {
@@ -163,12 +174,16 @@ export default class ProductDetail extends Component {
                     ref={(fadeAnimationDialog) => {
                         this.fadeAnimationDialog = fadeAnimationDialog;
                     }}
-                    dialogTitle={<DialogTitle title=" " />}>
+                    dialogTitle={<DialogTitle title={this.state.data.title} />}>
 
                     <View style={styles.dialogContentView}>
-                        <NumericInput type='up-down' onChange={value => console.log(value)} />
+                        <NumericInput type='up-down' onChange={value => this.setState({quantity: value})} />
                         <Button style={styles.buttonDialog}
-                                onPress={() => this.doAddToBasket(this.state)}
+                                onPress={() => this.doAddToBasket({
+                                    user_id:this.state.user.user.id,
+                                    product_id: this.state.data.id,
+                                    quantity: this.state.quantity
+                                    })}
                                 color="orange"
                                 title="Tambahkan ke keranjang">
                         </Button>
