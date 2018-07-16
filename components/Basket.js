@@ -3,12 +3,13 @@ import { AppRegistry,
   StyleSheet, 
   Text, 
   View, 
-  Image, 
+  Dimensions,
   TouchableOpacity,
   AsyncStorage } from "react-native";
 import { COLOR_PRIMARY } from "../styles/common";
 import getListItemCart from "../services/FetchShoppingCart";
 import { API, CART } from '../components/Global';
+import Image from 'react-native-scalable-image';
 
 export default class Basket extends Component {
   static navigationOptions = {
@@ -65,25 +66,51 @@ export default class Basket extends Component {
   }
 
   render () {
-    return (
-      <View style={styles.container}>
-        <Image 
-          source={require('../styles/icon/emptystates1.png')}
-          style={{width: 250, height: 150}}>
-        </Image>
-        <Text style={styles.text}>
-          Keranjang Belanja Anda Kosong
-        </Text>
-        <Text style={styles.smallText}>
-          Semua belanjaan Anda akan masuk di sini
-        </Text>
+    if(this.state.carts.length == 0){
+      return(
+        <View style={styles.container}>
+          <Image 
+            source={require('../styles/icon/emptystates1.png')}
+            style={{width: 250, height: 150}}>
+          </Image>
+          <Text style={styles.text}>
+            Keranjang Belanja Anda Kosong
+          </Text>
+          <Text style={styles.smallText}>
+            Semua belanjaan Anda akan masuk di sini
+          </Text>
+          <TouchableOpacity style={styles.button}>
+              <Text style={styles.buttonText}>
+                Mulai Belanja
+              </Text>
+          </TouchableOpacity>
+        </View>
+      )
+    }
+
+    return(
+      <View style={styles.containerlist}>
+        {
+          this.state.carts.map((product, index) => (
+            <TouchableOpacity
+              key = {product.id}
+              style = {styles.containerTwo}
+              onPress = {() => this.alertItemTitle(product)}>
+
+              <Image  width={20} 
+                      source={{uri: product.picture}}/>
+              <Text style={styles.text}>{product.title}</Text>
+
+            </TouchableOpacity>
+          ))
+        }
         <TouchableOpacity style={styles.button}>
             <Text style={styles.buttonText}>
-              Mulai Belanja
+              Checkout
             </Text>
         </TouchableOpacity>
       </View>
-    )
+    );
   }
 }
 const styles = StyleSheet.create({
@@ -91,6 +118,9 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: "25%",
     alignItems: "center"
+  },
+  containerlist: {
+    backgroundColor: "#EDF8FE"
   },
   text: {
     fontSize: 15,
@@ -116,6 +146,11 @@ const styles = StyleSheet.create({
     color: "white",
     textAlign: "center",
     fontWeight: "bold"
+  },
+  containerTwo: {
+    padding: 10,
+    marginTop: 3,
+    backgroundColor: 'white' 
   }
 });
 
