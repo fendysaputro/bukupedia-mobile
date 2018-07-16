@@ -13,14 +13,13 @@ import PopupDialog, {
     SlideAnimation,
     ScaleAnimation,
     FadeAnimation,} from 'react-native-popup-dialog';
-import Basket from './Basket';
 
 const slideAnimation = new SlideAnimation({ slideFrom: 'bottom' });
 const scaleAnimation = new ScaleAnimation();
 const fadeAnimation = new FadeAnimation({ animationDuration: 150 });
 
 var { height, width } = Dimensions.get('window');
-import postCreateShoppingCart from '../services/FetchCreateShoppingCart';
+import {addShoppingCart, getListShoppingCart} from '../services/FetchShoppingCart';
 import NumericInput from 'react-native-numeric-input';
 import IconBadge from 'react-native-icon-badge';
 import PropTypes from 'prop-types';
@@ -103,8 +102,14 @@ export default class ProductDetail extends Component {
             var userObj = JSON.parse(sUser);
             this.setState({ user: userObj });
         });
-        AsyncStorage.getItem('token_id').then((token) => {
+        AsyncStorage.getItem('id_token').then((token) => {
             this.setState({ token: token });
+            if (this.state.token != 'null') {
+                getListShoppingCart()
+                    .then((res) => {
+                        
+                    });
+            }
         });
         const { state } = this.props.navigation;
         getProductDetail(state.params.url)
@@ -119,10 +124,10 @@ export default class ProductDetail extends Component {
     }
 
     doAddToBasket(params) {
+        // params['token'] = this.state.token;
         console.log('press');
         console.log(params);
-        params['token'] = this.state.token;
-        addShoppingCart(params).
+        addShoppingCart(params, this.state.token).
             then((res) => {
                 console.log(res);
             });

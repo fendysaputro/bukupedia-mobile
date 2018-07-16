@@ -1,11 +1,13 @@
 import React, { Component } from "react";
-import { AppRegistry, StyleSheet, Text, View, Image, Search, TouchableOpacity } from "react-native";
+import { AppRegistry, 
+  StyleSheet, 
+  Text, 
+  View, 
+  Image, 
+  TouchableOpacity,
+  AsyncStorage } from "react-native";
 import { COLOR_PRIMARY } from "../styles/common";
-import TabNavigator from "react-native-tab-navigator";
-import BottomNavigation, { Tab } from "react-native-material-bottom-navigation";
-import { StackNavigator } from 'react-navigation'; 
-
-import Main from '../components/Main';
+import getListShoppingCart from "../services/FetchShoppingCart";
 
 export default class Basket extends Component {
   static navigationOptions = {
@@ -19,6 +21,24 @@ export default class Basket extends Component {
       width: '90%',
       textAlign: 'center'
     },
+  }
+
+  async retrieveToken() {
+    try {
+      const token =  await AsyncStorage.getItem('id_token');
+      return token;
+    } catch (error) {
+      console.log(error.message);
+    }
+    return
+  }
+
+  componentDidMount() {
+    var token = this.retrieveToken();
+    getListShoppingCart(token)
+      .then((res) => {
+        console.log(res);
+      });
   }
 
   alertItemName = () => {
