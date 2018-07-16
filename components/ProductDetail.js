@@ -23,6 +23,7 @@ import {addShoppingCart, getListShoppingCart} from '../services/FetchShoppingCar
 import NumericInput from 'react-native-numeric-input';
 import IconBadge from 'react-native-icon-badge';
 import PropTypes from 'prop-types';
+import { API, CART } from '../components/Global';
 
 
 export default class ProductDetail extends Component {
@@ -92,30 +93,41 @@ export default class ProductDetail extends Component {
             isDataLoaded: false,
             dialogShow: false,
             quantity: 1,
-            user: {}
+            user: {},
+            qty_cart: 0
         };
         this.doAddToBasket = this.doAddToBasket.bind(this);
     }
 
+    getQtyCart(token, callback) {
+        const URL = API + CART + '?token=' + token;
+        fetch(URL)  
+            .then(function(res) {
+                var resObj = JSON.parse(res._bodyText);
+                if (resObj.r) {
+                    callback(resObj.d.length);
+                }
+        })
+    }
+
     componentDidMount() {
+        var self = this;
         AsyncStorage.getItem('user').then((sUser) => {
             var userObj = JSON.parse(sUser);
-            this.setState({ user: userObj });
+            self.setState({ user: userObj });
         });
         AsyncStorage.getItem('id_token').then((token) => {
-            this.setState({ token: token });
-            if (this.state.token != 'null') {
-                getListShoppingCart()
-                    .then((res) => {
-                        
-                    });
-            }
+            self.setState({ token: token });
+            self.getQtyCart(this.state.token, function(qty){
+                console.log(qty);
+                self.setState({ qty_cart: qty });
+            });
         });
         const { state } = this.props.navigation;
         getProductDetail(state.params.url)
             .then((res) => {
-                this.setState({ data: res.d, isDataLoaded: true });
-                console.log(this.state.data);
+                self.setState({ data: res.d, isDataLoaded: true });
+                console.log(self.state.data);
         });
     }
 
@@ -124,12 +136,10 @@ export default class ProductDetail extends Component {
     }
 
     doAddToBasket(params) {
-        // params['token'] = this.state.token;
-        console.log('press');
-        console.log(params);
         addShoppingCart(params, this.state.token).
             then((res) => {
                 console.log(res);
+                this.props.navigation.navigate('');
             });
     }
 
@@ -199,7 +209,7 @@ export default class ProductDetail extends Component {
                                 />
                             }
                             BadgeElement={
-                                <Text style={{color:'#FFFFFF'}}>3</Text>
+                                <Text style={{color:'#FFFFFF'}}>{this.state.qty_cart}</Text>
                             }
                             IconBadgeStyle={
                                 {
