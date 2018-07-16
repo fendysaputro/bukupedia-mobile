@@ -19,9 +19,11 @@ const slideAnimation = new SlideAnimation({ slideFrom: 'bottom' });
 const scaleAnimation = new ScaleAnimation();
 const fadeAnimation = new FadeAnimation({ animationDuration: 150 });
 
-var { height, width } = Dimensions.get('windows');
+var { height, width } = Dimensions.get('window');
 import postCreateShoppingCart from '../services/FetchCreateShoppingCart';
 import NumericInput from 'react-native-numeric-input';
+import IconBadge from 'react-native-icon-badge';
+import PropTypes from 'prop-types';
 
 
 export default class ProductDetail extends Component {
@@ -71,6 +73,19 @@ export default class ProductDetail extends Component {
         )
     })
 
+    static propTypes = {
+        MainElement: PropTypes.element.isRequired,
+        BadgeElement: PropTypes.element.isRequired,
+        MainViewStyle: PropTypes.object,
+        IconBadgeStyle: PropTypes.object,
+        Hidden: PropTypes.bool,
+      };
+      static defaultProps = {
+        MainViewStyle: {},
+        IconBadgeStyle: {},
+        Hidden: true,
+      };
+
     constructor (props) {
         super(props);
         this.state = {
@@ -114,6 +129,13 @@ export default class ProductDetail extends Component {
     }
 
 	render() {
+        const {
+            MainViewStyle,
+            MainElement,
+            Hidden,
+            IconBadgeStyle,
+            BadgeElement,
+          } = this.props;
         console.log(this.state);
         let screenHeight = Dimensions.get('window').height;
         let sreadyStock = '';
@@ -165,9 +187,24 @@ export default class ProductDetail extends Component {
                 <View style={[styles.footer]}>
                     <TouchableOpacity style={styles.image}
                         onPress={() => this.props.navigation.navigate()}>
-                        <Image
-                            source={require('../styles/icon/keranjang-aktif.png')}
-                        />
+                        <IconBadge
+                            MainElement={
+                                <Image
+                                    source={require('../styles/icon/keranjang-aktif.png')}
+                                />
+                            }
+                            BadgeElement={
+                                <Text style={{color:'#FFFFFF'}}>3</Text>
+                            }
+                            IconBadgeStyle={
+                                {
+                                    width:30,
+                                    height:30,
+                                    backgroundColor: '#3bafff'
+                                }
+                            }
+                            Hidden={this.state.BadgeCount==0}
+                        />                  
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.buttonOne}
                          onPress={this.showFadeAnimationDialog}> 
@@ -323,7 +360,18 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end',
         width:360,
         bottom:30
-      }
-})
+      },
+      IconBadge: {
+        position: 'absolute',
+        top: 1,
+        right: 1,
+        minWidth: 20,
+        height: 20,
+        borderRadius: 15,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#FF0000',
+      },
+});
 
 AppRegistry.registerComponent("ProductDetail", () => ProductDetail);
