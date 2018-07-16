@@ -191,7 +191,7 @@ export default class ProductDetail extends Component {
                 </TouchableOpacity>
                 <View style={[styles.footer]}>
                     <TouchableOpacity style={styles.image}
-                        onPress={() => this.props.navigation.navigate()}>
+                        onPress={() => this.props.navigation.navigate("Basket")}>
                         <IconBadge
                             MainElement={
                                 <Image
@@ -199,7 +199,7 @@ export default class ProductDetail extends Component {
                                 />
                             }
                             BadgeElement={
-                                <Text style={{color:'#FFFFFF'}}>3</Text>
+                                <Text style={{color:'#FFFFFF'}}>{this.state.quantity}</Text>
                             }
                             IconBadgeStyle={
                                 {
@@ -242,7 +242,6 @@ export default class ProductDetail extends Component {
                                 title="Tambahkan ke keranjang">
                         </Button>
                     </View>
-
                 </PopupDialog>
 			</View>
 		)
