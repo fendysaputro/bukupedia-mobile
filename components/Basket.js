@@ -7,7 +7,8 @@ import { AppRegistry,
   TouchableOpacity,
   AsyncStorage } from "react-native";
 import { COLOR_PRIMARY } from "../styles/common";
-import getListShoppingCart from "../services/FetchShoppingCart";
+import getListItemCart from "../services/FetchShoppingCart";
+import { API, CART } from '../components/Global';
 
 export default class Basket extends Component {
   static navigationOptions = {
@@ -23,6 +24,13 @@ export default class Basket extends Component {
     },
   }
 
+  constructor (props) {
+    super(props);
+    this.state = {
+      carts: []
+    }
+  }
+
   async retrieveToken() {
     try {
       const token =  await AsyncStorage.getItem('id_token');
@@ -34,11 +42,22 @@ export default class Basket extends Component {
   }
 
   componentDidMount() {
-    var token = this.retrieveToken();
-    getListShoppingCart(token)
-      .then((res) => {
-        console.log(res);
-      });
+    var self = this;
+    AsyncStorage.getItem('id_token').then((token) => {
+      // console.log(token);
+      // getListItemCart(token)
+      //   .then((res) => {
+      //     console.log(res);
+      // });
+      const URL = API + CART + '?token=' + token;
+      fetch(URL)  
+        .then(function(res) {
+          var resObj = JSON.parse(res._bodyText);
+          if (resObj.r) {
+            self.setState({carts: resObj.d});
+          }
+        })
+    });
   }
 
   alertItemName = () => {
