@@ -90,8 +90,7 @@ export default class Register extends Component {
               underlineColorAndroid = "transparent"
               autoCapitalize = "none"
               onChangeText = {(text) => this.setState({name: text})}
-
-/>
+          />
           <TextInput style={styles.input}
               placeholder = "Email"
               placeholderTextColor="#696969"

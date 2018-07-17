@@ -10,6 +10,7 @@ import { COLOR_PRIMARY } from "../styles/common";
 import getListItemCart from "../services/FetchShoppingCart";
 import { API, CART } from '../components/Global';
 import Image from 'react-native-scalable-image';
+import Checkout from "../components/Checkout";
 
 export default class Basket extends Component {
   static navigationOptions = {
@@ -105,7 +106,8 @@ export default class Basket extends Component {
             </TouchableOpacity>
           ))
         }
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button}
+          onPress = {() => this.props.navigation.navigate("Checkout")}>
             <Text style={styles.buttonText}>
               Checkout
             </Text>
