@@ -257,12 +257,14 @@ export default class ProductDetail extends Component {
                             height={150}
                             source={{uri: this.state.data.image}}
                         />
-                        <Text style={styles.itemNewTitle}>{this.state.data.title}</Text>
-                        <Text style={styles.itemNewPrice}>Rp. {this.state.data.price}</Text>
                     </View>
                     <View style={styles.numberItem}>
+                        <Text style={styles.itemTitle}>{this.state.data.title}</Text>
+                        <Text style={styles.itemPrice}>Rp. {this.state.data.price}</Text>
                         <NumericInput
-                            type='up-down' onChange={value => this.setState({quantity: value})} />
+                            type='up-down' onChange={value => this.setState({quantity: value})} 
+                        />
+                        <Text style={{fontSize: 10}}>Harga belum termasuk ongkir</Text>            
                     </View>
                 </PopupDialog>
 			</View>
@@ -339,7 +341,7 @@ const styles = StyleSheet.create({
     },
     numberItem: {
         flex: 1,
-        top: -40,
+        top: -100,
         left: 200,
         alignItems: 'flex-start'
     },
