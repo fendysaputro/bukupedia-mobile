@@ -241,8 +241,7 @@ export default class ProductDetail extends Component {
                     dialogTitle={<DialogTitle title={this.state.data.title} />}>
 
                     <View style={styles.dialogContentView}>
-                        <NumericInput type='up-down' onChange={value => this.setState({quantity: value})} />
-                        <Button style={styles.buttonDialog}
+                        <Button
                                 onPress={() => this.doAddToBasket({
                                     user_id:this.state.user.user.id,
                                     product_id: this.state.data.id,
@@ -251,6 +250,19 @@ export default class ProductDetail extends Component {
                                 color="orange"
                                 title="Tambahkan ke keranjang">
                         </Button>
+                    </View>
+                    <View style={styles.box4}>
+                        <Image 
+                            width={70}
+                            height={150}
+                            source={{uri: this.state.data.image}}
+                        />
+                        <Text style={styles.itemNewTitle}>{this.state.data.title}</Text>
+                        <Text style={styles.itemNewPrice}>Rp. {this.state.data.price}</Text>
+                    </View>
+                    <View style={styles.numberItem}>
+                        <NumericInput
+                            type='up-down' onChange={value => this.setState({quantity: value})} />
                     </View>
                 </PopupDialog>
 			</View>
@@ -282,6 +294,12 @@ const styles = StyleSheet.create({
         paddingLeft: 20,
         paddingRight: 10
     },
+    box4: {
+        flex: 1,
+        top: 20,
+        left: 80,
+        alignItems: 'flex-start'
+    },
     itemTitle: {
         fontSize: 14,
         color: '#1791c5',
@@ -300,6 +318,30 @@ const styles = StyleSheet.create({
     itemStock: {
         fontSize: 10,
         fontWeight: '600',
+    },
+    itemNewTitle: {
+        flex: 1,
+        fontSize: 14,
+        color: '#1791c5',
+        fontWeight: '600',
+        top: -100,
+        left: 130,
+        alignItems: 'flex-start',
+    },
+    itemNewPrice: {
+        flex: 1,
+        fontSize: 12,
+        color: '#e7ad46',
+        fontWeight: '600',
+        top: -80,
+        left: 130,
+        alignItems: 'flex-start',
+    },
+    numberItem: {
+        flex: 1,
+        top: -40,
+        left: 200,
+        alignItems: 'flex-start'
     },
     footer: {
         height: 50,
