@@ -16,6 +16,7 @@ import { CategoryTwo } from "./components/Category";
 import ProductCategory from "./components/ProductCategory";
 import WelcomeAccount from "./components/WelcomeAccount";
 import Account from "./components/Account";
+import Checkout from "./components/Checkout";
 // import { MainStack } from "./config/Router";
 
 class App extends Component {
@@ -116,6 +117,12 @@ export default App = StackNavigator({
     screen: Account,
     navigationOptions: {
       title: "Account"
+    }
+  },
+  Checkout: {
+    screen: Checkout,
+    navigationOptions: {
+      
     }
   }
 },{
