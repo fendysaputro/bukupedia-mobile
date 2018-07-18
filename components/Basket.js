@@ -100,14 +100,8 @@ export default class Basket extends Component {
             </TouchableOpacity>
           ))
         }
-<<<<<<< HEAD
-        <TouchableOpacity 
-          style={styles.button}
-          onPress = {() => this.doCheckout(product)}>
-=======
         <TouchableOpacity style={styles.button}
           onPress = {() => this.props.navigation.navigate("Checkout")}>
->>>>>>> f45c3ccaddc4e03eb3d80b1ac6bccab29ec89d45
             <Text style={styles.buttonText}>
               Checkout
             </Text>
