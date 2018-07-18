@@ -23,7 +23,6 @@ export default class Basket extends Component {
       width: '90%',
       textAlign: 'center'
     },
-    headerLeft: null
   }
 
   constructor (props) {
@@ -46,11 +45,6 @@ export default class Basket extends Component {
   componentDidMount() {
     var self = this;
     AsyncStorage.getItem('id_token').then((token) => {
-      // console.log(token);
-      // getListItemCart(token)
-      //   .then((res) => {
-      //     console.log(res);
-      // });
       const URL = API + CART + '?token=' + token;
       fetch(URL)  
         .then(function(res) {
@@ -62,8 +56,8 @@ export default class Basket extends Component {
     });
   }
 
-  alertItemName = () => {
-    alert()
+  doCheckout() {
+    this.props.navigation.navigate('CheckoutAddress');
   }
 
   render () {
@@ -96,7 +90,7 @@ export default class Basket extends Component {
             <TouchableOpacity
               key = {product.id}
               style = {styles.containerTwo}
-              onPress = {() => this.alertItemTitle(product)}>
+              onPress = {() => console.log('press')}>
 
               <Image  width={20} 
                       source={{uri: product.picture}}/>
@@ -105,7 +99,9 @@ export default class Basket extends Component {
             </TouchableOpacity>
           ))
         }
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity 
+          style={styles.button}
+          onPress = {() => this.doCheckout(product)}>
             <Text style={styles.buttonText}>
               Checkout
             </Text>
@@ -127,6 +123,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     textAlign: "center",
     marginTop: "15%",
+    fontWeight: "bold" 
   },
   smallText: {
     fontSize: 13,
@@ -139,13 +136,13 @@ const styles = StyleSheet.create({
     padding: 5,
     margin: 15,
     height: 35,
-    width: "60%",
-    alignSelf: "center"
+    width: "60%"
   },
   buttonText: {
     fontSize: 15,
     color: "white",
-    textAlign: "center"
+    textAlign: "center",
+    fontWeight: "bold"
   },
   containerTwo: {
     padding: 10,
