@@ -11,7 +11,7 @@ import getListItemCart from "../services/FetchShoppingCart";
 import { API, CART } from '../components/Global';
 import Image from 'react-native-scalable-image';
 import Checkout from "../components/Checkout";
-import { box4, numberItem, itemTitle, itemPrice } from "../components/ProductDetail";
+import { itemTitle, itemPrice } from "../components/ProductDetail";
 import NumericInput from 'react-native-numeric-input';
 
 export default class Basket extends Component {
@@ -95,9 +95,7 @@ export default class Basket extends Component {
               key = {product.id}
               style = {styles.containerTwo}
               onPress = {() => console.log('press')}>
-              {/* <Text style={styles.text}>{product.title}</Text>
-              <Text styel={styles.text}>{product.price}</Text> */}
-              <View style={styles.box4}>
+              <View style={{marginLeft:60}}>
               <Image 
                 width={70} 
                 source={{uri: product.image}}
@@ -113,9 +111,6 @@ export default class Basket extends Component {
             </TouchableOpacity>
           ))
         }
-        {/* <NumericInput
-          type='up-down' onChange={value => this.setState({quantity: value})} 
-        />             */}
         <TouchableOpacity style={styles.button}
           onPress = {() => this.props.navigation.navigate("Checkout")}>
             <Text style={styles.buttonText}>
@@ -166,6 +161,12 @@ const styles = StyleSheet.create({
     marginTop: 3,
     backgroundColor: 'white' 
   },
+  numberItem: {
+    flex: 1,
+    top: -100,
+    left: 200,
+    alignItems: 'flex-start'
+  }
 });
 
 AppRegistry.registerComponent("Basket", () => Basket);
