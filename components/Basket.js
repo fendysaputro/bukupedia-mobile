@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
   numberItem: {
     flex: 1,
     top: -100,
-    left: 200,
+    marginLeft: 170,
     alignItems: 'flex-start'
   }
 });
