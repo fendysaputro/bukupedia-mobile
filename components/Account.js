@@ -174,7 +174,9 @@ const styles = StyleSheet.create({
   },
   textNew: {
     color: 'black',
-    textAlign: 'left'
+    textAlign: 'left',
+    marginLeft: 30,
+    top: -20
   },
 });
 
