@@ -11,9 +11,8 @@ import { AppRegistry,
   AsyncStorage } from "react-native";
 import { COLOR_PRIMARY } from "../styles/common";
 import { CheckBox } from "react-native-elements";
-// import { submitButton } from "../components/Register";
-// import { textLogin } from "../components/Orders";
 import Login from "../components/Login";
+import getAddress from "../services/FetchAddress";
 
 
 export default class Checkout extends Component {
@@ -36,6 +35,12 @@ export default class Checkout extends Component {
         this.state = {
             checked: false
         };
+    }
+
+    componentDidMount() {
+        getAddress().then((res) => {
+            console.log(res);
+        })
     }
 
     render(){

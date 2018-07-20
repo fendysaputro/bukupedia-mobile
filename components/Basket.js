@@ -53,8 +53,10 @@ export default class Basket extends Component {
       fetch(URL)  
         .then(function(res) {
           var resObj = JSON.parse(res._bodyText);
-          if (resObj.r) {
+          if ((resObj.r) || (res.status == 200)) {
             self.setState({carts: resObj.d});
+          }else{
+            self.props.navigation.navigate('Login');
           }
         })
     });
