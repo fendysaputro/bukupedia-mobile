@@ -25,20 +25,24 @@ export default class Category extends Component {
 
   constructor (props){
     super(props);
+    this.state = { 
+      categories : [], 
+      subCategories : []
+    }
     this.handleTouchCategory = this.handleTouchCategory.bind(this);
   }
 
-  componentWillMount(){
-    this.setState({ categories : [], subCategories : []});
+  componentDidMount(){
+    var self = this;
     getCategory()
           .then((res) => {
-            this.setState({ categories: res.d });
+            self.setState({ categories: res.d });
           });
     
-    getSubCategory()
-          .then((res) => {
-            this.setState({ subCategories: res.d});
-          });
+    // getSubCategory()
+    //       .then((res) => {
+    //         self.setState({ subCategories: res.d});
+    //       });
   }
 
   onSelectedItemsChange = (subCategories) => {
@@ -54,7 +58,6 @@ export default class Category extends Component {
   render () {
     let sections = [];
     let section = {};
-    
     this.state.categories.map((category) => (
       data = [],
       category.sub_category.map((sub) => {

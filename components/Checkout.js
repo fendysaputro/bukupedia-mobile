@@ -13,6 +13,7 @@ import { COLOR_PRIMARY } from "../styles/common";
 import { CheckBox } from "react-native-elements";
 import Login from "../components/Login";
 import getAddress from "../services/FetchAddress";
+import { API, ADDRESS } from '../components/Global';
 
 
 export default class Checkout extends Component {
@@ -38,33 +39,24 @@ export default class Checkout extends Component {
     }
 
     componentDidMount() {
-        getAddress().then((res) => {
-            console.log(res);
-        })
+        var self = this;
+        AsyncStorage.getItem('id_token').then((token) => {
+            const URL = API + ADDRESS + '?token=' + token;
+            fetch(URL)  
+                .then(function(res) {
+                var resObj = JSON.parse(res._bodyText);
+                console.log(res._bodyText);
+                // if ((resObj.r) || (res.status == 200)) {
+                //     self.setState({carts: resObj.d});
+                // }
+            })
+        });
     }
 
     render(){
         return(
             <ScrollView contentContainer={styles.contentContainer}>
             <View style={styles.container}>
-            <TouchableOpacity style={styles.loginButton}>
-                <Text style={styles.submitButtonText}>
-                    Login jika sudah terdaftar
-                </Text>
-            </TouchableOpacity>
-            <Text style={styles.textLogin}> Beli tanpa daftar </Text>
-                <CheckBox style={styles.textLogin}
-                    title = "pakai alamat perusahaan"
-                    checked={this.state.checked}
-                    onPress={() => this.setState({ checked: !this.state.checked})}
-                />
-                <Text style={styles.textLogin}>Email</Text>
-                <TextInput style={styles.input}
-                    placeholderTextColor="#696969"
-                    underlineColorAndroid = "transparent"
-                    autoCapitalize = "none"
-                    onChangeText = {(text) => this.setState({email: text})}
-                />
                 <Text style={styles.textLogin}>Nama</Text>
                 <TextInput style={styles.input}
                     placeholderTextColor="#696969"
