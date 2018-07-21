@@ -14,6 +14,7 @@ import { CheckBox } from "react-native-elements";
 import Login from "../components/Login";
 import getAddress from "../services/FetchAddress";
 import { API, ADDRESS } from '../components/Global';
+import ReviewOrder from '../components/ReviewOrder';
 
 
 export default class Checkout extends Component {
@@ -108,7 +109,7 @@ export default class Checkout extends Component {
                 />
             </View>
                 <TouchableOpacity style = {styles.submitButton}
-                    onPress = {() => this.props.navigation.navigate("Login") }>
+                    onPress = {() => this.props.navigation.navigate("ReviewOrder") }>
                     <Text style={styles.submitButtonText}>Lanjutkan</Text>
                 </TouchableOpacity>
             </ScrollView>
