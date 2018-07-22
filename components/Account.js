@@ -13,6 +13,7 @@ import Button from "react-native-button";
 import { ListItem } from "react-native-elements";
 import Login from "./Login"
 import { Header } from "react-native-elements";
+import EditProfile from "../components/EditProfile";
 
 export default class Account extends Component {
 
@@ -58,19 +59,18 @@ export default class Account extends Component {
 
   static navigationOptions = {
     title: 'Akun',
+    headerTintColor: 'white',
     headerStyle: {
       backgroundColor: COLOR_PRIMARY,
       elevation: null,
     },
     headerTitleStyle: {
-      color: 'white',
       width: '90%',
       textAlign: 'center'
     },
-    headerLeft: null,
     headerRight:
       <TouchableOpacity onPress={() => navigation.navigate("Login")}
-        style={{margin:10, padding: 10, width: 30, height: 30}}>
+        style={{marginRight: 5, width: 40, height: 40}}>
         <Image
           source={require('../styles/icon/akunsetting.png')}
         />
@@ -120,7 +120,7 @@ export default class Account extends Component {
         <TouchableOpacity
           key = '1'
           style = {styles.containerOne}
-            onPress = {() => this.props.navigation.navigate("LoginMain")}>
+            onPress = {() => this.props.navigation.navigate("EditProfile")}>
             <Image source={require('../styles/icon/edit-foto.png')} style={{ width: 24, height: 24, alignItems: 'flex-start' }}/> 
             <Text style = {styles.textNew}>
               Hi, {this.state.user.name}

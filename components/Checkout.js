@@ -28,8 +28,7 @@ export default class Checkout extends Component {
       headerTitleStyle: {
         width: '90%',
         textAlign: 'center'
-      },
-      headerLeft: null
+      }
     }
 
     constructor(props) {
