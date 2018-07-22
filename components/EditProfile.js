@@ -14,11 +14,8 @@ import { COLOR_PRIMARY } from "../styles/common";
 import { CheckBox } from "react-native-elements";
 import Login from "../components/Login";
 import getAddress from "../services/FetchAddress";
-import { API, ADDRESS } from '../components/Global';
+import { API, ADDRESS, PROFILE } from '../components/Global';
 import ReviewOrder from '../components/ReviewOrder';
-import { continerOne } from '../components/Account';
-import { API, PROFILE } from '../components/Global';
-
 
 export default class EditProfile extends Component {
     static navigationOptions = {

@@ -14,6 +14,7 @@ import { ListItem } from "react-native-elements";
 import Login from "./Login"
 import { Header } from "react-native-elements";
 import EditProfile from "../components/EditProfile";
+import AddAddress from "../components/AddAddress";
 
 export default class Account extends Component {
 
@@ -130,13 +131,10 @@ export default class Account extends Component {
         {
           this.stateTwo.listTwo.map((itemTwo, index) => (
             <TouchableOpacity
-              key = {itemTwo.id}
+              key = '5'
               style = {styles.containerTwo}
-              onPress = {() => this.alertItemTitle(itemTwo)}
+              onPress = {() => this.props.navigation.navigate("AddAddress")}
             >
-              <Text style = {styles.text}>
-                {itemTwo.title}
-              </Text>
             </TouchableOpacity>
           ))
         }

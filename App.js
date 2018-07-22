@@ -19,6 +19,7 @@ import Account from "./components/Account";
 import Checkout from "./components/Checkout";
 import ReviewOrder from './components/ReviewOrder';
 import EditProfile from './components/EditProfile';
+import AddAddress from './components/AddAddress';
 // import { MainStack } from "./config/Router";
 
 class App extends Component {
@@ -136,8 +137,12 @@ export default App = StackNavigator({
   EditProfile: {
     screen: EditProfile,
     navigationOptions: {
-      
+
     }
+  },
+  AddAddress: {
+    screen: AddAddress,
+
   }
 },{
   headerMode: 'screen'
