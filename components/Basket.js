@@ -99,16 +99,16 @@ export default class Basket extends Component {
               onPress = {() => console.log('press')}>
               <View style={{marginLeft:30}}>
               <Image 
-                width={50} 
+                width={60} 
                 source={{uri: product.image}}
               />
               </View>
               <View style={styles.numberItem}>
-                <Text style={styles.itemTitle}>{product.title}</Text>
-                <Text style={styles.itemPrice}>Rp. {product.price}</Text>
-                <NumericInput
-                  type='up-down' onChange={value => this.setState({quantity: value})} 
-                 />            
+                <Text style={{paddingTop:1}}>{product.title}</Text>
+                <Text>Rp. {product.price}</Text>
+                <NumericInput 
+                  onChange={value => this.setState({quantity: value})}
+                  value={product.quantity}/>            
               </View>
             </TouchableOpacity>
           ))
@@ -160,7 +160,8 @@ const styles = StyleSheet.create({
   },
   containerTwo: {
     padding: 10,
-    marginTop: 3,
+    marginTop: 5,
+    height: 100,
     backgroundColor: 'white' 
   },
   numberItem: {

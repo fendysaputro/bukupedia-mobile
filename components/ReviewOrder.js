@@ -42,14 +42,26 @@ export default class ReviewOrder extends Component {
         });
     }
 
-    renderItem(item) {
+    renderItem(product) {
         return  
-            <View>
-                <Image 
-                   width={30} 
-                   source = {{ uri: item.image }}
-                />
-            </View>
+        <TouchableOpacity
+              key = {product.id}
+              style = {styles.containerTwo}
+              onPress = {() => console.log('press')}>
+              <View style={{marginLeft:30}}>
+              <Image 
+                width={60} 
+                source={{uri: product.image}}
+              />
+              </View>
+              <View style={styles.numberItem}>
+                <Text style={{paddingTop:1}}>{JSON.stringify(product)}</Text>
+                <Text>Rp. {product.price}</Text>
+                <NumericInput 
+                  onChange={value => this.setState({quantity: value})}
+                  value={product.quantity}/>            
+              </View>
+        </TouchableOpacity>
     }
 
     render() {
