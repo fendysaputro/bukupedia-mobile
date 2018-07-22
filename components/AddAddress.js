@@ -31,19 +31,145 @@ export default class AddAddress extends Component {
         },
       }
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            email: '',
+            password: '',
+            checked: false,
+            trueCheckBoxIsOn: true,
+            falseCheckBoxIsOn: false
+        };
+    }   
+
     render (){
         return(
-            <View>
-                <Text>
-                    this add ADDRESS
-                </Text>
+            <ScrollView contentContainer={styles.contentContainer}>
+            <View style={styles.container}>
+                <CheckBox style={styles.check}
+                    title= 'Gunakan alamat perusahaan'
+                    checked={this.state.checked}
+                    onPress={() => this.setState({ checked: !this.state.checked})}
+                />
+                <Text style={styles.textLogin}>Label</Text>
+                <TextInput style={styles.input}
+                    placeholderTextColor="#696969"
+                    underlineColorAndroid = "transparent"
+                    autoCapitalize = "none"
+                    onChangeText = {(text) => this.setState({name: text})}
+                />
+                <Text style={styles.textLogin}>Nama</Text>
+                <TextInput style={styles.input}
+                    placeholderTextColor="#696969"
+                    underlineColorAndroid = "transparent"
+                    autoCapitalize = "none"
+                    onChangeText = {(text) => this.setState({name: text})}
+                />
+                <Text style={styles.textLogin}>Perusahaan</Text>
+                <TextInput style={styles.input}
+                    placeholderTextColor="#696969"
+                    underlineColorAndroid = "transparent"
+                    autoCapitalize = "none"
+                    onChangeText = {(text) => this.setState({name: text})}
+                />
+                <Text style={styles.textLogin}>Divisi</Text>
+                <TextInput style={styles.input}
+                    placeholderTextColor="#696969"
+                    underlineColorAndroid = "transparent"
+                    autoCapitalize = "none"
+                    onChangeText = {(text) => this.setState({name: text})}
+                />
+                <Text style={styles.textLogin}>Nomor Handphone</Text>
+                <TextInput style={styles.input}
+                    placeholderTextColor = "#696969"
+                    underlineColorAndroid = "transparent"
+                    autoCapitalize = "none"
+                    onChangeText = {(text) => this.setState({phone: text})}
+                />
+                <Text style={styles.textLogin}>Kecamatan/Kabupaten/Provinsi</Text>
+                <TextInput style={styles.input}
+                    placeholderTextColor="#696969"
+                    underlineColorAndroid = "transparent"
+                    autoCapitalize = "none"
+                    onChangeText = {(text) => this.setState({name: text})}
+                />
+                <Text style={styles.textLogin}>Kode Pos</Text>
+                <TextInput style={styles.input}
+                    placeholderTextColor="#696969"
+                    underlineColorAndroid = "transparent"
+                    autoCapitalize = "none"
+                    onChangeText = {(text) => this.setState({name: text})}
+                />
+                <Text style={styles.textLogin}>Alamat Lengkap</Text>
+                <TextInput style={styles.input}
+                    placeholderTextColor="#696969"
+                    underlineColorAndroid = "transparent"
+                    autoCapitalize = "none"
+                    onChangeText = {(text) => this.setState({name: text})}
+                />
             </View>
+                <TouchableOpacity style = {styles.submitButton}
+                    onPress = {() => this.props.navigation.navigate("ReviewOrder") }>
+                    <Text style={styles.submitButtonText}>Simpan</Text>
+                </TouchableOpacity>
+            </ScrollView>
         )
     }
 }
 
 const styles=StyleSheet.create({
-    container:{
-
-    }
+    contentContainer: {
+        paddingVertical: 20
+      },
+    container: {
+      flex: 1,
+      alignItems: "center"
+    },
+    textLogin: {
+      fontSize: 15,
+      textAlign: "left",
+      alignSelf: "flex-start",
+      marginLeft: "10%",
+      marginTop: 0,
+      paddingTop: 10,
+      fontWeight: "bold"
+    },
+    input: {
+      height: 30,
+      width: 285,
+      alignSelf: "flex-start",
+      marginLeft: "10%",
+      backgroundColor: "#F1F3F2"
+    },
+    submitButton: {
+      backgroundColor: "#00AEF2",
+      padding: 10,
+      margin: 15,
+      height: 35,
+      marginLeft: "10%",
+      width: 290
+   },
+   loginButton: {
+        backgroundColor: "orange",
+        padding: 10,
+        margin: 15,
+        height: 35,
+        marginLeft: "10%",
+        width: 290
+   },
+   submitButtonText:{
+      color: "white",
+      marginTop: -4,
+      textAlign: "center",
+      alignItems: "center",
+      alignSelf: "center",
+      fontSize: 15
+   },
+   check: {
+    flexDirection: 'row',
+    backgroundColor: '#F1F3F2',
+    start: "6%",
+    alignSelf: 'flex-start',
+    backgroundColor: 'transparent' 
+    },
 });

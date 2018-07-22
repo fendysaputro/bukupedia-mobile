@@ -19,7 +19,7 @@ import Account from "./components/Account";
 import Checkout from "./components/Checkout";
 import ReviewOrder from './components/ReviewOrder';
 import EditProfile from './components/EditProfile';
-import AddAddress from './components/AddAddress';
+import AddressMain from './components/AddressMain';
 // import { MainStack } from "./config/Router";
 
 class App extends Component {
@@ -140,9 +140,11 @@ export default App = StackNavigator({
 
     }
   },
-  AddAddress: {
-    screen: AddAddress,
-
+  AddressMain: {
+    screen: AddressMain,
+    navigationOptions:{
+      title: "Alamat"
+    }
   }
 },{
   headerMode: 'screen'

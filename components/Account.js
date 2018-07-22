@@ -14,7 +14,7 @@ import { ListItem } from "react-native-elements";
 import Login from "./Login"
 import { Header } from "react-native-elements";
 import EditProfile from "../components/EditProfile";
-import AddAddress from "../components/AddAddress";
+import AddAddress from "../components/AddressMain";
 
 export default class Account extends Component {
 
@@ -133,7 +133,7 @@ export default class Account extends Component {
             <TouchableOpacity
               key = '5'
               style = {styles.containerTwo}
-              onPress = {() => this.props.navigation.navigate("AddAddress")}
+              onPress = {() => this.props.navigation.navigate("AddressMain")}
             >
             </TouchableOpacity>
           ))
