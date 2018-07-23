@@ -131,7 +131,7 @@ export default App = StackNavigator({
   ReviewOrder: {
     screen: ReviewOrder,
     navigationOptions: {
-      title: "Review Pesanan"
+  
     }
   },
   EditProfile: {

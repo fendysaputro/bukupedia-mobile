@@ -15,6 +15,18 @@ import { API, CART } from '../components/Global';
 import Image from 'react-native-scalable-image';
 
 export default class ReviewOrder extends Component {
+    static navigationOptions = {
+        title: 'Review Pesanan',
+        headerTintColor: 'white',
+        headerStyle: {
+          backgroundColor: COLOR_PRIMARY,
+          elevation: null,
+        },
+        headerTitleStyle: {
+          width: '90%',
+          textAlign: 'center'
+        }
+      }
 
     constructor (props) {
         super(props);
