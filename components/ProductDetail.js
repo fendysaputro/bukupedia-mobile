@@ -262,7 +262,7 @@ export default class ProductDetail extends Component {
                         <Text style={styles.itemTitle}>{this.state.data.title}</Text>
                         <Text style={styles.itemPrice}>Rp. {this.state.data.price}</Text>
                         <NumericInput
-                            type='up-down' onChange={value => this.setState({quantity: value})} 
+                            onChange={value => this.setState({quantity: value})} 
                         />
                         <Text style={{fontSize: 10}}>Harga belum termasuk ongkir</Text>            
                     </View>

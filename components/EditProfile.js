@@ -64,34 +64,35 @@ export default class EditProfile extends Component {
       }
 
     render(){
-        return(
-            <View style = {styles.container}>
-                {
-                <TouchableOpacity
-                    key = '1'
-                    style = {styles.container}
-                    onPress = {() => this.props.navigation.navigate("EditProfile")}>
-                        <Image source={require('../styles/icon/edit-foto.png')} style={{ width: 24, height: 24, alignItems: 'flex-start' }}/> 
-                            <Text style={styles.text}>
-                                Edit Foto
-                            </Text>   
-                </TouchableOpacity>
-                }
-                {
-                this.state.user.map((itemTwo, index) => (
-                    <TouchableOpacity
-                        key = {itemTwo.id}
-                        style = {styles.containerTwo}
-                        onPress = {() => this.alertItemTitle(itemTwo)}
-                    >
-                    <Text style = {styles.text}>
-                        {itemTwo.title}
-                    </Text>
-                    </TouchableOpacity>
-          ))
-        }
-            </View>
-        )
+      console.log(user);
+      return(
+          <View style = {styles.container}>
+              {
+              <TouchableOpacity
+                  key = '1'
+                  style = {styles.container}
+                  onPress = {() => this.props.navigation.navigate("EditProfile")}>
+                    <Image source={require('../styles/icon/edit-foto.png')} style={{ width: 24, height: 24, alignItems: 'flex-start' }}/> 
+                      <Text style={styles.text}>
+                          Edit Foto
+                      </Text>   
+              </TouchableOpacity>
+              }
+              {
+              this.state.user.map((itemTwo, index) => (
+                  <TouchableOpacity
+                      key = {itemTwo.id}
+                      style = {styles.containerTwo}
+                      onPress = {() => this.alertItemTitle(itemTwo)}
+                  >
+                  <Text style = {styles.text}>
+                      {itemTwo.title}
+                  </Text>
+                  </TouchableOpacity>
+              ))
+              }
+          </View>
+      )
     }
 }
 

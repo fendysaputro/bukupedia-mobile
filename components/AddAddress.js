@@ -45,12 +45,15 @@ export default class AddAddress extends Component {
     render (){
         return(
             <ScrollView contentContainer={styles.contentContainer}>
-            <View style={styles.container}>
+            <View style={styles.check}>
                 <CheckBox style={styles.check}
                     title= 'Gunakan alamat perusahaan'
+                    fontSize= '10'
                     checked={this.state.checked}
                     onPress={() => this.setState({ checked: !this.state.checked})}
                 />
+            </View>
+            <View style={styles.container}>
                 <Text style={styles.textLogin}>Label</Text>
                 <TextInput style={styles.input}
                     placeholderTextColor="#696969"
@@ -166,9 +169,8 @@ const styles=StyleSheet.create({
       fontSize: 15
    },
    check: {
-    flexDirection: 'row',
     backgroundColor: '#F1F3F2',
-    start: "6%",
+    start: "4%",
     alignSelf: 'flex-start',
     backgroundColor: 'transparent' 
     },

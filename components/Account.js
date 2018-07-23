@@ -131,7 +131,7 @@ export default class Account extends Component {
         {
           this.stateTwo.listTwo.map((itemTwo, index) => (
             <TouchableOpacity
-              key = '5'
+              key = {itemTwo.id}
               style = {styles.containerTwo}
               onPress = {() => this.props.navigation.navigate("AddressMain")}
             >
