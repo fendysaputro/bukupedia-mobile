@@ -97,11 +97,11 @@ export default class Basket extends Component {
               key = {product.id}
               style = {styles.containerTwo}
               onPress = {() => console.log('press')}>
-              <View style={{marginLeft:30}}>
-              <Image 
-                width={60} 
-                source={{uri: product.image}}
-              />
+              <View style={{marginLeft:20}}>
+                <Image 
+                  width={60} 
+                  source={{uri: product.image}}
+                />
               </View>
               <View style={styles.numberItem}>
                 <Text style={{paddingTop:1}}>{product.title}</Text>

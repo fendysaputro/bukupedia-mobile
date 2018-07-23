@@ -89,15 +89,22 @@ export default class ReviewOrder extends Component {
                         <Text style={styles.addressTitle}>{'Phone'}</Text>
                     </View>
                     <View style={styles.itemBox}>
-                        <List containerStyle={{borderTopWidth:0, borderBottomWidth: 0}}>
-                            <FlatList
-                                data={this.state.items}
-                                renderItem={({item}) => (
-                                    this.renderItem(item)
-                                )}
-                                keyExtractor={item => item.title}
-                            />
-                        </List>    
+                    {
+                        this.state.items.map((product, index) => (
+                            <View style = {styles.containerTwo}>
+                                <View style={{marginLeft:30}}>
+                                    <Image 
+                                        width={60} 
+                                        source={{uri: product.image}}
+                                    />
+                                </View>
+                                <View style={styles.numberItem}>
+                                    <Text style={{paddingTop:1}}>{product.title}</Text>
+                                    <Text>Rp. {product.price}</Text>
+                                </View>
+                            </View>
+                        ))
+                    }
                     </View>
                     <View style={styles.totalBox} />
                     <View style={styles.paymentBox} />
@@ -118,7 +125,14 @@ const styles = StyleSheet.create({
         flex: 1,
         width: '100%',
         paddingLeft: 10,
-        paddingRight: 10
+        paddingRight: 10,
+        borderBottomWidth: 1
+    },
+    sellerBox: {
+        flex: 1,
+        paddingLeft: 10,
+        paddingRight: 10,
+        borderBottomWidth: 1
     },
     addressTitle: {
         fontSize: 11,
@@ -145,4 +159,16 @@ const styles = StyleSheet.create({
         paddingLeft: 10,
         paddingRight: 10
     },
+    containerTwo: {
+        padding: 10,
+        marginTop: 5,
+        height: 100,
+        backgroundColor: 'white' 
+    },
+    numberItem: {
+        flex: 1,
+        top: -100,
+        marginLeft: 110,
+        alignItems: 'flex-start'
+    }
 });
