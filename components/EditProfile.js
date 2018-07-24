@@ -63,34 +63,34 @@ export default class EditProfile extends Component {
         });
       }
 
-    render(){
-      console.log(user);
+    render(user){
       return(
           <View style = {styles.container}>
-              {
-              <TouchableOpacity
-                  key = '1'
-                  style = {styles.container}
-                  onPress = {() => this.props.navigation.navigate("EditProfile")}>
-                    <Image source={require('../styles/icon/edit-foto.png')} style={{ width: 24, height: 24, alignItems: 'flex-start' }}/> 
-                      <Text style={styles.text}>
-                          Edit Foto
-                      </Text>   
-              </TouchableOpacity>
-              }
-              {
-              this.state.user.map((itemTwo, index) => (
-                  <TouchableOpacity
-                      key = {itemTwo.id}
-                      style = {styles.containerTwo}
-                      onPress = {() => this.alertItemTitle(itemTwo)}
-                  >
-                  <Text style = {styles.text}>
-                      {itemTwo.title}
-                  </Text>
-                  </TouchableOpacity>
-              ))
-              }
+            {
+            <TouchableOpacity
+                key = '1'
+                style = {styles.container}
+                onPress = {() => this.props.navigation.navigate("EditProfile")}>
+                  <Image source={require('../styles/icon/edit-foto.png')} style={{ width: 24, height: 24, alignItems: 'flex-start' }}/> 
+                    <Text style={styles.text}>
+                        Edit Foto
+                    </Text>
+                  <View style={styles.containerTwo}>
+                    <Text>
+                      {this.state.user.name}
+                    </Text>
+                    <Text>
+                      {this.state.user.email}
+                    </Text>
+                    <Text>
+                      {this.state.user.birth_date}
+                    </Text>
+                    <Text>
+                      {this.state.user.gender}
+                    </Text>
+                  </View>   
+            </TouchableOpacity>
+            }
           </View>
       )
     }
@@ -104,7 +104,6 @@ const styles = StyleSheet.create({
     },
     containerTwo: {
         padding: 10,
-        marginTop: 3,
         backgroundColor: 'white' 
       },
     text: {

@@ -133,7 +133,6 @@ export default class Account extends Component {
             <TouchableOpacity
               key = {itemTwo.id}
               style = {styles.containerTwo}
-              onPress = {() => this.props.navigation.navigate("AddressMain")}
             >
               <Text style = {styles.text}>
                 {itemTwo.title}
