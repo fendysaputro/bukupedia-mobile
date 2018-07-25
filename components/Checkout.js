@@ -69,14 +69,14 @@ export default class Checkout extends Component {
                     placeholderTextColor="#696969"
                     underlineColorAndroid = "transparent"
                     autoCapitalize = "none"
-                    onChangeText = {(text) => this.setState({name: text})}
+                    onChangeText = {(text) => this.setState({company: text})}
                 />
                 <Text style={styles.textLogin}>Divisi</Text>
                 <TextInput style={styles.input}
                     placeholderTextColor="#696969"
                     underlineColorAndroid = "transparent"
                     autoCapitalize = "none"
-                    onChangeText = {(text) => this.setState({name: text})}
+                    onChangeText = {(text) => this.setState({division: text})}
                 />
                 <Text style={styles.textLogin}>Nomor Handphone</Text>
                 <TextInput style={styles.input}
@@ -85,26 +85,40 @@ export default class Checkout extends Component {
                     autoCapitalize = "none"
                     onChangeText = {(text) => this.setState({phone: text})}
                 />
-                <Text style={styles.textLogin}>Kecamatan/Kabupaten/Provinsi</Text>
+                <Text style={styles.textLogin}>Alamat Lengkap</Text>
                 <TextInput style={styles.input}
                     placeholderTextColor="#696969"
                     underlineColorAndroid = "transparent"
                     autoCapitalize = "none"
-                    onChangeText = {(text) => this.setState({name: text})}
+                    onChangeText = {(text) => this.setState({address: text})}
+                />
+                <Text style={styles.textLogin}>Kecamatan</Text>
+                <TextInput style={styles.input}
+                    placeholderTextColor="#696969"
+                    underlineColorAndroid = "transparent"
+                    autoCapitalize = "none"
+                    onChangeText = {(text) => this.setState({subdistrict: text})}
+                />
+                <Text style={styles.textLogin}>Kabupaten</Text>
+                <TextInput style={styles.input}
+                    placeholderTextColor="#696969"
+                    underlineColorAndroid = "transparent"
+                    autoCapitalize = "none"
+                    onChangeText = {(text) => this.setState({regency: text})}
+                />
+                <Text style={styles.textLogin}>Provinsi</Text>
+                <TextInput style={styles.input}
+                    placeholderTextColor="#696969"
+                    underlineColorAndroid = "transparent"
+                    autoCapitalize = "none"
+                    onChangeText = {(text) => this.setState({province: text})}
                 />
                 <Text style={styles.textLogin}>Kode Pos</Text>
                 <TextInput style={styles.input}
                     placeholderTextColor="#696969"
                     underlineColorAndroid = "transparent"
                     autoCapitalize = "none"
-                    onChangeText = {(text) => this.setState({name: text})}
-                />
-                <Text style={styles.textLogin}>Alamat Lengkap</Text>
-                <TextInput style={styles.input}
-                    placeholderTextColor="#696969"
-                    underlineColorAndroid = "transparent"
-                    autoCapitalize = "none"
-                    onChangeText = {(text) => this.setState({name: text})}
+                    onChangeText = {(text) => this.setState({postcode: text})}
                 />
             </View>
                 <TouchableOpacity style = {styles.submitButton}

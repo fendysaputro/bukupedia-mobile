@@ -17,3 +17,5 @@ export const CONTENT_PAY = 'how-to-payment';
 export const PROFILE = 'profile';
 export const CART = 'cart';
 export const PROVINCE = 'province';
+export const REGENCY = 'regency';
+export const SUBDISTRICT = 'subdistrict';

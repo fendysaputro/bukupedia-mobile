@@ -16,6 +16,7 @@ import Login from "../components/Login";
 import getAddress from "../services/FetchAddress";
 import { API, ADDRESS, PROFILE } from '../components/Global';
 import ReviewOrder from '../components/ReviewOrder';
+import { postCreateAddress } from '../services/FetchCreateAddress';
 
 export default class Address extends Component {
     static navigationOptions = {
@@ -34,7 +35,8 @@ export default class Address extends Component {
     constructor (props) {
         super(props);
         this.state = {
-          user: {}
+          user: {},
+          address: ''
         }
       }
     
@@ -79,7 +81,7 @@ export default class Address extends Component {
                             {this.state.user.name}
                         </Text>
                         <Text style = {styles.textNew}>
-                            {this.state.user.email}
+                            {API + ADDRESS}
                         </Text>
                         <Text style = {styles.textNew}>
                             {this.state.user.name}

@@ -9,15 +9,17 @@ import { AppRegistry,
   Dimensions,
   TouchableOpacity,
   Image,
-  AsyncStorage } from "react-native";
+  AsyncStorage, 
+  Alert } from "react-native";
 import { COLOR_PRIMARY } from "../styles/common";
 import { CheckBox } from "react-native-elements";
 import Login from "../components/Login";
 import getAddress from "../services/FetchAddress";
-import { API, ADDRESS, PROFILE } from '../components/Global';
+import { API, ADDRESS, PROFILE, PROVINCE } from '../components/Global';
 import ReviewOrder from '../components/ReviewOrder';
 import Address from '../components/Address';
-import { postCreateAddress } from '../services/FetchCreateAddress';
+import { getProvince } from '../services/FetchListProvince';
+import { Dropdown } from 'react-native-material-dropdown';
 
 export default class AddAddress extends Component {
     static navigationOptions = {
@@ -33,50 +35,32 @@ export default class AddAddress extends Component {
         },
       }
 
-    constructor(props) {
+    // constructor(props) {
+    //     super(props);
+    //     this.state = {
+    //         label: '',
+    //         name: '',
+    //         company: '',
+    //         division: '',
+    //         phone: '',
+    //         subdistrict: '',
+    //         regency: '',
+    //         province: '',
+    //         postcode: '',
+    //         checked: false,
+    //         trueCheckBoxIsOn: true,
+    //         falseCheckBoxIsOn: false
+    //     };
+    // }
+
+    constructor (props){
         super(props);
+        this.handleOnTouchProvince = this.handleOnTouchProvince.bind(this);
         this.state = {
-            label: '',
-            name: '',
-            company: '',
-            division: '',
-            phone: '',
-            province: '',
-            regency: '',
-            subdistrict: '',
-            postcode: '',
-            checked: false,
-            trueCheckBoxIsOn: true,
-            falseCheckBoxIsOn: false
+            province: {},
+            isDataLoaded: false,
+            checked: false
         };
-    }
-    
-    doSaveAddress(params){
-        console.log(params);
-        postCreateAddress(params)
-            .then((res) =>{
-                console.log(res);
-                if (typeof res.d != 'undefined') {
-                    AsyncStorage.setItem('token', JSON.stringify(false));
-                    Alert.alert(
-                        'Message',
-                        'Register success.',
-                        [
-                            {text: 'OK', onPress: () => this.props.navigation.navigate("Address")},
-                        ],
-                        { cancelable: false }
-                    )    
-                }else{
-                    Alert.alert(
-                        'Error',
-                        res.message,
-                        [
-                            {text: 'OK', onPress: () => console.log(res)},
-                        ],
-                        { cancelable: false }
-                    ) 
-                } 
-            });
     }
 
     render (){
@@ -96,7 +80,7 @@ export default class AddAddress extends Component {
                     placeholderTextColor="#696969"
                     underlineColorAndroid = "transparent"
                     autoCapitalize = "none"
-                    onChangeText = {(text) => this.setState({name: text})}
+                    onChangeText = {(text) => this.setState({label: text})}
                 />
                 <Text style={styles.textLogin}>Nama</Text>
                 <TextInput style={styles.input}
@@ -110,60 +94,60 @@ export default class AddAddress extends Component {
                     placeholderTextColor="#696969"
                     underlineColorAndroid = "transparent"
                     autoCapitalize = "none"
-                    onChangeText = {(text) => this.setState({name: text})}
+                    onChangeText = {(text) => this.setState({company: text})}
                 />
                 <Text style={styles.textLogin}>Divisi</Text>
                 <TextInput style={styles.input}
                     placeholderTextColor="#696969"
                     underlineColorAndroid = "transparent"
                     autoCapitalize = "none"
-                    onChangeText = {(text) => this.setState({name: text})}
+                    onChangeText = {(text) => this.setState({division: text})}
                 />
                 <Text style={styles.textLogin}>Nomor Handphone</Text>
                 <TextInput style={styles.input}
                     placeholderTextColor = "#696969"
                     underlineColorAndroid = "transparent"
                     autoCapitalize = "none"
-                    onChangeText = {(text) => this.setState({phone: text})}
+                    onChangeText = {(number) => this.setState({phone: number})}
                 />
                 <Text style={styles.textLogin}>Alamat Lengkap</Text>
                 <TextInput style={styles.input}
                     placeholderTextColor="#696969"
                     underlineColorAndroid = "transparent"
                     autoCapitalize = "none"
-                    onChangeText = {(text) => this.setState({name: text})}
-                />
-                <Text style={styles.textLogin}>Provinsi</Text>
-                <TextInput style={styles.input}
-                    placeholderTextColor="#696969"
-                    underlineColorAndroid = "transparent"
-                    autoCapitalize = "none"
-                    onChangeText = {(text) => this.setState({name: text})}
-                />
-                <Text style={styles.textLogin}>Kabupaten</Text>
-                <TextInput style={styles.input}
-                    placeholderTextColor="#696969"
-                    underlineColorAndroid = "transparent"
-                    autoCapitalize = "none"
-                    onChangeText = {(text) => this.setState({name: text})}
+                    onChangeText = {(text) => this.setState({address: text})}
                 />
                 <Text style={styles.textLogin}>Kecamatan</Text>
                 <TextInput style={styles.input}
                     placeholderTextColor="#696969"
                     underlineColorAndroid = "transparent"
                     autoCapitalize = "none"
-                    onChangeText = {(text) => this.setState({name: text})}
+                    onChangeText = {(text) => this.setState({subdistrict: text})}
+                />
+                <Text style={styles.textLogin}>Kabupaten</Text>
+                <TextInput style={styles.input}
+                    placeholderTextColor="#696969"
+                    underlineColorAndroid = "transparent"
+                    autoCapitalize = "none"
+                    onChangeText = {(text) => this.setState({regency: text})}
+                />
+                <Text style={styles.textLogin}>Provinsi</Text>
+                <TextInput style={styles.input}
+                    placeholderTextColor="#696969"
+                    underlineColorAndroid = "transparent"
+                    autoCapitalize = "none"
+                    onChangeText = {(text) => this.setState({province: text})}
                 />
                 <Text style={styles.textLogin}>Kode Pos</Text>
                 <TextInput style={styles.input}
                     placeholderTextColor="#696969"
                     underlineColorAndroid = "transparent"
                     autoCapitalize = "none"
-                    onChangeText = {(text) => this.setState({name: text})}
+                    onChangeText = {(text) => this.setState({postcode: text})}
                 />
             </View>
                 <TouchableOpacity style = {styles.submitButton}
-                    onPress = {() => this.doSaveAddress(this.state)}>
+                    onPress = {() => this.doSaveAddress("Address", this.state)}>
                     <Text style={styles.submitButtonText}>Simpan</Text>
                 </TouchableOpacity>
             </ScrollView>
