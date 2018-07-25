@@ -91,8 +91,11 @@ export default class ReviewOrder extends Component {
                     <View style={styles.itemBox}>
                     {
                         this.state.items.map((product, index) => (
-                            <View style = {styles.containerTwo}>
-                                <View style={{marginLeft:30}}>
+                            <View id={index} style = {styles.containerTwo}>
+                                <View style={styles.sellerBox}>
+                                    <Text>Penjual: </Text>
+                                </View>
+                                <View style={{marginLeft:30, marginTop:10}}>
                                     <Image 
                                         width={60} 
                                         source={{uri: product.image}}
@@ -101,12 +104,18 @@ export default class ReviewOrder extends Component {
                                 <View style={styles.numberItem}>
                                     <Text style={{paddingTop:1}}>{product.title}</Text>
                                     <Text>Rp. {product.price}</Text>
+                                    <Text style={{marginTop:30}}>Jumlah: {product.quantity}</Text>
+                                </View>
+                                <View style={styles.deliveryBox}>
+                                    <Text>Pengiriman: </Text>
                                 </View>
                             </View>
                         ))
                     }
                     </View>
-                    <View style={styles.totalBox} />
+                    <View style={styles.totalBox}>
+                        <Text>Ringkasan Belanja: </Text>
+                    </View>
                     <View style={styles.paymentBox} />
                 </View>
             </ScrollView>
@@ -129,10 +138,13 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1
     },
     sellerBox: {
-        flex: 1,
-        paddingLeft: 10,
-        paddingRight: 10,
-        borderBottomWidth: 1
+        borderBottomWidth: 1,
+        height: 30,
+    },
+    deliveryBox: {
+        borderBottomWidth: 0.5,
+        borderTopWidth: 0.5,
+        height: 60,
     },
     addressTitle: {
         fontSize: 11,
@@ -145,7 +157,6 @@ const styles = StyleSheet.create({
     },
     totalBox: {
         flex: 1,
-        backgroundColor: 'steelblue',
         width: '100%',
         height: 50,
         paddingLeft: 10,
@@ -153,7 +164,6 @@ const styles = StyleSheet.create({
     },
     paymentBox: {
         flex: 1,
-        backgroundColor: 'red',
         width: '100%',
         height: 50,
         paddingLeft: 10,
@@ -162,7 +172,7 @@ const styles = StyleSheet.create({
     containerTwo: {
         padding: 10,
         marginTop: 5,
-        height: 100,
+        height: 230,
         backgroundColor: 'white' 
     },
     numberItem: {
