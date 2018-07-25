@@ -122,7 +122,7 @@ export default class Register extends Component {
               onChangeText = {(text) => this.setState({phone: text})}
           />
           <Button style = {styles.submitButton}
-            onPress = {() => this.doClickRegister(this.state) }>
+            onPress = {() => this.doClickRegister(this.state)}>
                 Daftar
           </Button>     
         </View>

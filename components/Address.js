@@ -31,13 +31,66 @@ export default class Address extends Component {
       }
     }
 
+    constructor (props) {
+        super(props);
+        this.state = {
+          user: {}
+        }
+      }
+    
+      async retrieveUser() {
+        try {
+          const retrievedUser =  await AsyncStorage.getItem('user');
+          const user = JSON.parse(retrievedUser);
+          return user;
+        } catch (error) {
+          console.log(error.message);
+        }
+        return
+      }
+
+      componentDidMount() {
+        AsyncStorage.getItem('id_token').then((token) => {
+          this.setState({ hasToken: token !== null, isLoaded: true });
+          if (this.state.hasToken) {
+            AsyncStorage.getItem('user').then((user) => {
+              var userObj = JSON.parse(user);
+              this.setState(userObj);
+            })
+          }else{
+            this.replaceScreen();
+          }
+        });
+      }
+
     render(){
         return(
+            <ScrollView>
             <View style={styles.container}>
-                <Text>
-                    Address
-                </Text>
+                <View style={styles.containerTwo}>
+                    <TouchableOpacity>
+                        <View style={styles.imageStyle}>
+                            <Image
+                                source={require('../styles/icon/edit-foto.png')}
+                                style={{ width: 20, height: 20 }}>
+                            </Image>
+                        </View>
+                        <Text style = {styles.textNew}>
+                            {this.state.user.name}
+                        </Text>
+                        <Text style = {styles.textNew}>
+                            {this.state.user.email}
+                        </Text>
+                        <Text style = {styles.textNew}>
+                            {this.state.user.name}
+                        </Text>
+                        <Text style = {styles.textNew}>
+                            {this.state.user.email}
+                        </Text>
+                    </TouchableOpacity>
+                </View>
             </View>
+            </ScrollView>
         )
     }
 }
@@ -45,6 +98,24 @@ export default class Address extends Component {
 const styles=StyleSheet.create({
     container:{
         flex: 1,
-        alignItems: "center"
+        alignItems: "flex-start",
+    },
+    containerTwo:{
+        flex: 1,
+        alignItems: "flex-start",
+        marginTop: "5%",
+        start: "5%",
+        width: "90%",
+        backgroundColor: "white"
+    },
+    textNew: {
+        color: 'black',
+        textAlign: 'left',
+        marginLeft: 30
+    },
+    imageStyle: {
+        flex: 1,
+        alignItems: "flex-start",
+        start: "70%"
     }
 });

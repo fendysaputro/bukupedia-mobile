@@ -16,6 +16,8 @@ import Login from "../components/Login";
 import getAddress from "../services/FetchAddress";
 import { API, ADDRESS, PROFILE } from '../components/Global';
 import ReviewOrder from '../components/ReviewOrder';
+import Address from '../components/Address';
+import { postCreateAddress } from '../services/FetchCreateAddress';
 
 export default class AddAddress extends Component {
     static navigationOptions = {
@@ -34,13 +36,48 @@ export default class AddAddress extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: '',
-            password: '',
+            label: '',
+            name: '',
+            company: '',
+            division: '',
+            phone: '',
+            province: '',
+            regency: '',
+            subdistrict: '',
+            postcode: '',
             checked: false,
             trueCheckBoxIsOn: true,
             falseCheckBoxIsOn: false
         };
-    }   
+    }
+    
+    doSaveAddress(params){
+        console.log(params);
+        postCreateAddress(params)
+            .then((res) =>{
+                console.log(res);
+                if (typeof res.d != 'undefined') {
+                    AsyncStorage.setItem('token', JSON.stringify(false));
+                    Alert.alert(
+                        'Message',
+                        'Register success.',
+                        [
+                            {text: 'OK', onPress: () => this.props.navigation.navigate("Address")},
+                        ],
+                        { cancelable: false }
+                    )    
+                }else{
+                    Alert.alert(
+                        'Error',
+                        res.message,
+                        [
+                            {text: 'OK', onPress: () => console.log(res)},
+                        ],
+                        { cancelable: false }
+                    ) 
+                } 
+            });
+    }
 
     render (){
         return(
@@ -89,7 +126,28 @@ export default class AddAddress extends Component {
                     autoCapitalize = "none"
                     onChangeText = {(text) => this.setState({phone: text})}
                 />
-                <Text style={styles.textLogin}>Kecamatan/Kabupaten/Provinsi</Text>
+                <Text style={styles.textLogin}>Alamat Lengkap</Text>
+                <TextInput style={styles.input}
+                    placeholderTextColor="#696969"
+                    underlineColorAndroid = "transparent"
+                    autoCapitalize = "none"
+                    onChangeText = {(text) => this.setState({name: text})}
+                />
+                <Text style={styles.textLogin}>Provinsi</Text>
+                <TextInput style={styles.input}
+                    placeholderTextColor="#696969"
+                    underlineColorAndroid = "transparent"
+                    autoCapitalize = "none"
+                    onChangeText = {(text) => this.setState({name: text})}
+                />
+                <Text style={styles.textLogin}>Kabupaten</Text>
+                <TextInput style={styles.input}
+                    placeholderTextColor="#696969"
+                    underlineColorAndroid = "transparent"
+                    autoCapitalize = "none"
+                    onChangeText = {(text) => this.setState({name: text})}
+                />
+                <Text style={styles.textLogin}>Kecamatan</Text>
                 <TextInput style={styles.input}
                     placeholderTextColor="#696969"
                     underlineColorAndroid = "transparent"
@@ -103,16 +161,9 @@ export default class AddAddress extends Component {
                     autoCapitalize = "none"
                     onChangeText = {(text) => this.setState({name: text})}
                 />
-                <Text style={styles.textLogin}>Alamat Lengkap</Text>
-                <TextInput style={styles.input}
-                    placeholderTextColor="#696969"
-                    underlineColorAndroid = "transparent"
-                    autoCapitalize = "none"
-                    onChangeText = {(text) => this.setState({name: text})}
-                />
             </View>
                 <TouchableOpacity style = {styles.submitButton}
-                    onPress = {() => this.props.navigation.navigate("ReviewOrder") }>
+                    onPress = {() => this.doSaveAddress(this.state)}>
                     <Text style={styles.submitButtonText}>Simpan</Text>
                 </TouchableOpacity>
             </ScrollView>
