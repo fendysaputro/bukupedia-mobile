@@ -19,6 +19,7 @@ import { API, ADDRESS, PROFILE, PROVINCE } from '../components/Global';
 import ReviewOrder from '../components/ReviewOrder';
 import Address from '../components/Address';
 import { getProvince } from '../services/FetchListProvince';
+import { getRegencyByProvinceId } from '../services/FetchListRegency';
 import { Dropdown } from 'react-native-material-dropdown';
 
 export default class AddAddress extends Component {
@@ -55,13 +56,21 @@ export default class AddAddress extends Component {
 
     constructor (props){
         super(props);
-        // this.handleOnTouchProvince = this.handleOnTouchProvince.bind(this);
         this.state = {
-            province: {},
+            province: [],
+            regencyByProvinces: [],
             isDataLoaded: false,
             checked: false
         };
     }
+
+    componentDidMount(){
+        var self = this;
+        getProvince()
+            .then((res) => {
+            self.setState({ province: res.d });
+            });
+      }    
 
     onChangeText(text){
         [province]
@@ -72,11 +81,16 @@ export default class AddAddress extends Component {
         })
     }
 
+    onSelectedItemsChange = (regencyByProvinces) => {
+        this.setState({ regencyByProvinces });
+      }
+
     updateRef(province, ref){
         this[province] = ref;
     }
 
     render (){
+        console.log(province);
         let { province } = this.state;
         let textStyle = [
             styles.text,
@@ -150,17 +164,19 @@ export default class AddAddress extends Component {
                     onChangeText = {(text) => this.setState({regency: text})}
                 />
                 <Text style={styles.textLogin}>Provinsi</Text>
-                <Dropdown style={styles.dropdownStyle}
+                <View style={styles.dropdownStyle}>
+                <Dropdown
                     ref={this.provinceRef}
-                    value={province}
+                    value={[province]}
                     onChangeText={this.onChangeText}
                     label='choose province'
-                    data={provinceData}
+                    data={[province]}
                     // placeholderTextColor="#696969"
                     // underlineColorAndroid = "transparent"
                     // autoCapitalize = "none"
                     // onChangeText = {(text) => this.setState({province: text})}
                 />
+                </View>
                 <Text style={styles.textLogin}>Kode Pos</Text>
                 <TextInput style={styles.input}
                     placeholderTextColor="#696969"
