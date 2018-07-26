@@ -55,7 +55,7 @@ export default class AddAddress extends Component {
 
     constructor (props){
         super(props);
-        this.handleOnTouchProvince = this.handleOnTouchProvince.bind(this);
+        // this.handleOnTouchProvince = this.handleOnTouchProvince.bind(this);
         this.state = {
             province: {},
             isDataLoaded: false,
@@ -63,7 +63,25 @@ export default class AddAddress extends Component {
         };
     }
 
+    onChangeText(text){
+        [province]
+        .map((province) => ({ province, ref: this[province]}))
+        .filter(({ ref }) => ref && ref.isFocused())
+        .forEach(({ province, ref }) => {
+            this.setState({[province]: text});
+        })
+    }
+
+    updateRef(province, ref){
+        this[province] = ref;
+    }
+
     render (){
+        let { province } = this.state;
+        let textStyle = [
+            styles.text,
+            styles[province]
+        ]
         return(
             <ScrollView contentContainer={styles.contentContainer}>
             <View style={styles.check}>
@@ -132,11 +150,16 @@ export default class AddAddress extends Component {
                     onChangeText = {(text) => this.setState({regency: text})}
                 />
                 <Text style={styles.textLogin}>Provinsi</Text>
-                <TextInput style={styles.input}
-                    placeholderTextColor="#696969"
-                    underlineColorAndroid = "transparent"
-                    autoCapitalize = "none"
-                    onChangeText = {(text) => this.setState({province: text})}
+                <Dropdown style={styles.dropdownStyle}
+                    ref={this.provinceRef}
+                    value={province}
+                    onChangeText={this.onChangeText}
+                    label='choose province'
+                    data={provinceData}
+                    // placeholderTextColor="#696969"
+                    // underlineColorAndroid = "transparent"
+                    // autoCapitalize = "none"
+                    // onChangeText = {(text) => this.setState({province: text})}
                 />
                 <Text style={styles.textLogin}>Kode Pos</Text>
                 <TextInput style={styles.input}
@@ -209,4 +232,14 @@ const styles=StyleSheet.create({
     alignSelf: 'flex-start',
     backgroundColor: 'transparent' 
     },
+    dropdownStyle: {
+        marginLeft: "10%",
+        width: 400
+    }
 });
+
+const provinceData = [
+    { value: 'jakarta' },
+    { value: 'jawa barat' },
+    { value: 'jawa timur' },
+  ];
