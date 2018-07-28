@@ -6,12 +6,14 @@ export const getSubdistrict = async () => {
             .then((res) => res.json());
 }
 
-export const getSubdistrictByName = async () => {
+export const getSubdistrictByName = async (name) => {
+    const URL = API + SUBDISTRICT + '?name=' + name;
     return fetch (url)
             .then((res) => res.json());     
 }
 
-export const getSubdistrictByRegencyId = async () => {
+export const getSubdistrictByRegencyId = async (regencyId) => {
+    const URL = API + SUBDISTRICT + '?regency-id' + regencyId;
     return fetch (url)
             .then((res) => res.json());     
 }

@@ -20,6 +20,7 @@ import ReviewOrder from '../components/ReviewOrder';
 import Address from '../components/Address';
 import { getProvince } from '../services/FetchListProvince';
 import { getRegencyByProvinceId } from '../services/FetchListRegency';
+import { getSubdistrictByRegencyId } from '../services/FetchListSubdistrict';
 import { Dropdown } from 'react-native-material-dropdown';
 
 export default class AddAddress extends Component {
@@ -43,6 +44,7 @@ export default class AddAddress extends Component {
             regencyByProvinces: [],
             regencyByProvincesVal: [],
             subdistrictByRegencies: [],
+            subdistrictByRegenciesVal: [],
             isDataLoaded: false,
             checked: false
         };
@@ -76,22 +78,41 @@ export default class AddAddress extends Component {
             });
     }
 
+    onChangeTextRegency (text) {
+        console.log(text);
+        var regenc;
+        regenc = this.state.regencyByProvincesVal.find(regy => 
+            regy.name === text
+        );
+        console.log('regencyId: ');
+        console.log(regenc.id);
+        getSubdistrictByRegencyId(regenc.id)
+            .then((res) => {
+                this.setState({subdistrictByRegencies: [res.d]});
+                let subdistrictByRegenciesVal = [];
+                res.d.forEach(function(reg){
+                    subdistrictByRegenciesVal.push({id: sub.id, value: sub.name});
+                });
+                this.setState({subdistrictByRegenciesVal: subdistrictByRegenciesVal});
+            });
+    }
+
     updateRef(province, ref){
         this[province] = ref;
     }
 
     render (){
-        let { province, regencyByProvinces, subdistrict } = this.state;
+        let { province, regencyByProvinces, subdistrictByRegencies } = this.state;
 
         let provinceVal = [];
-        province.forEach(function(prov){
+            province.forEach(function(prov){
             provinceVal.push({id: prov.id, value: prov.name});
         });
         let textStyle = [
             styles.text,
             styles[province],
             styles[regencyByProvinces],
-            styles[subdistrict]
+            styles[subdistrictByRegencies]
         ]
         return(
             <ScrollView contentContainer={styles.contentContainer}>
@@ -158,7 +179,7 @@ export default class AddAddress extends Component {
                 <Text style={styles.textLogin}>Kabupaten</Text>
                 <View style={styles.dropdownStyle}>
                 <Dropdown 
-                    onSelectedItemsChange={this.onSelectedItemsChange}
+                    onChangeText={this.onChangeTextRegency}
                     label='pilih kabupaten'
                     data={this.state.regencyByProvincesVal}
                 />
@@ -166,9 +187,10 @@ export default class AddAddress extends Component {
                 <Text style={styles.textLogin}>Kecamatan</Text>
                 <View style={styles.dropdownStyle}>
                 <Dropdown 
-                    onSelectedItemsChange={this.onSelectedItemsChange}
-                    label='pilih kelurahan'
-                    data={subdistrict}
+                    // onSelectedItemsChange={this.onSelectedItemsChange}
+                    onChangeText={this.onChangeTextRegency}
+                    label='pilih kecamatan'
+                    data={this.state.subdistrictByRegenciesVal}
                 />
                 </View>
                 <Text style={styles.textLogin}>Kode Pos</Text>
