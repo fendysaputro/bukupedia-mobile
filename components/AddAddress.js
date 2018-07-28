@@ -36,30 +36,8 @@ export default class AddAddress extends Component {
         },
       }
 
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         label: '',
-    //         name: '',
-    //         company: '',
-    //         division: '',
-    //         phone: '',
-    //         subdistrict: '',
-    //         regency: '',
-    //         province: '',
-    //         postcode: '',
-    //         checked: false,
-    //         trueCheckBoxIsOn: true,
-    //         falseCheckBoxIsOn: false
-    //     };
-    // }
-
     constructor (props){
         super(props);
-        this.onChangeText = this.onChangeText.bind(this);
-        this.provinceRef = this.updateRef.bind(this, 'province');
-        this.regencyRef = this.updateRef.bind(this, 'regency');
-        this.subdistrictRef = this.updateRef.bind(this, 'subdistrict');
         this.state = {
             province: [],
             regencyByProvinces: [],
@@ -73,22 +51,14 @@ export default class AddAddress extends Component {
         var self = this;
         getProvince()
             .then((res) => {
-            self.setState({ province: res.d });
+                self.setState({ province: res.d });
             });
       }    
 
-    onChangeText(text){
-        ['province', 'regency', 'subdistrict']
-        .map((province) => ({ province, ref: this[province]}))
-        .filter(({ ref }) => ref && ref.isFocused())
-        .forEach(({ province, ref }) => {
-            this.setState({[province]: text});
-        })
-    }
-
     onSelectedItemsChange = (regencyByProvinces, subdistrictByRegencies) => {
-        this.setState({ regencyByProvinces });
-        this.setState({ subdistrictByRegencies });
+        console.log(regencyByProvinces);
+        // this.setState({ regencyByProvinces });
+        // this.setState({ subdistrictByRegencies });
       }
 
     updateRef(province, ref){
@@ -96,8 +66,12 @@ export default class AddAddress extends Component {
     }
 
     render (){
-        console.log(province);
         let { province, regency, subdistrict } = this.state;
+
+        let provinceVal = [];
+        province.forEach(function(prov){
+            provinceVal.push({id: prov.id, value: prov.name});
+        });
         let textStyle = [
             styles.text,
             styles[province],
@@ -160,31 +134,25 @@ export default class AddAddress extends Component {
                 <Text style={styles.textLogin}>Provinsi</Text>
                 <View style={styles.dropdownStyle}>
                 <Dropdown
-                    ref={this.provinceRef}
-                    value={[province]}
                     onSelectedItemsChange={this.onSelectedItemsChange}
                     label='pilih provinsi'
-                    data={[province]}
+                    data={provinceVal}
                 />
                 </View>
                 <Text style={styles.textLogin}>Kabupaten</Text>
                 <View style={styles.dropdownStyle}>
                 <Dropdown 
-                    ref={this.regencyRef}
-                    value={[regency]}
                     onSelectedItemsChange={this.onSelectedItemsChange}
                     label='pilih kabupaten'
-                    data={[regency]}
+                    data={regency}
                 />
                 </View>
                 <Text style={styles.textLogin}>Kecamatan</Text>
                 <View style={styles.dropdownStyle}>
                 <Dropdown 
-                    ref={this.subdistrictRef}
-                    value={[subdistrict]}
                     onSelectedItemsChange={this.onSelectedItemsChange}
                     label='pilih kelurahan'
-                    data={[subdistrict]}
+                    data={subdistrict}
                 />
                 </View>
                 <Text style={styles.textLogin}>Kode Pos</Text>
