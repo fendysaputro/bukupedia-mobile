@@ -41,10 +41,12 @@ export default class AddAddress extends Component {
         this.state = {
             province: [],
             regencyByProvinces: [],
+            regencyByProvincesVal: [],
             subdistrictByRegencies: [],
             isDataLoaded: false,
             checked: false
         };
+        this.onChangeTextProvince = this.onChangeTextProvince.bind(this);
     }
 
     componentDidMount(){
@@ -55,18 +57,31 @@ export default class AddAddress extends Component {
             });
       }    
 
-    onSelectedItemsChange = (regencyByProvinces, subdistrictByRegencies) => {
-        console.log(regencyByProvinces);
-        // this.setState({ regencyByProvinces });
-        // this.setState({ subdistrictByRegencies });
-      }
+    onChangeTextProvince (text) {
+        console.log(text);
+        var provi;
+        provi = this.state.province.find(prov => 
+            prov.name === text
+        );
+        console.log('provinceId: ');
+        console.log(provi.id);
+        getRegencyByProvinceId(provi.id)
+            .then((res) => {
+                this.setState({regencyByProvinces: [res.d]});
+                let regencyByProvincesVal = [];
+                res.d.forEach(function(reg){
+                    regencyByProvincesVal.push({id: reg.id, value: reg.name});
+                });
+                this.setState({regencyByProvincesVal: regencyByProvincesVal});
+            });
+    }
 
     updateRef(province, ref){
         this[province] = ref;
     }
 
     render (){
-        let { province, regency, subdistrict } = this.state;
+        let { province, regencyByProvinces, subdistrict } = this.state;
 
         let provinceVal = [];
         province.forEach(function(prov){
@@ -75,7 +90,7 @@ export default class AddAddress extends Component {
         let textStyle = [
             styles.text,
             styles[province],
-            styles[regency],
+            styles[regencyByProvinces],
             styles[subdistrict]
         ]
         return(
@@ -134,7 +149,8 @@ export default class AddAddress extends Component {
                 <Text style={styles.textLogin}>Provinsi</Text>
                 <View style={styles.dropdownStyle}>
                 <Dropdown
-                    onSelectedItemsChange={this.onSelectedItemsChange}
+                    // onSelectedItemsChange={this.onSelectedItemsChange}
+                    onChangeText={this.onChangeTextProvince}
                     label='pilih provinsi'
                     data={provinceVal}
                 />
@@ -144,7 +160,7 @@ export default class AddAddress extends Component {
                 <Dropdown 
                     onSelectedItemsChange={this.onSelectedItemsChange}
                     label='pilih kabupaten'
-                    data={regency}
+                    data={this.state.regencyByProvincesVal}
                 />
                 </View>
                 <Text style={styles.textLogin}>Kecamatan</Text>

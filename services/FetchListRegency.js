@@ -6,12 +6,14 @@ export const getRegency = async () => {
             .then((res) => res.json());
 }
 
-export const getRegencyByName = async () => {
-    return fetch (url)
+export const getRegencyByName = async (name) => {
+    const URL = API + REGENCY + '?name=' + name;
+    return fetch (URL)
             .then((res) => res.json());     
 }
 
-export const getRegencyByProvinceId = async () => {
-    return fetch (url)
+export const getRegencyByProvinceId = async (provinceId) => {
+    const URL = API + REGENCY + '?province-id=' + provinceId;
+    return fetch (URL)
             .then((res) => res.json());
 }
