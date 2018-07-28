@@ -56,9 +56,14 @@ export default class AddAddress extends Component {
 
     constructor (props){
         super(props);
+        this.onChangeText = this.onChangeText.bind(this);
+        this.provinceRef = this.updateRef.bind(this, 'province');
+        this.regencyRef = this.updateRef.bind(this, 'regency');
+        this.subdistrictRef = this.updateRef.bind(this, 'subdistrict');
         this.state = {
             province: [],
             regencyByProvinces: [],
+            subdistrictByRegencies: [],
             isDataLoaded: false,
             checked: false
         };
@@ -73,7 +78,7 @@ export default class AddAddress extends Component {
       }    
 
     onChangeText(text){
-        [province]
+        ['province', 'regency', 'subdistrict']
         .map((province) => ({ province, ref: this[province]}))
         .filter(({ ref }) => ref && ref.isFocused())
         .forEach(({ province, ref }) => {
@@ -81,8 +86,9 @@ export default class AddAddress extends Component {
         })
     }
 
-    onSelectedItemsChange = (regencyByProvinces) => {
+    onSelectedItemsChange = (regencyByProvinces, subdistrictByRegencies) => {
         this.setState({ regencyByProvinces });
+        this.setState({ subdistrictByRegencies });
       }
 
     updateRef(province, ref){
@@ -91,10 +97,12 @@ export default class AddAddress extends Component {
 
     render (){
         console.log(province);
-        let { province } = this.state;
+        let { province, regency, subdistrict } = this.state;
         let textStyle = [
             styles.text,
-            styles[province]
+            styles[province],
+            styles[regency],
+            styles[subdistrict]
         ]
         return(
             <ScrollView contentContainer={styles.contentContainer}>
@@ -149,32 +157,34 @@ export default class AddAddress extends Component {
                     autoCapitalize = "none"
                     onChangeText = {(text) => this.setState({address: text})}
                 />
-                <Text style={styles.textLogin}>Kecamatan</Text>
-                <TextInput style={styles.input}
-                    placeholderTextColor="#696969"
-                    underlineColorAndroid = "transparent"
-                    autoCapitalize = "none"
-                    onChangeText = {(text) => this.setState({subdistrict: text})}
-                />
-                <Text style={styles.textLogin}>Kabupaten</Text>
-                <TextInput style={styles.input}
-                    placeholderTextColor="#696969"
-                    underlineColorAndroid = "transparent"
-                    autoCapitalize = "none"
-                    onChangeText = {(text) => this.setState({regency: text})}
-                />
                 <Text style={styles.textLogin}>Provinsi</Text>
                 <View style={styles.dropdownStyle}>
                 <Dropdown
                     ref={this.provinceRef}
                     value={[province]}
-                    onChangeText={this.onChangeText}
-                    label='choose province'
+                    onSelectedItemsChange={this.onSelectedItemsChange}
+                    label='pilih provinsi'
                     data={[province]}
-                    // placeholderTextColor="#696969"
-                    // underlineColorAndroid = "transparent"
-                    // autoCapitalize = "none"
-                    // onChangeText = {(text) => this.setState({province: text})}
+                />
+                </View>
+                <Text style={styles.textLogin}>Kabupaten</Text>
+                <View style={styles.dropdownStyle}>
+                <Dropdown 
+                    ref={this.regencyRef}
+                    value={[regency]}
+                    onSelectedItemsChange={this.onSelectedItemsChange}
+                    label='pilih kabupaten'
+                    data={[regency]}
+                />
+                </View>
+                <Text style={styles.textLogin}>Kecamatan</Text>
+                <View style={styles.dropdownStyle}>
+                <Dropdown 
+                    ref={this.subdistrictRef}
+                    value={[subdistrict]}
+                    onSelectedItemsChange={this.onSelectedItemsChange}
+                    label='pilih kelurahan'
+                    data={[subdistrict]}
                 />
                 </View>
                 <Text style={styles.textLogin}>Kode Pos</Text>
@@ -193,6 +203,10 @@ export default class AddAddress extends Component {
         )
     }
 }
+
+// const provinceData = [
+//     {value: [province]}
+// ]
 
 const styles=StyleSheet.create({
     contentContainer: {
@@ -249,13 +263,9 @@ const styles=StyleSheet.create({
     backgroundColor: 'transparent' 
     },
     dropdownStyle: {
+        width: 285,
+        alignSelf: "flex-start",
         marginLeft: "10%",
-        width: 400
     }
 });
 
-const provinceData = [
-    { value: 'jakarta' },
-    { value: 'jawa barat' },
-    { value: 'jawa timur' },
-  ];
