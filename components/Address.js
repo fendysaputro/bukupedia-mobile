@@ -16,7 +16,8 @@ import Login from "../components/Login";
 import getAddress from "../services/FetchAddress";
 import { API, ADDRESS, PROFILE } from '../components/Global';
 import ReviewOrder from '../components/ReviewOrder';
-import { postCreateAddress } from '../services/FetchCreateAddress';
+import { postCreateAddress } from '../services/FetchAddress';
+import AddAddress from '../components/AddAddress';
 
 export default class Address extends Component {
     static navigationOptions = {
@@ -36,15 +37,15 @@ export default class Address extends Component {
         super(props);
         this.state = {
           user: {},
-          address: ''
+          address: {}
         }
       }
     
-      async retrieveUser() {
+      async retrieveAddress() {
         try {
-          const retrievedUser =  await AsyncStorage.getItem('user');
-          const user = JSON.parse(retrievedUser);
-          return user;
+          const retrievedAddress =  await AsyncStorage.getItem('address');
+          const address = JSON.parse(retrievedAddress);
+          return address;
         } catch (error) {
           console.log(error.message);
         }
@@ -55,9 +56,9 @@ export default class Address extends Component {
         AsyncStorage.getItem('id_token').then((token) => {
           this.setState({ hasToken: token !== null, isLoaded: true });
           if (this.state.hasToken) {
-            AsyncStorage.getItem('user').then((user) => {
-              var userObj = JSON.parse(user);
-              this.setState(userObj);
+            AsyncStorage.getItem('address').then((address) => {
+              var addressObj = JSON.parse(address);
+              this.setState(addressObj);
             })
           }else{
             this.replaceScreen();
@@ -78,16 +79,7 @@ export default class Address extends Component {
                             </Image>
                         </View>
                         <Text style = {styles.textNew}>
-                            {this.state.user.name}
-                        </Text>
-                        <Text style = {styles.textNew}>
-                            {API + ADDRESS}
-                        </Text>
-                        <Text style = {styles.textNew}>
-                            {this.state.user.name}
-                        </Text>
-                        <Text style = {styles.textNew}>
-                            {this.state.user.email}
+                            {this.state.address.name}
                         </Text>
                     </TouchableOpacity>
                 </View>

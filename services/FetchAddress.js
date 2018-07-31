@@ -5,3 +5,15 @@ export const getAddress = (token) => {
     return fetch(URL)
             .then((res) => res.json());
 }
+
+export const postCreateAddress = (params) => {
+    const URL = API + ADDRESS;
+    return fetch(URL, {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(params),
+    }).then((res) => res.json());
+}

@@ -14,7 +14,7 @@ import { AppRegistry,
 import { COLOR_PRIMARY } from "../styles/common";
 import { CheckBox } from "react-native-elements";
 import Login from "../components/Login";
-import getAddress from "../services/FetchAddress";
+import { getAddress, postCreateAddress} from "../services/FetchAddress";
 import { API, ADDRESS, PROFILE, PROVINCE } from '../components/Global';
 import ReviewOrder from '../components/ReviewOrder';
 import Address from '../components/Address';
@@ -46,11 +46,33 @@ export default class AddAddress extends Component {
             regencyByProvincesVal: [],
             subdistrictByRegencies: [],
             subdistrictByRegenciesVal: [],
+            label: '',
+            name: '',
+            company: '',
+            division: '',
+            phone: '',
+            address: '',
             isDataLoaded: false,
             checked: false
         };
         this.onChangeTextProvince = this.onChangeTextProvince.bind(this);
         this.onChangeTextRegency = this.onChangeTextRegency.bind(this);
+    }
+
+    doSaveAddress(params) {
+        console.log(params);
+            AsyncStorage.getItem('id_token', function(token){
+                postCreateAddress(params);
+                Alert.alert(
+                    'Message',
+                    'Add Address success',
+                    [
+                        {text: 'OK'}
+                        // {text: 'OK', onPress: () => this.props.navigation.navigate("Address"),}
+                    ],
+                    { cancelable: false }
+                )
+            }); 
     }
 
     componentDidMount(){
@@ -90,9 +112,9 @@ export default class AddAddress extends Component {
             .then((res) => {
                 this.setState({subdistrictByRegencies: [res.d]});
                 let subdistrictByRegenciesVal = [];
-                    res.d.forEach(function(sub){
-                        subdistrictByRegenciesVal.push({id: sub.id, value: sub.name});
-                    });
+                res.d.forEach(function(sub){
+                    subdistrictByRegenciesVal.push({id: sub.id, value: sub.name});
+                });
                 this.setState({subdistrictByRegenciesVal: subdistrictByRegenciesVal});
             });
     }

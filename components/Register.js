@@ -16,12 +16,12 @@ export default class Register extends Component {
         title: "Daftar",
         headerTintColor: "white",
         headerStyle: {
-        backgroundColor: COLOR_PRIMARY,
-        elevation: null,
+            backgroundColor: COLOR_PRIMARY,
+            elevation: null,
         },
         headerTitleStyle: {
-        width: '90%',
-        textAlign: 'center'
+            width: '90%',
+            textAlign: 'center'
         }
     }
 
