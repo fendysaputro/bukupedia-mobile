@@ -83,17 +83,16 @@ export default class AddAddress extends Component {
     onChangeTextRegency (text) {
         console.log(text);
         var regenc;
-        regenc = this.state.regencyByProvinces.find(regency => 
-            regency.name === text
+        regenc = this.state.regencyByProvincesVal.find(regy => 
+            regy.value === text
         );
-
         getSubdistrictByRegencyId(regenc.id)
             .then((res) => {
                 this.setState({subdistrictByRegencies: [res.d]});
                 let subdistrictByRegenciesVal = [];
-                res.d.forEach(function(sub){
-                    subdistrictByRegenciesVal.push({id: sub.id, value: sub.name});
-                });
+                    res.d.forEach(function(sub){
+                        subdistrictByRegenciesVal.push({id: sub.id, value: sub.name});
+                    });
                 this.setState({subdistrictByRegenciesVal: subdistrictByRegenciesVal});
             });
     }
@@ -171,7 +170,6 @@ export default class AddAddress extends Component {
                 <Text style={styles.textLogin}>Provinsi</Text>
                 <View style={styles.dropdownStyle}>
                 <Dropdown
-                    // onSelectedItemsChange={this.onSelectedItemsChange}
                     onChangeText={this.onChangeTextProvince}
                     label='pilih provinsi'
                     data={provinceVal}
@@ -188,8 +186,6 @@ export default class AddAddress extends Component {
                 <Text style={styles.textLogin}>Kecamatan</Text>
                 <View style={styles.dropdownStyle}>
                 <Dropdown 
-                    onSelectedItemsChange={this.onSelectedItemsChange}
-                    // onChangeText={this.onChangeTextRegency}
                     label='pilih kecamatan'
                     data={this.state.subdistrictByRegenciesVal}
                 />
@@ -210,10 +206,6 @@ export default class AddAddress extends Component {
         )
     }
 }
-
-// const provinceData = [
-//     {value: [province]}
-// ]
 
 const styles=StyleSheet.create({
     contentContainer: {
