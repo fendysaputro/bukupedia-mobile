@@ -1,4 +1,4 @@
-import { API, SUBDISTRICT, REGENCY } from "../components/Global";
+import { API, SUBDISTRICT, REGENCY, PROVINCE } from "../components/Global";
 
 export const getSubdistrict = async () => {
     const URL = API + SUBDISTRICT;
@@ -13,7 +13,7 @@ export const getSubdistrictByName = async (name) => {
 }
 
 export const getSubdistrictByRegencyId = async (regencyId) => {
-    const URL = API + SUBDISTRICT + '?regency-id' + regencyId;
+    const URL = API + SUBDISTRICT + '?regency-id=' + regencyId;
     return fetch (url)
             .then((res) => res.json());     
 }

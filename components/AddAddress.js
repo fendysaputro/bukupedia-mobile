@@ -41,6 +41,7 @@ export default class AddAddress extends Component {
         super(props);
         this.state = {
             province: [],
+            regency: [],
             regencyByProvinces: [],
             regencyByProvincesVal: [],
             subdistrictByRegencies: [],
@@ -81,8 +82,8 @@ export default class AddAddress extends Component {
     onChangeTextRegency (text) {
         console.log(text);
         var regenc;
-        regenc = this.state.regencyByProvincesVal.find(regy => 
-            regy.name === text
+        regenc = this.state.regencyByProvinces.find(regency => 
+            regency.name === text
         );
         console.log('regencyId: ');
         console.log(regenc.id);
@@ -90,7 +91,7 @@ export default class AddAddress extends Component {
             .then((res) => {
                 this.setState({subdistrictByRegencies: [res.d]});
                 let subdistrictByRegenciesVal = [];
-                res.d.forEach(function(reg){
+                res.d.forEach(function(sub){
                     subdistrictByRegenciesVal.push({id: sub.id, value: sub.name});
                 });
                 this.setState({subdistrictByRegenciesVal: subdistrictByRegenciesVal});
@@ -187,8 +188,8 @@ export default class AddAddress extends Component {
                 <Text style={styles.textLogin}>Kecamatan</Text>
                 <View style={styles.dropdownStyle}>
                 <Dropdown 
-                    // onSelectedItemsChange={this.onSelectedItemsChange}
-                    onChangeText={this.onChangeTextRegency}
+                    onSelectedItemsChange={this.onSelectedItemsChange}
+                    // onChangeText={this.onChangeTextRegency}
                     label='pilih kecamatan'
                     data={this.state.subdistrictByRegenciesVal}
                 />
