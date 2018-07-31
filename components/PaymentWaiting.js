@@ -1,10 +1,17 @@
 import React, { Component } from "react";
-import { Footer, AppRegistry, StyleSheet, Text, View, Image, Search, TouchableOpacity } from "react-native";
+import { 
+  AppRegistry, 
+  StyleSheet, 
+  Text, 
+  View, 
+  AsyncStorage,
+  TouchableOpacity } from "react-native";
 import { COLOR_PRIMARY } from "../styles/common";
 import TabNavigator from "react-native-tab-navigator";
 import BottomNavigation, { Tab } from "react-native-material-bottom-navigation";
-// import FooterBar from "./Footer";
+import Image from 'react-native-scalable-image';
 import Main from "./Main";
+import getListOrder from "../services/FetchOrder";
 
 export default class PaymentWaiting extends Component {
   static navigationOptions = {
@@ -18,6 +25,21 @@ export default class PaymentWaiting extends Component {
       width: '90%',
       textAlign: 'center'
     }
+  }
+
+  constructor (props) {
+    super(props);
+
+  }
+
+  componentDidMount() {
+    AsyncStorage.getItem('id_token').then((token) => {
+      console.log(token);
+      // getListOrder(token)
+      //   .then((res) => {
+      //     console.log(res);
+      // });
+    });
   }
 
   alertItemName = () => {
