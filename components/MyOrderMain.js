@@ -8,16 +8,6 @@ import PaymentReceived from "./PaymentReceived";
 import {tabs} from "./Main";
 import {FooterBar} from "./Footer";
 
-
-
-// export default class MyOrderMain extends Component {
-
-//     render() {
-//         return <View><Text>My Order Main</Text></View>
-//     }
-
-// }
-
 const MyOrderMain = TabNavigator({
     PaymentWaiting: {screen: PaymentWaiting},
     PaymentReceived: {screen: PaymentReceived}
