@@ -10,13 +10,14 @@ import Basket from "./Basket";
 import Orders from "./Orders";
 import WelcomeAccount from "./WelcomeAccount";
 import Account from "./Account";
+import MyOrderMain from "./MyOrderMain";
 
 const Main = TabNavigator( 
   {
     Home: { screen: Home },
     Category: { screen: Category },
     Basket: { screen: Basket },
-    Orders: { screen: Orders},
+    Orders: { screen: MyOrderMain},
     Account: { screen: Account}
   },
   {

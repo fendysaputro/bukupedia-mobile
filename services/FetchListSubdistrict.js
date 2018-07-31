@@ -8,7 +8,7 @@ export const getSubdistrict = async () => {
 
 export const getSubdistrictByName = async (name) => {
     const URL = API + SUBDISTRICT + '?name=' + name;
-    return fetch (url)
+    return fetch (URL)
             .then((res) => res.json());     
 }
 

@@ -50,6 +50,7 @@ export default class AddAddress extends Component {
             checked: false
         };
         this.onChangeTextProvince = this.onChangeTextProvince.bind(this);
+        this.onChangeTextRegency = this.onChangeTextRegency.bind(this);
     }
 
     componentDidMount(){
@@ -85,8 +86,7 @@ export default class AddAddress extends Component {
         regenc = this.state.regencyByProvinces.find(regency => 
             regency.name === text
         );
-        console.log('regencyId: ');
-        console.log(regenc.id);
+
         getSubdistrictByRegencyId(regenc.id)
             .then((res) => {
                 this.setState({subdistrictByRegencies: [res.d]});
