@@ -41,10 +41,7 @@ export default class AddAddress extends Component {
         super(props);
         this.state = {
             province: [],
-            regency: [],
-            regencyByProvinces: [],
             regencyByProvincesVal: [],
-            subdistrictByRegencies: [],
             subdistrictByRegenciesVal: [],
             label: '',
             name: '',
@@ -59,22 +56,24 @@ export default class AddAddress extends Component {
         this.onChangeTextRegency = this.onChangeTextRegency.bind(this);
     }
 
-    doSaveAddress(token) {
-        console.log(token);
-            AsyncStorage.getItem('id_token', function(token){
-                postCreateAddress(token) 
-                    .then((res) => {
-                        console.log(res);
-                        Alert.alert(
-                            'Message',
-                            'Add Address success',
-                            [
-                                {text: 'OK', onPress: () => this.props.navigation.navigate("AddressMain"),}
-                            ],
-                            { cancelable: false }
-                        )
-                    })
-            }); 
+    doSaveAddress(params, token) {
+        // console.log("ini params");
+        // console.log(token);
+        AsyncStorage.getItem('id_token', function(token){
+            postCreateAddress(params) 
+                .then((res) => {
+                    console.log("ini params");
+                    console.log(res);
+                    Alert.alert(
+                        'Message',
+                        'Add Address success',
+                        [
+                            {text: 'OK', onPress: () => this.props.navigation.navigate("AddressMain"),}
+                        ],
+                        { cancelable: false }
+                    )
+                })
+        }); 
     }
 
     componentDidMount(){

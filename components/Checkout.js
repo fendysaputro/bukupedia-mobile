@@ -15,6 +15,11 @@ import Login from "../components/Login";
 import getAddress from "../services/FetchAddress";
 import { API, ADDRESS } from '../components/Global';
 import ReviewOrder from '../components/ReviewOrder';
+import Address from '../components/Address';
+import { getProvince } from '../services/FetchListProvince';
+import { getRegencyByProvinceId } from '../services/FetchListRegency';
+import { getSubdistrictByRegencyId } from '../services/FetchListSubdistrict';
+import { Dropdown } from 'react-native-material-dropdown';
 
 
 export default class Checkout extends Component {
@@ -34,7 +39,10 @@ export default class Checkout extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            checked: false
+            checked: false,
+            province: [],
+            regencyByProvincesVal: [],
+            subdistrictByRegenciesVal: [],
         };
     }
 
@@ -51,9 +59,66 @@ export default class Checkout extends Component {
                 // }
             })
         });
+        getProvince()
+            .then((res) => {
+                self.setState({ province: res.d });
+            });
+    }    
+
+    onChangeTextProvince (text) {
+        console.log(text);
+        var provi;
+        provi = this.state.province.find(prov => 
+            prov.name === text
+        );
+        console.log('provinceId: ');
+        console.log(provi.id);
+        getRegencyByProvinceId(provi.id)
+            .then((res) => {
+                this.setState({regencyByProvinces: [res.d]});
+                let regencyByProvincesVal = [];
+                res.d.forEach(function(reg){
+                    regencyByProvincesVal.push({id: reg.id, value: reg.name});
+                });
+                this.setState({regencyByProvincesVal: regencyByProvincesVal});
+            });
     }
 
+    onChangeTextRegency (text) {
+        console.log(text);
+        var regenc;
+        regenc = this.state.regencyByProvincesVal.find(regy => 
+            regy.value === text
+        );
+        getSubdistrictByRegencyId(regenc.id)
+            .then((res) => {
+                this.setState({subdistrictByRegencies: [res.d]});
+                let subdistrictByRegenciesVal = [];
+                res.d.forEach(function(sub){
+                    subdistrictByRegenciesVal.push({id: sub.id, value: sub.name});
+                });
+                this.setState({subdistrictByRegenciesVal: subdistrictByRegenciesVal});
+            });
+    }
+
+    updateRef(province, ref){
+        this[province] = ref;
+    }
+
+
     render(){
+        let { province, regencyByProvinces, subdistrictByRegencies } = this.state;
+
+        let provinceVal = [];
+            province.forEach(function(prov){
+            provinceVal.push({id: prov.id, value: prov.name});
+        });
+        let textStyle = [
+            styles.text,
+            styles[province],
+            styles[regencyByProvinces],
+            styles[subdistrictByRegencies]
+        ]
         return(
             <ScrollView contentContainer={styles.contentContainer}>
             <View style={styles.container}>
@@ -92,27 +157,29 @@ export default class Checkout extends Component {
                     autoCapitalize = "none"
                     onChangeText = {(text) => this.setState({address: text})}
                 />
-                <Text style={styles.textLogin}>Kecamatan</Text>
-                <TextInput style={styles.input}
-                    placeholderTextColor="#696969"
-                    underlineColorAndroid = "transparent"
-                    autoCapitalize = "none"
-                    onChangeText = {(text) => this.setState({subdistrict: text})}
-                />
-                <Text style={styles.textLogin}>Kabupaten</Text>
-                <TextInput style={styles.input}
-                    placeholderTextColor="#696969"
-                    underlineColorAndroid = "transparent"
-                    autoCapitalize = "none"
-                    onChangeText = {(text) => this.setState({regency: text})}
-                />
                 <Text style={styles.textLogin}>Provinsi</Text>
-                <TextInput style={styles.input}
-                    placeholderTextColor="#696969"
-                    underlineColorAndroid = "transparent"
-                    autoCapitalize = "none"
-                    onChangeText = {(text) => this.setState({province: text})}
+                <View style={styles.dropdownStyle}>
+                <Dropdown
+                    onChangeText={this.onChangeTextProvince}
+                    label='pilih provinsi'
+                    data={provinceVal}
                 />
+                </View>
+                <Text style={styles.textLogin}>Kabupaten</Text>
+                <View style={styles.dropdownStyle}>
+                <Dropdown 
+                    onChangeText={this.onChangeTextRegency}
+                    label='pilih kabupaten'
+                    data={this.state.regencyByProvincesVal}
+                />
+                </View>
+                <Text style={styles.textLogin}>Kecamatan</Text>
+                <View style={styles.dropdownStyle}>
+                <Dropdown 
+                    label='pilih kecamatan'
+                    data={this.state.subdistrictByRegenciesVal}
+                />
+                </View>
                 <Text style={styles.textLogin}>Kode Pos</Text>
                 <TextInput style={styles.input}
                     placeholderTextColor="#696969"
@@ -177,5 +244,10 @@ const styles = StyleSheet.create({
       alignItems: "center",
       alignSelf: "center",
       fontSize: 15
-   }
+   },
+   dropdownStyle: {
+    width: 285,
+    alignSelf: "flex-start",
+    marginLeft: "10%",  
+}
   });
