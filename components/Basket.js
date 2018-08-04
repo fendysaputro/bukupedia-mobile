@@ -88,7 +88,10 @@ export default class Basket extends Component {
         </View>
       )
     }
-
+    let total = 0;
+    this.state.carts.map((product, index) => {
+      total = total + product.price;
+    });
     return(
       <View style={styles.containerlist}>
         {
@@ -105,7 +108,15 @@ export default class Basket extends Component {
               </View>
               <View style={styles.numberItem}>
                 <Text style={{paddingTop:1}}>{product.title}</Text>
-                <Text>Rp. {product.price}</Text>
+                {/* <Text>Rp. {product.price}</Text> */}
+                <Text>
+                  {new Intl.NumberFormat('en-GB', { 
+                      style: 'currency', 
+                      currency: 'IDR',
+                      minimumFractionDigits: 0, 
+                      maximumFractionDigits: 0 
+                  }).format(product.price)}
+                </Text>
                 <NumericInput 
                   onChange={value => this.setState({quantity: value})}
                   value={product.quantity}/>            
@@ -115,6 +126,7 @@ export default class Basket extends Component {
         }
         <TouchableOpacity style={styles.button}
           onPress = {() => this.props.navigation.navigate("Checkout")}>
+            <Text>{total}</Text>
             <Text style={styles.buttonText}>
               Checkout
             </Text>

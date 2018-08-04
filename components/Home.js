@@ -134,7 +134,14 @@ export default class Home extends Component {
                       <View style={styles.itemCaption}>
                         <Text style={styles.itemTitle}>{item.title}</Text>
                         <Text style={styles.itemAuthor}> {item.authors[0]}</Text>
-                        <Text style={styles.itemPrice}>Rp. {item.price}</Text>
+                        <Text style={styles.itemPrice}>
+                          {new Intl.NumberFormat('en-GB', { 
+                              style: 'currency', 
+                              currency: 'IDR',
+                              minimumFractionDigits: 0, 
+                              maximumFractionDigits: 0 
+                          }).format(item.price)}
+                      </Text>
                       </View>
                     </View>
                   </TouchableHighlight>
