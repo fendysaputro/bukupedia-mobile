@@ -6,8 +6,8 @@ export const getAddress = (token) => {
             .then((res) => res.json());
 }
 
-export const postCreateAddress = (params) => {
-    const URL = API + ADDRESS;
+export const postCreateAddress = (params, token) => {
+    const URL = API + ADDRESS + '?token=' + token;
     return fetch(URL, {
         method: 'POST',
         headers: {

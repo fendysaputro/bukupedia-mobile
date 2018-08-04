@@ -19,3 +19,5 @@ export const CART = 'cart';
 export const PROVINCE = 'province';
 export const REGENCY = 'regency';
 export const SUBDISTRICT = 'subdistrict';
+export const WISHLIST = 'wishlist';
+export const REVIEW = 'review';

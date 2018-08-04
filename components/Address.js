@@ -44,8 +44,8 @@ export default class Address extends Component {
       async retrieveUser() {
         try {
           const retrievedUser =  await AsyncStorage.getItem('user');
-          const address = JSON.parse(retrievedUser);
-          return address;
+          const user = JSON.parse(retrievedUser);
+          return user;
         } catch (error) {
           console.log(error.message);
         }
@@ -56,9 +56,9 @@ export default class Address extends Component {
         AsyncStorage.getItem('id_token').then((token) => {
           this.setState({ hasToken: token !== null, isLoaded: true });
           if (this.state.hasToken) {
-            AsyncStorage.getItem('user').then((address) => {
-              var addressObj = JSON.parse(address);
-              this.setState(addressObj);
+            AsyncStorage.getItem('user').then((user) => {
+              var userObj = JSON.parse(user);
+              this.setState(userObj);
             })
           }else{
             this.replaceScreen();
