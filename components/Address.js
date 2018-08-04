@@ -41,10 +41,10 @@ export default class Address extends Component {
         }
       }
     
-      async retrieveAddress() {
+      async retrieveUser() {
         try {
-          const retrievedAddress =  await AsyncStorage.getItem('address');
-          const address = JSON.parse(retrievedAddress);
+          const retrievedUser =  await AsyncStorage.getItem('user');
+          const address = JSON.parse(retrievedUser);
           return address;
         } catch (error) {
           console.log(error.message);
@@ -56,7 +56,7 @@ export default class Address extends Component {
         AsyncStorage.getItem('id_token').then((token) => {
           this.setState({ hasToken: token !== null, isLoaded: true });
           if (this.state.hasToken) {
-            AsyncStorage.getItem('address').then((address) => {
+            AsyncStorage.getItem('user').then((address) => {
               var addressObj = JSON.parse(address);
               this.setState(addressObj);
             })
@@ -79,7 +79,10 @@ export default class Address extends Component {
                             </Image>
                         </View>
                         <Text style = {styles.textNew}>
-                            {this.state.address.name}
+                            {this.state.user.name}
+                        </Text>
+                        <Text style = {styles.textNew}>
+                            {this.state.user.email}
                         </Text>
                     </TouchableOpacity>
                 </View>

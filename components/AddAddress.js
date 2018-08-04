@@ -59,19 +59,21 @@ export default class AddAddress extends Component {
         this.onChangeTextRegency = this.onChangeTextRegency.bind(this);
     }
 
-    doSaveAddress(params) {
-        console.log(params);
+    doSaveAddress(token) {
+        console.log(token);
             AsyncStorage.getItem('id_token', function(token){
-                postCreateAddress(params);
-                Alert.alert(
-                    'Message',
-                    'Add Address success',
-                    [
-                        {text: 'OK'}
-                        // {text: 'OK', onPress: () => this.props.navigation.navigate("Address"),}
-                    ],
-                    { cancelable: false }
-                )
+                postCreateAddress(token) 
+                    .then((res) => {
+                        console.log(res);
+                        Alert.alert(
+                            'Message',
+                            'Add Address success',
+                            [
+                                {text: 'OK', onPress: () => this.props.navigation.navigate("AddressMain"),}
+                            ],
+                            { cancelable: false }
+                        )
+                    })
             }); 
     }
 
@@ -221,7 +223,7 @@ export default class AddAddress extends Component {
                 />
             </View>
                 <TouchableOpacity style = {styles.submitButton}
-                    onPress = {() => this.doSaveAddress("Address", this.state)}>
+                    onPress = {() => this.doSaveAddress("AddressMain", this.state)}>
                     <Text style={styles.submitButtonText}>Simpan</Text>
                 </TouchableOpacity>
             </ScrollView>
