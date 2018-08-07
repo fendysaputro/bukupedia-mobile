@@ -1,3 +1,5 @@
+import 'intl';
+import 'intl/locale-data/jsonp/en';
 import React, { Component } from "react";
 import { AppRegistry, 
           StyleSheet, 
@@ -20,7 +22,6 @@ import GridView from 'react-native-super-grid';
 import { SearchBar, Icon, Header } from "react-native-elements";
 import { StackNavigator } from 'react-navigation';
 import { ProductDetail } from '../components/ProductDetail';
-import IntlProvider from 'react-intl';
 
 var { height, width } = Dimensions.get('window');
 
