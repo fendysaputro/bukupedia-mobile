@@ -16,7 +16,7 @@ import Login from "../components/Login";
 import getAddress from "../services/FetchAddress";
 import { API, ADDRESS, PROFILE } from '../components/Global';
 import ReviewOrder from '../components/ReviewOrder';
-import { postCreateAddress } from '../services/FetchAddress';
+import { postCreateAddress, getAddressList } from '../services/FetchAddress';
 import AddAddress from '../components/AddAddress';
 
 export default class Address extends Component {
@@ -41,7 +41,7 @@ export default class Address extends Component {
         }
       }
     
-      async retrieveUser() {
+    async retrieveUser() {
         try {
           const retrievedUser =  await AsyncStorage.getItem('user');
           const user = JSON.parse(retrievedUser);
@@ -52,14 +52,18 @@ export default class Address extends Component {
         return
       }
 
-      componentDidMount() {
+    componentDidMount() {
         AsyncStorage.getItem('id_token').then((token) => {
           this.setState({ hasToken: token !== null, isLoaded: true });
           if (this.state.hasToken) {
-            AsyncStorage.getItem('user').then((user) => {
-              var userObj = JSON.parse(user);
-              this.setState(userObj);
-            })
+            // AsyncStorage.getItem('user').then((user) => {
+            //   var userObj = JSON.parse(user);
+            //   this.setState(userObj);
+            // })
+            getAddressList(token)
+                .then((res) => {
+                    console.log(res);
+                });
           }else{
             this.replaceScreen();
           }

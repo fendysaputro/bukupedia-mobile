@@ -108,7 +108,6 @@ export default class Basket extends Component {
               </View>
               <View style={styles.numberItem}>
                 <Text style={{paddingTop:1}}>{product.title}</Text>
-                {/* <Text>Rp. {product.price}</Text> */}
                 <Text>
                   {new Intl.NumberFormat('en-GB', { 
                       style: 'currency', 
@@ -124,13 +123,22 @@ export default class Basket extends Component {
             </TouchableOpacity>
           ))
         }
-        <TouchableOpacity style={styles.button}
-          onPress = {() => this.props.navigation.navigate("Checkout")}>
-            <Text>{total}</Text>
-            <Text style={styles.buttonText}>
-              Checkout
-            </Text>
-        </TouchableOpacity>
+        <View style={styles.box1}>
+          <Text style={{paddingLeft: 10}}>
+            Total harga buku: {new Intl.NumberFormat('en-GB', { 
+                                style: 'currency', 
+                                currency: 'IDR',
+                                minimumFractionDigits: 0, 
+                                maximumFractionDigits: 0 
+                            }).format(total)}
+          </Text>
+          <TouchableOpacity style={styles.button}
+            onPress = {() => this.props.navigation.navigate("Checkout")}>
+              <Text style={styles.buttonText}>
+                Checkout
+              </Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
@@ -140,6 +148,9 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: "25%",
     alignItems: "center"
+  },
+  box1: {
+    flex: 1
   },
   containerlist: {
     backgroundColor: "#EDF8FE"
@@ -173,8 +184,10 @@ const styles = StyleSheet.create({
   containerTwo: {
     padding: 10,
     marginTop: 5,
-    height: 100,
-    backgroundColor: 'white' 
+    height: 110,
+    backgroundColor: 'white',
+    borderBottomWidth: 1,
+    borderColor: '#d6d7da'
   },
   numberItem: {
     flex: 1,

@@ -60,7 +60,7 @@ export default class AddAddress extends Component {
         // console.log("ini params");
         // console.log(token);
         AsyncStorage.getItem('id_token', function(token){
-            postCreateAddress(params) 
+            postCreateAddress(params, token) 
                 .then((res) => {
                     console.log("ini params");
                     console.log(res);

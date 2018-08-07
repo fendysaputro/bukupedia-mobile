@@ -1,12 +1,13 @@
 import { API, ADDRESS } from '../components/Global';
 
-export const getAddress = (token) => {
+export const getAddressList = (token) => {
     const URL = API + ADDRESS + '?token=' + token;
     return fetch(URL)
             .then((res) => res.json());
 }
 
 export const postCreateAddress = (params, token) => {
+    console.log(params);
     const URL = API + ADDRESS + '?token=' + token;
     return fetch(URL, {
         method: 'POST',
