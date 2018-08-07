@@ -7,7 +7,7 @@ export const getAddressList = (token) => {
 }
 
 export const postCreateAddress = (params, token) => {
-    console.log(params);
+    console.log(paramsi);
     const URL = API + ADDRESS + '?token=' + token;
     return fetch(URL, {
         method: 'POST',
@@ -20,7 +20,7 @@ export const postCreateAddress = (params, token) => {
 }
 
 export const updateAddress = (params, token, id) => {
-    const URL = API + ADDRESS + '?token=' + token + '?id=' + id;
+    const URL = API + ADDRESS + '/' + id + '?token=' + token;
     return fetch(URL, {
         method: 'POST',
         headers: {
