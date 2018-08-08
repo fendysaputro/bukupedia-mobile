@@ -3,9 +3,10 @@
     "name":"Bukupedia Mobile",
     "icon":"./styles/icon/icon-logo.png",
     "sdkVersion": "25.0.0",
-    "version": "1.0.0",
+    "version": "0.1.0",
     "android": {
-      "package": "com.bukupedia.mobile"
+      "package": "com.bukupedia.mobile",
+      "versionCode": 1
     },
     "ios":{
       "bundleIdentifier":"com.bukupedia.mobile"
