@@ -56,11 +56,11 @@ export default class AddAddress extends Component {
         this.onChangeTextRegency = this.onChangeTextRegency.bind(this);
     }
 
-    doSaveAddress(params, token) {
+    doSaveAddress(params) {
         // console.log("ini params");
-        // console.log(token);
+        // console.log(params);
         AsyncStorage.getItem('id_token', function(token){
-            postCreateAddress(params, token) 
+            postCreateAddress(token, params) 
                 .then((res) => {
                     console.log("ini params");
                     console.log(res);

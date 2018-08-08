@@ -7,7 +7,6 @@ import { AppRegistry,
           View, 
           Search, 
           Button, 
-          Intl,
           Dimensions, 
           ScrollView, 
           TouchableOpacity, 
@@ -23,7 +22,6 @@ import GridView from 'react-native-super-grid';
 import { SearchBar, Icon, Header } from "react-native-elements";
 import { StackNavigator } from 'react-navigation';
 import { ProductDetail } from '../components/ProductDetail';
-import 'intl';
 
 var { height, width } = Dimensions.get('window');
 
