@@ -60,8 +60,7 @@ export default class AddAddress extends Component {
     }
 
     doSaveAddress(params) {
-        console.log("ini params");
-        console.log(params);
+        console.log("params");
         postCreateAddress(params, this.state.token) 
             .then((res) => {
                 Alert.alert(
@@ -85,19 +84,19 @@ export default class AddAddress extends Component {
             self.setState({token:token});
         });
         AsyncStorage.getItem('user').then((user) => {
+            console.log(user);
             var userObj = JSON.parse(user);
-            self.setState({user_id:userObj.id});
+            self.setState({user_id:userObj.user.id});
+            console.log('self.state.user_id');
+            console.log(self.state.user_id);
         })
       }    
 
     onChangeTextProvince (text) {
-        console.log(text);
         var provi;
         provi = this.state.province.find(prov => 
             prov.name === text
         );
-        console.log('provinceId: ');
-        console.log(provi.id);
         getRegencyByProvinceId(provi.id)
             .then((res) => {
                 this.setState({regencyByProvinces: [res.d]});
@@ -110,7 +109,6 @@ export default class AddAddress extends Component {
     }
 
     onChangeTextRegency (text) {
-        console.log(text);
         var regenc;
         regenc = this.state.regencyByProvincesVal.find(regy => 
             regy.value === text
@@ -127,11 +125,10 @@ export default class AddAddress extends Component {
     }
 
     onChangeTextSubdistrict (text){
-        var subDist;
-        subDist = this.state.subdistrictByRegenciesVal.find(district => 
+        var  subDist = this.state.subdistrictByRegenciesVal.find(district => 
             district.value === text
         );
-        this.setState({subdistrict_id: subDist.id, province:null, regencyByProvincesVal:null,regencyByProvinces:null, subdistrict:null,subdistrictByRegencies:null, subdistrictByRegenciesVal:null});
+        this.setState({subdistrict_id: subDist.id});
     }
 
     updateRef(province, ref){
