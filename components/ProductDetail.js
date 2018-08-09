@@ -135,11 +135,15 @@ export default class ProductDetail extends Component {
         this.fadeAnimationDialog.show();
     }
 
+    hideFadeAnimationDialog = () => {
+        this.fadeAnimationDialog.hide();
+    }
+
     doAddToBasket(params) {
         addShoppingCart(params, this.state.token).
             then((res) => {
-                console.log(res);
-                this.props.navigation.navigate('');
+                hideFadeAnimationDialog();
+                // this.props.navigation.navigate('Basket');
             });
     }
 

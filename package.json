@@ -21,9 +21,10 @@
   "dependencies": {
     "expo": "^25.0.0",
     "intl": "^1.2.5",
-    "react": "16.2.0",
+    "native-base": "^2.7.2",
+    "react": "^16.2.0",
     "react-intl-native": "^2.1.2",
-    "react-native": "0.52.0",
+    "react-native": "^0.52.0",
     "react-native-button": "^2.3.0",
     "react-native-checkbox-heaven": "^0.1.4",
     "react-native-elements": "^0.19.1",

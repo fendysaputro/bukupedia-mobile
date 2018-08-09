@@ -1,9 +1,10 @@
 import React, { Component } from "react";
+import { Container, Content, List, ListItem, Thumbnail, Text } from 'native-base';
 import { AppRegistry, 
   StyleSheet, 
-  Text, 
   View, 
   Dimensions,
+  ScrollView,
   TouchableOpacity,
   AsyncStorage } from "react-native";
 import { COLOR_PRIMARY } from "../styles/common";
@@ -93,53 +94,77 @@ export default class Basket extends Component {
       total = total + product.price;
     });
     return(
-      <View style={styles.containerlist}>
-        {
-          this.state.carts.map((product, index) => (
-            <TouchableOpacity
-              key = {product.id}
-              style = {styles.containerTwo}
-              onPress = {() => console.log('press')}>
-              <View style={{marginLeft:20}}>
-                <Image 
-                  width={60} 
-                  source={{uri: product.image}}
-                />
+      // <Container>
+      //     <Content>
+      //         <List>
+      //           {
+      //             this.state.carts.map((product, index) => {
+      //               <ListItem>
+      //                   <Thumbnail square size={60} source={{uri: product.image}} />
+      //                   <Text>{product.title}</Text>
+      //                   <Text note>
+      //                     {new Intl.NumberFormat('en-GB', { 
+      //                           style: 'currency', 
+      //                           currency: 'IDR',
+      //                           minimumFractionDigits: 0, 
+      //                           maximumFractionDigits: 0 
+      //                       }).format(product.price)}
+      //                   </Text>
+      //               </ListItem>
+      //             })
+      //           }
+      //         </List>
+      //     </Content>
+      // </Container>
+      <ScrollView>
+        <View style={styles.containerlist}>
+          {
+            this.state.carts.map((product, index) => (
+              <View
+                key = {product.id}
+                style = {styles.containerTwo}
+                onPress = {() => console.log('press')}>
+                <View style={{marginLeft:20}}>
+                  <Image 
+                    width={60} 
+                    source={{uri: product.image}}
+                  />
+                </View>
+                <View style={styles.numberItem}>
+                  <Text style={{paddingTop:1}}>{product.title}</Text>
+                  <Text>
+                    {new Intl.NumberFormat('en-GB', { 
+                        style: 'currency', 
+                        currency: 'IDR',
+                        minimumFractionDigits: 0, 
+                        maximumFractionDigits: 0 
+                    }).format(product.price)}
+                  </Text>
+                  <NumericInput 
+                    onChange={value => this.setState({quantity: value})}
+                    value={product.quantity}/>            
+                </View>
               </View>
-              <View style={styles.numberItem}>
-                <Text style={{paddingTop:1}}>{product.title}</Text>
-                <Text>
-                  {new Intl.NumberFormat('en-GB', { 
-                      style: 'currency', 
-                      currency: 'IDR',
-                      minimumFractionDigits: 0, 
-                      maximumFractionDigits: 0 
-                  }).format(product.price)}
+            ))
+          }
+          <View style={styles.box1}>
+            <Text style={{paddingLeft: 10}}>
+              Total harga buku: {new Intl.NumberFormat('en-GB', { 
+                                  style: 'currency', 
+                                  currency: 'IDR',
+                                  minimumFractionDigits: 0, 
+                                  maximumFractionDigits: 0 
+                              }).format(total)}
+            </Text>
+            <TouchableOpacity style={styles.button}
+              onPress = {() => this.props.navigation.navigate("Checkout")}>
+                <Text style={styles.buttonText}>
+                  Checkout
                 </Text>
-                <NumericInput 
-                  onChange={value => this.setState({quantity: value})}
-                  value={product.quantity}/>            
-              </View>
             </TouchableOpacity>
-          ))
-        }
-        <View style={styles.box1}>
-          <Text style={{paddingLeft: 10}}>
-            Total harga buku: {new Intl.NumberFormat('en-GB', { 
-                                style: 'currency', 
-                                currency: 'IDR',
-                                minimumFractionDigits: 0, 
-                                maximumFractionDigits: 0 
-                            }).format(total)}
-          </Text>
-          <TouchableOpacity style={styles.button}
-            onPress = {() => this.props.navigation.navigate("Checkout")}>
-              <Text style={styles.buttonText}>
-                Checkout
-              </Text>
-          </TouchableOpacity>
+          </View>
         </View>
-      </View>
+      </ScrollView>
     );
   }
 }
@@ -150,10 +175,10 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   box1: {
-    flex: 1
+    height: 110,
   },
   containerlist: {
-    backgroundColor: "#EDF8FE"
+
   },
   text: {
     fontSize: 15,
