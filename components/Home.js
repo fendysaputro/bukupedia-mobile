@@ -142,6 +142,7 @@ export default class Home extends Component {
                               minimumFractionDigits: 0, 
                               maximumFractionDigits: 0 
                           }).format(item.price)}
+                          {/* {item.price} */}
                       </Text>
                       </View>
                     </View>

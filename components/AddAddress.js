@@ -20,7 +20,7 @@ import ReviewOrder from '../components/ReviewOrder';
 import Address from '../components/Address';
 import { getProvince } from '../services/FetchListProvince';
 import { getRegencyByProvinceId } from '../services/FetchListRegency';
-import { getSubdistrictByRegencyId } from '../services/FetchListSubdistrict';
+import { getSubdistrictByRegencyId, getSubdistrict } from '../services/FetchListSubdistrict';
 import { Dropdown } from 'react-native-material-dropdown';
 
 export default class AddAddress extends Component {
@@ -43,6 +43,7 @@ export default class AddAddress extends Component {
             province: [],
             regencyByProvincesVal: [],
             subdistrictByRegenciesVal: [],
+            getSubdistrictValId: [],
             label: '',
             name: '',
             company: '',
@@ -54,26 +55,27 @@ export default class AddAddress extends Component {
         };
         this.onChangeTextProvince = this.onChangeTextProvince.bind(this);
         this.onChangeTextRegency = this.onChangeTextRegency.bind(this);
+        this.onChangeTextSubdistrict = this.onChangeTextSubdistrict.bind(this);
+        this.doSaveAddress = this.doSaveAddress.bind(this);
     }
 
-    doSaveAddress(params, token) {
+    doSaveAddress(params) {
         // console.log("ini params");
-        // console.log(token);
-        AsyncStorage.getItem('id_token', function(token){
-            postCreateAddress(params, token) 
-                .then((res) => {
-                    console.log("ini params");
-                    console.log(res);
-                    Alert.alert(
-                        'Message',
-                        'Add Address success',
-                        [
-                            {text: 'OK', onPress: () => this.props.navigation.navigate("AddressMain"),}
-                        ],
-                        { cancelable: false }
-                    )
-                })
-        }); 
+        // console.log(params);
+        postCreateAddress(params, this.state.token) 
+            .then((res) => {
+                // console.log("ini token");
+                // console.log(this.state.token);
+                // console.log(this.state.user_id);
+                Alert.alert(
+                    'Message',
+                    'Add Address success',
+                    [
+                        {text: 'OK', onPress: () => this.props.navigation.navigate("AddressMain"),}
+                    ],
+                    { cancelable: false }
+                )
+            })
     }
 
     componentDidMount(){
@@ -82,6 +84,18 @@ export default class AddAddress extends Component {
             .then((res) => {
                 self.setState({ province: res.d });
             });
+        AsyncStorage.getItem('id_token').then((token) => {
+            self.setState({token:token});
+        });
+        AsyncStorage.getItem('user').then((user) => {
+            var userObj = JSON.parse(user);
+            console.log("ini OBJ");
+            console.log(userObj);
+            console.log("ini user id");
+            console.log(userObj.user.id);
+            // console.log(this.state.user.id);
+            self.setState({user_id:userObj.id});
+        })
       }    
 
     onChangeTextProvince (text) {
@@ -120,6 +134,23 @@ export default class AddAddress extends Component {
             });
     }
 
+    onChangeTextSubdistrict (text){
+        console.log(text)
+        var subDist;
+        subDist = this.state.subdistrictByRegenciesVal.find(district => 
+            district.value === text
+        );
+        getSubdistrict(subDist.id)
+            .then((res) => {
+                this.setState({subdistrict : [res.d]});
+                let getSubdistrictValId = [];
+                res.d.forEach(function(dist){
+                    getSubdistrictValId.push({id: dist.id, value: dist.name});
+                });
+                this.setState({getSubdistrictValId: getSubdistrictValId});
+            });
+    }
+
     updateRef(province, ref){
         this[province] = ref;
     }
@@ -135,6 +166,7 @@ export default class AddAddress extends Component {
             styles.text,
             styles[province],
             styles[regencyByProvinces],
+            styles[subdistrictByRegencies],
             styles[subdistrictByRegencies]
         ]
         return(
@@ -209,6 +241,7 @@ export default class AddAddress extends Component {
                 <Text style={styles.textLogin}>Kecamatan</Text>
                 <View style={styles.dropdownStyle}>
                 <Dropdown 
+                    onChangeText={this.onChangeTextSubdistrict}
                     label='pilih kecamatan'
                     data={this.state.subdistrictByRegenciesVal}
                 />
@@ -222,7 +255,7 @@ export default class AddAddress extends Component {
                 />
             </View>
                 <TouchableOpacity style = {styles.submitButton}
-                    onPress = {() => this.doSaveAddress("AddressMain", this.state)}>
+                    onPress = {() => this.doSaveAddress(this.state)}>
                     <Text style={styles.submitButtonText}>Simpan</Text>
                 </TouchableOpacity>
             </ScrollView>

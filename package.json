@@ -21,8 +21,13 @@
   "dependencies": {
     "expo": "^25.0.0",
     "intl": "^1.2.5",
+<<<<<<< HEAD
     "native-base": "^2.7.2",
     "react": "^16.2.0",
+=======
+    "react": "16.2.0",
+    "react-intl": "^2.4.0",
+>>>>>>> a4fcbf2e9658ca0d0f03ae5a88605ec545574f1a
     "react-intl-native": "^2.1.2",
     "react-native": "^0.52.0",
     "react-native-button": "^2.3.0",
