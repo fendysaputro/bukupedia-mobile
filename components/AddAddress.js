@@ -127,20 +127,11 @@ export default class AddAddress extends Component {
     }
 
     onChangeTextSubdistrict (text){
-        console.log(text)
         var subDist;
         subDist = this.state.subdistrictByRegenciesVal.find(district => 
             district.value === text
         );
-        getSubdistrict(subDist.id)
-            .then((res) => {
-                this.setState({subdistrict : [res.d]});
-                let getSubdistrictValId = [];
-                res.d.forEach(function(dist){
-                    getSubdistrictValId.push({id: dist.id, value: dist.name});
-                });
-                this.setState({getSubdistrictValId: getSubdistrictValId});
-            });
+        this.setState({subdistrict_id: subDist.id, province:null, regencyByProvincesVal:null,regencyByProvinces:null, subdistrict:null,subdistrictByRegencies:null, subdistrictByRegenciesVal:null});
     }
 
     updateRef(province, ref){
