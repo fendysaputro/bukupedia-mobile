@@ -60,13 +60,10 @@ export default class AddAddress extends Component {
     }
 
     doSaveAddress(params) {
-        // console.log("ini params");
-        // console.log(params);
+        console.log("ini params");
+        console.log(params);
         postCreateAddress(params, this.state.token) 
             .then((res) => {
-                // console.log("ini token");
-                // console.log(this.state.token);
-                // console.log(this.state.user_id);
                 Alert.alert(
                     'Message',
                     'Add Address success',
@@ -89,11 +86,6 @@ export default class AddAddress extends Component {
         });
         AsyncStorage.getItem('user').then((user) => {
             var userObj = JSON.parse(user);
-            console.log("ini OBJ");
-            console.log(userObj);
-            console.log("ini user id");
-            console.log(userObj.user.id);
-            // console.log(this.state.user.id);
             self.setState({user_id:userObj.id});
         })
       }    

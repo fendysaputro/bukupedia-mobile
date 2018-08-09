@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Container, Content, List, ListItem, Thumbnail, Text } from 'native-base';
 import { AppRegistry, 
   StyleSheet, 
   View, 
