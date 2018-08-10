@@ -12,13 +12,8 @@ import { AppRegistry,
 import { COLOR_PRIMARY } from "../styles/common";
 import { CheckBox } from "react-native-elements";
 import Login from "../components/Login";
-import getAddress from "../services/FetchAddress";
-import { API, ADDRESS } from '../components/Global';
+import getAddressList from "../services/FetchAddress";
 import ReviewOrder from '../components/ReviewOrder';
-import Address from '../components/Address';
-import { getProvince } from '../services/FetchListProvince';
-import { getRegencyByProvinceId } from '../services/FetchListRegency';
-import { getSubdistrictByRegencyId } from '../services/FetchListSubdistrict';
 import { Dropdown } from 'react-native-material-dropdown';
 
 
@@ -49,57 +44,11 @@ export default class Checkout extends Component {
     componentDidMount() {
         var self = this;
         AsyncStorage.getItem('id_token').then((token) => {
-            const URL = API + ADDRESS + '?token=' + token;
-            fetch(URL)  
-                .then(function(res) {
-                var resObj = JSON.parse(res._bodyText);
-                console.log(res._bodyText);
-                // if ((resObj.r) || (res.status == 200)) {
-                //     self.setState({carts: resObj.d});
-                // }
-            })
+            self.setState({token: token});
+
+            getAddressList(self.state.token).then(res) 
         });
-        getProvince()
-            .then((res) => {
-                self.setState({ province: res.d });
-            });
     }    
-
-    onChangeTextProvince (text) {
-        console.log(text);
-        var provi;
-        provi = this.state.province.find(prov => 
-            prov.name === text
-        );
-        console.log('provinceId: ');
-        console.log(provi.id);
-        getRegencyByProvinceId(provi.id)
-            .then((res) => {
-                this.setState({regencyByProvinces: [res.d]});
-                let regencyByProvincesVal = [];
-                res.d.forEach(function(reg){
-                    regencyByProvincesVal.push({id: reg.id, value: reg.name});
-                });
-                this.setState({regencyByProvincesVal: regencyByProvincesVal});
-            });
-    }
-
-    onChangeTextRegency (text) {
-        console.log(text);
-        var regenc;
-        regenc = this.state.regencyByProvincesVal.find(regy => 
-            regy.value === text
-        );
-        getSubdistrictByRegencyId(regenc.id)
-            .then((res) => {
-                this.setState({subdistrictByRegencies: [res.d]});
-                let subdistrictByRegenciesVal = [];
-                res.d.forEach(function(sub){
-                    subdistrictByRegenciesVal.push({id: sub.id, value: sub.name});
-                });
-                this.setState({subdistrictByRegenciesVal: subdistrictByRegenciesVal});
-            });
-    }
 
     updateRef(province, ref){
         this[province] = ref;
