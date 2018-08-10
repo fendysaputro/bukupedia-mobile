@@ -5,7 +5,8 @@ import { StyleSheet,
         Image, 
         TextInput, 
         TouchableOpacity, 
-        AsyncStorage } from "react-native";
+        AsyncStorage,
+        ScrollView } from "react-native";
 import { COLOR_PRIMARY } from "../styles/common";
 import Button from "react-native-button";
 import { CheckBox } from "react-native-elements";
@@ -58,6 +59,7 @@ export default class Login extends Component {
 
     render() {
         return(
+            <ScrollView contentContainer={styles.contentContainer}>
             <View style={styles.container}>
                 <TouchableOpacity style = {styles.buttonStyleFb}>
                     <Text style = {styles.submitButtonText}>Login With Facebook</Text>
@@ -107,11 +109,15 @@ export default class Login extends Component {
                         Masuk
                 </Button>
             </View>
+            </ScrollView>
         );
     }
 }
 
 const styles = StyleSheet.create({
+    contentContainer: {
+        paddingVertical: 20
+      },
     container: {
         flex: 1,
         alignItems: "center",

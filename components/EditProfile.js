@@ -65,6 +65,7 @@ export default class EditProfile extends Component {
 
     render(user){
       return(
+        <ScrollView contentContainer={styles.contentContainer}> 
           <View style = {styles.container}>
             {
             <TouchableOpacity
@@ -92,11 +93,15 @@ export default class EditProfile extends Component {
             </TouchableOpacity>
             }
           </View>
+        </ScrollView>
       )
     }
 }
 
 const styles = StyleSheet.create({
+  contentContainer: {
+    paddingVertical: 20
+  },
     container: {
         flex: 1,
         alignItems: 'center',
