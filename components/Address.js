@@ -88,6 +88,9 @@ export default class Address extends Component {
                         <Text style = {styles.textNew}>
                             {this.state.user.email}
                         </Text>
+                        <Text style = {styles.textNew}>
+                            {this.state.user.address}
+                        </Text>
                     </TouchableOpacity>
                 </View>
             </View>
