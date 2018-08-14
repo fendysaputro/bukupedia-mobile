@@ -22,6 +22,7 @@ import EditProfile from './components/EditProfile';
 import AddressMain from './components/AddressMain';
 import NewRating from './components/NewRating';
 import Wishlist from './components/Wishlist';
+import ContentFormFaq from "./components/ContentFormFaq";
 // import { MainStack } from "./config/Router";
 
 class App extends Component {
@@ -156,6 +157,12 @@ export default App = StackNavigator({
   },
   Wishlist: {
     screen: Wishlist,
+    navigationOptions: {
+      
+    }
+  },
+  ContentFormFaq: {
+    screen: ContentFormFaq,
     navigationOptions: {
       
     }

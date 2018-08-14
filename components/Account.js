@@ -17,6 +17,7 @@ import EditProfile from "../components/EditProfile";
 import AddAddress from "../components/AddressMain";
 import NewRating from "../components/NewRating";
 import Wishlist from "../components/Wishlist";
+import ContentFormFaq from "../components/ContentFormFaq";
 
 export default class Account extends Component {
 
@@ -162,7 +163,7 @@ export default class Account extends Component {
             <TouchableOpacity
               key = {itemTwo.id}
               style = {styles.containerTwo}
-              onPress = {() => this.props.navigation.navigate("NewRating")}
+              onPress = {() => this.props.navigation.navigate("ContentFormFaq")}
             >
               <Text style = {styles.text}>
                 {itemTwo.title}
