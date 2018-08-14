@@ -10,11 +10,13 @@ import {
 import { COLOR_PRIMARY } from "../styles/common";
 import TabNavigator from "react-native-tab-navigator";
 import Button from "react-native-button";
-import { ListItem } from "react-native-elements";
+import { List, ListItem } from "react-native-elements";
 import Login from "./Login"
 import { Header } from "react-native-elements";
 import EditProfile from "../components/EditProfile";
 import AddAddress from "../components/AddressMain";
+import NewRating from "../components/NewRating";
+import Wishlist from "../components/Wishlist";
 
 export default class Account extends Component {
 
@@ -23,7 +25,34 @@ export default class Account extends Component {
     this.state = {
       user: {}
     }
+    // this.renderPerson = this.renderPerson.bind(this);
+    // this.renderPeople = this.renderPeople.bind(this);
   }
+
+  // onPress = (name) => {
+  //   console.log(name);
+  // }
+
+  // renderPerson(person){
+  //   return (<ListItem
+  //     key={person._id}
+  //     title={person.name}
+  //     link={person.link}
+  //     onPress={() => this.onPress(person.link)}
+  //   />)
+  // }
+
+  // renderPeople = () => {
+  //   people = [{"_id": 0, "name": "Wishlist"},
+  //             {"_id": 1, "name": "Buku Poin"},
+  //             {"_id": 2, "name": "Blog Kami"},
+  //             {"_id": 3, "name": "Rating Aplikasi"},
+  //             {"_id": 4, "name": "Bantuan"},
+  //             {"_id": 5, "name": "Alamat", "link": ("AddressMain")}]
+  //   return people.map((p) => (
+  //     this.renderPerson(p)
+  //   ))
+  // }
 
   async retrieveUser() {
     try {
@@ -133,7 +162,7 @@ export default class Account extends Component {
             <TouchableOpacity
               key = {itemTwo.id}
               style = {styles.containerTwo}
-              onPress = {() => this.props.navigation.navigate("AddressMain")}
+              onPress = {() => this.props.navigation.navigate("NewRating")}
             >
               <Text style = {styles.text}>
                 {itemTwo.title}
@@ -141,6 +170,11 @@ export default class Account extends Component {
             </TouchableOpacity>
           ))
         }
+        {/* <TouchableOpacity>
+          <List>
+            {this.renderPeople()}
+          </List>
+        </TouchableOpacity> */}
       </View>
     )
   }

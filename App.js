@@ -20,6 +20,8 @@ import Checkout from "./components/Checkout";
 import ReviewOrder from './components/ReviewOrder';
 import EditProfile from './components/EditProfile';
 import AddressMain from './components/AddressMain';
+import NewRating from './components/NewRating';
+import Wishlist from './components/Wishlist';
 // import { MainStack } from "./config/Router";
 
 class App extends Component {
@@ -144,6 +146,18 @@ export default App = StackNavigator({
     screen: AddressMain,
     navigationOptions:{
       title: "Alamat"
+    }
+  },
+  NewRating: {
+    screen: NewRating,
+    navigationOptions: {
+
+    }
+  },
+  Wishlist: {
+    screen: Wishlist,
+    navigationOptions: {
+      
     }
   }
 },{
