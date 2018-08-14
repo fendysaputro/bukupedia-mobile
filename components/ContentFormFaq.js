@@ -33,15 +33,14 @@ export default class ContentFormFaq extends Component{
     this.setState({contentFaqs: []});
     getContentFaq()
         .then((res) => {
-            console.log(res);
-        // this.setState({ contentFaqs: res.d });
+        this.setState({ contentFaq: res.d });
         });
     }
 
     render (){
         return(
             <View style={styles.container}>
-                <Text>
+                <Text style={styles.textNew}>
                     {this.state.contentFaq.content}
                 </Text>
             </View>
@@ -54,6 +53,11 @@ const styles = StyleSheet.create({
         flex: 1, 
         alignItems: "center",
         justifyContent: "center"   
+    },
+    textNew: {
+        color: 'black',
+        textAlign: 'left',
+        marginLeft: 30
     }
 })
 

@@ -23,6 +23,8 @@ import AddressMain from './components/AddressMain';
 import NewRating from './components/NewRating';
 import Wishlist from './components/Wishlist';
 import ContentFormFaq from "./components/ContentFormFaq";
+import HowToShop from "./components/HowToShop";
+import HowToPay from "./components/HowToPay";
 // import { MainStack } from "./config/Router";
 
 class App extends Component {
@@ -163,6 +165,18 @@ export default App = StackNavigator({
   },
   ContentFormFaq: {
     screen: ContentFormFaq,
+    navigationOptions: {
+      
+    }
+  },
+  HowToShop: {
+    screen: HowToShop,
+    navigationOptions: {
+
+    }
+  },
+  HowToPay: {
+    screen: HowToPay,
     navigationOptions: {
       
     }

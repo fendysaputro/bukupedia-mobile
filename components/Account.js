@@ -18,6 +18,8 @@ import AddAddress from "../components/AddressMain";
 import NewRating from "../components/NewRating";
 import Wishlist from "../components/Wishlist";
 import ContentFormFaq from "../components/ContentFormFaq";
+import HowToShop from "../components/HowToShop";
+import HowToPay from "../components/HowToPay";
 
 export default class Account extends Component {
 
@@ -163,7 +165,7 @@ export default class Account extends Component {
             <TouchableOpacity
               key = {itemTwo.id}
               style = {styles.containerTwo}
-              onPress = {() => this.props.navigation.navigate("ContentFormFaq")}
+              onPress = {() => this.props.navigation.navigate("HowToPay")}
             >
               <Text style = {styles.text}>
                 {itemTwo.title}
