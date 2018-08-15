@@ -20,6 +20,7 @@ import Wishlist from "../components/Wishlist";
 import ContentFormFaq from "../components/ContentFormFaq";
 import HowToShop from "../components/HowToShop";
 import HowToPay from "../components/HowToPay";
+import Blog from "../components/Blog";
 
 export default class Account extends Component {
 
@@ -28,34 +29,7 @@ export default class Account extends Component {
     this.state = {
       user: {}
     }
-    // this.renderPerson = this.renderPerson.bind(this);
-    // this.renderPeople = this.renderPeople.bind(this);
   }
-
-  // onPress = (name) => {
-  //   console.log(name);
-  // }
-
-  // renderPerson(person){
-  //   return (<ListItem
-  //     key={person._id}
-  //     title={person.name}
-  //     link={person.link}
-  //     onPress={() => this.onPress(person.link)}
-  //   />)
-  // }
-
-  // renderPeople = () => {
-  //   people = [{"_id": 0, "name": "Wishlist"},
-  //             {"_id": 1, "name": "Buku Poin"},
-  //             {"_id": 2, "name": "Blog Kami"},
-  //             {"_id": 3, "name": "Rating Aplikasi"},
-  //             {"_id": 4, "name": "Bantuan"},
-  //             {"_id": 5, "name": "Alamat", "link": ("AddressMain")}]
-  //   return people.map((p) => (
-  //     this.renderPerson(p)
-  //   ))
-  // }
 
   async retrieveUser() {
     try {
@@ -114,36 +88,34 @@ export default class Account extends Component {
     listTwo: [
       {
         id: 0,
-        title: 'Wishlist'
+        title: 'Wishlist',
+        link: 'Wishlist'
       },
       {
         id: 1,
-        title: 'Buku Poin'
+        title: 'Buku Poin',
       },
       {
         id: 2,
-        title: 'Blog Kami'
+        title: 'Blog Kami',
+        link: 'Blog'
       },
       {
         id: 3,
-        title: 'Rating Aplikasi'
+        title: 'Rating Aplikasi',
+        link: 'NewRating'
       },
       {
         id: 4,
-        title: 'Bantuan'
+        title: 'Bantuan',
+        link: 'HowToPay'
       },
       {
         id: 5,
-        title: 'Alamat'
+        title: 'Alamat',
+        link: 'AddressMain'
       },
     ]
-  }
-
-  alertItemName = (itemOne, index) => {
-    alert(itemOne.name)
-  }
-  alertItemTitle = (itemTwo, index) => {
-    alert(itemTwo.title)
   }
 
   render () {
@@ -165,7 +137,7 @@ export default class Account extends Component {
             <TouchableOpacity
               key = {itemTwo.id}
               style = {styles.containerTwo}
-              onPress = {() => this.props.navigation.navigate("HowToPay")}
+              onPress = {() => this.props.navigation.navigate(itemTwo.link)}
             >
               <Text style = {styles.text}>
                 {itemTwo.title}
@@ -173,11 +145,6 @@ export default class Account extends Component {
             </TouchableOpacity>
           ))
         }
-        {/* <TouchableOpacity>
-          <List>
-            {this.renderPeople()}
-          </List>
-        </TouchableOpacity> */}
       </View>
     )
   }

@@ -25,6 +25,7 @@ import Wishlist from './components/Wishlist';
 import ContentFormFaq from "./components/ContentFormFaq";
 import HowToShop from "./components/HowToShop";
 import HowToPay from "./components/HowToPay";
+import Blog from "./components/Blog";
 // import { MainStack } from "./config/Router";
 
 class App extends Component {
@@ -179,6 +180,12 @@ export default App = StackNavigator({
     screen: HowToPay,
     navigationOptions: {
       
+    }
+  },
+  Blog: {
+    screen: Blog,
+    navigationOptions: {
+
     }
   }
 },{
