@@ -132,14 +132,24 @@ export default class ReviewOrder extends Component {
                                     <Text>Rp. {product.price}</Text>
                                     <Text style={{marginTop:30}}>Jumlah: {product.quantity}</Text>
                                 </View>
+                                <View style={styles.reviewShop}>
+                                    <Text>Ringkasan Belanja: </Text>
+                                </View>
                             </View>
                         ))
                     }
+                    <View style={styles.totalBox}>
+                        <Text>Ringkasan Belanja: </Text>
+                        <View style={styles.reviewShop}>
+                            <Text>-Total Harga: </Text> 
+                            <Text>Rp. 50.000</Text>
+                        </View>
+                    </View>
                     </View>
                     {/* <View style={{flexDirection:'row',justifyContent: 'space-between'}}>
                         <Image width={60} source={{uri: 'https://randomuser.me/api/portraits/thumb/men/4.jpg'}}/>
                         <View>
-                            <Text style={styles.unityName}>SUPERMERCADO MACCARTNEY</Text>
+                            <Text style={styles .unityName}>SUPERMERCADO MACCARTNEY</Text>
                             <Text style={styles.subInfo}>Categoria: Mercado</Text>
                             <Text style={styles.subInfo}>Pedido Nº: 1245</Text>
                         </View>
@@ -247,5 +257,10 @@ const styles = StyleSheet.create({
         top: -100,
         marginLeft: 110,
         alignItems: 'flex-start'
+    },
+    reviewShop: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-around'
     }
 });
