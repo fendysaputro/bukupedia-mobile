@@ -15,6 +15,11 @@ import TabNavigator from "react-native-tab-navigator";
 import Button from "react-native-button";
 import { ListItem } from "react-native-elements";
 import Login from "./Login"
+import NewRating from "../components/NewRating";
+import Blog from "../components/Blog";
+import HowToShop from "../components/HowToShop";
+import HowToPay from "../components/HowToPay";
+import ContentFormFaq from "../components/ContentFormFaq";
 
 export default class WelcomeAccount extends Component {
   static navigationOptions = {
@@ -35,24 +40,20 @@ export default class WelcomeAccount extends Component {
     listTwo: [
       {
         id: 0,
-        title: 'Rating Aplikasi'
+        title: 'Rating Aplikasi',
+        link: 'NewRating'
       },
       {
         id: 1,
-        title: 'Blog Kami'
+        title: 'Blog Kami',
+        link: 'Blog'
       },
       {
         id: 2,
-        title: 'Bantuan                                                                          >'
+        title: 'Bantuan                                                                          >',
+        link: 'HowToShop'
       }
     ]
-  }
-
-  alertItemName = (itemOne, index) => {
-    alert(itemOne.name)
-  }
-  alertItemTitle = (itemTwo, index) => {
-    alert(itemTwo.title)
   }
 
   constructor(props){
@@ -89,7 +90,7 @@ export default class WelcomeAccount extends Component {
             <TouchableOpacity
               key = {itemTwo.id}
               style = {styles.containerTwo}
-              onPress = {() => this.alertItemTitle(itemTwo)}
+              onPress = {() => this.props.navigation.navigate(itemTwo.link)}
             >
               <Text style = {styles.text}>
                 {itemTwo.title}
