@@ -141,8 +141,14 @@ export default class ReviewOrder extends Component {
                     <View style={styles.totalBox}>
                         <Text>Ringkasan Belanja: </Text>
                         <View style={styles.reviewShop}>
-                            <Text>-Total Harga: </Text> 
+                            <Text>-Total Harga: </Text>
+                            <Text>-Total Shipment: </Text>
+                            <Text>-Total Pembayaran: </Text>
+                        </View>
+                        <View style={{alignSelf: 'flex-end', alignItems: 'flex-end'}}> 
                             <Text>Rp. 50.000</Text>
+                            <Text>Rp. 50.000</Text>
+                            <Text>Rp. 100.000</Text>
                         </View>
                     </View>
                     </View>
@@ -234,7 +240,7 @@ const styles = StyleSheet.create({
     totalBox: {
         flex: 1,
         width: '100%',
-        height: 50,
+        height: 90,
         paddingLeft: 10,
         paddingRight: 10,
         paddingTop: 10,
@@ -260,7 +266,7 @@ const styles = StyleSheet.create({
     },
     reviewShop: {
         flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'space-around'
+        paddingLeft: 10,
+        justifyContent: 'flex-start'
     }
 });
