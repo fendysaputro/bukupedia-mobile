@@ -12,7 +12,7 @@ import { AppRegistry,
   AsyncStorage } from "react-native";
 import { Card, ButtonGroup } from 'react-native-elements'
 import { COLOR_PRIMARY } from "../styles/common";
-import { API, CART, ADDRESS, SHIPMENT_METHOD } from '../components/Global';
+import { API, CART, ADDRESS, SHIPMENT_METHOD, SHIPPING_COST } from '../components/Global';
 import Image from 'react-native-scalable-image';
 import {getShipmentMethod, postShipmentCost} from '../services/FetchShipment';
 import { Dropdown } from 'react-native-material-dropdown';
@@ -49,7 +49,10 @@ export default class ReviewOrder extends Component {
             status: '',
             subdistrict: ''
           },
-          couriers: []
+          couriers: [],
+          shipmentCosts: [],
+          shipmentCostsO: [],
+          shipmentCost: 0
         }
         this.onChangeTextKurir = this.onChangeTextKurir.bind(this);
     }
@@ -76,6 +79,7 @@ export default class ReviewOrder extends Component {
         var self = this;
         this.setState({loading: true});
         AsyncStorage.getItem('id_token').then((token) => {
+            self.setState({token: token});
             console.log(token);
             const URL = API + CART + '?token=' + token;
             fetch(URL)  
@@ -111,17 +115,39 @@ export default class ReviewOrder extends Component {
                 });
     }
 
-    onChangeTextKurir() {
-        postShipmentCost
-            .then((res) => {
-                console.log('onChangeTextKurir');
-                console.log(res);
-            })
+    onChangeTextKurirCost(text) {
+        var cost = this.state.shipmentCostsO.find(cost => 
+            cost.cost[0].value
+        );
+    }
+
+    onChangeTextKurir(text) {
+        var self = this;
+        var courier;
+        courier = this.state.couriers.find(cour => 
+            cour.name === text
+        );
+        console.log(courier);
+        var params = {subdistrict_id: '2500', courier: courier.code, token: this.state.token}
+        const URL4 = API + SHIPPING_COST;
+        fetch(URL4, {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(params),
+        }).then((res) => {
+            var resp = JSON.parse(res._bodyText);
+            self.setState({shipmentCostsO: resp.d.costs});
+            resp.d.costs.map(function(cost, i){
+                self.state.shipmentCosts.push({id: i, value: cost.service+' - '+cost.cost[0].value});
+            });
+        });
     }
 
     render() {
         var totalPrice = 0;
-        var shipmentPrice = 0;
         var totalPay = 0;
         this.state.items.map((product, index) => {
             totalPrice = totalPrice + product.price;
@@ -175,6 +201,11 @@ export default class ReviewOrder extends Component {
                                 label='pilih kurir'
                                 data={couriers}
                             />
+                            <Dropdown
+                                onChangeText={this.onChangeTextKurirCost}
+                                label='pilih tipe paket'
+                                data={this.state.shipmentCosts}
+                            />
                         </Card>
                     </View>
                     <View style={styles.totalBox}>
@@ -206,7 +237,7 @@ export default class ReviewOrder extends Component {
                                     currency: 'IDR',
                                     minimumFractionDigits: 0, 
                                     maximumFractionDigits: 0 
-                                        }).format(shipmentPrice)}</Text>
+                                        }).format(shipmentCost)}</Text>
                                 <Text style={{
                                     paddingTop: 10
                                     }}>{new Intl.NumberFormat('en-GB', { 
