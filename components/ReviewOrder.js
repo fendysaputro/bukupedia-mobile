@@ -10,10 +10,12 @@ import { AppRegistry,
   FlatList,
   ListView,
   AsyncStorage } from "react-native";
-import { List, ListItem } from "react-native-elements";
+import { Card, ButtonGroup } from 'react-native-elements'
 import { COLOR_PRIMARY } from "../styles/common";
-import { API, CART, ADDRESS } from '../components/Global';
+import { API, CART, ADDRESS, SHIPMENT_METHOD } from '../components/Global';
 import Image from 'react-native-scalable-image';
+import {getShipmentMethod, postShipmentCost} from '../services/FetchShipment';
+import { Dropdown } from 'react-native-material-dropdown';
 
 export default class ReviewOrder extends Component {
     static navigationOptions = {
@@ -31,7 +33,6 @@ export default class ReviewOrder extends Component {
 
     constructor (props) {
         super(props);
-        const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         this.state = {
           items: [],
           address: {
@@ -48,8 +49,9 @@ export default class ReviewOrder extends Component {
             status: '',
             subdistrict: ''
           },
-          dataSource: ds.cloneWithRows([]),
+          couriers: []
         }
+        this.onChangeTextKurir = this.onChangeTextKurir.bind(this);
     }
 
     ListViewItemSeparator = () => {
@@ -96,26 +98,50 @@ export default class ReviewOrder extends Component {
                         self.setState({address: resp.d[0]});
                     }
                 });
-        
+            
         });
+        const URL3 = API + SHIPMENT_METHOD;
+        fetch(URL3)
+                .then((res) => {
+                    var resp = JSON.parse(res._bodyText);
+                    if (resp.r) {
+                        console.log(resp.d.couriers);
+                        self.setState({couriers: resp.d.couriers});
+                    }
+                });
+    }
 
+    onChangeTextKurir() {
+        postShipmentCost
+            .then((res) => {
+                console.log('onChangeTextKurir');
+                console.log(res);
+            })
     }
 
     render() {
         var totalPrice = 0;
+        var shipmentPrice = 0;
+        var totalPay = 0;
         this.state.items.map((product, index) => {
             totalPrice = totalPrice + product.price;
         });
+        var couriers = [];
+        this.state.couriers.map((courier) => {
+            couriers.push({id: courier.code, value: courier.name});
+        })
         return (
             <ScrollView>
                 <View style={styles.root}>
-                    <View style={styles.addressBox}>
-                        <Text>Pengiriman Ke:</Text>
-                        <Text style={styles.addressTitle}>{'Name: '+this.state.address.name}</Text>
-                        <Text style={styles.addressTitle}>{'Company: '+this.state.address.company}</Text>
-                        <Text style={styles.addressTitle}>{'Address1: '+this.state.address.address}</Text>
-                        <Text style={styles.addressTitle}>{'Address2: '+this.state.address.regency}</Text>
-                        <Text style={styles.addressTitle}>{'Phone: '+this.state.address.phone}</Text>
+                <View style={styles.addressBox}>
+                        <Card
+                            title='Pengiriman Ke'>
+                            <Text style={styles.addressTitle}>{this.state.address.name}</Text>
+                            <Text style={styles.addressTitle}>{this.state.address.company}</Text>
+                            <Text style={styles.addressTitle}>{this.state.address.address}</Text>
+                            <Text style={styles.addressTitle}>{this.state.address.regency}</Text>
+                            <Text style={styles.addressTitle}>{this.state.address.phone}</Text>
+                        </Card>
                     </View>
                     <View style={styles.itemBox}>
                     {
@@ -129,41 +155,76 @@ export default class ReviewOrder extends Component {
                                 </View>
                                 <View style={styles.numberItem}>
                                     <Text style={{paddingTop:1}}>{product.title}</Text>
-                                    <Text>Rp. {product.price}</Text>
+                                    <Text>{new Intl.NumberFormat('en-GB', { 
+                                        style: 'currency', 
+                                        currency: 'IDR',
+                                        minimumFractionDigits: 0, 
+                                        maximumFractionDigits: 0 
+                                            }).format(product.price)}</Text>
                                     <Text style={{marginTop:30}}>Jumlah: {product.quantity}</Text>
-                                </View>
-                                <View style={styles.reviewShop}>
-                                    <Text>Ringkasan Belanja: </Text>
                                 </View>
                             </View>
                         ))
                     }
+                    </View>
+                    <View style={styles.shipmentBox}>
+                        <Card
+                            title='Kurir'>
+                            <Dropdown
+                                onChangeText={this.onChangeTextKurir}
+                                label='pilih kurir'
+                                data={couriers}
+                            />
+                        </Card>
+                    </View>
                     <View style={styles.totalBox}>
-                        <Text>Ringkasan Belanja: </Text>
-                        <View style={styles.reviewShop}>
-                            <Text>-Total Harga: </Text>
-                            <Text>-Total Shipment: </Text>
-                            <Text>-Total Pembayaran: </Text>
-                        </View>
-                        <View style={{alignSelf: 'flex-end', alignItems: 'flex-end'}}> 
-                            <Text>Rp. 50.000</Text>
-                            <Text>Rp. 50.000</Text>
-                            <Text>Rp. 100.000</Text>
-                        </View>
+                        <Card
+                            title='Ringkasan Belanja'>
+                            <View style={styles.reviewShop}>
+                                <Text>Total Harga Buku: </Text>
+                                <Text>Ongkos Kirim: </Text>
+                                <View
+                                    style={{
+                                        paddingTop: 10,
+                                        borderBottomColor: 'black',
+                                        borderBottomWidth: 1,
+                                    }}/>
+                                <Text style={{
+                                    paddingTop: 5
+                                    }}>Total Belanja: </Text>
+                            </View>
+                            <View style={{alignSelf: 'flex-end', alignItems: 'flex-end', position: 'absolute', paddingTop:55}}> 
+                                <Text>{new Intl.NumberFormat('en-GB', { 
+                                    style: 'currency', 
+                                    currency: 'IDR',
+                                    minimumFractionDigits: 0, 
+                                    maximumFractionDigits: 0 
+                                        }).format(totalPrice)}
+                                </Text>
+                                <Text>{new Intl.NumberFormat('en-GB', { 
+                                    style: 'currency', 
+                                    currency: 'IDR',
+                                    minimumFractionDigits: 0, 
+                                    maximumFractionDigits: 0 
+                                        }).format(shipmentPrice)}</Text>
+                                <Text style={{
+                                    paddingTop: 10
+                                    }}>{new Intl.NumberFormat('en-GB', { 
+                                        style: 'currency', 
+                                        currency: 'IDR',
+                                        minimumFractionDigits: 0, 
+                                        maximumFractionDigits: 0 
+                                            }).format(totalPay)}</Text>
+                            </View>
+                            <Button
+                                icon={{name: 'code'}}
+                                backgroundColor='#03A9F4'
+                                fontFamily='Lato'
+                                buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
+                                onPress={console.log('bayar')}
+                                title='Bayar' />
+                        </Card>
                     </View>
-                    </View>
-                    {/* <View style={{flexDirection:'row',justifyContent: 'space-between'}}>
-                        <Image width={60} source={{uri: 'https://randomuser.me/api/portraits/thumb/men/4.jpg'}}/>
-                        <View>
-                            <Text style={styles .unityName}>SUPERMERCADO MACCARTNEY</Text>
-                            <Text style={styles.subInfo}>Categoria: Mercado</Text>
-                            <Text style={styles.subInfo}>Pedido Nº: 1245</Text>
-                        </View>
-                    </View>
-                        <View style={styles.containerProducts}>
-                            <Text style={styles.productName}>1x 42 - Coca Cola 2L</Text>
-                        <View style={styles.minus}></View>
-                    </View> */}
                 </View>
             </ScrollView>
             );
@@ -178,31 +239,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
     },
-    productName: {
-        alignSelf: 'flex-start',
-      },
-      minus:{
-        width: 20,
-        height: 20,
-        borderRadius: 20/2,
-        backgroundColor: 'red',
-      },
-      containerInfo:{
-        paddingTop:15,
-        flexDirection:'row',
-        paddingLeft: 15,
-      },
-      unityName:{
-        fontWeight: 'bold',
-        paddingLeft: 15,
-      },
-      subInfo:{
-        color: 'gray',
-        paddingLeft: 15,
-      },
-      circle: {
-        justifyContent: 'flex-end',
-      },
     root: {
         flex: 1,
         flexDirection: 'column',
@@ -215,9 +251,6 @@ const styles = StyleSheet.create({
     addressBox: {
         flex: 1,
         width: '100%',
-        paddingLeft: 10,
-        paddingRight: 10,
-        borderBottomWidth: 1
     },
     sellerBox: {
         borderBottomWidth: 1,
@@ -240,17 +273,14 @@ const styles = StyleSheet.create({
     totalBox: {
         flex: 1,
         width: '100%',
-        height: 90,
-        paddingLeft: 10,
-        paddingRight: 10,
-        paddingTop: 10,
     },
     paymentBox: {
         flex: 1,
         width: '100%',
-        height: 50,
-        paddingLeft: 10,
-        paddingRight: 10
+    },
+    shipmentBox: {
+        flex: 1,
+        width: '100%',
     },
     containerTwo: {
         padding: 10,
@@ -268,5 +298,20 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingLeft: 10,
         justifyContent: 'flex-start'
-    }
+    },
+    submitButton: {
+        backgroundColor: "#00AEF2",
+        padding: 10,
+        margin: 15,
+        height: 35,
+        width: '100%'
+     },
+    submitButtonText:{
+        color: "white",
+        marginTop: -4,
+        textAlign: "center",
+        alignItems: "center",
+        alignSelf: "center",
+        fontSize: 15
+     },
 });

@@ -21,3 +21,4 @@ export const REGENCY = 'regency';
 export const SUBDISTRICT = 'subdistrict';
 export const WISHLIST = 'wishlist';
 export const REVIEW = 'review';
+export const SHIPPING_COST = 'shipping-cost';
