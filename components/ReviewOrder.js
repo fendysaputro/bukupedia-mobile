@@ -55,6 +55,7 @@ export default class ReviewOrder extends Component {
           shipmentCost: 0
         }
         this.onChangeTextKurir = this.onChangeTextKurir.bind(this);
+        this.onChangeTextKurirCost = this.onChangeTextKurirCost.bind(this);
     }
 
     ListViewItemSeparator = () => {
@@ -116,9 +117,11 @@ export default class ReviewOrder extends Component {
     }
 
     onChangeTextKurirCost(text) {
+        var service = text.split(' ')[0];
         var cost = this.state.shipmentCostsO.find(cost => 
-            cost.cost[0].value
+            cost.service === service
         );
+        this.setState({shipmentCost: cost.cost[0].value});
     }
 
     onChangeTextKurir(text) {
@@ -127,7 +130,6 @@ export default class ReviewOrder extends Component {
         courier = this.state.couriers.find(cour => 
             cour.name === text
         );
-        console.log(courier);
         var params = {subdistrict_id: '2500', courier: courier.code, token: this.state.token}
         const URL4 = API + SHIPPING_COST;
         fetch(URL4, {
@@ -152,6 +154,7 @@ export default class ReviewOrder extends Component {
         this.state.items.map((product, index) => {
             totalPrice = totalPrice + product.price;
         });
+        totalPay = totalPrice + this.state.shipmentCost;
         var couriers = [];
         this.state.couriers.map((courier) => {
             couriers.push({id: courier.code, value: courier.name});
@@ -237,7 +240,7 @@ export default class ReviewOrder extends Component {
                                     currency: 'IDR',
                                     minimumFractionDigits: 0, 
                                     maximumFractionDigits: 0 
-                                        }).format(shipmentCost)}</Text>
+                                        }).format(this.state.shipmentCost)}</Text>
                                 <Text style={{
                                     paddingTop: 10
                                     }}>{new Intl.NumberFormat('en-GB', { 
