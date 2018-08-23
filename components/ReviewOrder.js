@@ -14,7 +14,7 @@ import { Card, ButtonGroup } from 'react-native-elements'
 import { COLOR_PRIMARY } from "../styles/common";
 import { API, CART, ADDRESS, SHIPMENT_METHOD, SHIPPING_COST, PAYMENT_METHOD } from '../components/Global';
 import Image from 'react-native-scalable-image';
-import {getShipmentMethod, postShipmentCost} from '../services/FetchShipment';
+import {RadioGroup, RadioButton} from 'react-native-flexi-radio-button'
 import { Dropdown } from 'react-native-material-dropdown';
 
 export default class ReviewOrder extends Component {
@@ -53,10 +53,15 @@ export default class ReviewOrder extends Component {
           shipmentCosts: [],
           shipmentCostsO: [],
           shipmentCost: 0,
-          paymentMethods: []
+          paymentMethods: [
+            {
+                label: 'Default',
+            }
+          ],
         }
         this.onChangeTextKurir = this.onChangeTextKurir.bind(this);
         this.onChangeTextKurirCost = this.onChangeTextKurirCost.bind(this);
+        this.pressRadioPayment = this.pressRadioPayment.bind(this);
     }
 
     ListViewItemSeparator = () => {
@@ -85,6 +90,9 @@ export default class ReviewOrder extends Component {
             .then(function(res) {
                 var resObj = JSON.parse(res._bodyInit);
                 if (resObj.r) {
+                    // resObj.d.map(function(payment) {
+                    //     payment['label'] = payment.bank_name;
+                    // })
                     self.setState({paymentMethods: resObj.d});
                 }
             });
@@ -97,9 +105,7 @@ export default class ReviewOrder extends Component {
                 var resObj = JSON.parse(res._bodyText);
                 if ((resObj.r) || (res.status == 200)) {
                     self.setState({items: resObj.d});
-                    // self.setState({ds: this.state.ds.cloneWithRows(resObj.di)});
                 }else{
-                    // self.setState({loading: false});
                     self.props.navigation.navigate('Login');
                 }
                 })
@@ -157,8 +163,11 @@ export default class ReviewOrder extends Component {
         });
     }
 
+    pressRadioPayment() {
+
+    }
+
     render() {
-        console.log(this.state.paymentMethods);
         var totalPrice = 0;
         var totalPay = 0;
         this.state.items.map((product, index) => {
@@ -265,13 +274,26 @@ export default class ReviewOrder extends Component {
                     <View style={styles.paymentBox}>
                         <Card
                             title='Metode Pembayaran'>
-                            <Button
-                                icon={{name: 'code'}}
-                                backgroundColor='#03A9F4'
-                                fontFamily='Lato'
-                                buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
-                                onPress={console.log('bayar')}
-                                title='Bayar' />
+                            {/* <RadioGroup
+                                color='#9575b2'
+                                highlightColor='#ccc8b9'
+                                selectedIndex={1}
+                                onSelect = {(index, value) => this.onSelect(index, value)}
+                                >
+                                {
+                                    this.state.paymentMethods.map(function(paymentmtd){
+                                        console.log(paymentmtd);
+                                        // <RadioButton 
+                                        //     style={{alignItems:'center'}}
+                                        //     value={paymentmtd.bank_name}>
+                                        //     <Image
+                                        //         style={{width:10, height: 10}}
+                                        //         source={{uri:'https://cloud.githubusercontent.com/assets/21040043/18446298/fa576974-794b-11e6-8430-b31b30846084.jpg'}}
+                                        //     />
+                                        // </RadioButton>        
+                                    })
+                                }
+                            </RadioGroup> */}
                         </Card>
                     </View>
                 </View>
