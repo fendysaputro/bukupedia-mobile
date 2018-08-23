@@ -12,7 +12,7 @@ import { AppRegistry,
   AsyncStorage } from "react-native";
 import { Card, ButtonGroup } from 'react-native-elements'
 import { COLOR_PRIMARY } from "../styles/common";
-import { API, CART, ADDRESS, SHIPMENT_METHOD, SHIPPING_COST } from '../components/Global';
+import { API, CART, ADDRESS, SHIPMENT_METHOD, SHIPPING_COST, PAYMENT_METHOD } from '../components/Global';
 import Image from 'react-native-scalable-image';
 import {getShipmentMethod, postShipmentCost} from '../services/FetchShipment';
 import { Dropdown } from 'react-native-material-dropdown';
@@ -52,7 +52,8 @@ export default class ReviewOrder extends Component {
           couriers: [],
           shipmentCosts: [],
           shipmentCostsO: [],
-          shipmentCost: 0
+          shipmentCost: 0,
+          paymentMethods: []
         }
         this.onChangeTextKurir = this.onChangeTextKurir.bind(this);
         this.onChangeTextKurirCost = this.onChangeTextKurirCost.bind(this);
@@ -79,6 +80,14 @@ export default class ReviewOrder extends Component {
     componentDidMount( ){
         var self = this;
         this.setState({loading: true});
+        const URL = API + PAYMENT_METHOD;
+        fetch(URL)  
+            .then(function(res) {
+                var resObj = JSON.parse(res._bodyInit);
+                if (resObj.r) {
+                    self.setState({paymentMethods: resObj.d});
+                }
+            });
         AsyncStorage.getItem('id_token').then((token) => {
             self.setState({token: token});
             console.log(token);
@@ -149,6 +158,7 @@ export default class ReviewOrder extends Component {
     }
 
     render() {
+        console.log(this.state.paymentMethods);
         var totalPrice = 0;
         var totalPay = 0;
         this.state.items.map((product, index) => {
@@ -250,6 +260,11 @@ export default class ReviewOrder extends Component {
                                         maximumFractionDigits: 0 
                                             }).format(totalPay)}</Text>
                             </View>
+                        </Card>
+                    </View>
+                    <View style={styles.paymentBox}>
+                        <Card
+                            title='Metode Pembayaran'>
                             <Button
                                 icon={{name: 'code'}}
                                 backgroundColor='#03A9F4'
@@ -305,6 +320,10 @@ const styles = StyleSheet.create({
         width: '100%',
     },
     totalBox: {
+        flex: 1,
+        width: '100%',
+    },
+    paymentBox: {
         flex: 1,
         width: '100%',
     },
