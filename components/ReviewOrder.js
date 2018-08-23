@@ -274,7 +274,7 @@ export default class ReviewOrder extends Component {
                     <View style={styles.paymentBox}>
                         <Card
                             title='Metode Pembayaran'>
-                            {/* <RadioGroup
+                            <RadioGroup
                                 color='#9575b2'
                                 highlightColor='#ccc8b9'
                                 selectedIndex={1}
@@ -293,7 +293,7 @@ export default class ReviewOrder extends Component {
                                         // </RadioButton>        
                                     })
                                 }
-                            </RadioGroup> */}
+                            </RadioGroup>
                         </Card>
                     </View>
                 </View>
