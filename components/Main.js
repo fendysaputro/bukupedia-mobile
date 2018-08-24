@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { AppRegistry, StyleSheet, Text, View, Image, Search } from "react-native";
+import { AppRegistry, StyleSheet, Text, View, Image, Search, Icon } from "react-native";
 import { TabNavigator } from "react-navigation";
-import { NavigationComponent } from "react-native-material-bottom-navigation";
+// import { NavigationComponent } from "react-native-material-bottom-navigation";
 import { COLOR_PRIMARY, COLOR_SECONDARY, FONT_NORMAL } from '../styles/common';
 
 import Home from "./Home";
@@ -10,61 +10,77 @@ import Basket from "./Basket";
 import Orders from "./Orders";
 import WelcomeAccount from "./WelcomeAccount";
 import Account from "./Account";
-import MyOrderMain from "./MyOrderMain";
+import  MyOrderMain from "./MyOrderMain";
 
 const Main = TabNavigator( 
   {
-    Home: { screen: Home },
-    Category: { screen: Category },
-    Basket: { screen: Basket },
-    Orders: { screen: MyOrderMain},
-    Account: { screen: Account}
+    Home: { screen: Home, 
+      navigationOptions: ({ navigation }) => ({
+        tabBarIcon: ({tintColor}) => (
+          <Image source={require('../styles/icon/beranda.png')} style={{width: 28, height: 24}} tintColor="white"/>
+        ),
+      })},
+    Category: { screen: Category, 
+      navigationOptions: ({ navigation }) => ({
+        tabBarIcon: ({tintColor}) => (
+          <Image source={require('../styles/icon/kategori.png')} style={{width: 28, height: 24}} tintColor="white"/>
+        ),
+      })},
+    Basket: { screen: Basket, 
+      navigationOptions: ({ navigation }) => ({
+        tabBarIcon: ({tintColor}) => (
+          <Image source={require('../styles/icon/keranjang.png')} style={{width: 28, height: 24}} tintColor="white"/>
+        ),
+      })},
+    Orders: { screen: MyOrderMain,
+      navigationOptions: ({ navigation }) => ({
+        tabBarIcon: ({tintColor}) => (
+          <Image source={require('../styles/icon/pesanan.png')} style={{width: 28, height: 24}} tintColor="white"/>
+        ),
+      })},
+    Account: { screen: Account,
+      navigationOptions: ({ navigation }) => ({
+        tabBarIcon: ({tintColor}) => (
+          <Image source={require('../styles/icon/akun.png')} style={{width: 28, height: 24}} tintColor="white"/>
+        ),
+      })}
   },
   {
-    tabBarComponent: NavigationComponent,
+    // tabBarComponent: NavigationComponent,
     tabBarPosition: 'bottom',
     swipeEnabled: true,
     tabBarOptions: {
-      bottomNavigationOptions: {
-        showLabel: true,
+        showLabel: false,
+        showIcon: true,
         shifting: false,
-        labelColor: 'white',
-        activeLabelColor: 'yellow',
+        style: {
+          backgroundColor: COLOR_PRIMARY
+        },
+        iconStyle: {
+          padding: 0,
+          marginBottom: 0,
+          marginTop: 0
+        },
         tabs: {
           Home: {
-            barBackgroundColor: COLOR_PRIMARY,
-            label: 'Beranda',
-            labelColor: 'white',
-            icon:<Image source={require('../styles/icon/beranda.png')} style={{ width: 24, height: 24 }} />  
+            label:'beranda'
           },
           Category: {
-            barBackgroundColor: COLOR_PRIMARY,
-            label: 'Kategori',
-            labelColor: 'white',
-            icon:<Image source={require('../styles/icon/kategori.png')} style={{ width: 24, height: 24 }} />
+            label: 'kategori',
           },
           Basket: {
-            barBackgroundColor: COLOR_PRIMARY,
-            label: 'Keranjang',
-            labelColor: 'white',
-            icon:<Image source={require('../styles/icon/keranjang.png')} style={{ width: 24, height: 24 }} />        
+            label: 'keranjang',        
           },
           Orders: {
-            barBackgroundColor: COLOR_PRIMARY,
-            label: 'Pesanan',
-            labelColor: 'white',
-            icon:<Image source={require('../styles/icon/pesanan.png')} style={{ width: 24, height: 24 }} />
+            label: 'pesanan',
           },
           Account: {
-            barBackgroundColor: COLOR_PRIMARY,
-            label: 'Akun',
-            labelColor: 'white',
-            icon:<Image source={require('../styles/icon/akun.png')} style={{ width: 24, height: 24 }} />
+            label: 'akun',
           }
         }
       }
     }
-  }
+  // }
 );
 const styles = StyleSheet.create({
   container: {

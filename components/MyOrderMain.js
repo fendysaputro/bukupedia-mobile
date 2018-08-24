@@ -6,7 +6,7 @@ import { COLOR_PRIMARY, COLOR_SECONDARY, FONT_NORMAL } from '../styles/common';
 import PaymentWaiting from "./PaymentWaiting";
 import PaymentReceived from "./PaymentReceived";
 import {tabs} from "./Main";
-import {FooterBar} from "./Footer";
+import {FooterBar} from "./Footer"; 
 
 const MyOrderMain = TabNavigator({
     PaymentWaiting: {screen: PaymentWaiting},

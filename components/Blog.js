@@ -17,6 +17,18 @@ export default class Blog extends Component {
         }
     }
 
+    componentDidMount(){
+        this.replaceScreen();
+    }
+
+    replaceScreen = () => {
+        this.props.navigation.dispatch({
+          key: 'Blog',
+          type: 'ReplaceCurrentScreen',
+          routeName: 'Blog'
+        });
+      };
+
     render (){
         return(
             <WebView

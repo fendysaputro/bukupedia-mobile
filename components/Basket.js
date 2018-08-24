@@ -14,6 +14,7 @@ import Image from 'react-native-scalable-image';
 import Checkout from "../components/Checkout";
 import { itemTitle, itemPrice } from "../components/ProductDetail";
 import NumericInput from 'react-native-numeric-input';
+import Home from "./Home";
 
 export default class Basket extends Component {
   static navigationOptions = {
@@ -81,7 +82,8 @@ export default class Basket extends Component {
           <Text style={styles.smallText}>
             Semua belanjaan Anda akan masuk di sini
           </Text>
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity style={styles.button}
+            onPress = {this.props.navigation.navigate('Home')}>
               <Text style={styles.buttonText}>
                 Mulai Belanja
               </Text>
