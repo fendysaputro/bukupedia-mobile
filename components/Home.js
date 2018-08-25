@@ -65,9 +65,9 @@ export default class Home extends Component {
     },
     headerLeft: null,
     headerRight:
-      <TouchableOpacity onPress={() => navigation.navigate("Login")}
-        style={{margin:10, padding: 10, width: 50, height: 70}}>
+      <TouchableOpacity onPress={() => navigation.navigate("Login")}>
         <Image
+          style={{flex: 1, margin: 12.5, padding: 12.5, aspectRatio: 1.5, resizeMode: 'contain'}}
           source={require('../styles/icon/notification.png')}
         />
       </TouchableOpacity>
