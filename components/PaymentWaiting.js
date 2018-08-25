@@ -51,7 +51,7 @@ export default class PaymentWaiting extends Component {
       <View style={styles.container}>
         <Image 
           source={require('../styles/icon/emptystates2.png')}
-          style={{width: 250, height: 265}}>
+          style={{flex: 1, width: 170, height: 170, aspectRatio: 2, resizeMode:'contain'}}>
         </Image>
         <Text style={styles.text}>
           Anda Belum Memiliki Pesanan
@@ -73,7 +73,7 @@ export default class PaymentWaiting extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: "2%",
+    marginTop: "20%",
     alignItems: "center"
   },
   text: {
