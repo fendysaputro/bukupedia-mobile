@@ -22,7 +22,8 @@ export default class Register extends Component {
         headerTitleStyle: {
             width: '90%',
             textAlign: 'center'
-        }
+        },
+        headerLeft: null
     }
 
     constructor(props) {

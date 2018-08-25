@@ -17,6 +17,7 @@ import Button from "./Button";
 import Main from "./Main";
 import { COLOR_PRIMARY } from "../styles/common";
 import Home from "./Home";
+import Screen from "./Screen";
 
 export default class OnboardingScreens extends Component {
   static navigationOptions = {

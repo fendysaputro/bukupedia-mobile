@@ -16,6 +16,7 @@ import Password from "./Password";
 
 export default class Login extends Component {
     static navigationOptions = {
+        title: 'Login',
         headerTintColor : 'white',
         headerStyle: {
           backgroundColor: COLOR_PRIMARY,
@@ -24,7 +25,8 @@ export default class Login extends Component {
         headerTitleStyle: {
           width: '90%',
           textAlign: 'center'
-        }
+        },
+        headerLeft: null
       }
     constructor(props) {
         super(props);

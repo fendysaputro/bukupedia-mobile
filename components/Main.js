@@ -11,6 +11,7 @@ import Orders from "./Orders";
 import WelcomeAccount from "./WelcomeAccount";
 import Account from "./Account";
 import  MyOrderMain from "./MyOrderMain";
+import LoginMain from "./LoginMain";
 
 const Main = TabNavigator( 
   {

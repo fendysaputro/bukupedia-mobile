@@ -7,7 +7,14 @@ import Swiper from './Swiper';
 import Main from './Main';
 
 export default class Screen extends Component {
-
+    static navigationOptions = {
+        headerStyle: {
+          backgroundColor: COLOR_PRIMARY,
+          elevation: null
+        },
+        header: null,
+        headerLeft: null,
+      };
     constructor (props) {
         super(props);
         this.state = {
@@ -21,6 +28,14 @@ export default class Screen extends Component {
             firstime = JSON.parse(ft);
             this.setState({ firstime: firstime, isMounted: true });
         });
+        // AsyncStorage.getItem('firstime').then((firstime) => {
+        //     console.log(firstime);  
+        //     if (firstime !== 'null') {
+        //         this.setState({ firstime: true })
+        //     }else{
+        //         this.setState({ firstime: false })
+        //     }
+        // });
     }
 
     componentWillUnmount() {

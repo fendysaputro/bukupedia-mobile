@@ -64,8 +64,14 @@ export default App = StackNavigator({
     }
   },
   app: {
+    screen: Screen,
+    navigationOptions: {
+    }
+  },
+  Main: {
     screen: Main,
     navigationOptions: {
+
     }
   },
   Screen: {
