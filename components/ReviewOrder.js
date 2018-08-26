@@ -14,7 +14,7 @@ import { Card, ButtonGroup } from 'react-native-elements'
 import { COLOR_PRIMARY } from "../styles/common";
 import { API, CART, ADDRESS, SHIPMENT_METHOD, SHIPPING_COST, PAYMENT_METHOD } from '../components/Global';
 import Image from 'react-native-scalable-image';
-import {RadioGroup, RadioButton} from 'react-native-flexi-radio-button'
+import {RadioGroup, RadioButton} from 'react-native-flexi-radio-button';
 import { Dropdown } from 'react-native-material-dropdown';
 
 export default class ReviewOrder extends Component {
@@ -53,34 +53,13 @@ export default class ReviewOrder extends Component {
           shipmentCosts: [],
           shipmentCostsO: [],
           shipmentCost: 0,
-          paymentMethods: [
-            {
-                label: 'Default',
-            }
-          ],
+          paymentMethods: [],
+          paymentMethod: {}
         }
         this.onChangeTextKurir = this.onChangeTextKurir.bind(this);
         this.onChangeTextKurirCost = this.onChangeTextKurirCost.bind(this);
         this.pressRadioPayment = this.pressRadioPayment.bind(this);
     }
-
-    ListViewItemSeparator = () => {
-        return (
-          <View
-            style={{
-              height: .5,
-              width: "100%",
-              backgroundColor: "#000",
-            }}
-          />
-        );
-      }
-     
-    GetListViewItem (rowData) {
-       
-      Alert.alert(rowData);
-     
-      }
 
     componentDidMount( ){
         var self = this;
@@ -90,9 +69,10 @@ export default class ReviewOrder extends Component {
             .then(function(res) {
                 var resObj = JSON.parse(res._bodyInit);
                 if (resObj.r) {
-                    // resObj.d.map(function(payment) {
-                    //     payment['label'] = payment.bank_name;
-                    // })
+                    resObj.d.map(function(payment) {
+                        payment['label'] = payment.bank_name;
+                        payment['value'] = payment.id;
+                    })
                     self.setState({paymentMethods: resObj.d});
                 }
             });
@@ -125,7 +105,6 @@ export default class ReviewOrder extends Component {
                 .then((res) => {
                     var resp = JSON.parse(res._bodyText);
                     if (resp.r) {
-                        console.log(resp.d.couriers);
                         self.setState({couriers: resp.d.couriers});
                     }
                 });
@@ -163,8 +142,8 @@ export default class ReviewOrder extends Component {
         });
     }
 
-    pressRadioPayment() {
-
+    onSelectPayment(index, value) {
+        this.setState({paymentMethod: this.state.paymentMethods[index]});
     }
 
     render() {
@@ -178,6 +157,13 @@ export default class ReviewOrder extends Component {
         this.state.couriers.map((courier) => {
             couriers.push({id: courier.code, value: courier.name});
         })
+        let radioBtn =  this.state.paymentMethods.map(function(payment, i){
+            return <RadioButton key={payment.id} value={payment.value} >
+                    {/* <Text>{payment.label}</Text> */}
+                    <Image width={50}
+                        source={{uri:payment.picture}}/>
+                   </RadioButton>;
+        });
         return (
             <ScrollView>
                 <View style={styles.root}>
@@ -275,23 +261,9 @@ export default class ReviewOrder extends Component {
                         <Card
                             title='Metode Pembayaran'>
                             <RadioGroup
-                                color='#9575b2'
-                                highlightColor='#ccc8b9'
-                                selectedIndex={1}
-                                onSelect = {(index, value) => this.onSelect(index, value)}
-                                >
+                                onSelect = {(index, value) => this.onSelectPayment(index, value)}>
                                 {
-                                    this.state.paymentMethods.map(function(paymentmtd){
-                                        console.log(paymentmtd);
-                                        // <RadioButton 
-                                        //     style={{alignItems:'center'}}
-                                        //     value={paymentmtd.bank_name}>
-                                        //     <Image
-                                        //         style={{width:10, height: 10}}
-                                        //         source={{uri:'https://cloud.githubusercontent.com/assets/21040043/18446298/fa576974-794b-11e6-8430-b31b30846084.jpg'}}
-                                        //     />
-                                        // </RadioButton>        
-                                    })
+                                    radioBtn
                                 }
                             </RadioGroup>
                         </Card>
