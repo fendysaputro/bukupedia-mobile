@@ -58,7 +58,7 @@ export default class ReviewOrder extends Component {
         }
         this.onChangeTextKurir = this.onChangeTextKurir.bind(this);
         this.onChangeTextKurirCost = this.onChangeTextKurirCost.bind(this);
-        this.pressRadioPayment = this.pressRadioPayment.bind(this);
+        this.onSelectPayment = this.onSelectPayment.bind(this);
     }
 
     componentDidMount( ){
@@ -266,6 +266,11 @@ export default class ReviewOrder extends Component {
                                     radioBtn
                                 }
                             </RadioGroup>
+                            <TouchableOpacity 
+                                style = {styles.submitButton}
+                                onPress = {() => this.props.navigation.navigate("ReviewOrder") }>
+                                <Text style={styles.submitButtonText}>Bayar</Text>
+                            </TouchableOpacity>
                         </Card>
                     </View>
                 </View>
@@ -351,7 +356,7 @@ const styles = StyleSheet.create({
         padding: 10,
         margin: 15,
         height: 35,
-        width: '100%'
+        width: 290
      },
     submitButtonText:{
         color: "white",
@@ -360,5 +365,5 @@ const styles = StyleSheet.create({
         alignItems: "center",
         alignSelf: "center",
         fontSize: 15
-     },
+     }
 });
