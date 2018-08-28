@@ -24,7 +24,8 @@ export default class PaymentWaiting extends Component {
     headerTitleStyle: {
       width: '90%',
       textAlign: 'center'
-    }
+    },
+    headerLeft: null
   }
 
   constructor (props) {
@@ -60,7 +61,7 @@ export default class PaymentWaiting extends Component {
           pantau status pesanan Anda di sini
         </Text>
         <TouchableOpacity style={styles.button}
-          onPress = {() => this.alertItemName("fendy")}>
+          onPress = {() => this.props.navigation.navigate("Main")}>
             <Text style={styles.buttonText}>
               Buat Pesanan
             </Text>

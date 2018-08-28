@@ -19,6 +19,7 @@ export default class PaymentReceived extends Component {
       width: '90%',
       textAlign: 'center'
     },
+    headerLeft: null
   }
 
   alertItemName = () => {

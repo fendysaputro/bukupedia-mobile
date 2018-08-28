@@ -76,9 +76,9 @@ export default class Account extends Component {
       textAlign: 'center'
     },
     headerRight:
-      <TouchableOpacity onPress={() => navigation.navigate("Login")}
-        style={{marginRight: 5, width: 40, height: 40}}>
+      <TouchableOpacity onPress={() => navigation.navigate("Login")}>
         <Image
+          style={{flex: 1, margin: 12.5, padding: 12.5, aspectRatio: 1.5, resizeMode: 'contain'}}
           source={require('../styles/icon/akunsetting.png')}
         />
       </TouchableOpacity>
