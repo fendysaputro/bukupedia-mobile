@@ -43,7 +43,7 @@ export default class Screen extends Component {
     }
 
     render(){
-        if (this.state.firstime) {
+        if (this.state.firstime == 'firstime') {
             return (
                 <Swiper navigation={this.props.navigation}>
                     {/* First screen */}

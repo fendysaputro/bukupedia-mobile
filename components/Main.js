@@ -12,6 +12,7 @@ import WelcomeAccount from "./WelcomeAccount";
 import Account from "./Account";
 import  MyOrderMain from "./MyOrderMain";
 import LoginMain from "./LoginMain";
+import { onLogin } from "./Login"
 
 const Main = TabNavigator( 
   {
@@ -45,7 +46,7 @@ const Main = TabNavigator(
           <Image source={require('../styles/icon/akun.png')} style={{width: 28, height: 24}} tintColor="white"/>
         ),
       })}
-  },
+    },
   {
     // tabBarComponent: NavigationComponent,
     tabBarPosition: 'bottom',

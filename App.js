@@ -74,12 +74,12 @@ export default App = StackNavigator({
 
     }
   },
-  Screen: {
-    screen: Screen,
-    navigationOptions: {
-      title: "Screen"
-    }
-  },
+  // Screen: {
+  //   screen: Screen,
+  //   navigationOptions: {
+  //     title: "Screen"
+  //   }
+  // },
   Swiper: {
     screen: Swiper,
     navigationOptions: {

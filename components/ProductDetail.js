@@ -47,7 +47,7 @@ export default class ProductDetail extends Component {
                 <HeaderButtons.Item 
                     title="search" 
                     iconName="search" 
-                    onPress={() => navigation.navigate("Login")} 
+                    onPress={() => alert("Searching")} 
                 />
                 <HeaderButtons.Item
                     title="akun" 
