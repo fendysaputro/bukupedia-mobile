@@ -197,12 +197,6 @@ export default class ProductDetail extends Component {
                         </View>
                     </ScrollView>
                 </View>
-                <TouchableOpacity style={styles.wishList}
-                    onPress={() => {console.log("pressed")}}>
-                        <Image 
-                            source={require('../styles/icon/wishlist.png')}
-                        />
-                </TouchableOpacity>
                 <View style={[styles.footer]}>
                     <TouchableOpacity style={styles.image}
                         onPress={() => this.props.navigation.navigate("Basket")}>
@@ -393,13 +387,6 @@ const styles = StyleSheet.create({
         left: '5%',
         width: 80,
         height: 45
-    },
-    wishList:{
-        position: 'absolute',
-        right: '5%',
-        top: 20,
-        width: 47,
-        height: 47
     },
     modal:{
         height: 300
