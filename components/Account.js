@@ -88,30 +88,25 @@ export default class Account extends Component {
     listTwo: [
       {
         id: 0,
-        title: 'Wishlist',
-        link: 'Wishlist'
-      },
-      {
-        id: 1,
         title: 'Buku Poin',
       },
       {
-        id: 2,
+        id: 1,
         title: 'Blog Kami',
         link: 'Blog'
       },
       {
-        id: 3,
+        id: 2,
         title: 'Rating Aplikasi',
         link: 'NewRating'
       },
       {
-        id: 4,
+        id: 3,
         title: 'Bantuan',
         link: 'HowToPay'
       },
       {
-        id: 5,
+        id: 4,
         title: 'Alamat',
         link: 'AddressMain'
       },
