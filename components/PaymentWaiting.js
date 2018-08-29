@@ -52,7 +52,7 @@ export default class PaymentWaiting extends Component {
       <View style={styles.container}>
         <Image 
           source={require('../styles/icon/emptystates2.png')}
-          style={{flex: 1, width: 170, height: 170, aspectRatio: 2, resizeMode:'contain'}}>
+          style={{flex: 1, width: 170, height: 170, aspectRatio: 2.5, resizeMode:'contain'}}>
         </Image>
         <Text style={styles.text}>
           Anda Belum Memiliki Pesanan
