@@ -15,6 +15,7 @@ import Checkout from "../components/Checkout";
 import { itemTitle, itemPrice } from "../components/ProductDetail";
 import NumericInput from 'react-native-numeric-input';
 import Home from "./Home";
+import Main from "./Main";
 
 export default class Basket extends Component {
   static navigationOptions = {
@@ -74,7 +75,7 @@ export default class Basket extends Component {
         <View style={styles.container}>
           <Image 
             source={require('../styles/icon/emptystates1.png')}
-            style={{width: 250, height: 150}}>
+            style={{flex: 1, aspectRatio: 2, resizeMode: 'contain', width: 250, height: 150}}>
           </Image>
           <Text style={styles.text}>
             Keranjang Belanja Anda Kosong
