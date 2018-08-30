@@ -149,7 +149,7 @@ export default class Checkout extends Component {
                 />
             </View>
                 <TouchableOpacity style = {styles.submitButton}
-                    onPress = {() => this.props.navigation.navigate("ReviewOrder") }>
+                    onPress = {() => this.props.navigation.navigate("ReviewOrder", {address:this.state.address}) }>
                     <Text style={styles.submitButtonText}>Lanjutkan</Text>
                 </TouchableOpacity>
             </ScrollView>

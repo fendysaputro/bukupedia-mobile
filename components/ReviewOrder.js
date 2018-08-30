@@ -63,7 +63,10 @@ export default class ReviewOrder extends Component {
 
     componentDidMount( ){
         var self = this;
-        this.setState({loading: true});
+        const { navigation } = this.props;
+        const address = navigation.getParam('address', 'NO-address');
+        this.setState({loading: true, address: address});
+        console.log(this.state.address);
         const URL = API + PAYMENT_METHOD;
         fetch(URL)  
             .then(function(res) {
