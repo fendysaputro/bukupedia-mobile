@@ -13,6 +13,8 @@ import Image from 'react-native-scalable-image';
 import Main from "./Main";
 import getListOrder from "../services/FetchOrder";
 import Home from "./Home";
+import { API, LIST_ORDER } from '../components/Global';
+import { Card } from 'react-native-elements';
 
 export default class PaymentWaiting extends Component {
   static navigationOptions = {
@@ -31,42 +33,62 @@ export default class PaymentWaiting extends Component {
 
   constructor (props) {
     super(props);
-
+    this.state = {
+      orders: []
+    }
   }
 
   componentDidMount() {
     AsyncStorage.getItem('id_token').then((token) => {
-      console.log(token);
-      // getListOrder(token)
-      //   .then((res) => {
-      //     console.log(res);
-      // });
+      const URL = API + LIST_ORDER + '?token=' + token;
+      fetch(URL)
+            .then((res) => {
+              var resObj = JSON.parse(res._bodyText);
+              if (resObj.r) {
+                this.setState({orders: resObj.d})
+              }
+            });
     });
   }
 
-  alertItemName = () => {
-    alert()
-  }
-
   render () {
+    console.log('PaymentWaiting orders');
+    console.log(this.state.orders);
+    var contentPayment = <View></View>;
+    if (this.state.orders.length == 0) {
+      contentPayment = <View style={styles.container}>
+                          <Image 
+                            source={require('../styles/icon/emptystates2.png')}
+                            style={{flex: 1, width: 170, height: 170, aspectRatio: 2.5, resizeMode:'contain'}}>
+                          </Image>
+                          <Text style={styles.text}>
+                            Anda Belum Memiliki Pesanan
+                          </Text>
+                          <Text style={styles.smallText}>
+                            pantau status pesanan Anda di sini
+                          </Text>
+                          <TouchableOpacity style={styles.button}
+                            onPress = {() => this.props.navigation.navigate("Home")}>
+                              <Text style={styles.buttonText}>
+                                Buat Pesanan
+                              </Text>
+                          </TouchableOpacity>
+                        </View>;
+    }else{
+      contentPayment = <View style={styles.containerOrder}>
+                        {
+                          this.state.orders.map(function(order, i){
+                            return <Card key={i} title={'Invoice No. ' + order.invoice_no}>
+                                    <Text>Text 1</Text>
+                                    <Text>Text 2</Text>
+                                   </Card>;
+                          })
+                        }
+                      </View>
+    }
     return (
-      <View style={styles.container}>
-        <Image 
-          source={require('../styles/icon/emptystates2.png')}
-          style={{flex: 1, width: 170, height: 170, aspectRatio: 2.5, resizeMode:'contain'}}>
-        </Image>
-        <Text style={styles.text}>
-          Anda Belum Memiliki Pesanan
-        </Text>
-        <Text style={styles.smallText}>
-          pantau status pesanan Anda di sini
-        </Text>
-        <TouchableOpacity style={styles.button}
-          onPress = {() => this.props.navigation.navigate("Home")}>
-            <Text style={styles.buttonText}>
-              Buat Pesanan
-            </Text>
-        </TouchableOpacity>
+      <View>
+        { contentPayment }
       </View>
     );
   }
@@ -77,6 +99,10 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: "20%",
     alignItems: "center"
+  },
+  containerOrder: {
+    flex: 1,
+    width: '100%',
   },
   text: {
     fontSize: 17,

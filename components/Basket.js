@@ -55,8 +55,6 @@ export default class Basket extends Component {
       const URL = API + CART + '?token=' + token;
       fetch(URL)  
         .then(function(res) {
-          console.log('componentDidMount: res');
-          console.log(res);
           var resObj = JSON.parse(res._bodyText);
           if ((resObj.r) || (res.status == 200)) {
             self.setState({carts: resObj.d});
