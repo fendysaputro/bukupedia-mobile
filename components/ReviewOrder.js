@@ -67,7 +67,6 @@ export default class ReviewOrder extends Component {
         const { navigation } = this.props;
         const address = navigation.getParam('address', 'NO-address');
         this.setState({loading: true, address: address});
-        console.log(this.state.address);
         const URL = API + PAYMENT_METHOD;
         fetch(URL)  
             .then(function(res) {
@@ -95,16 +94,7 @@ export default class ReviewOrder extends Component {
                 }else{
                     self.props.navigation.navigate('Login');
                 }
-                })
-            
-            const URL2 = API + ADDRESS + '?token=' + token;
-            fetch(URL2)
-                .then((res) => {
-                    var resp = JSON.parse(res._bodyText);
-                    if (resp.r) {
-                        self.setState({address: resp.d[0]});
-                    }
-                });
+            })
             
         });
         const URL3 = API + SHIPMENT_METHOD;
@@ -121,7 +111,19 @@ export default class ReviewOrder extends Component {
         var params = {user_id: this.state.user.id, bank_id: 
             this.state.paymentMethod.id, 
             courier_name: this.state.courier.name,
-            courier_cost: this.state.shipmentCost}
+            courier_cost: this.state.shipmentCost,
+            cust_name: this.state.address.name,
+            cust_company: this.state.address.company,
+            cust_division: this.state.address.division,
+            cust_phone: this.state.address.phone,
+            cust_email: this.state.address.email,
+            cust_address: this.state.address.address,
+            subdistrict: this.state.address.subdistrict,
+            regency: this.state.address.regency,
+            province: this.state.address.province,
+            postcode: this.state.address.postcode,
+            order: this.state.items
+        }
         console.log('params');
         console.log(params);
     }
