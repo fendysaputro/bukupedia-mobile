@@ -59,6 +59,7 @@ export default class ReviewOrder extends Component {
         this.onChangeTextKurir = this.onChangeTextKurir.bind(this);
         this.onChangeTextKurirCost = this.onChangeTextKurirCost.bind(this);
         this.onSelectPayment = this.onSelectPayment.bind(this);
+        this.onSubmitOrder = this.onSubmitOrder.bind(this);
     }
 
     componentDidMount( ){
@@ -76,9 +77,12 @@ export default class ReviewOrder extends Component {
                     self.setState({paymentMethods: resObj.d});
                 }
             });
+        AsyncStorage.getItem('user').then((user) => {
+            var userObj = JSON.parse(user);
+            this.setState({user: userObj.user});
+        });
         AsyncStorage.getItem('id_token').then((token) => {
             self.setState({token: token});
-            console.log(token);
             const URL = API + CART + '?token=' + token;
             fetch(URL)  
                 .then(function(res) {
@@ -110,6 +114,15 @@ export default class ReviewOrder extends Component {
                 });
     }
 
+    onSubmitOrder() {
+        var params = {user_id: this.state.user.id, bank_id: 
+            this.state.paymentMethod.id, 
+            courier_name: this.state.courier.name,
+            courier_cost: this.state.shipmentCost}
+        console.log('params');
+        console.log(params);
+    }
+
     onChangeTextKurirCost(text) {
         var service = text.split(' ')[0];
         var cost = this.state.shipmentCostsO.find(cost => 
@@ -124,6 +137,7 @@ export default class ReviewOrder extends Component {
         courier = this.state.couriers.find(cour => 
             cour.name === text
         );
+        this.setState({courier: courier});
         var params = {subdistrict_id: '2500', courier: courier.code, token: this.state.token}
         const URL4 = API + SHIPPING_COST;
         fetch(URL4, {
@@ -268,7 +282,7 @@ export default class ReviewOrder extends Component {
                             </RadioGroup>
                             <TouchableOpacity 
                                 style = {styles.submitButton}
-                                onPress = {() => this.props.navigation.navigate("ReviewOrder") }>
+                                onPress = {() => this.onSubmitOrder() }>
                                 <Text style={styles.submitButtonText}>Bayar</Text>
                             </TouchableOpacity>
                         </Card>
