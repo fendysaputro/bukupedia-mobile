@@ -55,11 +55,11 @@ export default class Basket extends Component {
       const URL = API + CART + '?token=' + token;
       fetch(URL)  
         .then(function(res) {
+          console.log('componentDidMount: res');
+          console.log(res);
           var resObj = JSON.parse(res._bodyText);
           if ((resObj.r) || (res.status == 200)) {
             self.setState({carts: resObj.d});
-          }else{
-            self.props.navigation.navigate('Login');
           }
         })
     });
@@ -83,8 +83,9 @@ export default class Basket extends Component {
           <Text style={styles.smallText}>
             Semua belanjaan Anda akan masuk di sini
           </Text>
-          <TouchableOpacity style={styles.button}
-            onPress = {this.props.navigation.navigate('Home')}>
+          <TouchableOpacity 
+            style={styles.button}
+            onPress = {() => this.props.navigation.navigate('Home')}>
               <Text style={styles.buttonText}>
                 Mulai Belanja
               </Text>

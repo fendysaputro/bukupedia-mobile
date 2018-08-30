@@ -118,6 +118,7 @@ export default class ReviewOrder extends Component {
             courier_name: this.state.courier.name,
             courier_cost: this.state.shipmentCost,
             cust_name: this.state.address.name,
+            cust_email: this.state.address.email,
             cust_company: this.state.address.company,
             cust_division: this.state.address.division,
             cust_phone: this.state.address.phone,
