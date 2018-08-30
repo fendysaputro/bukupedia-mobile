@@ -5,7 +5,7 @@ import TabNavigator from "react-native-tab-navigator";
 import BottomNavigation, { Tab } from "react-native-material-bottom-navigation";
 import {tabs} from "./Main";
 
-import Main from "./Main";
+import Home from "./Home";
 
 export default class PaymentReceived extends Component {
   static navigationOptions = {
@@ -40,7 +40,7 @@ export default class PaymentReceived extends Component {
           Pesanan Anda akan segera kami proses
         </Text>
         <TouchableOpacity style={styles.button}
-          onPress = {() => this.props.navigation.navigate("Main")}>
+          onPress = {() => this.props.navigation.navigate("Home")}>
             <Text style={styles.buttonText}>
               Kembali Ke beranda
             </Text>

@@ -75,7 +75,7 @@ export default class Basket extends Component {
         <View style={styles.container}>
           <Image 
             source={require('../styles/icon/emptystates1.png')}
-            style={{flex: 1, aspectRatio: 2, resizeMode: 'contain', width: 250, height: 150}}>
+            style={{flex: 1, aspectRatio: 2, resizeMode: 'contain', width: 170, height: 150}}>
           </Image>
           <Text style={styles.text}>
             Keranjang Belanja Anda Kosong
