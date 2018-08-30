@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Platform, StyleSheet, StatusBar, Text, View, AsyncStorage } from "react-native";
+import { Platform, StyleSheet, StatusBar, Text, View, AsyncStorage, BackHandler } from "react-native";
 import { StackNavigator } from "react-navigation";
 import { COLOR_PRIMARY, COLOR_SECONDARY } from "./styles/common";
 
@@ -74,12 +74,6 @@ export default App = StackNavigator({
 
     }
   },
-  // Screen: {
-  //   screen: Screen,
-  //   navigationOptions: {
-  //     title: "Screen"
-  //   }
-  // },
   Swiper: {
     screen: Swiper,
     navigationOptions: {

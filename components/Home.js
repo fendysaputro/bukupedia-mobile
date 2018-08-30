@@ -10,7 +10,10 @@ import { AppRegistry,
           Dimensions, 
           ScrollView, 
           TouchableOpacity, 
-          TouchableHighlight } from "react-native";
+          TouchableHighlight, 
+          BackAndroid, 
+          Alert,
+          BackHandler } from "react-native";
 import { COLOR_PRIMARY, sliderWidth, itemWidth } from "../styles/common";
 import TabNavigator from "react-native-tab-navigator";
 import BottomNavigation, { Tab } from "react-native-material-bottom-navigation";
@@ -48,6 +51,26 @@ export default class Home extends Component {
           .then((res) => {
             this.setState({ new_products: res.d });
           });
+
+          let self = this;
+      BackAndroid.addEventListener('hardwareBackPress', () => {
+        if(self.props.navigation.navigate > 0) {
+          this.props.dispatch({ type:"Navigation/BACK" });
+          return true;
+        } 
+        else {
+          Alert.alert(
+          'Exit App',
+          'Exiting the application?',
+        [
+          {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+          {text: 'OK', onPress: () => BackHandler.exitApp() },
+        ],
+          { cancelable: false }
+        )
+      return true;
+      }
+    });
   }
 
   static navigationOptions = ({navigation}) => ({
