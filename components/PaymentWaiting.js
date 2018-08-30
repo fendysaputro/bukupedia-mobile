@@ -12,6 +12,7 @@ import BottomNavigation, { Tab } from "react-native-material-bottom-navigation";
 import Image from 'react-native-scalable-image';
 import Main from "./Main";
 import getListOrder from "../services/FetchOrder";
+import Home from "./Home";
 
 export default class PaymentWaiting extends Component {
   static navigationOptions = {
@@ -61,7 +62,7 @@ export default class PaymentWaiting extends Component {
           pantau status pesanan Anda di sini
         </Text>
         <TouchableOpacity style={styles.button}
-          onPress = {() => this.props.navigation.navigate("Main")}>
+          onPress = {() => this.props.navigation.navigate("Home")}>
             <Text style={styles.buttonText}>
               Buat Pesanan
             </Text>
