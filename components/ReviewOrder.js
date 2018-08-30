@@ -16,6 +16,7 @@ import { API, CART, ADDRESS, SHIPMENT_METHOD, SHIPPING_COST, PAYMENT_METHOD } fr
 import Image from 'react-native-scalable-image';
 import {RadioGroup, RadioButton} from 'react-native-flexi-radio-button';
 import { Dropdown } from 'react-native-material-dropdown';
+import { PostOrderPayment } from '../services/FetchPayment';
 
 export default class ReviewOrder extends Component {
     static navigationOptions = {
@@ -108,6 +109,10 @@ export default class ReviewOrder extends Component {
     }
 
     onSubmitOrder() {
+        var products = [];
+        this.state.items.map(function(product){
+            products.push({product_id: product.id, quantity: product.quantity});
+        })
         var params = {user_id: this.state.user.id, bank_id: 
             this.state.paymentMethod.id, 
             courier_name: this.state.courier.name,
@@ -122,10 +127,14 @@ export default class ReviewOrder extends Component {
             regency: this.state.address.regency,
             province: this.state.address.province,
             postcode: this.state.address.postcode,
-            order: this.state.items
+            order: products
         }
         console.log('params');
-        console.log(params);
+        console.log(JSON.stringify(params));
+        PostOrderPayment(params)
+            .then((res) => {
+                console.log(res);
+            })
     }
 
     onChangeTextKurirCost(text) {
