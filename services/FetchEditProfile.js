@@ -1,7 +1,7 @@
 import { API, PROFILE } from '../components/Global';
 
-export const postEditProfile = (params) => {
-    const URL = API + PROFILE;
+export const postEditProfile = (params, id, token) => {
+    const URL = API + PROFILE + '/' + id + '?token=' + token;
     return fetch(URL, {
         method: 'POST',
         headers: {
