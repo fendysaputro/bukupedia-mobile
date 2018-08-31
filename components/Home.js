@@ -52,13 +52,13 @@ export default class Home extends Component {
             this.setState({ new_products: res.d });
           });
 
-          let self = this;
-      BackAndroid.addEventListener('hardwareBackPress', () => {
-        if(self.props.navigation.navigate > 0) {
-          this.props.dispatch({ type:"Navigation/BACK" });
+      BackHandler.addEventListener('hardwareBackPress', () => {
+        let self = this;
+        console.log(self.props.navigation.state.key);
+        if(!self.props.navigation.index > 0) {
+          this.props.navigation.navigate("Home");
           return true;
-        } 
-        else {
+        }else {
           Alert.alert(
           'Exit App',
           'Exiting the application?',
@@ -68,7 +68,7 @@ export default class Home extends Component {
         ],
           { cancelable: false }
         )
-      return true;
+        return true;
       }
     });
   }
