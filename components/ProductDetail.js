@@ -204,15 +204,17 @@ export default class ProductDetail extends Component {
                             MainElement={
                                 <Image
                                     source={require('../styles/icon/keranjang-aktif.png')}
+                                    style={{aspectRatio: 0.9, width: 30, height: 30, resizeMode: 'contain'}}
                                 />
                             }
                             BadgeElement={
                                 <Text style={{color:'#FFFFFF'}}>{this.state.qty_cart}</Text>
                             }
                             IconBadgeStyle={
-                                {
-                                    width:30,
-                                    height:30,
+                                {   
+                                    left:40,
+                                    width:20,
+                                    height:20,
                                     backgroundColor: '#3bafff'
                                 }
                             }

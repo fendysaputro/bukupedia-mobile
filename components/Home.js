@@ -55,7 +55,7 @@ export default class Home extends Component {
       BackHandler.addEventListener('hardwareBackPress', () => {
         let self = this;
         console.log(self.props.navigation.state.key);
-        if(!self.props.navigation.state.key) {
+        if(self.props.navigation.state.key) {
           this.props.navigation.navigate("Home");
           return true;
         }else {
