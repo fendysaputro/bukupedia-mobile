@@ -177,7 +177,14 @@ export default class ProductDetail extends Component {
                         <View style={styles.box2}>
                             <Text style={styles.itemTitle}>{this.state.data.title}</Text>
                             <Text style={styles.itemAuthor}> {this.state.data.authors}</Text>
-                            <Text style={styles.itemPrice}>Rp. {this.state.data.price}</Text>
+                            <Text style={styles.itemPrice}>
+                                {new Intl.NumberFormat('en-GB', { 
+                                style: 'currency', 
+                                currency: 'IDR',
+                                minimumFractionDigits: 0, 
+                                maximumFractionDigits: 0 
+                                }).format(this.state.data.price)}
+                            </Text>
                         </View>
                         <Text style={styles.textRegister}>  </Text>
                         <View style={styles.box3}>

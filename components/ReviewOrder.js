@@ -135,6 +135,7 @@ export default class ReviewOrder extends Component {
         PostOrderPayment(params)
             .then((res) => {
                 console.log(res);
+                this.props.navigation.navigate('Home');
             })
     }
 
