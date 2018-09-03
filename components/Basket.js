@@ -73,7 +73,7 @@ export default class Basket extends Component {
         <View style={styles.container}>
           <Image 
             source={require('../styles/icon/emptystates1.png')}
-            style={{aspectRatio: 2, resizeMode: 'contain', width: 100, height: 100}}>
+            style={{flex:1, aspectRatio: 2, resizeMode: 'contain', width: 170, height: 170}}>
           </Image>
           <Text style={styles.text}>
             Keranjang Belanja Anda Kosong
@@ -185,7 +185,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 15,
     textAlign: "center",
-    marginTop: "15%",
+    marginTop: "10%",
     fontWeight: "bold" 
   },
   smallText: {

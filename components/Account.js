@@ -21,6 +21,8 @@ import ContentFormFaq from "../components/ContentFormFaq";
 import HowToShop from "../components/HowToShop";
 import HowToPay from "../components/HowToPay";
 import Blog from "../components/Blog";
+import { getLogout } from "../services/FetchLogout";
+import Home from "../components/Home";
 
 export default class Account extends Component {
 
@@ -63,6 +65,11 @@ export default class Account extends Component {
       routeName: 'WelcomeAccount'
     });
   };
+
+  onLogout = () => {
+    // AsyncStorage.clear();
+    // this.props.navigation.navigate("Home");
+  }
 
   static navigationOptions = {
     title: 'Akun',
@@ -109,6 +116,11 @@ export default class Account extends Component {
         id: 4,
         title: 'Alamat',
         link: 'AddressMain'
+      },
+      {
+        id: 5,
+        title: 'Keluar',
+        link: this.onLogout()
       },
     ]
   }
