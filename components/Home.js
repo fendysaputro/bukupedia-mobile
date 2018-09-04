@@ -25,6 +25,7 @@ import GridView from 'react-native-super-grid';
 import { SearchBar, Icon, Header } from "react-native-elements";
 import { StackNavigator } from 'react-navigation';
 import { ProductDetail } from '../components/ProductDetail';
+import Carousel from 'react-native-carousel-view';
 
 var { height, width } = Dimensions.get('window');
 
@@ -114,7 +115,23 @@ export default class Home extends Component {
         <View style={{ height: (screenHeight - 100), borderColor: 'green', borderWidth: 0 }}>
           <ScrollView>
             <View style={styles.box1}>
-              <SideSwipe
+              <Carousel
+                width={width}
+                delay={2000}
+                indicatorAtBottom={false}
+                indicatorSize={20}
+                indicatorText="✽"
+                indicatorColor="red">
+                  {
+                    this.state.banners.map(function(banner, i){
+                      return  (<View key={i}>
+                                <Image  width={Dimensions.get('window').width} 
+                                        source={{uri: banner.picture}}/>
+                             </View>)  
+                    })
+                  }
+              </Carousel>
+              {/* <SideSwipe
                 index={0}
                 itemWidth={width}
                 style={{ width }}
@@ -127,7 +144,7 @@ export default class Home extends Component {
                   <Image  width={Dimensions.get('window').width} 
                       source={{uri: item.picture}}/>
                 )}
-              /> 
+              />  */}
             </View>
             <View style={styles.box2}>
               <SideSwipe
@@ -193,6 +210,18 @@ const styles = StyleSheet.create({
   },
   box3: {
     flex: 1
+  },
+  container: {
+    flex: 0.5,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  contentContainer: {
+    borderWidth: 2,
+    borderColor: '#CCC',
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   gridView: {
     paddingTop: 25,
