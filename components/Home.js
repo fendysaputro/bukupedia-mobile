@@ -115,11 +115,25 @@ export default class Home extends Component {
         <View style={{ height: (screenHeight - 100), borderColor: 'green', borderWidth: 0 }}>
           <ScrollView>
             <View style={styles.box1}>
-              <Carousel
+              <SideSwipe
+                  index={0}
+                  itemWidth={width}
+                  style={{ width }}
+                  data={this.state.banners}
+                  contentOffset={contentOffset}
+                  onIndexChange={index =>
+                    this.setState(() => ({ currentIndex: index }))
+                  }
+                  renderItem={({ itemIndex, currentIndex, item, animatedValue }) => (
+                    <Image  width={Dimensions.get('window').width} 
+                        source={{uri: item.picture}}/>
+                  )}
+                />
+              {/* <Carousel
                 width={width}
                 delay={2000}
-                indicatorAtBottom={false}
-                indicatorSize={20}
+                indicatorAtBottom={true}
+                indicatorSize={10}
                 indicatorText="✽"
                 indicatorColor="red">
                   {
@@ -130,21 +144,7 @@ export default class Home extends Component {
                              </View>)  
                     })
                   }
-              </Carousel>
-              {/* <SideSwipe
-                index={0}
-                itemWidth={width}
-                style={{ width }}
-                data={this.state.banners}
-                contentOffset={contentOffset}
-                onIndexChange={index =>
-                  this.setState(() => ({ currentIndex: index }))
-                }
-                renderItem={({ itemIndex, currentIndex, item, animatedValue }) => (
-                  <Image  width={Dimensions.get('window').width} 
-                      source={{uri: item.picture}}/>
-                )}
-              />  */}
+              </Carousel> */}
             </View>
             <View style={styles.box2}>
               <SideSwipe
@@ -182,7 +182,6 @@ export default class Home extends Component {
                               minimumFractionDigits: 0, 
                               maximumFractionDigits: 0 
                           }).format(item.price)}
-                          {/* {item.price} */}
                       </Text>
                       </View>
                     </View>

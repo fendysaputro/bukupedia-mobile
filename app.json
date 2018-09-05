@@ -4,6 +4,7 @@
     "icon":"./styles/icon/icon-logo.png",
     "sdkVersion": "25.0.0",
     "version": "0.1.1",
+    "orientation" : "portrait",
     "android": {
       "package": "com.bukupedia.mobile",
       "versionCode": 2
