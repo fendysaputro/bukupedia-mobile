@@ -115,7 +115,21 @@ export default class Home extends Component {
         <View style={{ height: (screenHeight - 100), borderColor: 'green', borderWidth: 0 }}>
           <ScrollView>
             <View style={styles.box1}>
-              <Carousel
+              <SideSwipe
+                  index={0}
+                  itemWidth={width}
+                  style={{ width }}
+                  data={this.state.banners}
+                  contentOffset={contentOffset}
+                  onIndexChange={index =>
+                    this.setState(() => ({ currentIndex: index }))
+                  }
+                  renderItem={({ itemIndex, currentIndex, item, animatedValue }) => (
+                    <Image  width={Dimensions.get('window').width} 
+                        source={{uri: item.picture}}/>
+                  )}
+                />
+              {/* <Carousel
                 width={width}
                 delay={2000}
                 indicatorAtBottom={true}
@@ -130,7 +144,7 @@ export default class Home extends Component {
                              </View>)  
                     })
                   }
-              </Carousel>
+              </Carousel> */}
             </View>
             <View style={styles.box2}>
               <SideSwipe
