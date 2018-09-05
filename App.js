@@ -31,11 +31,11 @@ import Blog from "./components/Blog";
 class App extends Component {
 
   componentWillMount() {
-    AsyncStorage.getItem('id_token').then((token) => {
-      this.setState({ hasToken: token !== null, isLoaded: true });
-      console.log("token");
-      console.log(this.state.hasToken);
-    });
+    // AsyncStorage.getItem('id_token').then((token) => {
+    //   this.setState({ hasToken: token !== null, isLoaded: true });
+    //   console.log("token");
+    //   console.log(this.state.hasToken);
+    // });
   }
 
   static navigationOptions = {
