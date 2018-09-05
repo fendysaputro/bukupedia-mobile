@@ -26,6 +26,7 @@ import { SearchBar, Icon, Header } from "react-native-elements";
 import { StackNavigator } from 'react-navigation';
 import { ProductDetail } from '../components/ProductDetail';
 import Carousel from 'react-native-carousel-view';
+import Swiper from 'react-native-swiper';
 
 var { height, width } = Dimensions.get('window');
 
@@ -115,36 +116,16 @@ export default class Home extends Component {
         <View style={{ height: (screenHeight - 100), borderColor: 'green', borderWidth: 0 }}>
           <ScrollView>
             <View style={styles.box1}>
-              <SideSwipe
-                  index={0}
-                  itemWidth={width}
-                  style={{ width }}
-                  data={this.state.banners}
-                  contentOffset={contentOffset}
-                  onIndexChange={index =>
-                    this.setState(() => ({ currentIndex: index }))
-                  }
-                  renderItem={({ itemIndex, currentIndex, item, animatedValue }) => (
-                    <Image  width={Dimensions.get('window').width} 
-                        source={{uri: item.picture}}/>
-                  )}
-                />
-              {/* <Carousel
-                width={width}
-                delay={2000}
-                indicatorAtBottom={true}
-                indicatorSize={10}
-                indicatorText="✽"
-                indicatorColor="red">
-                  {
-                    this.state.banners.map(function(banner, i){
-                      return  (<View key={i}>
-                                <Image  width={Dimensions.get('window').width} 
-                                        source={{uri: banner.picture}}/>
-                             </View>)  
-                    })
-                  }
-              </Carousel> */}
+              <Swiper height={190} showsButtons={false}>
+                {
+                  this.state.banners.map(function(banner, i){
+                    return  (<View key={i}>
+                              <Image  width={Dimensions.get('window').width} 
+                                      source={{uri: banner.picture}}/>
+                            </View>)  
+                  })
+                }
+              </Swiper>
             </View>
             <View style={styles.box2}>
               <SideSwipe
@@ -196,6 +177,32 @@ export default class Home extends Component {
   }
 }
 const styles = StyleSheet.create({
+  wrapper: {
+    flex: 1
+  },
+  slide1: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#9DD6EB',
+  },
+  slide2: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#97CAE5',
+  },
+  slide3: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#92BBD9',
+  },
+  text: {
+    color: '#fff',
+    fontSize: 30,
+    fontWeight: 'bold',
+  },
   root: {
     flex: 1,
     flexDirection: 'column',
