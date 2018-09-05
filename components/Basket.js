@@ -6,7 +6,8 @@ import { AppRegistry,
   Dimensions,
   ScrollView,
   TouchableOpacity,
-  AsyncStorage } from "react-native";
+  AsyncStorage,
+  BackHandler } from "react-native";
 import { COLOR_PRIMARY } from "../styles/common";
 import getListItemCart from "../services/FetchShoppingCart";
 import { API, CART } from '../components/Global';

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Platform, StyleSheet, StatusBar, Text, View, AsyncStorage, BackHandler } from "react-native";
+import { Platform, StyleSheet, StatusBar, Text, View, AsyncStorage, BackHandler, BackAndroid } from "react-native";
 import { StackNavigator } from "react-navigation";
 import { COLOR_PRIMARY, COLOR_SECONDARY } from "./styles/common";
 
@@ -28,7 +28,18 @@ import HowToPay from "./components/HowToPay";
 import Blog from "./components/Blog";
 // import { MainStack } from "./config/Router";
 
+let listener = null;
+let backButtonPressFunction = () => false;
+
 class App extends Component {
+
+  componentDidMount() {
+    if (Platform.OS == "android" && listener == null) {
+      listener = BackAndroid.addEventListener("hardwareBackPress", () => {
+        return backButtonPressFunction()
+      });
+    }
+  }
 
   componentWillMount() {
     // AsyncStorage.getItem('id_token').then((token) => {

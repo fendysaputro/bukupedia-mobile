@@ -8,7 +8,8 @@ import { AppRegistry,
   Button, 
   Dimensions,
   TouchableOpacity,
-  AsyncStorage } from "react-native";
+  AsyncStorage,
+  BackHandler } from "react-native";
 import { COLOR_PRIMARY } from "../styles/common";
 import { CheckBox } from "react-native-elements";
 import Login from "../components/Login";
