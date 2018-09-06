@@ -242,8 +242,7 @@ export default class OnboardingScreens extends Component {
 
   _closeButtonPress = () => {
     try {
-      console.log('set AsyncStorage firstime= '+JSON.stringify(false));
-      AsyncStorage.setItem('firstime', JSON.stringify(false));
+      AsyncStorage.setItem('notfirstime', JSON.stringify(false));
     } catch (error) {
       // console.log(error);
     }

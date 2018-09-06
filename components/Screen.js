@@ -18,24 +18,18 @@ export default class Screen extends Component {
     constructor (props) {
         super(props);
         this.state = {
-            firstime: true,
+            notfirstime: false,
             isMounted: false
         };
     }
 
-    componentDidMount() {
-        AsyncStorage.getItem('firstime').then((ft) => {
-            firstime = JSON.parse(ft);
-            this.setState({ firstime: firstime, isMounted: true });
+    componentWillMount() {
+        AsyncStorage.getItem('notfirstime').then((notfirstime) => {
+            if (notfirstime == null) {
+                notfirstime = false;
+            }
+            this.setState({ notfirstime: notfirstime, isMounted: true });
         });
-        // AsyncStorage.getItem('firstime').then((firstime) => {
-        //     console.log(firstime);  
-        //     if (firstime !== 'null') {
-        //         this.setState({ firstime: true })
-        //     }else{
-        //         this.setState({ firstime: false })
-        //     }
-        // });
     }
 
     componentWillUnmount() {
@@ -43,7 +37,10 @@ export default class Screen extends Component {
     }
 
     render(){
-        if (this.state.firstime == 'firstime') {
+        console.log('this.state.notfirstime:');
+        console.log(this.state.notfirstime);
+        console.log('----------------------');
+        if (!this.state.notfirstime) {
             return (
                 <Swiper navigation={this.props.navigation}>
                     {/* First screen */}
@@ -75,8 +72,7 @@ export default class Screen extends Component {
                     </View>
                 </Swiper>
             );
-        }
-        else{
+        }else{
             return ( this.props.navigation.navigate("Main") );
         }
     }
