@@ -40,7 +40,7 @@ export default class Screen extends Component {
         console.log('this.state.notfirstime:');
         console.log(this.state.notfirstime);
         console.log('----------------------');
-        if (!this.state.notfirstime) {
+        if (this.state.notfirstime) {
             return (
                 <Swiper navigation={this.props.navigation}>
                     {/* First screen */}

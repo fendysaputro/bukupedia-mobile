@@ -23,6 +23,7 @@ import HowToPay from "../components/HowToPay";
 import Blog from "../components/Blog";
 import { getLogout } from "../services/FetchLogout";
 import Home from "../components/Home";
+import Welcome from "../components/WelcomeAccount";
 
 export default class Account extends Component {
 
@@ -60,9 +61,9 @@ export default class Account extends Component {
 
   replaceScreen = () => {
     this.props.navigation.dispatch({
-      key: 'WelcomeAccount',
       type: 'ReplaceCurrentScreen',
-      routeName: 'WelcomeAccount'
+      routeName: 'WelcomeAccount',
+      key: 'WelcomeAccount',
     });
   };
 
@@ -132,7 +133,7 @@ export default class Account extends Component {
         <TouchableOpacity
           key = '1'
           style = {styles.containerOne}
-            onPress = {() => this.props.navigation.navigate("EditProfile")}>
+            onPress = {() => this.replaceScreen()}>
             <Image source={require('../styles/icon/edit-foto.png')} style={{ width: 24, height: 24, alignItems: 'flex-start' }}/> 
             <Text style = {styles.textNew}>
               Hi, {this.state.user.name}

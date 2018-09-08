@@ -20,6 +20,7 @@ import Blog from "../components/Blog";
 import HowToShop from "../components/HowToShop";
 import HowToPay from "../components/HowToPay";
 import ContentFormFaq from "../components/ContentFormFaq";
+import Account from "../components/Account";
 
 export default class WelcomeAccount extends Component {
   static navigationOptions = {
@@ -60,6 +61,15 @@ export default class WelcomeAccount extends Component {
     super(props);
   }
 
+  replaceScreen = () => {
+    this.props.navigation.dispatch({
+      type: 'ReplaceCurrentScreen',
+      key: 'Account',
+      params: { },
+      routeName: 'Account'
+    });
+  };
+
   render () {
     return (
      <View style = {styles.container}>
@@ -77,7 +87,7 @@ export default class WelcomeAccount extends Component {
               width: '25%',  
               alignSelf: 'flex-end'
             }}
-            onPress = {() => this.props.navigation.navigate("LoginMain")}>
+            onPress = {() => this.replaceScreen()}>
             <Text style = {styles.text}>
               Hi, Selamat Datang!
             </Text>
