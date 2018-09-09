@@ -14,7 +14,7 @@ import Main from "./Main";
 import getListOrder from "../services/FetchOrder";
 import Home from "./Home";
 import { API, LIST_ORDER } from '../components/Global';
-import { Card } from 'react-native-elements';
+import { Card, Button, Icon } from 'react-native-elements';
 
 export default class PaymentWaiting extends Component {
   static navigationOptions = {
@@ -75,13 +75,27 @@ export default class PaymentWaiting extends Component {
                           </TouchableOpacity>
                         </View>;
     }else{
-      contentPayment = <View style={styles.containerOrder}>
+      contentPayment = <View>
                         {
                           this.state.orders.map(function(order, i){
-                            return <Card key={i} title={'Invoice No. ' + order.invoice_no}>
-                                    <Text>Text 1</Text>
-                                    <Text>Text 2</Text>
-                                   </Card>;
+                            return (
+                              <Card
+                                key={i}
+                                title={'INVOICE NO. '+order.invocie_no}>
+                                <Text style={{marginBottom: 10}}>
+                                  {order.status}
+                                </Text>
+                                <Text style={{marginBottom: 10}}>
+                                  Total Pembayaran: 
+                                  {new Intl.NumberFormat('en-GB', { 
+                                      style: 'currency', 
+                                      currency: 'IDR',
+                                      minimumFractionDigits: 0, 
+                                      maximumFractionDigits: 0 
+                                  }).format(order.grand_total)}
+                                </Text>
+                              </Card>
+                            );
                           })
                         }
                       </View>
