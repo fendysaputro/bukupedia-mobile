@@ -130,13 +130,13 @@ export default App = StackNavigator({
   WelcomeAccount: {
     screen: WelcomeAccount,
     navigationOptions: {
-      title: "Welcome"
+      
     }
   },
   Account: {
     screen: Account,
     navigationOptions: {
-      title: "Account"
+      
     }
   },
   Checkout: {
