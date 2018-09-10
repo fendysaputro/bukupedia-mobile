@@ -52,22 +52,22 @@ export default class ProductDetail extends Component {
                 <HeaderButtons.Item
                     title="akun" 
                     show="never"  
-                    onPress={() => navigation.navigate("Login")} 
+                    // onPress={() => navigation.navigate("Login")} 
                 />
                 <HeaderButtons.Item
                     title="profil"
                     show="never"
-                    onPress={() => navigation.navigate("Login")}
+                    // onPress={() => navigation.navigate("Login")}
                 />
                 <HeaderButtons.Item
                     title="point"
                     show="never"
-                    onPress={() => navigation.navigate("Login")}
+                    // onPress={() => navigation.navigate("Login")}
                 />
                 <HeaderButtons.Item
                     title="setting"
                     show="never"
-                    onPress={() => navigation.navigate("Login")}
+                    // onPress={() => navigation.navigate("Login")}
                 />
             </HeaderButtons>
         )

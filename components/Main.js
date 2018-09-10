@@ -14,6 +14,15 @@ import  MyOrderMain from "./MyOrderMain";
 import LoginMain from "./LoginMain";
 import { onLogin } from "./Login"
 
+replaceScreen = () => {
+  this.props.navigation.dispatch({
+    type: 'ReplaceCurrentScreen',
+    key: 'WelcomeAccount',
+    params: { },
+    routeName: 'WelcomeAccount'
+  });
+};
+
 const Main = TabNavigator( 
   {
     Home: { screen: Home }, 

@@ -51,7 +51,7 @@ export default class WelcomeAccount extends Component {
       },
       {
         id: 2,
-        title: 'Bantuan                                                                          >',
+        title: 'Bantuan',
         link: 'HowToShop'
       }
     ]
@@ -61,14 +61,14 @@ export default class WelcomeAccount extends Component {
     super(props);
   }
 
-  replaceScreen = () => {
-    this.props.navigation.dispatch({
-      type: 'ReplaceCurrentScreen',
-      key: 'Account',
-      params: { },
-      routeName: 'Account'
-    });
-  };
+  // replaceScreen = () => {
+  //   this.props.navigation.dispatch({
+  //     type: 'ReplaceCurrentScreen',
+  //     key: 'Account',
+  //     params: { },
+  //     routeName: 'Account'
+  //   });
+  // };
 
   render () {
     return (
@@ -87,7 +87,7 @@ export default class WelcomeAccount extends Component {
               width: '25%',  
               alignSelf: 'flex-end'
             }}
-            onPress = {() => this.replaceScreen()}>
+            onPress = {() => this.props.navigation.navigate("Login")}>
             <Text style = {styles.text}>
               Hi, Selamat Datang!
             </Text>
