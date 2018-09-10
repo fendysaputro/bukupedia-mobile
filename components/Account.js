@@ -5,98 +5,44 @@ import {
   Text, 
   View, 
   Image, 
+  Search, 
   TouchableOpacity, 
-  AsyncStorage } from "react-native";
+  TouchableNativeFeedback, 
+  ListView, 
+  DataSource } from "react-native";
 import { COLOR_PRIMARY } from "../styles/common";
 import TabNavigator from "react-native-tab-navigator";
 import Button from "react-native-button";
-import { List, ListItem } from "react-native-elements";
+import { ListItem } from "react-native-elements";
 import Login from "./Login"
-import { Header } from "react-native-elements";
-import EditProfile from "../components/EditProfile";
-import AddAddress from "../components/AddressMain";
 import NewRating from "../components/NewRating";
-import Wishlist from "../components/Wishlist";
-import ContentFormFaq from "../components/ContentFormFaq";
+import Blog from "../components/Blog";
 import HowToShop from "../components/HowToShop";
 import HowToPay from "../components/HowToPay";
-import Blog from "../components/Blog";
-import { getLogout } from "../services/FetchLogout";
-import Home from "../components/Home";
-import Welcome from "../components/WelcomeAccount";
+import ContentFormFaq from "../components/ContentFormFaq";
+import Account from "../components/Account";
 
-export default class Account extends Component {
-
-  constructor (props) {
-    super(props);
-    this.state = {
-      user: {}
-    }
-  }
-
-  async retrieveUser() {
-    try {
-      const retrievedUser =  await AsyncStorage.getItem('user');
-      const user = JSON.parse(retrievedUser);
-      return user;
-    } catch (error) {
-      console.log(error.message);
-    }
-    return
-  }
-
-  componentDidMount() {
-    AsyncStorage.getItem('id_token').then((token) => {
-      this.setState({ hasToken: token !== null, isLoaded: true });
-      if (this.state.hasToken) {
-        AsyncStorage.getItem('user').then((user) => {
-          var userObj = JSON.parse(user);
-          this.setState(userObj);
-        })
-      }else{
-        this.replaceScreen();
-      }
-    });
-  }
-
-  replaceScreen = () => {
-    this.props.navigation.dispatch({
-      type: 'ReplaceCurrentScreen',
-      routeName: 'WelcomeAccount',
-      key: 'WelcomeAccount',
-    });
-  };
-
-  onLogout = () => {
-    // AsyncStorage.clear();
-    // this.props.navigation.navigate("Home");
-  }
-
+export default class WelcomeAccount extends Component {
   static navigationOptions = {
     title: 'Akun',
-    headerTintColor: 'white',
     headerStyle: {
       backgroundColor: COLOR_PRIMARY,
       elevation: null,
     },
     headerTitleStyle: {
+      color: 'white',
       width: '90%',
       textAlign: 'center'
     },
-    headerRight:
-      <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-        <Image
-          style={{flex: 1, margin: 12.5, padding: 12.5, aspectRatio: 1.5, resizeMode: 'contain'}}
-          source={require('../styles/icon/akunsetting.png')}
-        />
-      </TouchableOpacity>
+    headerLeft: null
   }
 
   stateTwo = {
     listTwo: [
       {
         id: 0,
-        title: 'Buku Poin',
+        title: 'Rating Aplikasi',
+        link: 'NewRating'
       },
       {
         id: 1,
@@ -105,26 +51,24 @@ export default class Account extends Component {
       },
       {
         id: 2,
-        title: 'Rating Aplikasi',
-        link: 'NewRating'
-      },
-      {
-        id: 3,
         title: 'Bantuan',
-        link: 'HowToPay'
-      },
-      {
-        id: 4,
-        title: 'Alamat',
-        link: 'AddressMain'
-      },
-      {
-        id: 5,
-        title: 'Keluar',
-        link: this.onLogout()
-      },
+        link: 'HowToShop'
+      }
     ]
   }
+
+  constructor(props){
+    super(props);
+  }
+
+  // replaceScreen = () => {
+  //   this.props.navigation.dispatch({
+  //     type: 'ReplaceCurrentScreen',
+  //     key: 'Account',
+  //     params: { },
+  //     routeName: 'Account'
+  //   });
+  // };
 
   render () {
     return (
@@ -133,11 +77,22 @@ export default class Account extends Component {
         <TouchableOpacity
           key = '1'
           style = {styles.containerOne}
-            onPress = {() => this.replaceScreen()}>
-            <Image source={require('../styles/icon/edit-foto.png')} style={{ width: 24, height: 24, alignItems: 'flex-start' }}/> 
-            <Text style = {styles.textNew}>
-              Hi, {this.state.user.name}
-            </Text>   
+        >
+          <Button 
+            style = {{
+              position: 'relative',
+              fontSize: 15, 
+              color: 'black', 
+              backgroundColor: '#FBAD19', 
+              width: '25%',  
+              alignSelf: 'flex-end'
+            }}
+            onPress = {() => this.props.navigation.navigate("Login")}>
+            <Text style = {styles.text}>
+              Hi, Selamat Datang!
+            </Text>
+            Masuk  
+          </Button> 
         </TouchableOpacity>
         }
         {
@@ -175,7 +130,7 @@ const styles = StyleSheet.create({
   text: {
     color: 'black',
     textAlign: 'left',
-    marginLeft: '5%',
+    marginLeft: '5%'
   },
   symbol:{
     color: 'black',
@@ -184,13 +139,7 @@ const styles = StyleSheet.create({
   buttonText: {
     color: 'black',
     textAlign: 'center'
-  },
-  textNew: {
-    color: 'black',
-    textAlign: 'left',
-    marginLeft: 30,
-    top: -20
-  },
+  }
 });
 
-AppRegistry.registerComponent("Account", () => Account);
+AppRegistry.registerComponent("WelcomeAccount", () => WelcomeAccount);
