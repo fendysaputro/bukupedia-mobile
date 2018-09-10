@@ -29,7 +29,7 @@ const Main = TabNavigator(
     Category: { screen: Category, },
     Basket: { screen: Basket },
     Orders: { screen: MyOrderMain },
-    Account: { screen: Account }
+    Account: { screen: WelcomeAccount }
   },
   {
     tabBarComponent: NavigationComponent,
