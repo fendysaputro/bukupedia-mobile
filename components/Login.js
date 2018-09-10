@@ -12,6 +12,7 @@ import Button from "react-native-button";
 import { CheckBox } from "react-native-elements";
 import { postLogin } from "../services/FetchLogin";
 import Account from "../components/Account";
+import WelcomeAccount from "../components/WelcomeAccount";
 import Password from "./Password";
 
 export default class Login extends Component {
@@ -54,7 +55,7 @@ export default class Login extends Component {
                 AsyncStorage.setItem('id_token', res.d.token);
                 AsyncStorage.setItem('user', JSON.stringify(res.d));
 
-                this.props.navigation.navigate("Account");
+                this.props.navigation.navigate("WelcomeAccount");
             });
     }
 
