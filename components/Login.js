@@ -25,8 +25,7 @@ export default class Login extends Component {
         headerTitleStyle: {
           width: '90%',
           textAlign: 'center'
-        },
-        headerLeft: null
+        }
       }
     constructor(props) {
         super(props);
