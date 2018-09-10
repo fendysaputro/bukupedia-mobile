@@ -60,11 +60,11 @@ export default class Account extends Component {
   }
 
   replaceScreen = () => {
-    this.props.navigation.dispatch({
-      type: 'ReplaceCurrentScreen',
-      routeName: 'WelcomeAccount',
-      key: 'WelcomeAccount',
-    });
+    // this.props.navigation.dispatch({
+    //   type: 'ReplaceCurrentScreen',
+    //   routeName: 'WelcomeAccount',
+    //   key: 'WelcomeAccount',
+    // });
   };
 
   onLogout = () => {
