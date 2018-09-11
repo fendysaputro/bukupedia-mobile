@@ -20,9 +20,9 @@ import Blog from "../components/Blog";
 import HowToShop from "../components/HowToShop";
 import HowToPay from "../components/HowToPay";
 import ContentFormFaq from "../components/ContentFormFaq";
-import Account from "../components/Account";
+import WelcomeAccount from "../components/WelcomeAccount";
 
-export default class WelcomeAccount extends Component {
+export default class Account extends Component {
   static navigationOptions = {
     title: 'Akun',
     headerStyle: {
@@ -133,4 +133,4 @@ const styles = StyleSheet.create({
   }
 });
 
-AppRegistry.registerComponent("WelcomeAccount", () => WelcomeAccount);
+AppRegistry.registerComponent("Account", () => Account);
