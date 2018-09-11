@@ -55,7 +55,8 @@ export default class Login extends Component {
                 AsyncStorage.setItem('id_token', res.d.token);
                 AsyncStorage.setItem('user', JSON.stringify(res.d));
 
-                this.props.navigation.navigate("WelcomeAccount");
+                this.props.navigation.goBack();
+                this.props.navigation.navigate("Main");
             });
     }
 

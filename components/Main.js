@@ -21,7 +21,7 @@ const mainPages = {
   Category: { screen: Category, },
   Basket: { screen: Basket },
   Orders: { screen: MyOrderMain },
-  Account: { screen: WelcomeAccount }
+  Account: { screen: Account }
 }
 
 const mainPagesLogined = {
@@ -29,7 +29,7 @@ const mainPagesLogined = {
   Category: { screen: Category, },
   Basket: { screen: Basket },
   Orders: { screen: MyOrderMain },
-  Account: { screen: Account }
+  Account: { screen: WelcomeAccount }
 }
 
 const mainOption = {

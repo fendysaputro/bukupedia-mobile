@@ -70,7 +70,7 @@ export default class Home extends Component {
     },
     headerLeft: null,
     headerRight:
-      <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+      <TouchableOpacity onPress={() => navigation.navigate()}>
         <Image
           // width={24}
           style={{flex: 1, margin: 12.5, padding: 12.5, aspectRatio: 1.5, resizeMode: 'contain'}}

@@ -69,7 +69,7 @@ export default class WelcomeAccount extends Component {
 
   onLogout = () => {
     AsyncStorage.clear();
-    this.props.navigation.navigate("Account");
+    this.props.navigation.navigate("Main");
   }
 
   static navigationOptions = {
