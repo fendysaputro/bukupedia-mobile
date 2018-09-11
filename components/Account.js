@@ -61,15 +61,6 @@ export default class WelcomeAccount extends Component {
     super(props);
   }
 
-  // replaceScreen = () => {
-  //   this.props.navigation.dispatch({
-  //     type: 'ReplaceCurrentScreen',
-  //     key: 'Account',
-  //     params: { },
-  //     routeName: 'Account'
-  //   });
-  // };
-
   render () {
     return (
      <View style = {styles.container}>
