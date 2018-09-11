@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import { AppRegistry, StyleSheet, Text, View, Image, Search, Icon } from "react-native";
+import { AppRegistry, StyleSheet, Text, View, 
+  Image, Search, Icon,
+  AsyncStorage } from "react-native";
 import { TabNavigator } from "react-navigation";
 import { NavigationComponent } from "react-native-material-bottom-navigation";
 import { COLOR_PRIMARY, COLOR_SECONDARY, FONT_NORMAL } from '../styles/common';
@@ -14,52 +16,20 @@ import  MyOrderMain from "./MyOrderMain";
 import LoginMain from "./LoginMain";
 import { onLogin } from "./Login"
 
-// componentDidMount() {
-//   AsyncStorage.getItem('id_token').then((token) => {
-//     console.log('token at');
-//     console.log(token);
-//   });
-// }
-
-const pages = {
-	TheOne: {
-		screen: Home,
-		path: '/one'
-	},
-	TheTwo: {
-		screen: Basket,
-		path: '/two'
-	}
-};
-
-const pagesTwo = {
-	three: {
-		screen: Home,
-		path: '/one'
-	},
-	four: {
-		screen: Orders,
-		path: '/two'
-	}
-};
-
-export const TabNavigatorTest = TabNavigator(pages, {
-	tabBarPosition: 'bottom',
-	animationEnabled: false,
-	tabBarOptions: {
-		activeTintColor: '#e91e63',
-		labelStyle: {
-			fontSize: 15,
-		},
-	},
-});
-
 const mainPages = {
   Home: { screen: Home }, 
   Category: { screen: Category, },
   Basket: { screen: Basket },
   Orders: { screen: MyOrderMain },
   Account: { screen: Account }
+}
+
+const mainPagesLogined = {
+  Home: { screen: Home }, 
+  Category: { screen: Category, },
+  Basket: { screen: Basket },
+  Orders: { screen: MyOrderMain },
+  Account: { screen: WelcomeAccount }
 }
 
 const mainOption = {
@@ -118,11 +88,36 @@ const mainOption = {
 }
 
 export const MainTabNavigator = TabNavigator(mainPages, mainOption);
+export const MainTabNavigatorLogined = TabNavigator(mainPagesLogined, mainOption);
 
 class Main extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLogined: false
+    }
+  }
+
+  componentWillMount() {
+    AsyncStorage.getItem('id_token').then((token) => {
+      console.log('token at');
+      console.log(token);
+      if (typeof token != 'undefined') {
+        this.setState({isLogined: true})
+      } 
+    });
+  }
+
   static router = MainTabNavigator.router;
   render() {
-    return (<MainTabNavigator navigation={this.props.navigation} />);
+    let tab = <MainTabNavigator navigation={this.props.navigation} />;
+    if (this.state.isLogined) {
+      tab = <MainTabNavigatorLogined navigation={this.props.navigation} />;
+    }
+    return (
+      [tab]
+    );
   }
 
 }
