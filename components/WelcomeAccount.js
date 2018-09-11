@@ -23,9 +23,9 @@ import HowToPay from "../components/HowToPay";
 import Blog from "../components/Blog";
 import { getLogout } from "../services/FetchLogout";
 import Home from "../components/Home";
-import Welcome from "../components/WelcomeAccount";
+import Account from "../components/Account";
 
-export default class Account extends Component {
+export default class WelcomeAccount extends Component {
 
   constructor (props) {
     super(props);
@@ -83,13 +83,14 @@ export default class Account extends Component {
       width: '90%',
       textAlign: 'center'
     },
-    headerRight:
-      <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-        <Image
-          style={{flex: 1, margin: 12.5, padding: 12.5, aspectRatio: 1.5, resizeMode: 'contain'}}
-          source={require('../styles/icon/akunsetting.png')}
-        />
-      </TouchableOpacity>
+    headerLeft: null
+    // headerRight:
+    //   <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+    //     <Image
+    //       style={{flex: 1, margin: 12.5, padding: 12.5, aspectRatio: 1.5, resizeMode: 'contain'}}
+    //       source={require('../styles/icon/akunsetting.png')}
+    //     />
+    //   </TouchableOpacity>
   }
 
   stateTwo = {
@@ -117,11 +118,6 @@ export default class Account extends Component {
         id: 4,
         title: 'Alamat',
         link: 'AddressMain'
-      },
-      {
-        id: 5,
-        title: 'Keluar',
-        link: this.onLogout()
       },
     ]
   }
@@ -152,6 +148,16 @@ export default class Account extends Component {
               </Text>
             </TouchableOpacity>
           ))
+        }
+        {
+          <TouchableOpacity
+            key = '1'
+            style = {styles.containerTwo}
+            onPress = {() => this.onLogout()}> 
+              <Text style = {styles.text}>
+                Keluar
+              </Text>   
+          </TouchableOpacity>
         }
       </View>
     )
@@ -193,4 +199,4 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent("Account", () => Account);
+AppRegistry.registerComponent("WelcomeAccount", () => WelcomeAccount);
