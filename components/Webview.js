@@ -4,11 +4,16 @@ import { WebView, AsyncStorage,
 import { COLOR_PRIMARY } from '../styles/common';
 
 export default class Webview extends Component {
+    static navigationOptions = {
+        header: null,
+        headerLeft: null,
+    };
+
     render (){
         return(
             <WebView
             source={{uri: 'https://www.bukupedia.com/'}}
-            style={{marginTop: 0}}
+            style={{marginTop: 20}}
           />
         )
     }
