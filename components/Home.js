@@ -53,26 +53,6 @@ export default class Home extends Component {
           .then((res) => {
             this.setState({ new_products: res.d });
           });
-
-    //   BackHandler.addEventListener('hardwareBackPress', () => {
-    //     let self = this;
-    //     console.log(self.props.navigation.state.key);
-    //     if(self.props.navigation.state.key) {
-    //       this.props.navigation.navigate("Home");
-    //       return true;
-    //     }else {
-    //       Alert.alert(
-    //       'Exit App',
-    //       'Exiting the application?',
-    //     [
-    //       {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-    //       {text: 'OK', onPress: () => BackHandler.exitApp() },
-    //     ],
-    //       { cancelable: false }
-    //     )
-    //     return true;
-    //   }
-    // });
   }
 
   static navigationOptions = ({navigation}) => ({
@@ -90,7 +70,7 @@ export default class Home extends Component {
     },
     headerLeft: null,
     headerRight:
-      <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+      <TouchableOpacity onPress={() => navigation.navigate()}>
         <Image
           // width={24}
           style={{flex: 1, margin: 12.5, padding: 12.5, aspectRatio: 1.5, resizeMode: 'contain'}}
