@@ -147,6 +147,11 @@ export default class ProductDetail extends Component {
             });
     }
 
+    handleOnCloseButton = () => {
+        this.props.navigation.goBack();
+        this.props.navigation.navigate("Basket");
+    }
+
 	render() {
         const {
             MainViewStyle,
@@ -206,7 +211,7 @@ export default class ProductDetail extends Component {
                 </View>
                 <View style={[styles.footer]}>
                     <TouchableOpacity style={styles.image}
-                        onPress={() => this.props.navigation.navigate("Basket")}>
+                        onPress={() => this.handleOnCloseButton()}>
                         <IconBadge
                             MainElement={
                                 <Image
