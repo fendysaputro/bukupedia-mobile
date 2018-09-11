@@ -26,6 +26,7 @@ import ContentFormFaq from "./components/ContentFormFaq";
 import HowToShop from "./components/HowToShop";
 import HowToPay from "./components/HowToPay";
 import Blog from "./components/Blog";
+import Webview from "./components/Webview";
 // import { MainStack } from "./config/Router";
 
 let listener = null;
@@ -80,7 +81,7 @@ export default App = StackNavigator({
     }
   },
   Main: {
-    screen: Main,
+    screen: Webview,
     navigationOptions: {
 
     }
