@@ -30,6 +30,7 @@ export default class Basket extends Component {
       width: '90%',
       textAlign: 'center'
     },
+    headerLeft: null
   }
 
   constructor (props) {
