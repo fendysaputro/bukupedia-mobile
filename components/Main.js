@@ -101,10 +101,12 @@ class Main extends Component {
 
   componentWillMount() {
     AsyncStorage.getItem('id_token').then((token) => {
-      console.log('token at');
+      console.log('token: ');
       console.log(token);
-      if (typeof token != 'undefined') {
-        this.setState({isLogined: true})
+      if (token != null) {
+        this.setState({isLogined: true});
+        console.log('isLogined: ');
+        console.log(this.state.isLogined);
       } 
     });
   }
