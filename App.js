@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Platform, StyleSheet, StatusBar, Text, View, AsyncStorage, BackHandler, BackAndroid } from "react-native";
+import { Platform, StyleSheet, StatusBar, Text, View, 
+        AsyncStorage, BackHandler, BackAndroid, ToastAndroid } from "react-native";
 import { StackNavigator } from "react-navigation";
 import { COLOR_PRIMARY, COLOR_SECONDARY } from "./styles/common";
 
@@ -29,26 +30,42 @@ import Blog from "./components/Blog";
 import Webview from "./components/Webview";
 // import { MainStack } from "./config/Router";
 
-let listener = null;
-let backButtonPressFunction = () => false;
+// let listener = null;
+// let index = 0;
+// let backButtonPressFunction = () => false;
 
 class App extends Component {
 
-  componentDidMount() {
-    if (Platform.OS == "android" && listener == null) {
-      listener = BackAndroid.addEventListener("hardwareBackPress", () => {
-        return backButtonPressFunction()
-      });
-    }
-  }
+  
+  // componentDidMount() {
+  //   if (Platform.OS == "android" && listener == null) {
+  //     listener = BackAndroid.addEventListener("hardwareBackPress", () => {
+  //       return backButtonPressFunction()
+  //     });
+  //   }
+  // }
 
-  componentWillMount() {
-    // AsyncStorage.getItem('id_token').then((token) => {
-    //   this.setState({ hasToken: token !== null, isLoaded: true });
-    //   console.log("token");
-    //   console.log(this.state.hasToken);
-    // });
-  }
+//   constructor(props) {
+//     super(props);
+//     this.backButtonListener = null;
+//     this.currentRouteName = 'Webview';
+//     this.lastBackButtonPress = null;
+//   }
+
+//   componentDidMount() {
+//     if (Platform.OS === 'android') {
+//       this.backButtonListener = BackHandler.addEventListener('hardwareBackPress', () => {
+//           if (this.currentRouteName == 'Webview') {
+//               BackHandler.exitApp();
+//               return true;
+//           }
+//       });
+//     }
+//   }
+
+//   componentWillUnmount() {
+//     this.backButtonListener.remove();
+// }
 
   static navigationOptions = {
     headerStyle: {
