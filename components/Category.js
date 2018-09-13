@@ -5,6 +5,7 @@ import TabNavigator from "react-native-tab-navigator";
 import BottomNavigation, { Tab } from "react-native-material-bottom-navigation";
 import { getCategory, getSubCategory, getProductByCategory } from "../services/FetchCategory";
 import SectionedMultiSelect from "react-native-sectioned-multi-select";
+import { Dropdown } from 'react-native-material-dropdown';
 
 var { height, width } = Dimensions.get('window');
 

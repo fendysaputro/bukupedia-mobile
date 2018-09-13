@@ -30,20 +30,20 @@ import Blog from "./components/Blog";
 import Webview from "./components/Webview";
 // import { MainStack } from "./config/Router";
 
-// let listener = null;
-// let index = 0;
-// let backButtonPressFunction = () => false;
+let listener = null;
+let index = 0;
+let backButtonPressFunction = () => false;
 
 class App extends Component {
 
   
-  // componentDidMount() {
-  //   if (Platform.OS == "android" && listener == null) {
-  //     listener = BackAndroid.addEventListener("hardwareBackPress", () => {
-  //       return backButtonPressFunction()
-  //     });
-  //   }
-  // }
+  componentDidMount() {
+    if (Platform.OS == "android" && listener == null) {
+      listener = BackAndroid.addEventListener("hardwareBackPress", () => {
+        return backButtonPressFunction()
+      });
+    }
+  }
 
 //   constructor(props) {
 //     super(props);
@@ -98,7 +98,7 @@ export default App = StackNavigator({
     }
   },
   Main: {
-    screen: Webview,
+    screen: Main,
     navigationOptions: {
 
     }

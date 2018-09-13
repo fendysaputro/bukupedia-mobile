@@ -69,6 +69,7 @@ export default class WelcomeAccount extends Component {
 
   onLogout = () => {
     AsyncStorage.clear();
+    this.props.navigation.goBack();
     this.props.navigation.navigate("Main");
   }
 
@@ -83,14 +84,14 @@ export default class WelcomeAccount extends Component {
       width: '90%',
       textAlign: 'center'
     },
-    headerLeft: null
-    // headerRight:
-    //   <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-    //     <Image
-    //       style={{flex: 1, margin: 12.5, padding: 12.5, aspectRatio: 1.5, resizeMode: 'contain'}}
-    //       source={require('../styles/icon/akunsetting.png')}
-    //     />
-    //   </TouchableOpacity>
+    headerLeft: null,
+    headerRight:
+      <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+        <Image
+          style={{flex: 1, margin: 12.5, padding: 12.5, aspectRatio: 1.5, resizeMode: 'contain'}}
+          source={require('../styles/icon/akunsetting.png')}
+        />
+      </TouchableOpacity>
   }
 
   stateTwo = {

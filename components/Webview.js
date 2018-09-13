@@ -23,17 +23,18 @@ export default class Webview extends Component {
     }
 
     componentDidMount() {
-        
-        this.backButtonListener = BackHandler.addEventListener('hardwareBackPress', () => {
-            console.log("onbackTst");
-            console.log(this.state.webViewState.canGoBack);
-            console.log("============");
-            if (this.state.webViewState.canGoBack) {
-                BackHandler.exitApp();
-                return true;
-            } 
-        });
+        if (Platform.OS == "android"){
+            this.backButtonListener = BackHandler.addEventListener('hardwareBackPress', () => {
+                console.log("onbackTst");
+                console.log(this.state.webViewState.canGoBack);
+                console.log("============");
+                if (this.state.webViewState.canGoBack) {
+                    BackHandler.exitApp();
+                    return true;
+                } 
+            });
         }
+    }
     
 
     render (){
