@@ -28,6 +28,7 @@ import HowToShop from "./components/HowToShop";
 import HowToPay from "./components/HowToPay";
 import Blog from "./components/Blog";
 import Webview from "./components/Webview";
+import WebviewBanner from "./components/WebviewBanner";
 // import { MainStack } from "./config/Router";
 
 let listener = null;
@@ -44,28 +45,6 @@ class App extends Component {
       });
     }
   }
-
-//   constructor(props) {
-//     super(props);
-//     this.backButtonListener = null;
-//     this.currentRouteName = 'Webview';
-//     this.lastBackButtonPress = null;
-//   }
-
-//   componentDidMount() {
-//     if (Platform.OS === 'android') {
-//       this.backButtonListener = BackHandler.addEventListener('hardwareBackPress', () => {
-//           if (this.currentRouteName == 'Webview') {
-//               BackHandler.exitApp();
-//               return true;
-//           }
-//       });
-//     }
-//   }
-
-//   componentWillUnmount() {
-//     this.backButtonListener.remove();
-// }
 
   static navigationOptions = {
     headerStyle: {
@@ -213,6 +192,12 @@ export default App = StackNavigator({
   },
   Blog: {
     screen: Blog,
+    navigationOptions: {
+
+    }
+  },
+  WebviewBanner: {
+    screen: WebviewBanner,
     navigationOptions: {
 
     }

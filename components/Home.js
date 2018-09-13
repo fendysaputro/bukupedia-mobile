@@ -27,6 +27,7 @@ import { StackNavigator } from 'react-navigation';
 import { ProductDetail } from '../components/ProductDetail';
 import Carousel from 'react-native-carousel-view';
 import Swiper from 'react-native-swiper';
+import WebviewBanner from '../components/WebviewBanner';
 
 var { height, width } = Dimensions.get('window');
 
@@ -90,6 +91,7 @@ export default class Home extends Component {
   }
 
   render () {
+    const {navigate} = this.props.navigation;
     const contentOffset = 0;
     let screenHeight = Dimensions.get('window').height;
     return (
@@ -99,11 +101,16 @@ export default class Home extends Component {
             <View style={styles.box1}>
               <Swiper height={190} showsButtons={false}>
                 {
-                  this.state.banners.map(function(banner, i){
-                    return  (<View key={i}>
-                              <Image  width={Dimensions.get('window').width} 
+                  this.state.banners.map(function(banner, i){   
+                    // console.log(this.state.banner);
+                    return  (
+                              <View key={i}>
+                              <TouchableOpacity onPress={() => navigate('WebviewBanner')}>
+                                <Image  width={Dimensions.get('window').width} 
                                       source={{uri: banner.picture}}/>
-                            </View>)  
+                              </TouchableOpacity>
+                              </View>
+                            )  
                   })
                 }
               </Swiper>
