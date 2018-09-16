@@ -102,12 +102,12 @@ export default class Home extends Component {
               <Swiper height={190} showsButtons={false}>
                 {
                   this.state.banners.map(function(banner, i){   
-                    // console.log(this.state.banner);
+                    console.log(banner);
                     return  (
                               <View key={i}>
-                              <TouchableOpacity onPress={() => navigate('WebviewBanner')}>
+                              <TouchableOpacity onPress={() => this.props.navigation.navigate('WebviewBanner')}>
                                 <Image  width={Dimensions.get('window').width} 
-                                      source={{uri: banner.picture}}/>
+                                      source={{uri: banner.attributes.picture}}/>
                               </TouchableOpacity>
                               </View>
                             )  
