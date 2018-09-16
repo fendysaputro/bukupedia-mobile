@@ -102,7 +102,7 @@ export default class Home extends Component {
               <Swiper height={190} showsButtons={false}>
                 {
                   this.state.banners.map(function(banner, i){   
-                    console.log(banner);
+                    // console.log(banner);
                     return  (
                               <View key={i}>
                               <TouchableOpacity onPress={() => this.props.navigation.navigate('WebviewBanner')}>
@@ -137,7 +137,7 @@ export default class Home extends Component {
                 items={this.state.new_products}
                 style={styles.gridView}
                 renderItem={item => (
-                  <TouchableHighlight onPress={() => this.handleOnTouchProduct(item)}>
+                  <TouchableHighlight key={item.id} onPress={() => this.handleOnTouchProduct(item)}>
                     <View style={[styles.itemContainer]}>
                       <Image width={Dimensions.get('window').width / 3} 
                         source={{uri: item.image}}/>
