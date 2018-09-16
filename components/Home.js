@@ -35,11 +35,12 @@ export default class Home extends Component {
 
   constructor (props) {
       super(props);
+      this.state = { banners: [], banners_small: [], new_products: []};
       this.handleOnTouchProduct = this.handleOnTouchProduct.bind(this);
+      this.handleOnTouchBanner = this.handleOnTouchBanner.bind(this);
   }
 
   componentWillMount() {
-    this.setState({ banners: [], banners_small: [], new_products: []});
     getBanner()
           .then((res) => {
               this.setState({ banners: res.d });
@@ -80,14 +81,12 @@ export default class Home extends Component {
       </TouchableOpacity>
   })
 
-  getAuthorsText(authorObj) {
-    return authorObj.results.map(function(author){
-      author + ' ';
-    });
-  }
-
   handleOnTouchProduct(item) {
     this.props.navigation.navigate('ProductDetail', {url: item.link});
+  }
+
+  handleOnTouchBanner(item) {
+    this.props.navigation.navigate('WebviewBanner', {url: item.attributes.url});
   }
 
   render () {
@@ -101,11 +100,10 @@ export default class Home extends Component {
             <View style={styles.box1}>
               <Swiper height={190} showsButtons={false}>
                 {
-                  this.state.banners.map(function(banner, i){   
-                    // console.log(banner);
+                  this.state.banners.map((banner, i) => {   
                     return  (
                               <View key={i}>
-                              <TouchableOpacity onPress={() => this.props.navigation.navigate('WebviewBanner')}>
+                              <TouchableOpacity onPress={() => this.handleOnTouchBanner(banner)}>
                                 <Image  width={Dimensions.get('window').width} 
                                       source={{uri: banner.attributes.picture}}/>
                               </TouchableOpacity>
@@ -126,7 +124,7 @@ export default class Home extends Component {
                   this.setState(() => ({ currentIndex: index }))
                 }
                 renderItem={({ itemIndex, currentIndex, item, animatedValue }) => (
-                  <Image  width={Dimensions.get('window').width / 3} 
+                  <Image key={item.id}  width={Dimensions.get('window').width / 3} 
                       source={{uri: item.picture}}/>
                 )}
               />
@@ -143,7 +141,7 @@ export default class Home extends Component {
                         source={{uri: item.image}}/>
                       <View style={styles.itemCaption}>
                         <Text style={styles.itemTitle}>{item.title}</Text>
-                        <Text style={styles.itemAuthor}> {item.authors[0]}</Text>
+                        <Text style={styles.itemAuthor}> {'Authors: '+item.authors}</Text>
                         <Text style={styles.itemPrice}>
                           {new Intl.NumberFormat('en-GB', { 
                               style: 'currency', 
@@ -234,13 +232,13 @@ const styles = StyleSheet.create({
 
   },
   itemTitle: {
-    fontSize: 14,
+    fontSize: 8,
     color: '#1791c5',
     fontWeight: '600',
   },
   itemAuthor: {
     fontWeight: '600',
-    fontSize: 11,
+    fontSize: 8,
     color: '#49aedd'
   },
   itemPrice: {
