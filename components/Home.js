@@ -61,7 +61,10 @@ export default class Home extends Component {
     headerTitle: 
       <SearchBar
         lightTheme
-        // onChangeText={someMethod}
+        type="text"
+        // value={this.state.seachText}
+        // ref={item.id}
+        // onChangeText={this.handleOnTouchProduct(item)}
         // onClearText={someMethod}
         placeholder='Bukupedia App' 
         containerStyle={{width: '100%', backgroundColor: COLOR_PRIMARY}}
@@ -88,6 +91,10 @@ export default class Home extends Component {
   handleOnTouchBanner(item) {
     this.props.navigation.navigate('WebviewBanner', {url: item.attributes.url});
   }
+
+  // searchItem(){
+  //   let seachText = this.setState({ new_products: res.d });
+  // }
 
   render () {
     const {navigate} = this.props.navigation;

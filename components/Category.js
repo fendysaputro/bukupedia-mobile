@@ -6,23 +6,26 @@ import BottomNavigation, { Tab } from "react-native-material-bottom-navigation";
 import { getCategory, getSubCategory, getProductByCategory } from "../services/FetchCategory";
 import SectionedMultiSelect from "react-native-sectioned-multi-select";
 import { Dropdown } from 'react-native-material-dropdown';
+import { SearchBar, Icon, Header } from "react-native-elements";
 
 var { height, width } = Dimensions.get('window');
 
 export default class Category extends Component {
-  static navigationOptions = {
-    title: "Pilih Kategori Buku",
-    headerTintColor: "white",
+  static navigationOptions = ({navigation}) => ({
+    headerTitle: 
+      <SearchBar
+        lightTheme
+        // onChangeText={getNewProduct()}
+        // onClearText={someMethod}
+        placeholder='Pilih Kategori' 
+        containerStyle={{width: '95%', backgroundColor: COLOR_PRIMARY}}
+      />,
     headerStyle: {
       backgroundColor: COLOR_PRIMARY,
       elevation: null
     },
-    headerTitleStyle: {
-      width: '90%',
-      textAlign: 'center'
-    },
-    headerLeft: null,
-  }
+    headerLeft: null
+  })
 
   constructor (props){
     super(props);
@@ -39,11 +42,6 @@ export default class Category extends Component {
           .then((res) => {
             self.setState({ categories: res.d });
           });
-    
-    // getSubCategory()
-    //       .then((res) => {
-    //         self.setState({ subCategories: res.d});
-    //       });
   }
 
   onSelectedItemsChange = (subCategories) => {

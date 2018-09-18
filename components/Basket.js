@@ -69,6 +69,9 @@ export default class Basket extends Component {
   }
 
   render () {
+    // console.log("ini charts");
+    //   console.log(this.state.carts);
+    //   console.log("============");
     if(this.state.carts.length == 0){
       return(
         <View style={styles.container}>
@@ -97,28 +100,6 @@ export default class Basket extends Component {
       total = total + product.price;
     });
     return(
-      // <Container>
-      //     <Content>
-      //         <List>
-      //           {
-      //             this.state.carts.map((product, index) => {
-      //               <ListItem>
-      //                   <Thumbnail square size={60} source={{uri: product.image}} />
-      //                   <Text>{product.title}</Text>
-      //                   <Text note>
-      //                     {new Intl.NumberFormat('en-GB', { 
-      //                           style: 'currency', 
-      //                           currency: 'IDR',
-      //                           minimumFractionDigits: 0, 
-      //                           maximumFractionDigits: 0 
-      //                       }).format(product.price)}
-      //                   </Text>
-      //               </ListItem>
-      //             })
-      //           }
-      //         </List>
-      //     </Content>
-      // </Container>
       <ScrollView>
         <View style={styles.containerlist}>
           {
