@@ -15,7 +15,10 @@ export default class Category extends Component {
     headerTitle: 
       <SearchBar
         lightTheme
-        // onChangeText={getNewProduct()}
+        type="text"
+        ref={getCategory}
+        onChangeText={this.getCategory}
+        value={this.categories}
         // onClearText={someMethod}
         placeholder='Pilih Kategori' 
         containerStyle={{width: '95%', backgroundColor: COLOR_PRIMARY}}
