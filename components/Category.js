@@ -9,19 +9,32 @@ import { Dropdown } from 'react-native-material-dropdown';
 import { SearchBar, Icon, Header } from "react-native-elements";
 
 var { height, width } = Dimensions.get('window');
+const arrayHolder = [];
 
 export default class Category extends Component {
   static navigationOptions = ({navigation}) => ({
     headerTitle: 
       <SearchBar
         lightTheme
-        type="text"
-        ref={getCategory}
-        onChangeText={this.getCategory}
-        value={this.categories}
+        // type="text"
+        // ref={this.searchFilterFunction(text)}
+        onChangeText={function(text){
+          console.log("ini text");
+          console.log(text);
+          console.log("============");
+          console.log(arrayHolder);
+          // const newData = this.arrayHolder.filter(item => {
+          //     const itemData = `${item.category.name.toUpperCase()}`;
+          //     const TextData = text.toUpperCase();
+          //     return itemData.indexOf(textData) > -1;
+          //   });
+        }}
+        // value={this.focusTextInput}
+        autoCorrect={false}
+        round
         // onClearText={someMethod}
-        placeholder='Pilih Kategori' 
-        containerStyle={{width: '95%', backgroundColor: COLOR_PRIMARY}}
+        placeholder='Cari Kategori' 
+        containerStyle={{width: '100%', backgroundColor: COLOR_PRIMARY}}
       />,
     headerStyle: {
       backgroundColor: COLOR_PRIMARY,
@@ -34,9 +47,11 @@ export default class Category extends Component {
     super(props);
     this.state = { 
       categories : [], 
-      subCategories : []
+      subCategories : [],
+      dataSearch : [],
     }
     this.handleTouchCategory = this.handleTouchCategory.bind(this);
+    this.searchFilterFunction = this.searchFilterFunction.bind(this);
   }
 
   componentDidMount(){
@@ -51,13 +66,40 @@ export default class Category extends Component {
     this.setState({ subCategories });
   }
 
-  handleTouchCategory(link) {
+  handleTouchCategory(link){ 
     console.log(link)
     this.props.navigation.navigate('ProductCategory', {url: link});
   }
 
 
+  searchFilterFunction = text => {
+    console.log("ini text");
+    console.log(text);
+    console.log("============");
+    // searchText = event.nativeEvent.text;
+    // dataSearch = this.state.categories;
+    // searchText = searchText.trim().toLowerCase();
+
+    // dataSearch = dataSearch.filter(i => {
+    //   return i.category.name.toLowerCase().match( searchText );
+    // });
+
+    // this.setState({
+    //   dataSearch : dataSearch
+    // });
+
+    // const newData = this.arrayHolder.filter(item => {
+    //   const itemData = `${item.category.name.toUpperCase()}`;
+    //   const TextData = text.toUpperCase();
+    //   return itemData.indexOf(textData) > -1;
+    // });
+    // this.setState({
+    //   dataSearch: newData,
+    // })
+  }
+
   render () {
+    console.log(section);
     let sections = [];
     let section = {};
     this.state.categories.map((category) => (
@@ -75,11 +117,11 @@ export default class Category extends Component {
             <SectionList
               renderItem={({item, index, section}) => 
               <TouchableOpacity
-                    onPress = {() => this.handleTouchCategory(item.link)}
+                  onPress = {() => this.handleTouchCategory(item.link)}
                   style = {styles.containerTwo}>
                 <Text>{item.name}</Text>
               </TouchableOpacity>}
-              renderSectionHeader={({section: {title}}) => (
+                renderSectionHeader={({section: {title}}) => (
                 <TouchableOpacity
                   style = {styles.containerThree}>
                   <Text>{title}</Text>
