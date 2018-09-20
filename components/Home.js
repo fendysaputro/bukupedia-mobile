@@ -63,8 +63,8 @@ export default class Home extends Component {
         lightTheme
         type="text"
         // value={this.state.seachText}
-        // ref={item.id}
-        // onChangeText={this.handleOnTouchProduct(item)}
+        // ref={url}
+        // onChangeText={this.searchItem(url)}
         // onClearText={someMethod}
         placeholder='Bukupedia App' 
         containerStyle={{width: '100%', backgroundColor: COLOR_PRIMARY}}
@@ -92,8 +92,8 @@ export default class Home extends Component {
     this.props.navigation.navigate('WebviewBanner', {url: item.attributes.url});
   }
 
-  // searchItem(){
-  //   let seachText = this.setState({ new_products: res.d });
+  // searchItem(item){
+  //   this.props.navigation.navigate('ProductDetail', {url: item.link});
   // }
 
   render () {
