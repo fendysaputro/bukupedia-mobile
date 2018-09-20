@@ -5575,7 +5575,7 @@ feedback :
 ```
 
 ### Search Product
-url : https://service.bukupedia.com/id/product/the-secret
+url : https://service.bukupedia.com/id/search
 type : Post
 json : {"keywords":"algoritma"}
 feedback :
@@ -5695,7 +5695,7 @@ feedback :
 }
 ```
 
-### Product Advance Product
+### Search Advance Product
 url : https://service.bukupedia.com/id/search?advance=1
 type : Post
 json : {"title":"buku","author":"","publisher":"erlangga","category_id":"","isbn":"","release":""}
