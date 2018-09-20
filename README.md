@@ -5575,7 +5575,7 @@ feedback :
 ```
 
 ### Search Product
-url : https://service.bukupedia.com/id/product/the-secret
+url : https://service.bukupedia.com/id/search
 type : Post
 json : {"keywords":"algoritma"}
 feedback :
