@@ -23,3 +23,4 @@ export const WISHLIST = 'wishlist';
 export const REVIEW = 'review';
 export const SHIPPING_COST = 'shipping-cost';
 export const ORDER_PAYMENT = 'order-payment';
+export const SEARCH_PRODUCT = 'search';

@@ -28,6 +28,7 @@ import { ProductDetail } from '../components/ProductDetail';
 import Carousel from 'react-native-carousel-view';
 import Swiper from 'react-native-swiper';
 import WebviewBanner from '../components/WebviewBanner';
+import { PostSearch } from '../services/FetchSearch';
 
 var { height, width } = Dimensions.get('window');
 
