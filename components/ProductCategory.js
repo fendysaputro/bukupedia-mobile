@@ -42,11 +42,14 @@ export default class ProductCategory extends Component {
     componentDidMount() {
         const { state } = this.props.navigation;
         let link =''
+        console.log("ini res");
+                console.log(state);
+                console.log("=========");
         getProductLink(state.params.url)
             .then((res) => {
                 getProductByCategory(res.d[0].product_link)
-                    .then((res) => {
-                        this.setState({products: res.d})
+                  .then((res) => {
+                      this.setState({products: res.d})
                 })
             })
     }

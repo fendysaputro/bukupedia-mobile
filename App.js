@@ -121,7 +121,7 @@ export default App = StackNavigator({
   ProductCategory: {
     screen: ProductCategory,
     navigationOptions: {
-      title: "Category"
+    
     }
   },
   WelcomeAccount: {
