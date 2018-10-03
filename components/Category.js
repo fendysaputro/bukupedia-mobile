@@ -65,11 +65,12 @@ export default class Category extends Component {
     this.setState({ subCategories });
   }
 
-  handleTouchCategory(link){ 
-    console.log(link)
+  handleTouchCategory = link => { 
+    console.log('product_link');
+    console.log(link);
+    console.log('---');
     this.props.navigation.navigate('ProductCategory', {url: link});
   }
-
 
   searchFilterFunction = text => {
     console.log("ini text");
@@ -104,7 +105,7 @@ export default class Category extends Component {
     this.state.categories.map((category) => (
       data = [],
       category.sub_category.map((sub) => {
-        data.push({name: sub.name, link: sub.link})
+        data.push({name: sub.name, link: sub.product_link})
       }),
       section = {title: category.name, data: data}, 
       sections.push(section)

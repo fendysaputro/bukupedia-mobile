@@ -44,10 +44,11 @@ export default class ProductCategory extends Component {
         let link =''
         getProductLink(state.params.url)
             .then((res) => {
-                getProductByCategory(res.d[0].product_link)
-                    .then((res) => {
-                        this.setState({products: res.d})
-                })
+              this.setState({products: res.d});
+                // getProductByCategory(res.d[0].product_link)
+                //     .then((res) => {
+                //         this.setState({products: res.d})
+                // })
             })
     }
 
