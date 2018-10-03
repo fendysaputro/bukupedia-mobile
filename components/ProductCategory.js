@@ -47,10 +47,18 @@ export default class ProductCategory extends Component {
                 console.log("=========");
         getProductLink(state.params.url)
             .then((res) => {
+<<<<<<< HEAD
                 getProductByCategory(res.d[0].product_link)
                   .then((res) => {
                       this.setState({products: res.d})
                 })
+=======
+              this.setState({products: res.d});
+                // getProductByCategory(res.d[0].product_link)
+                //     .then((res) => {
+                //         this.setState({products: res.d})
+                // })
+>>>>>>> 233e9a63a3e2dca172a67d6845160b9db19b9aac
             })
     }
 
