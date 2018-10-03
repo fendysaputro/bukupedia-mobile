@@ -23,12 +23,11 @@ export default class Category extends Component {
           console.log(text);
           console.log("============");
           console.log(arrayHolder);
-          // const newData = this.arrayHolder.filter(item => {
-          //     const itemData = `${item.category.name.toUpperCase()}`;
-          //     const TextData = text.toUpperCase();
-          //     return itemData.indexOf(textData) > -1;
-          //   });
+          // dataSearch = this.getCategory.filter(i => {
+          //   return i.category.name.toLowerCase().match( searchText );
+          // });
         }}
+        // onChangeText={this.searchFilterFunction}
         // value={this.focusTextInput}
         autoCorrect={false}
         round
@@ -112,28 +111,28 @@ export default class Category extends Component {
     ))
     return (
       <View style={styles.container}>
-        {
-          <View>
-            <SectionList
-              renderItem={({item, index, section}) => 
+      {
+        <View>
+          <SectionList
+            renderItem={({item, index, section}) => 
+            <TouchableOpacity
+                onPress = {() => this.handleTouchCategory(item.link)}
+                style = {styles.containerTwo}>
+              <Text>{item.name}</Text>
+            </TouchableOpacity>}
+            renderSectionHeader={({section: {title}}) => (
               <TouchableOpacity
-                  onPress = {() => this.handleTouchCategory(item.link)}
-                  style = {styles.containerTwo}>
-                <Text>{item.name}</Text>
-              </TouchableOpacity>}
-                renderSectionHeader={({section: {title}}) => (
-                <TouchableOpacity
-                  style = {styles.containerThree}>
-                  <Text>{title}</Text>
-                </TouchableOpacity>
-              )}
-              sections={
-                sections
-              }
-              keyExtractor={(item, index) => item + index}/>
-          </View>
-        }
-      </View>
+                style = {styles.containerThree}>
+                <Text>{title}</Text>
+              </TouchableOpacity>
+            )}
+            sections={
+              sections
+            }
+            keyExtractor={(item, index) => item + index}/>
+        </View>
+      }
+    </View>
     )
   }
 }
