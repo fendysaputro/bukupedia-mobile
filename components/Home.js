@@ -28,15 +28,23 @@ import { ProductDetail } from '../components/ProductDetail';
 import Carousel from 'react-native-carousel-view';
 import Swiper from 'react-native-swiper';
 import WebviewBanner from '../components/WebviewBanner';
-import { PostSearch } from '../services/FetchSearch';
+import { PostSearch, getSearch } from '../services/FetchSearch';
 
 var { height, width } = Dimensions.get('window');
+const arrayHolder = [];
 
 export default class Home extends Component {
 
   constructor (props) {
       super(props);
-      this.state = { banners: [], banners_small: [], new_products: []};
+      this.state = { 
+        banners: [], 
+        banners_small: [], 
+        new_products: [],
+        loading: false,
+        data: [],
+        error: null
+      };
       this.handleOnTouchProduct = this.handleOnTouchProduct.bind(this);
       this.handleOnTouchBanner = this.handleOnTouchBanner.bind(this);
   }
@@ -55,20 +63,42 @@ export default class Home extends Component {
     getNewProduct()
           .then((res) => {
             this.setState({ new_products: res.d });
-          });
+        });
+    
+        this.makeRemoteRequest();
   }
+
+  makeRemoteRequest = () => {
+    this.setState({ loading: true });
+
+    getSearch()
+      .then(new_products => {
+        this.setState({
+          loading: false,
+          data: new_products
+        });
+      })
+      .catch(error => {
+        this.setState({ error, loading: false });
+      });
+  };
+
 
   static navigationOptions = ({navigation}) => ({
     headerTitle: 
       <SearchBar
         lightTheme
         type="text"
-        // value={this.state.seachText}
-        // ref={url}
-        // onChangeText={this.searchItem(url)}
-        // onClearText={someMethod}
         placeholder='Bukupedia App' 
         containerStyle={{width: '100%', backgroundColor: COLOR_PRIMARY}}
+        onChangeText={function(makeRemoteRequest){
+          console.log("ini text");
+          console.log(makeRemoteRequest);
+          console.log("============");
+          console.log(arrayHolder);
+        }}
+        // onChangeText={this.makeRemoteRequest}
+        autoCorrect={false}
       />,
     headerStyle: {
       backgroundColor: COLOR_PRIMARY,
