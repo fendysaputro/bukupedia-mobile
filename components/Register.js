@@ -10,6 +10,9 @@ import TabNavigator from "react-native-tab-navigator";
 import BottomNavigation, { Tab } from "react-native-material-bottom-navigation";
 import Button from "react-native-button";
 import { postRegister } from "../services/FetchRegister";
+import { withSafeArea } from "react-native-safe-area";
+
+const SafeAreaView = withSafeArea(View, 'margin', 'all')
 
 export default class Register extends Component {
     static navigationOptions = {
@@ -67,6 +70,7 @@ export default class Register extends Component {
 
     render () {
       return (
+        <SafeAreaView>
         <ScrollView contentContainer={styles.contentContainer}>
         <View style={styles.container}>
           <TouchableOpacity style = {styles.buttonStyleFb}>
@@ -129,6 +133,7 @@ export default class Register extends Component {
           </Button>     
         </View>
         </ScrollView>
+        </SafeAreaView>
       )
     }
   }

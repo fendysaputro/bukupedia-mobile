@@ -69,9 +69,9 @@ export default class Basket extends Component {
   }
 
   render () {
-    // console.log("ini charts");
-    //   console.log(this.state.carts);
-    //   console.log("============");
+    console.log("ini charts");
+      console.log(this.state.carts);
+      console.log("============");
     if(this.state.carts.length == 0){
       return(
         <View style={styles.container}>

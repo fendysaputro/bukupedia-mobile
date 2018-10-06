@@ -28,7 +28,7 @@ import { ProductDetail } from '../components/ProductDetail';
 import Carousel from 'react-native-carousel-view';
 import Swiper from 'react-native-swiper';
 import WebviewBanner from '../components/WebviewBanner';
-import { PostSearch, getSearch } from '../services/FetchSearch';
+import { postSearch } from '../services/FetchSearch';
 
 var { height, width } = Dimensions.get('window');
 const arrayHolder = [];
@@ -65,17 +65,18 @@ export default class Home extends Component {
             this.setState({ new_products: res.d });
         });
     
-        this.makeRemoteRequest();
+        this.makeRemoteRequest = this.makeRemoteRequest.bind(this);
   }
 
-  makeRemoteRequest = () => {
+  makeRemoteRequest = (params, id) => {
     this.setState({ loading: true });
 
-    getSearch()
-      .then(new_products => {
+    postSearch(params, id)
+      .then((res) => {
+        console.log(res);
         this.setState({
           loading: false,
-          data: new_products
+          data: res
         });
       })
       .catch(error => {
@@ -91,9 +92,9 @@ export default class Home extends Component {
         type="text"
         placeholder='Bukupedia App' 
         containerStyle={{width: '100%', backgroundColor: COLOR_PRIMARY}}
-        onChangeText={function(makeRemoteRequest){
+        onChangeText={function(postSearch){
           console.log("ini text");
-          console.log(makeRemoteRequest);
+          console.log(postSearch);
           console.log("============");
           console.log(arrayHolder);
         }}
