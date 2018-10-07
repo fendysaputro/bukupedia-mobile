@@ -17,9 +17,7 @@ import EditProfile from "../components/EditProfile";
 import AddAddress from "../components/AddressMain";
 import NewRating from "../components/NewRating";
 import Wishlist from "../components/Wishlist";
-import ContentFormFaq from "../components/ContentFormFaq";
-import HowToShop from "../components/HowToShop";
-import HowToPay from "../components/HowToPay";
+import Content from "../components/Content";
 import Blog from "../components/Blog";
 import { getLogout } from "../services/FetchLogout";
 import Home from "../components/Home";
@@ -112,7 +110,7 @@ export default class WelcomeAccount extends Component {
       {
         id: 3,
         title: 'Bantuan',
-        link: 'HowToPay'
+        link: 'Content'
       },
       {
         id: 4,

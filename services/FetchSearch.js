@@ -1,7 +1,7 @@
 import {API, SEARCH_PRODUCT} from "../components/Global";
 
-export const postSearch = async (params, id) => {
-    const URL = API + SEARCH_PRODUCT + '/' + id;
+export const postSearch = async (params) => {
+    const URL = API + SEARCH_PRODUCT;
     return fetch(URL, {
         method: 'POST',
         headers: {

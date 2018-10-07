@@ -43,10 +43,12 @@ export default class Home extends Component {
         new_products: [],
         loading: false,
         data: [],
-        error: null
+        error: null,
+        search: ''
       };
       this.handleOnTouchProduct = this.handleOnTouchProduct.bind(this);
       this.handleOnTouchBanner = this.handleOnTouchBanner.bind(this);
+      this.makeRemoteRequest = this.makeRemoteRequest.bind(this);
   }
 
   componentWillMount() {
@@ -64,14 +66,11 @@ export default class Home extends Component {
           .then((res) => {
             this.setState({ new_products: res.d });
         });
-    
-        this.makeRemoteRequest = this.makeRemoteRequest.bind(this);
   }
 
-  makeRemoteRequest = (params, id) => {
-    this.setState({ loading: true });
-
-    postSearch(params, id)
+  makeRemoteRequest = (params) => {
+    console.log(params)
+    postSearch(params)
       .then((res) => {
         console.log(res);
         this.setState({
@@ -79,7 +78,7 @@ export default class Home extends Component {
           data: res
         });
       })
-      .catch(error => {
+      .catch(error => {console.log(arrayHolder);
         this.setState({ error, loading: false });
       });
   };
@@ -92,11 +91,10 @@ export default class Home extends Component {
         type="text"
         placeholder='Bukupedia App' 
         containerStyle={{width: '100%', backgroundColor: COLOR_PRIMARY}}
-        onChangeText={function(postSearch){
-          console.log("ini text");
-          console.log(postSearch);
-          console.log("============");
-          console.log(arrayHolder);
+        onChangeText={function(makeRemoteRequest){
+          // console.log("ini text");
+          console.log(makeRemoteRequest);
+          // console.log("============");
         }}
         // onChangeText={this.makeRemoteRequest}
         autoCorrect={false}

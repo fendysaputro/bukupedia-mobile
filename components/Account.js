@@ -17,9 +17,7 @@ import { ListItem } from "react-native-elements";
 import Login from "./Login"
 import NewRating from "../components/NewRating";
 import Blog from "../components/Blog";
-import HowToShop from "../components/HowToShop";
-import HowToPay from "../components/HowToPay";
-import ContentFormFaq from "../components/ContentFormFaq";
+import Content from "../components/Content";
 import WelcomeAccount from "../components/WelcomeAccount";
 
 export default class Account extends Component {
@@ -52,7 +50,7 @@ export default class Account extends Component {
       {
         id: 2,
         title: 'Bantuan',
-        link: 'HowToShop'
+        link: 'Content'
       }
     ]
   }

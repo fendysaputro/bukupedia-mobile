@@ -39,11 +39,13 @@ export default class ContentFormFaq extends Component{
 
     render (){
         return(
-            <View style={styles.container}>
-                <Text style={styles.textNew}>
-                    {this.state.contentFaq.content}
-                </Text>
-            </View>
+            <ScrollView>
+                <View style={styles.container}>
+                    <Text style={styles.textNew}>
+                        {this.state.contentFaq.content}
+                    </Text>
+                </View>
+            </ScrollView>
         )
     }
 }
