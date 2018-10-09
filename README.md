@@ -5455,15 +5455,127 @@ feedback :
 
 
 ### Product by Pubisher
-url : 
+url : https://service.bukupedia.com/id/publisher/id-91505/GrassMedia.html
 type : Get
 feedback :
 ```
-
+{
+    "s": true,
+    "m": "Get Product by Publisher Success",
+    "d": [
+        {
+            "id": "132282",
+            "title": "Dearest",
+            "authors": "Dacytta Peach",
+            "stock": 1,
+            "price-old": 107500,
+            "price": 107500,
+            "image": "https://service.bukupedia.com/images/products/132282dearest.png",
+            "link": "https://service.bukupedia.com/id/product/id-132282/dearest.html"
+        },
+        {
+            "id": "132283",
+            "title": "Fake Identity",
+            "authors": "Winda Zizty",
+            "stock": 1,
+            "price-old": 94000,
+            "price": 94000,
+            "image": "https://service.bukupedia.com/images/products/132283fake-identity.png",
+            "link": "https://service.bukupedia.com/id/product/id-132283/fake-identity.html"
+        },
+        {
+            "id": "132284",
+            "title": "Mammamia! ( Aku Patah Hati )",
+            "authors": "Julie Hasjiem",
+            "stock": 1,
+            "price-old": 92000,
+            "price": 92000,
+            "image": "https://service.bukupedia.com/images/products/132284mammamia-aku-patah-hati.png",
+            "link": "https://service.bukupedia.com/id/product/id-132284/mammamia-aku-patah-hati.html"
+        },
+        {
+            "id": "131467",
+            "title": "Dinginnya Sang Hati",
+            "authors": "Viroez",
+            "stock": 1,
+            "price-old": 109000,
+            "price": 109000,
+            "image": "https://service.bukupedia.com/images/products/131467-dinginnya-sang-hati.JPG",
+            "link": "https://service.bukupedia.com/id/product/id-131467/dinginnya-sang-hati.html"
+        },
+        {
+            "id": "131468",
+            "title": "You're All I See",
+            "authors": "Rahmi Agustina",
+            "stock": 1,
+            "price-old": 97000,
+            "price": 97000,
+            "image": "https://service.bukupedia.com/images/products/131468you-re-all-i-see.JPG",
+            "link": "https://service.bukupedia.com/id/product/id-131468/you-re-all-i-see.html"
+        },
+        {
+            "id": "123389",
+            "title": "Cinta di Langit Biru",
+            "authors": "Prima Mutiara",
+            "stock": 1,
+            "price-old": 89000,
+            "price": 89000,
+            "image": "https://service.bukupedia.com/images/products/123389cinta-di-langit-biru.jpg",
+            "link": "https://service.bukupedia.com/id/product/id-123389/cinta-di-langit-biru.html"
+        },
+        {
+            "id": "131469",
+            "title": "Bhumi dan Bulan",
+            "authors": "Eriska Helmi",
+            "stock": 1,
+            "price-old": 99000,
+            "price": 99000,
+            "image": "https://service.bukupedia.com/images/products/131469bhumi-dan-bulan.JPG",
+            "link": "https://service.bukupedia.com/id/product/id-131469/bhumi-dan-bulan.html"
+        },
+        {
+            "id": "130329",
+            "title": "But,Darling?",
+            "authors": "Risalia Anugrah(IG:risaliaicha)",
+            "stock": 1,
+            "price-old": 93000,
+            "price": 93000,
+            "image": "https://service.bukupedia.com/images/products/130329but-darling.jpg",
+            "link": "https://service.bukupedia.com/id/product/id-130329/but-darling.html"
+        },
+        {
+            "id": "130330",
+            "title": "My Husband is Hot Guy",
+            "authors": "Miss Kepo (IG:rahma_wijayanti)",
+            "stock": 1,
+            "price-old": 104000,
+            "price": 104000,
+            "image": "https://service.bukupedia.com/images/products/130330my-husband-is-hot-guy.jpg",
+            "link": "https://service.bukupedia.com/id/product/id-130330/my-husband-is-hot-guy.html"
+        },
+        {
+            "id": "130331",
+            "title": "Reminiscentiam",
+            "authors": "Philia Fate (IG:p_fate)",
+            "stock": 1,
+            "price-old": 97000,
+            "price": 97000,
+            "image": "https://service.bukupedia.com/images/products/130331reminiscentiam.jpg",
+            "link": "https://service.bukupedia.com/id/product/id-130331/reminiscentiam.html"
+        }
+    ],
+    "p": {
+        "per_page": "10",
+        "last_page": 2,
+        "next_page_url": "https://service.bukupedia.com/id/publisher/?id=91505&_sort=&_page=2",
+        "prevous_page_url": "https://service.bukupedia.com/id/publisher/?id=91505&_sort=",
+        "total": 17
+    }
+}
 ```
 
 ### Search Product
-url : https://service.bukupedia.com/id/product/the-secret
+url : https://service.bukupedia.com/id/search
 type : Post
 json : {"keywords":"algoritma"}
 feedback :
@@ -5583,7 +5695,7 @@ feedback :
 }
 ```
 
-### Product Advance Product
+### Search Advance Product
 url : https://service.bukupedia.com/id/search?advance=1
 type : Post
 json : {"title":"buku","author":"","publisher":"erlangga","category_id":"","isbn":"","release":""}
@@ -5951,6 +6063,77 @@ feedback :
 }
 ```
 
+### Create Address (page my account)
+url : https://service.bukupedia.com/id/address
+type : post
+query : {"label":"alamat kantor", "name":"Irfan Abdurrasyid", "company":"", "division":"", "phone":"08122313424", "address":"Kav Polri, Blok C, No 729. Jl. Haidah Utama", "subdistrict_id":"6449", "postcode":"11640"}
+param : token JWT
+feedback :
+```
+{
+    "s": true,
+    "m": "Post Save/Update Address Success",
+    "q": {
+        "label": "alamat kantor",
+        "name": "Irfan Abdurrasyid",
+        "company": "",
+        "division": "",
+        "phone": "08122313424",
+        "address": "Kav Polri, Blok C, No 729. Jl. Haidah Utama",
+        "subdistrict_id": "6449",
+        "postcode": "11640"
+    },
+    "d": {
+        "id": "63233",
+        "label": "alamat kantor",
+        "name": "Irfan Abdurrasyid",
+        "company": "",
+        "division_company": "",
+        "phone": "08122313424",
+        "address": "Kav Polri, Blok C, No 729. Jl. Haidah Utama",
+        "subdistrict": "Jamanis",
+        "regency": "Tasikmalaya",
+        "province": "Jawa Barat",
+        "postcode": "11640"
+    }
+}
+```
+
+### Update Address (page my account)
+url : https://service.bukupedia.com/id/address?id=xx
+type : post
+query : {"label":"alamat kantor 1", "name":"Irfan Abdurrasyid", "company":"", "division":"", "phone":"08122313424", "address":"Kav Polri, Blok C, No 729. Jl. Haidah Utama", "subdistrict_id":"6449", "postcode":"11640"}
+param : token JWT and address_id
+feedback :
+```
+{
+    "s": true,
+    "m": "Post Save/Update Address Success",
+    "q": {
+        "label": "alamat kantor 1",
+        "name": "Irfan Abdurrasyid",
+        "company": "",
+        "division": "",
+        "phone": "08122313424",
+        "address": "Kav Polri, Blok C, No 729. Jl. Haidah Utama",
+        "subdistrict_id": "6449",
+        "postcode": "11640"
+    },
+    "d": {
+        "id": "63233",
+        "label": "alamat kantor 1",
+        "name": "Irfan Abdurrasyid",
+        "company": "",
+        "division_company": "",
+        "phone": "08122313424",
+        "address": "Kav Polri, Blok C, No 729. Jl. Haidah Utama",
+        "subdistrict": "Jamanis",
+        "regency": "Tasikmalaya",
+        "province": "Jawa Barat",
+        "postcode": "11640"
+    }
+}
+```
 
 ### Content FAQ
 url : https://service.bukupedia.com/id/faq
@@ -5982,7 +6165,16 @@ feedback :
 }
 ```
 
-``
+### Content How To Payment
+url : https://service.bukupedia.com/id/how-to-payment
+type : Get
+feedback :
+```
+{
+    "s": false,
+    "m": "Get How To Payment Field"
+}
+```
 
 ### Profile
 url : https://service.bukupedia.com/id/profile
@@ -6005,6 +6197,37 @@ feedback :
 }
 ```
 
+
+
+### Edit Profile
+url : https://service.bukupedia.com/id/profile
+type : Post
+query : {"name":"irfan", "email":"irfan@bisnis2030.com", "phone":"08212344", "birth_date":"1988-07-27", "gender":"1","address":"Jakarta"}
+param : token JWT
+feedback :
+```
+{
+    "s": true,
+    "m": "Update Profile Success",
+    "q": {
+        "name": "irfan",
+        "email": "irfan@bisnis2030.com",
+        "phone": "08212344",
+        "birth_date": "1988-07-27",
+        "gender": "1",
+        "address": "Jakarta"
+    },
+    "d": {
+        "id": "71415",
+        "name": "irfan",
+        "email": "irfan@bisnis2030.com",
+        "gender": 1,
+        "birth_date": "1988-07-27",
+        "phone": "08212344",
+        "address": "Jakarta"
+    }
+}
+```
 
 ### List Shopping Cart
 url : https://service.bukupedia.com/id/cart
@@ -6498,5 +6721,97 @@ feedback :
             }
         ]
     }
+}
+```
+
+### List Review (product detail)
+url : https://service.bukupedia.com/id/resensi/id-108211/holy-mother.html
+type : Get
+feedback :
+```
+{
+    "s": true,
+    "m": "Get Review Success",
+    "d": [
+        {
+            "id": "3000",
+            "name": "Natalia ",
+            "title": "Misteri Pembunuhan dengan Twist Tak Terduga",
+            "create_at": "2017-01-03 08:08:50",
+            "rating": 5,
+            "description": "<p>\r\n\tHoly Mother adalah buku <a href=\"http://www.bukupedia.com/id/cari-buku?author=AKIYOSHI%20RIKAKO\">Akiyoshi Rikako</a>&nbsp;yang baru saya baca. Kisahnya sendiri merupakan kisah misteri/thriller mengenai kasus pembunuhan anak kecil yang cukup kejam. Kondisi mayat ditemukan di tepi sungai Aiide dalam kondisi mengenaskan. Diduga korban juga diperkosa setelah dibunuh. Tempat tinggal yang dianggap aman tenteram, sekarang menimbulkan tanda tanya dan ketakutan bagi warga. Termasuk Honami, seorang ibu yang memiliki anak perempuan.&nbsp;</p>\r\n<p>\r\n\tHonami merasa was-was akan kejadian ini. Ia sendiri adalah sosok ibu yang protektif terhadap anak perempuannya karena ia pernah mengalami sulitnya hamil sampai akhirnya dia berhasil dikaruniai seorang anak perempuan. Ia akan melakukan apapun demi melindungi darah dagingnya.</p>\r\n<p>\r\n\tAda karakter Kaoru. Anak kecil yang masih duduk di bangku KB ini selalu dilindungi dan disayangi oleh Honami.</p>\r\n<p>\r\n\tDi sisi lain, ada pula Makoto. Seorang anak SMA yang merangkap kerja sampingan di swalayan serta menjadi sensei Kendo bagi anak-anak kecil.</p>\r\n<p>\r\n\tSelain itu, ada karakter dua detektif yang bekerjasama memecahkan kasus ini. Serta di saat bersamaan, muncul seorang eks-narapidana atas kasus perkosaan. Sebagai eks-narapidana dengan kasus perkosaan, tentu saja kehadiran pria ini ke dalam masyarakat menimbulkan prasangka dan kecurigaan baru atas tindak-tanduknya.</p>\r\n<p>\r\n\t&nbsp;</p>\r\n<p>\r\n\tSebenarnya, misteri utama dari novel ini bukanlah siapa pelaku pembunuhan anak kecil. Namun, misteri terbesarnya adalah ketika pembaca mulai digiring pertengahan menuju akhir. Di sana muncul pertanyaan baru yang membuat bergidik. Twist yang dimunculkan membuat mindblowing.&nbsp;</p>\r\n<p>\r\n\tPenokohan karakter, lokasi cerita, dan latar belakang karakter yang sudah saya bangun dari awal cerita, ternyata harus bergeser karena twist ini. Penyampaian cerita yang cerdas dari penulis, membuat saya terkecoh dengan apa yang digambarkan di otak saya. Sekilas mengingatkanku pada kisah film Mother, kisah kasih seorang ibu pada anaknya.</p>\r\n<p>\r\n\tSaya sangat menikmati kisah thriller misteri dengan twist ini, sangat layak dibaca oleh Anda sesama penikmat kisah genre ini.</p>\r\n"
+        }
+    ],
+    "p": {
+        "per_page": "10",
+        "last_page": 1,
+        "next_page_url": "https://service.bukupedia.com/id/resensi/?_sort=",
+        "prevous_page_url": "https://service.bukupedia.com/id/resensi/?_sort=",
+        "total": 1
+    }
+}
+```
+
+### Create Review
+url : https://service.bukupedia.com/id/resensi
+type : post
+query : {"name":"irfan 2","email":"irfan@bisnis2030.com","product_id":"108211", "title":"review buku 2", "rating":"5", "comment":"isi dari revie buku 2"}
+feedback :
+```
+{
+    "s": true,
+    "m": "Save Review Success",
+    "d": {
+        "id": "3042",
+        "name": "irfan 2",
+        "title": "review buku 2",
+        "create_at": "2018-09-19 13:46:27",
+        "rating": 5,
+        "description": "isi dari revie buku 2"
+    }
+}
+```
+
+
+### List Wishlist
+url : https://service.bukupedia.com/id/wishlist
+type : Get
+parma : token JWT
+feedback :
+```
+{
+    "s": true,
+    "m": "Get Whislist Success",
+    "d": [
+        {
+            "id": "108211",
+            "title": "HOLY MOTHER",
+            "authors": "AKIYOSHI RIKAKO",
+            "stock": 1,
+            "price_old": 69000,
+            "price": 69000,
+            "image": "https://service.bukupedia.com/images/products/108211holy-mother.jpg",
+            "link": "https://service.bukupedia.com/id/product/id-108211/holy-mother.html"
+        }
+    ],
+    "p": {
+        "per_page": "10",
+        "last_page": 1,
+        "next_page_url": "https://service.bukupedia.com/id/wishlist/",
+        "prevous_page_url": "https://service.bukupedia.com/id/wishlist/",
+        "total": 1
+    }
+}
+```
+
+### Create/Detele Wishlist
+url : https://service.bukupedia.com/id/wishlist?id=xx
+type : Get
+param : token JWT and product_id
+feedback :
+```
+{
+    "s": true,
+    "m": "Add Wishlist Success"
 }
 ```

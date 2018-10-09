@@ -43,12 +43,9 @@ export default class ProductCategory extends Component {
         const { state } = this.props.navigation;
         let link =''
         getProductLink(state.params.url)
-            .then((res) => {
-                getProductByCategory(res.d[0].product_link)
-                    .then((res) => {
-                        this.setState({products: res.d})
-                })
-            })
+        .then((res) => {
+            this.setState({products: res.d})
+        })
     }
 
     handleOnTouchProduct(item) {

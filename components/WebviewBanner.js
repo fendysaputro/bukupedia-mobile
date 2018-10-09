@@ -9,10 +9,22 @@ export default class WebviewBanner extends Component {
         headerLeft: null,
     };
 
+    constructor (props) {
+        super(props);
+        this.state = {
+            url: ''
+        }
+    }
+
+    componentDidMount() {
+        const { state } = this.props.navigation;
+        this.setState({url: state.params.url});
+    }
+
     render (){
         return(
             <WebView
-                source={{uri: 'https://www.bukupedia.com/'}}
+                source={{uri: this.state.url}}
                 style={{marginTop: 20}}
             />
         )

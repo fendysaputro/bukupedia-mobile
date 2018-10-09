@@ -126,8 +126,9 @@ export default class ProductDetail extends Component {
         const { state } = this.props.navigation;
         getProductDetail(state.params.url)
             .then((res) => {
-                self.setState({ data: res.d, isDataLoaded: true });
-                console.log(self.state.data);
+                self.setState({ data: res.d[0], isDataLoaded: true });
+                console.log('getProductDetail data');
+                console.log(JSON.stringify(res.d[0]));
         });
     }
 

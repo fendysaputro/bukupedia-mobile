@@ -1,4 +1,4 @@
-export const API = 'https://service.bukupedia.com/id/'; //'https://bmcdev-api.bukupedia.com/api/v1/';
+export const API = 'https://service.bukupedia.com/id/';//'https://bmcdev-api.bukupedia.com/api/v1/';
 export const BANNER = 'banner';
 export const BANNER_SMALL = 'banner-small';
 export const BANNER_FOOTER = 'banner-footer';
@@ -23,3 +23,4 @@ export const WISHLIST = 'wishlist';
 export const REVIEW = 'review';
 export const SHIPPING_COST = 'shipping-cost';
 export const ORDER_PAYMENT = 'order-payment';
+export const SEARCH_PRODUCT = 'search';

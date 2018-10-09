@@ -29,6 +29,7 @@ import HowToPay from "./components/HowToPay";
 import Blog from "./components/Blog";
 import Webview from "./components/Webview";
 import WebviewBanner from "./components/WebviewBanner";
+import Content from "./components/Content";
 // import { MainStack } from "./config/Router";
 
 let listener = null;
@@ -121,7 +122,7 @@ export default App = StackNavigator({
   ProductCategory: {
     screen: ProductCategory,
     navigationOptions: {
-      title: "Category"
+    
     }
   },
   WelcomeAccount: {
@@ -198,6 +199,12 @@ export default App = StackNavigator({
   },
   WebviewBanner: {
     screen: WebviewBanner,
+    navigationOptions: {
+
+    }
+  },
+  Content: {
+    screen: Content,
     navigationOptions: {
 
     }

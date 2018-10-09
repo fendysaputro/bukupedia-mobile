@@ -28,18 +28,30 @@ import { ProductDetail } from '../components/ProductDetail';
 import Carousel from 'react-native-carousel-view';
 import Swiper from 'react-native-swiper';
 import WebviewBanner from '../components/WebviewBanner';
+import { postSearch } from '../services/FetchSearch';
 
 var { height, width } = Dimensions.get('window');
+const arrayHolder = [];
 
 export default class Home extends Component {
 
   constructor (props) {
       super(props);
+      this.state = { 
+        banners: [], 
+        banners_small: [], 
+        new_products: [],
+        loading: false,
+        data: [],
+        error: null,
+        search: ''
+      };
       this.handleOnTouchProduct = this.handleOnTouchProduct.bind(this);
+      this.handleOnTouchBanner = this.handleOnTouchBanner.bind(this);
+      this.makeRemoteRequest = this.makeRemoteRequest.bind(this);
   }
 
   componentWillMount() {
-    this.setState({ banners: [], banners_small: [], new_products: []});
     getBanner()
           .then((res) => {
               this.setState({ banners: res.d });
@@ -53,17 +65,39 @@ export default class Home extends Component {
     getNewProduct()
           .then((res) => {
             this.setState({ new_products: res.d });
-          });
+        });
   }
+
+  makeRemoteRequest = (params) => {
+    console.log(params)
+    postSearch(params)
+      .then((res) => {
+        console.log(res);
+        this.setState({
+          loading: false,
+          data: res
+        });
+      })
+      .catch(error => {console.log(arrayHolder);
+        this.setState({ error, loading: false });
+      });
+  };
+
 
   static navigationOptions = ({navigation}) => ({
     headerTitle: 
       <SearchBar
         lightTheme
-        // onChangeText={someMethod}
-        // onClearText={someMethod}
+        type="text"
         placeholder='Bukupedia App' 
         containerStyle={{width: '100%', backgroundColor: COLOR_PRIMARY}}
+        onChangeText={function(makeRemoteRequest){
+          // console.log("ini text");
+          console.log(makeRemoteRequest);
+          // console.log("============");
+        }}
+        // onChangeText={this.makeRemoteRequest}
+        autoCorrect={false}
       />,
     headerStyle: {
       backgroundColor: COLOR_PRIMARY,
@@ -80,15 +114,17 @@ export default class Home extends Component {
       </TouchableOpacity>
   })
 
-  getAuthorsText(authorObj) {
-    return authorObj.results.map(function(author){
-      author + ' ';
-    });
-  }
-
   handleOnTouchProduct(item) {
     this.props.navigation.navigate('ProductDetail', {url: item.link});
   }
+
+  handleOnTouchBanner(item) {
+    this.props.navigation.navigate('WebviewBanner', {url: item.attributes.url});
+  }
+
+  // searchItem(item){
+  //   this.props.navigation.navigate('ProductDetail', {url: item.link});
+  // }
 
   render () {
     const {navigate} = this.props.navigation;
@@ -101,13 +137,12 @@ export default class Home extends Component {
             <View style={styles.box1}>
               <Swiper height={190} showsButtons={false}>
                 {
-                  this.state.banners.map(function(banner, i){   
-                    // console.log(this.state.banner);
+                  this.state.banners.map((banner, i) => {   
                     return  (
                               <View key={i}>
-                              <TouchableOpacity onPress={() => navigate('WebviewBanner')}>
+                              <TouchableOpacity onPress={() => this.handleOnTouchBanner(banner)}>
                                 <Image  width={Dimensions.get('window').width} 
-                                      source={{uri: banner.picture}}/>
+                                      source={{uri: banner.attributes.picture}}/>
                               </TouchableOpacity>
                               </View>
                             )  
@@ -126,7 +161,7 @@ export default class Home extends Component {
                   this.setState(() => ({ currentIndex: index }))
                 }
                 renderItem={({ itemIndex, currentIndex, item, animatedValue }) => (
-                  <Image  width={Dimensions.get('window').width / 3} 
+                  <Image key={item.id}  width={Dimensions.get('window').width / 3} 
                       source={{uri: item.picture}}/>
                 )}
               />
@@ -137,13 +172,13 @@ export default class Home extends Component {
                 items={this.state.new_products}
                 style={styles.gridView}
                 renderItem={item => (
-                  <TouchableHighlight onPress={() => this.handleOnTouchProduct(item)}>
+                  <TouchableHighlight key={item.id} onPress={() => this.handleOnTouchProduct(item)}>
                     <View style={[styles.itemContainer]}>
                       <Image width={Dimensions.get('window').width / 3} 
                         source={{uri: item.image}}/>
                       <View style={styles.itemCaption}>
                         <Text style={styles.itemTitle}>{item.title}</Text>
-                        <Text style={styles.itemAuthor}> {item.authors[0]}</Text>
+                        <Text style={styles.itemAuthor}> {'Authors: '+item.authors}</Text>
                         <Text style={styles.itemPrice}>
                           {new Intl.NumberFormat('en-GB', { 
                               style: 'currency', 
@@ -234,13 +269,13 @@ const styles = StyleSheet.create({
 
   },
   itemTitle: {
-    fontSize: 14,
+    fontSize: 8,
     color: '#1791c5',
     fontWeight: '600',
   },
   itemAuthor: {
     fontWeight: '600',
-    fontSize: 11,
+    fontSize: 8,
     color: '#49aedd'
   },
   itemPrice: {
