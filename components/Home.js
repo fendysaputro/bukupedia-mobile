@@ -40,15 +40,13 @@ export default class Home extends Component {
       this.state = { 
         banners: [], 
         banners_small: [], 
-        new_products: [],
-        loading: false,
-        data: [],
-        error: null,
-        search: ''
+        new_products: [],  
+        isLoading: true,
+        text: ''
       };
       this.handleOnTouchProduct = this.handleOnTouchProduct.bind(this);
       this.handleOnTouchBanner = this.handleOnTouchBanner.bind(this);
-      this.makeRemoteRequest = this.makeRemoteRequest.bind(this);
+      this.arrayholder = [];
   }
 
   componentWillMount() {
@@ -66,22 +64,36 @@ export default class Home extends Component {
           .then((res) => {
             this.setState({ new_products: res.d });
         });
+
+    makeRemoteRequest = (params) => {
+      console.log(params)
+      postSearch(params)
+        .then((res) => {
+          console.log(res);
+          this.setState({
+            loading: false,
+            data: res
+          });
+          this.arrayholder = res;
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    };
   }
 
-  makeRemoteRequest = (params) => {
-    console.log(params)
-    postSearch(params)
-      .then((res) => {
-        console.log(res);
-        this.setState({
-          loading: false,
-          data: res
-        });
-      })
-      .catch(error => {console.log(arrayHolder);
-        this.setState({ error, loading: false });
-      });
-  };
+SearchFilterFunction(text){     
+     const newData = this.arrayholder.filter(function(item){
+       console.log(item);
+         const itemData = item.title.toUpperCase()
+         const textData = text.toUpperCase()
+         return itemData.indexOf(textData) > -1
+     })
+     this.setState({
+        //  dataSource: this.state.dataSource.cloneWithRows(newData),
+         text: text
+     })
+ }
 
 
   static navigationOptions = ({navigation}) => ({
@@ -91,12 +103,15 @@ export default class Home extends Component {
         type="text"
         placeholder='Bukupedia App' 
         containerStyle={{width: '100%', backgroundColor: COLOR_PRIMARY}}
-        onChangeText={function(makeRemoteRequest){
-          // console.log("ini text");
-          console.log(makeRemoteRequest);
-          // console.log("============");
+        onChangeText={function(text){
+          function exec(text){ 
+            console.log("ini searchFunction");
+            console.log(text);
+            SearchFilterFunction(); 
+            console.log("==========");
+          }
         }}
-        // onChangeText={this.makeRemoteRequest}
+        // onChangeText={(text) => this.SearchFilterFunction(text)}
         autoCorrect={false}
       />,
     headerStyle: {

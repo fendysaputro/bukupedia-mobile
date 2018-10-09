@@ -31,13 +31,13 @@ export default class Content extends Component{
             title: 'Bagaimana Cara untuk Membeli?',
             link: 'HowToShop'
           },
+        //   {
+        //     id: 1,
+        //     title: 'Bagaimana Cara untuk Membayar?',
+        //     link: 'HowToPay'
+        //   },
           {
             id: 1,
-            title: 'Bagaimana Cara untuk Membayar?',
-            link: 'HowToPay'
-          },
-          {
-            id: 2,
             title: 'Apa itu Konten FAQ?',
             link: 'ContentFormFaq'
           }

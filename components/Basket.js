@@ -1,3 +1,5 @@
+import 'intl';
+import 'intl/locale-data/jsonp/en';
 import React, { Component } from "react";
 import { AppRegistry, 
   StyleSheet, 
@@ -69,88 +71,90 @@ export default class Basket extends Component {
   }
 
   render () {
-    console.log("ini charts");
-      console.log(this.state.carts);
-      console.log("============");
-    if(this.state.carts.length == 0){
-      return(
-        <View style={styles.container}>
-          <Image 
-            width={200}
-            source={require('../styles/icon/emptystates1.png')}>
-          </Image>
-          <Text style={styles.text}>
-            Keranjang Belanja Anda Kosong
-          </Text>
-          <Text style={styles.smallText}>
-            Semua belanjaan Anda akan masuk di sini
-          </Text>
-          <TouchableOpacity 
-            style={styles.button}
-            onPress = {() => this.props.navigation.navigate('Home')}>
-              <Text style={styles.buttonText}>
-                Mulai Belanja
-              </Text>
-          </TouchableOpacity>
-        </View>
-      )
-    }
-    let total = 0;
-    this.state.carts.map((product, index) => {
-      total = total + product.price;
-    });
-    return(
-      <ScrollView>
-        <View style={styles.containerlist}>
-          {
-            this.state.carts.map((product, index) => (
-              <View
-                key = {product.id}
-                style = {styles.containerTwo}
-                onPress = {() => console.log('press')}>
-                <View style={{marginLeft:20}}>
-                  <Image 
-                    width={60} 
-                    source={{uri: product.image}}
-                  />
-                </View>
-                <View style={styles.numberItem}>
-                  <Text style={{paddingTop:1}}>{product.title}</Text>
-                  <Text>
-                    {new Intl.NumberFormat('en-GB', { 
-                        style: 'currency', 
-                        currency: 'IDR',
-                        minimumFractionDigits: 0, 
-                        maximumFractionDigits: 0 
-                    }).format(product.price)}
-                  </Text>
-                  <NumericInput 
-                    onChange={value => this.setState({quantity: value})}
-                    value={product.quantity}/>            
-                </View>
-              </View>
-            ))
-          }
-          <View style={styles.box1}>
-            <Text style={{paddingLeft: 10}}>
-              Total harga buku: {new Intl.NumberFormat('en-GB', { 
-                                  style: 'currency', 
-                                  currency: 'IDR',
-                                  minimumFractionDigits: 0, 
-                                  maximumFractionDigits: 0 
-                              }).format(total)}
+    if(this.state.token){
+      if(this.state.carts.length == 0){
+        return(
+          <View style={styles.container}>
+            <Image 
+              width={200}
+              source={require('../styles/icon/emptystates1.png')}>
+            </Image>
+            <Text style={styles.text}>
+              Keranjang Belanja Anda Kosong
             </Text>
-            <TouchableOpacity style={styles.button}
-              onPress = {() => this.props.navigation.navigate("Checkout")}>
+            <Text style={styles.smallText}>
+              Semua belanjaan Anda akan masuk di sini
+            </Text>
+            <TouchableOpacity 
+              style={styles.button}
+              onPress = {() => this.props.navigation.navigate('Home')}>
                 <Text style={styles.buttonText}>
-                  Checkout
+                  Mulai Belanja
                 </Text>
             </TouchableOpacity>
           </View>
-        </View>
-      </ScrollView>
-    );
-  }
+        )
+      }
+      let total = 0;
+      this.state.carts.map((product, index) => {
+        total = total + product.price;
+      });
+      return(
+        <ScrollView>
+          <View style={styles.containerlist}>
+            {
+              this.state.carts.map((product, index) => (
+                <View
+                  key = {product.id}
+                  style = {styles.containerTwo}
+                  onPress = {() => console.log('press')}>
+                  <View style={{marginLeft:20}}>
+                    <Image 
+                      width={60} 
+                      source={{uri: product.image}}
+                    />
+                  </View>
+                  <View style={styles.numberItem}>
+                    <Text style={{paddingTop:1}}>{product.title}</Text>
+                    <Text>
+                      {new Intl.NumberFormat('en-GB', { 
+                          style: 'currency', 
+                          currency: 'IDR',
+                          minimumFractionDigits: 0, 
+                          maximumFractionDigits: 0 
+                      }).format(product.price)}
+                    </Text>
+                    <NumericInput 
+                      onChange={value => this.setState({quantity: value})}
+                      value={product.quantity}/>            
+                  </View>
+                </View>
+              ))
+            }
+            <View style={styles.box1}>
+              <Text style={{paddingLeft: 10}}>
+                Total harga buku: {new Intl.NumberFormat('en-GB', { 
+                                    style: 'currency', 
+                                    currency: 'IDR',
+                                    minimumFractionDigits: 0, 
+                                    maximumFractionDigits: 0 
+                                }).format(total)}
+              </Text>
+              <TouchableOpacity style={styles.button}
+                onPress = {() => this.props.navigation.navigate("Checkout")}>
+                  <Text style={styles.buttonText}>
+                    Checkout
+                  </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </ScrollView>
+      );
+    }
+    return(
+      this.props.navigation.navigate('Login')
+    )
+  }   
 }
 const styles = StyleSheet.create({
   container: {
