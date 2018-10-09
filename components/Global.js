@@ -1,4 +1,4 @@
-export const API = 'https://bmcdev-api.bukupedia.com/api/v1/';
+export const API = 'https://service.bukupedia.com/id/'; //'https://bmcdev-api.bukupedia.com/api/v1/';
 export const BANNER = 'banner';
 export const BANNER_SMALL = 'banner-small';
 export const BANNER_FOOTER = 'banner-footer';
