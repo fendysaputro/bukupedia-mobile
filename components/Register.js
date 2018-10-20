@@ -11,6 +11,7 @@ import BottomNavigation, { Tab } from "react-native-material-bottom-navigation";
 import Button from "react-native-button";
 import { postRegister } from "../services/FetchRegister";
 import { withSafeArea } from "react-native-safe-area";
+import Login from "../components/LoginMain";
 
 const SafeAreaView = withSafeArea(View, 'margin', 'all')
 
@@ -36,6 +37,7 @@ export default class Register extends Component {
             name: '',
             email: '',
             password: '',
+            verify_password: '',
             phone: ''
           }
     }
@@ -60,7 +62,9 @@ export default class Register extends Component {
                         'Error',
                         res.message,
                         [
-                            {text: 'OK', onPress: () => console.log(res)},
+                            {text: 'OK', onPress: () =>
+                            // console.log("ini error lho")},
+                           console.log(res)},
                         ],
                         { cancelable: false }
                     ) 
@@ -70,7 +74,7 @@ export default class Register extends Component {
 
     render () {
       return (
-        <SafeAreaView>
+        <SafeAreaView always="top">
         <ScrollView contentContainer={styles.contentContainer}>
         <View style={styles.container}>
           <TouchableOpacity style = {styles.buttonStyleFb}>
@@ -118,7 +122,7 @@ export default class Register extends Component {
               underlineColorAndroid = "transparent"
               autoCapitalize = "none"
               secureTextEntry = {true}
-              onChangeText = {(text) => this.setState({confirmPwd: text})}
+              onChangeText = {(text) => this.setState({verify_password: text})}
           />
           <TextInput style={styles.input}
               placeholder = "Nomor Handphone"

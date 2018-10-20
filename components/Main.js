@@ -81,7 +81,7 @@ const mainOption = {
             label: 'Akun',
             labelColor: 'white',
             icon:<Image source={require('../styles/icon/akun.png')} style={{ width: 24, height: 24 }} />
-          }
+          },
         }
       }
     }
@@ -95,7 +95,7 @@ class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLogined: false
+      isLogined: false,
     }
   }
 

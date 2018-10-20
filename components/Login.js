@@ -14,6 +14,7 @@ import { postLogin } from "../services/FetchLogin";
 import Account from "../components/Account";
 import WelcomeAccount from "../components/WelcomeAccount";
 import Password from "./Password";
+import SafeAreaView from "react-native-safe-area-view";
 
 export default class Login extends Component {
     static navigationOptions = {
@@ -52,16 +53,20 @@ export default class Login extends Component {
         postLogin(params)
             .then((res) => {
                 console.log(res);
-                AsyncStorage.setItem('id_token', res.d.token);
+                AsyncStorage.setItem('id_token', res.token);
                 AsyncStorage.setItem('user', JSON.stringify(res.d));
 
-                this.props.navigation.goBack();
+                AsyncStorage.getItem('id_token').then((token) => {
+                });
+
+                // this.props.navigation.navigate("WelcomeAccount");
                 this.props.navigation.navigate("Main");
             });
     }
 
     render() {
         return(
+            <SafeAreaView>
             <ScrollView contentContainer={styles.contentContainer}>
             <View style={styles.container}>
                 <TouchableOpacity style = {styles.buttonStyleFb}>
@@ -82,7 +87,7 @@ export default class Login extends Component {
                     ────────  Atau  ────────
                 </Text>
                 <TextInput style={styles.input}
-                    placeholder = "Username"
+                    placeholder = "Email"
                     placeholderTextColor="#696969"
                     underlineColorAndroid = "transparent"
                     autoCapitalize = "none"
@@ -113,6 +118,7 @@ export default class Login extends Component {
                 </Button>
             </View>
             </ScrollView>
+            </SafeAreaView>
         );
     }
 }

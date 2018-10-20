@@ -141,11 +141,13 @@ export default class ProductDetail extends Component {
     }
 
     doAddToBasket(params) {
-        addShoppingCart(params, this.state.token).
-            then((res) => {
+        addShoppingCart(params, this.state.token)
+            .then((res) => {
                 hideFadeAnimationDialog();
                 // this.props.navigation.navigate('Basket');
-            });
+            }); 
+            return 
+            this.props.navigation.navigate("Login");
     }
 
     handleOnCloseButton = () => {
@@ -255,13 +257,13 @@ export default class ProductDetail extends Component {
 
                     <View style={styles.dialogContentView}>
                         <Button
-                                onPress={() => this.doAddToBasket({
-                                    user_id:this.state.user.user.id,
-                                    product_id: this.state.data.id,
-                                    quantity: this.state.quantity
-                                    })}
-                                color="orange"
-                                title="Tambahkan ke keranjang">
+                            onPress={() => this.doAddToBasket({
+                                user_id:this.state.user.user.id,
+                                product_id: this.state.data.id,
+                                quantity: this.state.quantity
+                                })}
+                            color="orange"
+                            title="Tambahkan ke keranjang">
                         </Button>
                     </View>
                     <View style={styles.box4}>
