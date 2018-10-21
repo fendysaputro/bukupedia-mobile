@@ -117,29 +117,6 @@ export default class Checkout extends Component {
                     value={this.state.address.address}
                     onChangeText = {(text) => this.setState({address: text})}
                 />
-                {/* <Text style={styles.textLogin}>Provinsi</Text>
-                <View style={styles.dropdownStyle}>
-                <Dropdown
-                    onChangeText={this.onChangeTextProvince}
-                    label='pilih provinsi'
-                    data={provinceVal}
-                />
-                </View>
-                <Text style={styles.textLogin}>Kabupaten</Text>
-                <View style={styles.dropdownStyle}>
-                <Dropdown 
-                    onChangeText={this.onChangeTextRegency}
-                    label='pilih kabupaten'
-                    data={this.state.regencyByProvincesVal}
-                />
-                </View>
-                <Text style={styles.textLogin}>Kecamatan</Text>
-                <View style={styles.dropdownStyle}>
-                <Dropdown 
-                    label='pilih kecamatan'
-                    data={this.state.subdistrictByRegenciesVal}
-                />
-                </View> */}
                 <Text style={styles.textLogin}>Kode Pos</Text>
                 <TextInput style={styles.input}
                     placeholderTextColor="#696969"

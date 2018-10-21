@@ -14,6 +14,7 @@ import { COLOR_PRIMARY } from "../styles/common";
 import getListItemCart from "../services/FetchShoppingCart";
 import { API, CART } from '../components/Global';
 import Image from 'react-native-scalable-image';
+console.log("ini error lho");
 import Checkout from "../components/Checkout";
 import { itemTitle, itemPrice } from "../components/ProductDetail";
 import NumericInput from 'react-native-numeric-input';
@@ -38,7 +39,8 @@ export default class Basket extends Component {
   constructor (props) {
     super(props);
     this.state = {
-      carts: []
+      carts: [],
+      isLogined: false
     }
   }
 
@@ -63,16 +65,37 @@ export default class Basket extends Component {
             self.setState({carts: resObj.d});
           }
         })
+        if (token != null){
+          this.setState({isLogined: true});
+          console.log('isLogined in basket ');
+          console.log(this.state.isLogined);
+        }
     });
   }
+
+  // componentWillMount(){
+  //   AsyncStorage.getItem('id_token').then((newToken) => {
+  //     console.log("ini token in basket: ");
+  //     console.log(newToken);
+  //     if (newToken != null){
+  //       this.setState({isLogined: true});
+  //       console.log('isLogined in basket: ');
+  //       console.log(this.state.isLogined);
+  //     }
+  //   })
+  // }
 
   doCheckout() {
     this.props.navigation.navigate('CheckoutAddress');
   }
 
   render () {
-    if(this.state.token){
+    console.log("ini token di basket dalam render");
+    console.log(this.state.isLogined);
+    if(this.state.isLogined){
       if(this.state.carts.length == 0){
+        console.log("ini carts: ");
+        console.log(this.state.carts);
         return(
           <View style={styles.container}>
             <Image 
@@ -156,6 +179,7 @@ export default class Basket extends Component {
     )
   }   
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
