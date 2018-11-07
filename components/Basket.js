@@ -96,6 +96,7 @@ export default class Basket extends Component {
   }
 
   render () {
+    let isLogin = this.props.navigation.navigate("Login");
     let carts = [];
     carts = this.state.carts;
     console.log("ini masih charts lagi: ");
@@ -186,8 +187,8 @@ export default class Basket extends Component {
         </ScrollView>
       );
     } else {
-      // ifLogin = isLogin;
-      ifLogin = <View><Text>Not Login</Text></View>;
+      ifLogin = isLogin;
+      // ifLogin = <View><Text>Not Login</Text></View>;
     }
     return (
       <View>{ifLogin}</View>
