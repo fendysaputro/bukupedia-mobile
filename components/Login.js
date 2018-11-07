@@ -55,8 +55,10 @@ export default class Login extends Component {
                 console.log(res);
                 AsyncStorage.setItem('id_token', res.token);
                 AsyncStorage.setItem('user', JSON.stringify(res.d));
-
+        
                 AsyncStorage.getItem('id_token').then((token) => {
+                    console.log("token ketika login: ");
+                    console.log(token);
                 });
 
                 // this.props.navigation.navigate("WelcomeAccount");

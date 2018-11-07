@@ -14,12 +14,12 @@ import { COLOR_PRIMARY } from "../styles/common";
 import getListItemCart from "../services/FetchShoppingCart";
 import { API, CART } from '../components/Global';
 import Image from 'react-native-scalable-image';
-console.log("ini error lho");
-import Checkout from "../components/Checkout";
+// import Checkout from "../components/Checkout";
 import { itemTitle, itemPrice } from "../components/ProductDetail";
 import NumericInput from 'react-native-numeric-input';
 import Home from "./Home";
 import Main from "./Main";
+import { NavigationActions } from 'react-navigation';
 
 export default class Basket extends Component {
   static navigationOptions = {
@@ -54,48 +54,60 @@ export default class Basket extends Component {
     return
   }
 
+  componentWillMount(){
+    AsyncStorage.getItem('id_token').then((newToken) => {
+      if (newToken != null){
+        console.log("ini token new: ");
+        console.log(newToken);
+        this.setState({isLogined: true});
+      }
+    })
+  }
+
+  componentDidUpdate() {
+    console.log(this.state.isLogined);
+  }
+
   componentDidMount() {
     var self = this;
+    self.setState({carts: []});
     AsyncStorage.getItem('id_token').then((token) => {
+      console.log("ini token lho: ");
+      console.log(token);
       const URL = API + CART + '?token=' + token;
       fetch(URL)  
         .then(function(res) {
+          console.log("ini res: ");
+          console.log(res._bodyText);
           var resObj = JSON.parse(res._bodyText);
+          console.log("ini resObj: ");
+          console.log(res._bodyText);
           if ((resObj.r) || (res.status == 200)) {
+            console.log("resObj.d");
+            console.log(resObj.d);
             self.setState({carts: resObj.d});
           }
         })
-        if (token != null){
-          this.setState({isLogined: true});
-          console.log('isLogined in basket ');
-          console.log(this.state.isLogined);
-        }
     });
   }
-
-  // componentWillMount(){
-  //   AsyncStorage.getItem('id_token').then((newToken) => {
-  //     console.log("ini token in basket: ");
-  //     console.log(newToken);
-  //     if (newToken != null){
-  //       this.setState({isLogined: true});
-  //       console.log('isLogined in basket: ');
-  //       console.log(this.state.isLogined);
-  //     }
-  //   })
-  // }
 
   doCheckout() {
     this.props.navigation.navigate('CheckoutAddress');
   }
 
   render () {
-    console.log("ini token di basket dalam render");
-    console.log(this.state.isLogined);
+    let carts = [];
+    carts = this.state.carts;
+    console.log("ini masih charts lagi: ");
+    console.log(carts);
+    let ifLogin;
+    let cartView;
     if(this.state.isLogined){
-      if(this.state.carts.length == 0){
-        console.log("ini carts: ");
-        console.log(this.state.carts);
+      console.log("ini login di basket: ");
+      console.log(this.state.isLogined);
+      ifLogin=<View><Text>Login</Text></View>;
+        if(carts.length == 0){
+        // cartView = <View><Text>isinya carts</Text></View>;
         return(
           <View style={styles.container}>
             <Image 
@@ -119,14 +131,14 @@ export default class Basket extends Component {
         )
       }
       let total = 0;
-      this.state.carts.map((product, index) => {
+      carts.map((product, index) => {
         total = total + product.price;
       });
       return(
         <ScrollView>
           <View style={styles.containerlist}>
             {
-              this.state.carts.map((product, index) => (
+              carts.map((product, index) => (
                 <View
                   key = {product.id}
                   style = {styles.containerTwo}
@@ -173,11 +185,14 @@ export default class Basket extends Component {
           </View>
         </ScrollView>
       );
+    } else {
+      // ifLogin = isLogin;
+      ifLogin = <View><Text>Not Login</Text></View>;
     }
-    return(
-      this.props.navigation.navigate('Login')
+    return (
+      <View>{ifLogin}</View>
     )
-  }   
+  } 
 }
 
 const styles = StyleSheet.create({

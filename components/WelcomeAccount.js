@@ -36,6 +36,8 @@ export default class WelcomeAccount extends Component {
     try {
       const retrievedUser =  await AsyncStorage.getItem('user');
       const user = JSON.parse(retrievedUser);
+      console.log("isi dari user");
+      console.log(this.state.user);
       return user;
     } catch (error) {
       console.log(error.message);
@@ -49,7 +51,7 @@ export default class WelcomeAccount extends Component {
       if (this.state.hasToken) {
         AsyncStorage.getItem('user').then((user) => {
           var userObj = JSON.parse(user);
-          this.setState(userObj);
+          this.setState({user: userObj});
         })
       }else{
         this.replaceScreen();
@@ -121,6 +123,7 @@ export default class WelcomeAccount extends Component {
   }
 
   render () {
+    let userObj = userObj;
     return (
      <View style = {styles.container}>
         {

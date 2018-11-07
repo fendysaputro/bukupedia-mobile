@@ -94,7 +94,8 @@ export default class ProductDetail extends Component {
             dialogShow: false,
             quantity: 1,
             user: {},
-            qty_cart: 0
+            qty_cart: 0,
+            isLogined: false
         };
         this.doAddToBasket = this.doAddToBasket.bind(this);
     }
@@ -103,11 +104,32 @@ export default class ProductDetail extends Component {
         const URL = API + CART + '?token=' + token;
         fetch(URL)  
             .then(function(res) {
+                // console.log("ini res di product detail: ");
+                // console.log(res);
                 var resObj = JSON.parse(res._bodyText);
-                if (resObj.r) {
+                if ((resObj.r) || (res.status == 200)) {
+                    console.log("ini resObj di product Detail: ");
+                    console.log(resObj);
                     callback(resObj.d.length);
                 }
+                // if ((resObj.r) || (res.status == 200)) {
+                //     console.log("resObj.d");
+                //     console.log(resObj.d);
+                //     self.setState({carts: resObj.d});
+                //   }
         })
+    }
+
+    componentWillMount(){
+        AsyncStorage.getItem('id_token').then((tokenInProduct) =>{
+            if (tokenInProduct != null){
+                this.setState({isLogined:true});
+            }
+        })
+    }
+
+    componentDidUpdate() {
+        console.log(this.state.isLogined);
     }
 
     componentDidMount() {
@@ -115,10 +137,15 @@ export default class ProductDetail extends Component {
         AsyncStorage.getItem('user').then((sUser) => {
             var userObj = JSON.parse(sUser);
             self.setState({ user: userObj });
+            console.log("user di product detail: ");
+            console.log(this.state.user);
         });
         AsyncStorage.getItem('id_token').then((token) => {
             self.setState({ token: token });
+            console.log("token baru: ");
+            console.log(token);
             self.getQtyCart(this.state.token, function(qty){
+                console.log("ini qty lho: ");
                 console.log(qty);
                 self.setState({ qty_cart: qty });
             });
@@ -144,7 +171,7 @@ export default class ProductDetail extends Component {
         addShoppingCart(params, this.state.token)
             .then((res) => {
                 hideFadeAnimationDialog();
-                // this.props.navigation.navigate('Basket');
+                this.props.navigation.navigate('Basket');
             }); 
             return 
             this.props.navigation.navigate("Login");
@@ -223,7 +250,11 @@ export default class ProductDetail extends Component {
                                 />
                             }
                             BadgeElement={
-                                <Text style={{color:'#FFFFFF'}}>{this.state.qty_cart}</Text>
+                                <Text style={{color:'#FFFFFF'}}>
+                                    {console.log("ini isi carts: ")}
+                                    {console.log(this.state.qty_cart)}
+                                    {this.state.qty_cart}
+                                </Text>
                             }
                             IconBadgeStyle={
                                 {   
@@ -258,7 +289,7 @@ export default class ProductDetail extends Component {
                     <View style={styles.dialogContentView}>
                         <Button
                             onPress={() => this.doAddToBasket({
-                                user_id:this.state.user.user.id,
+                                user_id:this.state.user.user_id,
                                 product_id: this.state.data.id,
                                 quantity: this.state.quantity
                                 })}
