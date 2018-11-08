@@ -95,8 +95,12 @@ export default class Basket extends Component {
     this.props.navigation.navigate('CheckoutAddress');
   }
 
+  // LoginPageFrom(){
+  //   this.props.navigation.navigate('Login');
+  // }
+
   render () {
-    let isLogin = this.props.navigation.navigate("Login");
+    // let isLogin = this.props.navigation.navigate("Login");
     let carts = [];
     carts = this.state.carts;
     console.log("ini masih charts lagi: ");
@@ -187,8 +191,18 @@ export default class Basket extends Component {
         </ScrollView>
       );
     } else {
-      ifLogin = isLogin;
-      // ifLogin = <View><Text>Not Login</Text></View>;
+      // this.LoginPageFrom();
+      // ifLogin = this.LoginPageFrom();
+      ifLogin = <View>
+        <Text style={styles.text}>Harus Login terlebih dahulu</Text>
+          <TouchableOpacity 
+            style={styles.button}
+            onPress = {() => this.props.navigation.navigate('Login')}>
+              <Text style={styles.buttonText}>
+                Login
+              </Text>
+          </TouchableOpacity>
+        </View>;
     }
     return (
       <View>{ifLogin}</View>
