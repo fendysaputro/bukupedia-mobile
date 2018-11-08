@@ -62,7 +62,7 @@ export default class Checkout extends Component {
             fetch(URL)
                 .then((res) => {
                     var resp = JSON.parse(res._bodyText);
-                    if (resp.r) {
+                    if ((resp.r) || (res.status == 200)) {
                         self.setState({address: resp.d[0]});
                     }
                 });
