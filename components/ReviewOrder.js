@@ -96,16 +96,19 @@ export default class ReviewOrder extends Component {
                     self.props.navigation.navigate('Login');
                 }
             })
-            
         });
         const URL3 = API + SHIPMENT_METHOD;
         fetch(URL3)
-                .then((res) => {
-                    var resp = JSON.parse(res._bodyText);
-                    if (resp.r) {
-                        self.setState({couriers: resp.d.couriers});
-                    }
-                });
+            .then(function(res) {
+                var resp = JSON.parse(res._bodyText);
+                if (res.status == 200) {
+                    console.log("ini res.d.code");
+                    console.log(resp.d);
+                    self.setState({couriers: resp.d});
+                    console.log("ini couriers di shipment method: ");
+                    console.log(couriers);
+                }
+            });
     }
 
     onSubmitOrder() {

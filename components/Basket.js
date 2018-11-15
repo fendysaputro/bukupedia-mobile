@@ -95,12 +95,7 @@ export default class Basket extends Component {
     this.props.navigation.navigate('CheckoutAddress');
   }
 
-  // LoginPageFrom(){
-  //   this.props.navigation.navigate('Login');
-  // }
-
   render () {
-    // let isLogin = this.props.navigation.navigate("Login");
     let carts = [];
     carts = this.state.carts;
     console.log("ini masih charts lagi: ");

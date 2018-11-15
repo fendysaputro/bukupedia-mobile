@@ -187,5 +187,5 @@ const styles = StyleSheet.create({
     width: 285,
     alignSelf: "flex-start",
     marginLeft: "10%",  
-}
+    }
   });
