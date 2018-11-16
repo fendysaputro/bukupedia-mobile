@@ -144,6 +144,8 @@ export default class ReviewOrder extends Component {
 
     onChangeTextKurirCost(text) {
         var service = text.split(' ')[0];
+        console.log("ini cost: ");
+        console.log(shipmentCostsO);
         var cost = this.state.shipmentCostsO.find(cost => 
             cost.service === service
         );
@@ -168,8 +170,10 @@ export default class ReviewOrder extends Component {
             body: JSON.stringify(params),
         }).then((res) => {
             var resp = JSON.parse(res._bodyText);
-            self.setState({shipmentCostsO: resp.d.costs});
-            resp.d.costs.map(function(cost, i){
+                console.log("ini log shipmentcost2222: ");
+                console.log(resp);
+                self.setState({shipmentCostsO: resp.d.costs});
+                resp.d.costs.map(function(cost, i){
                 self.state.shipmentCosts.push({id: i, value: cost.service+' - '+cost.cost[0].value});
             });
         });
@@ -246,6 +250,8 @@ export default class ReviewOrder extends Component {
                                 onChangeText={this.onChangeTextKurirCost}
                                 label='pilih tipe paket'
                                 data={this.state.shipmentCosts}
+                                test2={console.log("test shipmentCost")}
+                                test={console.log(this.state.shipmentCost)}
                             />
                         </Card>
                     </View>
