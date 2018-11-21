@@ -109,7 +109,7 @@ export default class ReviewOrder extends Component {
                     console.log(couriers);
                 }
             });
-    }
+        }
 
     onSubmitOrder() {
         var products = [];
