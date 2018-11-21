@@ -106,7 +106,7 @@ export default class ReviewOrder extends Component {
                     console.log(resp.d);
                     self.setState({couriers: resp.d});
                     console.log("ini couriers di shipment method: ");
-                    console.log(couriers);
+                    console.log(this.state.couriers);
                 }
             });
         }
@@ -145,7 +145,7 @@ export default class ReviewOrder extends Component {
     onChangeTextKurirCost(text) {
         var service = text.split(' ')[0];
         console.log("ini cost: ");
-        console.log(shipmentCostsO);
+        console.log(this.state.shipmentCostsO);
         var cost = this.state.shipmentCostsO.find(cost => 
             cost.service === service
         );
@@ -173,8 +173,8 @@ export default class ReviewOrder extends Component {
             if (res.status == 200){
                 self.setState({shipmentCostsO: resp.d[0].cost});
                 console.log("ini log shipmentcost2222: ");
-                console.log(shipmentCostsO);
-                resp.d.costs.map(function(cost, i){
+                console.log(this.state.shipmentCostsO);
+                resp.d[0].costs.map(function(cost, i){
                     self.state.shipmentCosts.push({id: i, value: cost.service+' - '+cost.cost[0].value});
                 });
             }
