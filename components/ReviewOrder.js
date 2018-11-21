@@ -170,12 +170,14 @@ export default class ReviewOrder extends Component {
             body: JSON.stringify(params),
         }).then((res) => {
             var resp = JSON.parse(res._bodyText);
+            if (res.status == 200){
+                self.setState({shipmentCostsO: resp.d[0].cost});
                 console.log("ini log shipmentcost2222: ");
-                console.log(resp);
-                self.setState({shipmentCostsO: resp.d.costs});
+                console.log(shipmentCostsO);
                 resp.d.costs.map(function(cost, i){
-                self.state.shipmentCosts.push({id: i, value: cost.service+' - '+cost.cost[0].value});
-            });
+                    self.state.shipmentCosts.push({id: i, value: cost.service+' - '+cost.cost[0].value});
+                });
+            }
         });
     }
 

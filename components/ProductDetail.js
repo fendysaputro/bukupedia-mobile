@@ -151,8 +151,6 @@ export default class ProductDetail extends Component {
 
     showFadeAnimationDialog = () => {
         AsyncStorage.getItem('id_token').then((detailToken) => {
-            console.log("ini token di showFadeDialog: ");
-            console.log(detailToken);
             if (detailToken == null){
                 this.props.navigation.navigate('Login');       
             } else {
