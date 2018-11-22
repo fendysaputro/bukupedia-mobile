@@ -270,7 +270,7 @@ export default class ProductDetail extends Component {
                         </Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.buttonTwo}
-                        onPress={() => this.props.navigation.navigate("Login", {})}>
+                        onPress={this.showFadeAnimationDialog}>
                         <Text style={styles.textTwo}>
                             Beli
                         </Text>

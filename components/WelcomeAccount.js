@@ -130,7 +130,7 @@ export default class WelcomeAccount extends Component {
         <TouchableOpacity
           key = '1'
           style = {styles.containerOne}
-            onPress = {() => this.replaceScreen()}>
+            onPress = {() => this.props.navigation.navigate('EditProfile')}>
             <Image source={require('../styles/icon/edit-foto.png')} style={{ width: 24, height: 24, alignItems: 'flex-start' }}/> 
             <Text style = {styles.textNew}>
               Hi, {this.state.user.name}
