@@ -98,13 +98,9 @@ export default class Basket extends Component {
   render () {
     let carts = [];
     carts = this.state.carts;
-    console.log("ini masih charts lagi: ");
-    console.log(carts);
     let ifLogin;
     let cartView;
     if(this.state.isLogined){
-      console.log("ini login di basket: ");
-      console.log(this.state.isLogined);
       ifLogin=<View><Text>Login</Text></View>;
         if(carts.length == 0){
         // cartView = <View><Text>isinya carts</Text></View>;
@@ -186,8 +182,6 @@ export default class Basket extends Component {
         </ScrollView>
       );
     } else {
-      // this.LoginPageFrom();
-      // ifLogin = this.LoginPageFrom();
       ifLogin = <View>
         <Text style={styles.text}>Harus Login terlebih dahulu</Text>
           <TouchableOpacity 
