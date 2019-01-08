@@ -102,8 +102,6 @@ export default class ReviewOrder extends Component {
             .then(function(res) {
                 var resp = JSON.parse(res._bodyText);
                 if (res.status == 200) {
-                    console.log("ini res.d.code");
-                    console.log(resp.d);
                     self.setState({couriers: resp.d});
                     console.log("ini couriers di shipment method: ");
                     console.log(this.state.couriers);
@@ -143,13 +141,13 @@ export default class ReviewOrder extends Component {
     }
 
     onChangeTextKurirCost(text) {
-        var service = text.split(' ')[0];
-        console.log("ini cost: ");
-        console.log(this.state.shipmentCostsO);
+        var service = text.split(' ')[0]
         var cost = this.state.shipmentCostsO.find(cost => 
             cost.service === service
         );
         this.setState({shipmentCost: cost.cost[0].value});
+        console.log("ini cost: ");
+        console.log(this.state.shipmentCosts);
     }
 
     onChangeTextKurir(text) {
@@ -172,11 +170,11 @@ export default class ReviewOrder extends Component {
             var resp = JSON.parse(res._bodyText);
             if (res.status == 200){
                 self.setState({shipmentCostsO: resp.d[0].cost});
-                console.log("ini log shipmentcost2222: ");
-                console.log(this.state.shipmentCostsO);
                 resp.d[0].costs.map(function(cost, i){
                     self.state.shipmentCosts.push({id: i, value: cost.service+' - '+cost.cost[0].value});
-                });
+                    console.log("ini log shipmentcost2222: ");
+                    console.log(this.state.shipmentCosts);
+                });   
             }
         });
     }

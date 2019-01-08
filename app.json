@@ -2,7 +2,7 @@
   "expo": {
     "name":"Bukupedia Mobile",
     "icon":"./styles/icon/icon-logo.png",
-    "sdkVersion": "25.0.0",
+    "sdkVersion": "26.0.0",
     "version": "0.1.1",
     "orientation" : "portrait",
     "android": {

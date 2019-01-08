@@ -270,7 +270,11 @@ export default class ProductDetail extends Component {
                         </Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.buttonTwo}
-                        onPress={this.showFadeAnimationDialog}>
+                        onPress={() => this.doAddToBasket({
+                            user_id:this.state.user.user_id,
+                            product_id: this.state.data.id,
+                            quantity: this.state.quantity
+                            })}>
                         <Text style={styles.textTwo}>
                             Beli
                         </Text>
