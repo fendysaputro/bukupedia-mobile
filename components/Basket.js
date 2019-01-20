@@ -57,8 +57,6 @@ export default class Basket extends Component {
   componentWillMount(){
     AsyncStorage.getItem('id_token').then((newToken) => {
       if (newToken != null){
-        console.log("ini token new: ");
-        console.log(newToken);
         this.setState({isLogined: true});
       }
     })
@@ -72,13 +70,9 @@ export default class Basket extends Component {
     var self = this;
     self.setState({carts: []});
     AsyncStorage.getItem('id_token').then((token) => {
-      console.log("ini token lho: ");
-      console.log(token);
       const URL = API + CART + '?token=' + token;
       fetch(URL)  
         .then(function(res) {
-          console.log("ini res: ");
-          console.log(res._bodyText);
           var resObj = JSON.parse(res._bodyText);
           console.log("ini resObj: ");
           console.log(res._bodyText);

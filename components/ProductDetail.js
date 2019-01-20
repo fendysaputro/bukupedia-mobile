@@ -136,6 +136,7 @@ export default class ProductDetail extends Component {
         AsyncStorage.getItem('id_token').then((token) => {
             self.setState({ token: token });
             self.getQtyCart(this.state.token, function(qty){
+                console.log("ini qty sementara: ");
                 console.log(qty);
                 self.setState({ qty_cart: qty });
             });
@@ -166,8 +167,11 @@ export default class ProductDetail extends Component {
     doAddToBasket(params) {
         addShoppingCart(params, this.state.token)
             .then((res) => {
-                hideFadeAnimationDialog();
-                this.props.navigation.navigate('Basket');
+                var qtyObj = JSON.parse(res._bodyText); 
+                if ((qtyObj.r) || (res.status == 200)) {
+                    this.props.navigation.navigate('Basket');
+                    hideFadeAnimationDialog();
+                }
             }); 
             return 
             this.props.navigation.navigate("Login");
