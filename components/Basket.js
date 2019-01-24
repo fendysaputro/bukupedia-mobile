@@ -55,11 +55,39 @@ export default class Basket extends Component {
   }
 
   componentWillMount(){
-    AsyncStorage.getItem('id_token').then((newToken) => {
-      if (newToken != null){
+    // AsyncStorage.getItem('id_token').then((newToken) => {
+    //   if (newToken != null){
+    //     this.setState({isLogined: true});
+    //   }
+    // })
+    var self = this;
+    self.setState({carts: []});
+    AsyncStorage.getItem('id_token').then((token) => {
+      if (token != null){
         this.setState({isLogined: true});
       }
-    })
+
+      getListItemCart(this.state.token)
+      .then((res) => {
+        console.log("getListItemCart ");
+        console.log(res);
+      })
+       
+    //   const URL = API + CART + '?token=' + token;
+    //   fetch(URL)  
+    //     .then(function(res) {
+    //       console.log("Testing res basket: ");
+    //       console.log(res.json());
+    //       var resObj = JSON.parse(res.data);
+    //       console.log("ini resObj: ");
+    //       console.log(resObj);
+    //       if ((resObj.r) || (res.status == 200)) {
+    //         console.log("resObj.d");
+    //         console.log(resObj.d);
+    //         self.setState({carts: resObj.d});
+    //       }
+    //     })
+    });
   }
 
   componentDidUpdate() {
@@ -67,22 +95,24 @@ export default class Basket extends Component {
   }
 
   componentDidMount() {
-    var self = this;
-    self.setState({carts: []});
-    AsyncStorage.getItem('id_token').then((token) => {
-      const URL = API + CART + '?token=' + token;
-      fetch(URL)  
-        .then(function(res) {
-          var resObj = JSON.parse(res._bodyText);
-          console.log("ini resObj: ");
-          console.log(res._bodyText);
-          if ((resObj.r) || (res.status == 200)) {
-            console.log("resObj.d");
-            console.log(resObj.d);
-            self.setState({carts: resObj.d});
-          }
-        })
-    });
+    // var self = this;
+    // self.setState({carts: []});
+    // AsyncStorage.getItem('id_token').then((token) => {
+    //   const URL = API + CART + '?token=' + token;
+    //   fetch(URL)  
+    //     .then(function(res) {
+    //       console.log("Testing res basket: ");
+    //       console.log(res);
+    //       var resObj = JSON.parse(res._bodyText);
+    //       console.log("ini resObj: ");
+    //       console.log(resObj);
+    //       if ((resObj.r) || (res.status == 200)) {
+    //         console.log("resObj.d");
+    //         console.log(resObj.d);
+    //         self.setState({carts: resObj.d});
+    //       }
+    //     })
+    // });
   }
 
   doCheckout() {
