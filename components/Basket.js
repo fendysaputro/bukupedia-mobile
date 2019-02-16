@@ -100,13 +100,13 @@ export default class Basket extends Component {
     self.setState({carts: []});
     AsyncStorage.getItem('id_token').then((token) => {
       const URL = API + CART + '?token=' + token;
-      fetch('https://facebook.github.io/react-native/movies.json')
+      fetch(URL)
       .then((response) => response.json())
       .then((responseJson) => {
-
-        console.log(responseJson);
-        console.log(res);
-
+        var resObj = responseJson;
+        if ((responseJson.s)) {
+          self.setState({carts: resObj.d});
+        }
       })
       .catch((error) =>{
         console.error(error);
