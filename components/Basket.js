@@ -96,25 +96,36 @@ export default class Basket extends Component {
   }
 
   componentDidMount() {
-    // var self = this;
-    // self.setState({carts: []});
-    // AsyncStorage.getItem('id_token').then((token) => {
-    //   const URL = API + CART + '?token=' + token;
-    //   fetch(URL)  
-    //     .then(function(res) {
-    //       console.log("Testing res basket: ");
-    //       console.log(res);
-    //       console.log(res.status);
-    //       // var resObj = JSON.parse(res._bodyBlob);
-    //       // console.log("ini resObj: ");
-    //       // console.log(resObj);
-    //       // if ((resObj.r) || (res.status == 200)) {
-    //       //   console.log("resObj.d");
-    //       //   console.log(resObj.d);
-    //       //   self.setState({carts: resObj.d});
-    //       // }
-    //     })
-    // });
+    var self = this;
+    self.setState({carts: []});
+    AsyncStorage.getItem('id_token').then((token) => {
+      const URL = API + CART + '?token=' + token;
+      fetch('https://facebook.github.io/react-native/movies.json')
+      .then((response) => response.json())
+      .then((responseJson) => {
+
+        console.log(responseJson);
+        console.log(res);
+
+      })
+      .catch((error) =>{
+        console.error(error);
+      });
+      // fetch(URL)  
+      //   .then(function(res) {
+      //     console.log("Testing res basket: ");
+      //     console.log(res);
+      //     console.log(res.status);
+      //     var resObj = JSON.parse(res._bodyBlob);
+      //     console.log("ini resObj: ");
+      //     console.log(resObj);
+      //     if ((resObj.r) || (res.status == 200)) {
+      //       console.log("resObj.d");
+      //       console.log(resObj.d);
+      //       self.setState({carts: resObj.d});
+      //     }
+      //   })
+    });
   }
 
   doCheckout() {
