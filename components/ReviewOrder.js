@@ -85,17 +85,17 @@ export default class ReviewOrder extends Component {
             this.setState({user: userObj.user});
         });
         AsyncStorage.getItem('id_token').then((token) => {
-            self.setState({token: token});
             const URL = API + CART + '?token=' + token;
-            fetch(URL)  
-                .then(function(res) {
-                var resObj = JSON.parse(res._bodyText);
-                if ((resObj.r) || (res.status == 200)) {
-                    self.setState({items: resObj.d});
-                }else{
-                    self.props.navigation.navigate('Login');
-                }
-            })
+            fetch(URL)
+                .then((response) => response.json())
+                .then((responseJson) => {
+                    var resObj = responseJson;
+                    if (responseJson.s) {
+                        self.setState({items: resObj.d});
+                    } else {
+                        self.props.navigation.navigate('Login');
+                    }
+                })  
         });
         const URL3 = API + SHIPMENT_METHOD;
         fetch(URL3)
