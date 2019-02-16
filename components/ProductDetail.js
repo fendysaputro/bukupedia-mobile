@@ -94,23 +94,30 @@ export default class ProductDetail extends Component {
             dialogShow: false,
             quantity: 1,
             user: {},
-            qty_cart: 0,
+            qty_cart: 0, 
             isLogined: false
         };
         this.doAddToBasket = this.doAddToBasket.bind(this);
     }
 
     getQtyCart(token, callback) {
+        var self = this;
+        self.setState({qty_cart: []});
         const URL = API + CART + '?token=' + token;
-        fetch(URL)  
-            .then(function(res) {
-                var resObj = JSON.parse(res._bodyText);
-                if ((resObj.r) || (res.status == 200)) {
-                    console.log("ini resObj di product Detail: ");
-                    console.log(resObj);
+        fetch(URL)
+            .then((response) => response.json())
+            .then((responseJson) => {
+            var resObj = responseJson;
+            console.log("ini carts baru");
+            console.log(resObj);
+                if ((responseJson.s)) {
                     callback(resObj.d.length);
                 }
-        })
+            })
+            .catch((error) => {
+                console.log(error);
+            })  
+         
     }
 
     componentWillMount(){
@@ -250,8 +257,6 @@ export default class ProductDetail extends Component {
                             }
                             BadgeElement={
                                 <Text style={{color:'#FFFFFF'}}>
-                                    {console.log("ini isi carts: ")}
-                                    {console.log(this.state.qty_cart)}
                                     {this.state.qty_cart}
                                 </Text>
                             }

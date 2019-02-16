@@ -55,11 +55,6 @@ export default class Basket extends Component {
   }
 
   componentWillMount(){
-    // AsyncStorage.getItem('id_token').then((newToken) => {
-    //   if (newToken != null){
-    //     this.setState({isLogined: true});
-    //   }
-    // })
     var self = this;
     self.setState({carts: []});
     AsyncStorage.getItem('id_token').then((token) => {
@@ -111,20 +106,6 @@ export default class Basket extends Component {
       .catch((error) =>{
         console.error(error);
       });
-      // fetch(URL)  
-      //   .then(function(res) {
-      //     console.log("Testing res basket: ");
-      //     console.log(res);
-      //     console.log(res.status);
-      //     var resObj = JSON.parse(res._bodyBlob);
-      //     console.log("ini resObj: ");
-      //     console.log(resObj);
-      //     if ((resObj.r) || (res.status == 200)) {
-      //       console.log("resObj.d");
-      //       console.log(resObj.d);
-      //       self.setState({carts: resObj.d});
-      //     }
-      //   })
     });
   }
 
