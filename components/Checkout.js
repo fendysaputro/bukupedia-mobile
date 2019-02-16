@@ -57,15 +57,15 @@ export default class Checkout extends Component {
     componentDidMount() {
         var self = this;
         AsyncStorage.getItem('id_token').then((token) => {
-            self.setState({token: token});
             const URL = API + ADDRESS + '?token=' + token;
             fetch(URL)
-                .then((res) => {
-                    var resp = JSON.parse(res._bodyText);
-                    if ((resp.r) || (res.status == 200)) {
+                .then((response) => response.json())
+                .then((responseJson) => {
+                    var resp = responseJson;
+                    if ((responseJson.s)) {
                         self.setState({address: resp.d[0]});
                     }
-                });
+                })
             // getAddressList(token)
             //     .then((res) => {
             //         console.log(res);

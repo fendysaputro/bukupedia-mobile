@@ -108,8 +108,6 @@ export default class ProductDetail extends Component {
             .then((response) => response.json())
             .then((responseJson) => {
             var resObj = responseJson;
-            console.log("ini carts baru");
-            console.log(resObj);
                 if ((responseJson.s)) {
                     callback(resObj.d.length);
                 }
