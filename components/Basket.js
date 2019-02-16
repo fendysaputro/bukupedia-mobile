@@ -78,15 +78,15 @@ export default class Basket extends Component {
         .then(function(res) {
           console.log("Testing res basket: ");
           console.log(res);
-          // console.log(res.json());
-          // var resObj = JSON.parse(res.data);
-          // console.log("ini resObj: ");
-          // console.log(resObj);
-          // if ((resObj.r) || (res.status == 200)) {
-          //   console.log("resObj.d");
-          //   console.log(resObj.d);
-          //   self.setState({carts: resObj.d});
-          // }
+          console.log(res.json());
+          var resObj = JSON.parse(res.data);
+          console.log("ini resObj: ");
+          console.log(resObj);
+          if ((resObj.r) || (res.status == 200)) {
+            console.log("resObj.d");
+            console.log(resObj.d);
+            self.setState({carts: resObj.d});
+          }
         })
     });
   }
