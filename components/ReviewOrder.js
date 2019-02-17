@@ -97,16 +97,17 @@ export default class ReviewOrder extends Component {
                     }
                 })  
         });
-        const URL3 = API + SHIPMENT_METHOD;
-        fetch(URL3)
-            .then(function(res) {
-                var resp = JSON.parse(res._bodyText);
-                if (res.status == 200) {
-                    self.setState({couriers: resp.d});
-                    console.log("ini couriers di shipment method: ");
-                    console.log(this.state.couriers);
-                }
-            });
+        AsyncStorage.getItem('id_token').then((token) => {
+            const URL3 = API + SHIPMENT_METHOD + '?token=' + token;
+            fetch(URL3)
+                .then((response) => response.json())
+                .then((responseJson) => {
+                    var resp = responseJson;
+                    if (responseJson.s) {
+                        self.setState({couriers: resp.d});
+                    }
+                })
+        });
         }
 
     onSubmitOrder() {
@@ -166,15 +167,15 @@ export default class ReviewOrder extends Component {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(params),
-        }).then((res) => {
-            var resp = JSON.parse(res._bodyText);
-            if (res.status == 200){
+        })
+        .then((response) => response.json())
+        .then((responseJson) => {
+            var resp = responseJson;
+            if (responseJson.s) {
                 self.setState({shipmentCostsO: resp.d[0].cost});
                 resp.d[0].costs.map(function(cost, i){
                     self.state.shipmentCosts.push({id: i, value: cost.service+' - '+cost.cost[0].value});
-                    console.log("ini log shipmentcost2222: ");
-                    console.log(this.state.shipmentCosts);
-                });   
+                })
             }
         });
     }
