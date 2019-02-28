@@ -158,7 +158,7 @@ export default class ReviewOrder extends Component {
             cour.name === text
         );
         this.setState({courier: courier});
-        var params = {subdistrict_id: '2500', courier: courier.code, token: this.state.token}
+        var params = {subdistrict_id: '1062', courier: courier.code, token: this.state.token}
         const URL4 = API + SHIPPING_COST;
         fetch(URL4, {
             method: 'POST',
