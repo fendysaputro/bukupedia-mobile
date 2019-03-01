@@ -50,17 +50,18 @@ export default class EditProfile extends Component {
       }
     
       componentDidMount() {
+        var self = this;
         AsyncStorage.getItem('id_token').then((token) => {
-          this.setState({ hasToken: token !== null, isLoaded: true });
-          if (this.state.hasToken) {
-            AsyncStorage.getItem('user').then((user) => {
-              var userObj = JSON.parse(user);
-              this.setState(userObj);
+          const URL3 = API + PROFILE + '?token=' + token;
+          fetch(URL3)
+            .then((response) => response.json())
+            .then((responseJson) => {
+              var profileObj = responseJson;
+              if ((profileObj.s)){
+                self.setState({user: profileObj.d});
+              }
             })
-          }else{
-            this.replaceScreen();
-          }
-        });
+        })
       }
 
     render(user){
@@ -87,7 +88,10 @@ export default class EditProfile extends Component {
                       {this.state.user.birth_date}
                     </Text>
                     <Text>
-                      {this.state.user.gender}
+                      {this.state.user.phone}
+                    </Text>
+                    <Text>
+                      {this.state.user.address}
                     </Text>
                   </View>   
             </TouchableOpacity>

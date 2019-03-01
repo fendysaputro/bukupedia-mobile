@@ -53,22 +53,19 @@ export default class Address extends Component {
       }
 
     componentDidMount() {
-        AsyncStorage.getItem('id_token').then((token) => {
-          this.setState({ hasToken: token !== null, isLoaded: true });
-          if (this.state.hasToken) {
-            // AsyncStorage.getItem('user').then((user) => {
-            //   var userObj = JSON.parse(user);
-            //   this.setState(userObj);
-            // })
-            getAddressList(token)
-                .then((res) => {
-                    console.log(res);
-                });
-          }else{
-            this.replaceScreen();
-          }
-        });
-      }
+      var self = this;
+      AsyncStorage.getItem('id_token').then((token) => {
+        const URL = API + ADDRESS + '?token=' + token;
+        fetch(URL)
+          .then((response) => response.json())
+          .then((responseJson) => {
+            var userObj = responseJson;
+            if (userObj.s){
+              self.setState({address: userObj.d[0]});
+            }
+          })
+      })
+    }
 
     render(){
         return(
@@ -76,21 +73,21 @@ export default class Address extends Component {
             <View style={styles.container}>
                 <View style={styles.containerTwo}>
                     <TouchableOpacity>
-                        <View style={styles.imageStyle}>
-                            <Image
-                                source={require('../styles/icon/edit-foto.png')}
-                                style={{ width: 20, height: 20 }}>
-                            </Image>
-                        </View>
-                        <Text style = {styles.textNew}>
-                            {this.state.user.name}
-                        </Text>
-                        <Text style = {styles.textNew}>
-                            {this.state.user.email}
-                        </Text>
-                        <Text style = {styles.textNew}>
-                            {this.state.user.address}
-                        </Text>
+                      <Text style = {styles.textNew}>
+                        {this.state.address.label}
+                      </Text>
+                      <Text style = {styles.textNew}>
+                        {this.state.address.name}
+                      </Text>
+                      <Text style = {styles.textNew}>
+                        {this.state.address.company}
+                      </Text>
+                      <Text style = {styles.textNew}>
+                        {this.state.address.address}
+                      </Text>
+                      <Text style = {styles.textNew}>
+                        {this.state.address.phone}
+                      </Text>
                     </TouchableOpacity>
                 </View>
             </View>
