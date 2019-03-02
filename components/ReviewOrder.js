@@ -141,16 +141,6 @@ export default class ReviewOrder extends Component {
             })
     }
 
-    onChangeTextKurirCost(text) {
-        var service = text.split(' ')[0]
-        var cost = this.state.shipmentCostsO.find(cost => 
-            cost.service === service
-        );
-        this.setState({shipmentCost: cost.cost[0].value});
-        console.log("ini cost: ");
-        console.log(this.state.shipmentCosts);
-    }
-
     onChangeTextKurir(text) {
         var self = this;
         var courier;
@@ -171,13 +161,28 @@ export default class ReviewOrder extends Component {
         .then((response) => response.json())
         .then((responseJson) => {
             var resp = responseJson;
+            console.log("ini response resp :");
+            console.log(resp);
             if (responseJson.s) {
                 self.setState({shipmentCostsO: resp.d[0].cost});
+                console.log("ini cosstttt new :");
+                console.log(this.state.shipmentCostsO);
                 resp.d[0].costs.map(function(cost, i){
                     self.state.shipmentCosts.push({id: i, value: cost.service+' - '+cost.cost[0].value});
                 })
             }
         });
+    }
+
+    onChangeTextKurirCost(text) {
+        var self = this;
+        var service = text.split(' ')[0]
+        var cost = this.state.shipmentCostsO.find(cost => 
+            cost.service === service
+        );
+        this.setState({shipmentCost: cost.cost[0].value});
+        console.log("ini cost: ");
+        console.log(this.state.shipmentCosts);
     }
 
     onSelectPayment(index, value) {
