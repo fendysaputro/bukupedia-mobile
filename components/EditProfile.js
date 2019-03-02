@@ -78,22 +78,46 @@ export default class EditProfile extends Component {
                         Edit Foto
                     </Text>
                   <View style={styles.containerTwo}>
-                    <Text>
-                      {this.state.user.name}
-                    </Text>
-                    <Text>
-                      {this.state.user.email}
-                    </Text>
-                    <Text>
-                      {this.state.user.birth_date}
-                    </Text>
-                    <Text>
-                      {this.state.user.phone}
-                    </Text>
-                    <Text>
-                      {this.state.user.address}
-                    </Text>
-                  </View>   
+                    <Text style={styles.textLogin}>Nama</Text>
+                      <TextInput style={styles.input}
+                        placeholderTextColor="#696969"
+                        underlineColorAndroid = "transparent"
+                        autoCapitalize = "none"
+                        value={this.state.user.name}
+                        onChangeText = {(text) => this.setState({name: text})}
+                      />
+                    
+                    <Text style={styles.textLogin}>Email</Text>
+                      <TextInput style={styles.input}
+                        placeholderTextColor="#696969"
+                        underlineColorAndroid = "transparent"
+                        autoCapitalize = "none"
+                        value={this.state.user.email}
+                        onChangeText = {(text) => this.setState({name: text})}
+                      />
+
+                    <Text style={styles.textLogin}>Birth_Date</Text>
+                      <TextInput style={styles.input}
+                        placeholderTextColor="#696969"
+                        underlineColorAndroid = "transparent"
+                        autoCapitalize = "none"
+                        value={this.state.user.birth_date}
+                        onChangeText = {(text) => this.setState({name: text})}
+                      />
+
+                    <Text style={styles.textLogin}>Phone</Text>
+                      <TextInput style={styles.input}
+                        placeholderTextColor="#696969"
+                        underlineColorAndroid = "transparent"
+                        autoCapitalize = "none"
+                        value={this.state.user.phone}
+                        onChangeText = {(text) => this.setState({name: text})}
+                      />
+                  </View>
+                  <TouchableOpacity style = {styles.submitButton}
+                    onPress = {() => this.props.navigation.navigate("Main")}>
+                    <Text style={styles.submitButtonText}>Simpan</Text>
+                  </TouchableOpacity>   
             </TouchableOpacity>
             }
           </View>
@@ -112,12 +136,44 @@ const styles = StyleSheet.create({
         top: 5
     },
     containerTwo: {
-        padding: 10,
-        backgroundColor: 'white' 
+        flex: 1,
+        alignItems: 'center', 
       },
     text: {
         color: 'blue',
         textAlign: 'justify',
         alignItems: 'center'        
-    }
+    },
+    textLogin: {
+      fontSize: 15,
+      textAlign: "left",
+      alignSelf: "flex-start",
+      marginLeft: "10%",
+      marginTop: 0,
+      paddingTop: 10,
+      fontWeight: "bold"
+    },
+    input: {
+      height: 30,
+      width: 285,
+      alignSelf: "flex-start",
+      marginLeft: "10%",
+      backgroundColor: "#F1F3F2"
+    },
+    submitButton: {
+      backgroundColor: "#00AEF2",
+      padding: 10,
+      margin: 15,
+      height: 35,
+      marginLeft: "10%",
+      width: 290
+   },
+   submitButtonText:{
+    color: "white",
+    marginTop: -4,
+    textAlign: "center",
+    alignItems: "center",
+    alignSelf: "center",
+    fontSize: 15
+ },
 });
