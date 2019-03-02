@@ -64,6 +64,8 @@ export default class Checkout extends Component {
                     var resp = responseJson;
                     if ((responseJson.s)) {
                         self.setState({address: resp.d[0]});
+                        console.log("ini address: ");
+                        console.log(this.state.address);
                     }
                 })
             // getAddressList(token)
@@ -91,6 +93,7 @@ export default class Checkout extends Component {
                     placeholderTextColor="#696969"
                     underlineColorAndroid = "transparent"
                     autoCapitalize = "none"
+                    value={this.state.address.company}
                     onChangeText = {(text) => this.setState({company: text})}
                 />
                 <Text style={styles.textLogin}>Divisi</Text>
@@ -98,7 +101,7 @@ export default class Checkout extends Component {
                     placeholderTextColor="#696969"
                     underlineColorAndroid = "transparent"
                     autoCapitalize = "none"
-                    value={this.state.address.division}
+                    value={this.state.address.division_company}
                     onChangeText = {(text) => this.setState({division: text})}
                 />
                 <Text style={styles.textLogin}>Nomor Handphone</Text>
