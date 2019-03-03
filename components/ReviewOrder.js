@@ -95,14 +95,12 @@ export default class ReviewOrder extends Component {
             //         })
             // })
             AsyncStorage.getItem('id_token').then((token) => {
-                console.log("ini tokenneww: ");
-                console.log(token);
                 self.setState({token:token});
+                console.log("ini tokenneww: ");
+                console.log(this.state.token);
             });
               
             AsyncStorage.getItem('user').then((user) => {
-                console.log("ini user");
-                console.log(user);
                 var userObj = JSON.parse(user);
                 this.setState({user: userObj});
             });
