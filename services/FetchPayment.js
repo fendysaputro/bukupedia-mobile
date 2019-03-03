@@ -6,8 +6,8 @@ export const getPaymentMethod = () => {
             .then((res) => res.json());
 }
 
-export const PostOrderPayment = async (params) => {
-    const URL = API + ORDER_PAYMENT;
+export const PostOrderPayment = async (params, token) => {
+    const URL = API + ORDER_PAYMENT + '?token=' + token;
     return fetch(URL, {
         method: 'POST',
         headers: {

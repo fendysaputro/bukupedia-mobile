@@ -88,22 +88,24 @@ export default class ReviewOrder extends Component {
             //     fetch(URL6)
             //         .then((response) => response.json())
             //         .then((responseJson) => {
-            //             var userObj = responseJson;
             //             console.log("ini user : ");
-            //             console.log(userObj);
-            //             self.setState({user_id: userObj.d});
+            //             console.log(responseJson);
+            //             var userObj = responseJson;
+            //             self.setState({user: userObj});
             //         })
             // })
             AsyncStorage.getItem('id_token').then((token) => {
+                console.log("ini tokenneww: ");
+                console.log(token);
                 self.setState({token:token});
             });
               
             AsyncStorage.getItem('user').then((user) => {
-                var userObj = JSON.parse(user);
                 console.log("ini user");
-                console.log(userObj);
-                this.setState({user: userObj.user_id});
-        });
+                console.log(user);
+                var userObj = JSON.parse(user);
+                this.setState({user: userObj});
+            });
         AsyncStorage.getItem('id_token').then((token) => {
             const URL = API + CART + '?token=' + token;
             fetch(URL)
@@ -141,7 +143,7 @@ export default class ReviewOrder extends Component {
             courier_name: this.state.courier.name,
             courier_cost: this.state.shipmentCost,
             cust_name: this.state.address.name,
-            cust_email: this.state.user.email,
+            // cust_email: this.state.user.email,
             cust_company: this.state.address.company,
             cust_division: this.state.address.division_company,
             cust_phone: this.state.address.phone,
@@ -160,7 +162,7 @@ export default class ReviewOrder extends Component {
             .then((res) => {
                 console.log('params');
                 console.log(params);
-                // console.log(res);
+                console.log(res);
                 this.props.navigation.navigate('PaymentWaiting');
             })
     }
