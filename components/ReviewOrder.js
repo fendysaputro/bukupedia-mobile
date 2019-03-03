@@ -12,11 +12,12 @@ import { AppRegistry,
   AsyncStorage } from "react-native";
 import { Card, ButtonGroup } from 'react-native-elements'
 import { COLOR_PRIMARY } from "../styles/common";
-import { API, CART, ADDRESS, SHIPMENT_METHOD, SHIPPING_COST, PAYMENT_METHOD } from '../components/Global';
+import { API, CART, ADDRESS, SHIPMENT_METHOD, SHIPPING_COST, PAYMENT_METHOD, PROFILE } from '../components/Global';
 import Image from 'react-native-scalable-image';
 import {RadioGroup, RadioButton} from 'react-native-flexi-radio-button';
 import { Dropdown } from 'react-native-material-dropdown';
 import { PostOrderPayment } from '../services/FetchPayment';
+import PaymentWaiting from '../components/PaymentWaiting';
 
 export default class ReviewOrder extends Component {
     static navigationOptions = {
@@ -35,6 +36,7 @@ export default class ReviewOrder extends Component {
     constructor (props) {
         super(props);
         this.state = {
+            user_id: '',
           items: [],
           address: {
             name: '',
@@ -69,20 +71,38 @@ export default class ReviewOrder extends Component {
         const address = navigation.getParam('address', 'NO-address');
         this.setState({loading: true, address: address});
         const URL = API + PAYMENT_METHOD;
-        fetch(URL)  
-            .then(function(res) {
-                var resObj = JSON.parse(res._bodyInit);
-                if (resObj.r) {
-                    resObj.d.map(function(payment) {
+        fetch(URL)
+            .then((response) => response.json())
+            .then((responseJson) => {
+                var paymentObj = responseJson;
+                if (responseJson.s) {
+                    paymentObj.d.map(function(payment) {
                         payment['label'] = payment.bank_name;
                         payment['value'] = payment.id;
                     })
-                    self.setState({paymentMethods: resObj.d});
+                    self.setState({paymentMethods: paymentObj.d});
                 }
+            })
+            // AsyncStorage.getItem('id_token').then((token) => {
+            //     const URL6 = API + PROFILE + '?token=' + token;
+            //     fetch(URL6)
+            //         .then((response) => response.json())
+            //         .then((responseJson) => {
+            //             var userObj = responseJson;
+            //             console.log("ini user : ");
+            //             console.log(userObj);
+            //             self.setState({user_id: userObj.d});
+            //         })
+            // })
+            AsyncStorage.getItem('id_token').then((token) => {
+                self.setState({token:token});
             });
-        AsyncStorage.getItem('user').then((user) => {
-            var userObj = JSON.parse(user);
-            this.setState({user: userObj.user});
+              
+            AsyncStorage.getItem('user').then((user) => {
+                var userObj = JSON.parse(user);
+                console.log("ini user");
+                console.log(userObj);
+                this.setState({user: userObj.user_id});
         });
         AsyncStorage.getItem('id_token').then((token) => {
             const URL = API + CART + '?token=' + token;
@@ -115,16 +135,17 @@ export default class ReviewOrder extends Component {
         this.state.items.map(function(product){
             products.push({product_id: product.id, quantity: product.quantity});
         })
-        var params = {user_id: this.state.user.id, bank_id: 
-            this.state.paymentMethod.id, 
+        var params = {
+            user_id: this.state.user.user_id, 
+            bank_id: this.state.paymentMethod.id, 
             courier_name: this.state.courier.name,
             courier_cost: this.state.shipmentCost,
             cust_name: this.state.address.name,
-            cust_email: this.state.address.email,
+            cust_email: this.state.user.email,
             cust_company: this.state.address.company,
-            cust_division: this.state.address.division,
+            cust_division: this.state.address.division_company,
             cust_phone: this.state.address.phone,
-            cust_email: this.state.address.email,
+            // cust_email: this.state.address.email,
             cust_address: this.state.address.address,
             subdistrict: this.state.address.subdistrict,
             regency: this.state.address.regency,
@@ -132,12 +153,15 @@ export default class ReviewOrder extends Component {
             postcode: this.state.address.postcode,
             order: products
         }
-        console.log('params');
-        console.log(JSON.stringify(params));
+        // console.log('params');
+        // console.log(params);
+        // console.log(JSON.stringify(params));
         PostOrderPayment(params)
             .then((res) => {
-                console.log(res);
-                this.props.navigation.navigate('Home');
+                console.log('params');
+                console.log(params);
+                // console.log(res);
+                this.props.navigation.navigate('PaymentWaiting');
             })
     }
 
@@ -354,10 +378,6 @@ const styles = StyleSheet.create({
         width: '100%',
     },
     totalBox: {
-        flex: 1,
-        width: '100%',
-    },
-    paymentBox: {
         flex: 1,
         width: '100%',
     },

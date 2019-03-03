@@ -30,6 +30,7 @@ import Blog from "./components/Blog";
 import Webview from "./components/Webview";
 import WebviewBanner from "./components/WebviewBanner";
 import Content from "./components/Content";
+import PaymentWaiting from "./components/PaymentWaiting";
 // import { MainStack } from "./config/Router";
 
 let listener = null;
@@ -205,6 +206,12 @@ export default App = StackNavigator({
   },
   Content: {
     screen: Content,
+    navigationOptions: {
+
+    }
+  },
+  PaymentWaiting: {
+    screen: PaymentWaiting,
     navigationOptions: {
 
     }
