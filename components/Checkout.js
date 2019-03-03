@@ -64,8 +64,6 @@ export default class Checkout extends Component {
                     var resp = responseJson;
                     if ((responseJson.s)) {
                         self.setState({address: resp.d[0]});
-                        console.log("ini address: ");
-                        console.log(this.state.address);
                     }
                 })
             // getAddressList(token)

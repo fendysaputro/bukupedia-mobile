@@ -172,13 +172,9 @@ export default class ReviewOrder extends Component {
 
     onChangeTextKurirCost(text) {
         var self = this;
-        var service = text.split(' ')[0]
-        var cost = this.state.shipmentCostsO.find(cost => 
-            cost.service === service
-        );
-        this.setState({shipmentCost: cost.cost});
-        console.log("ini cost: ");
-        console.log(this.state.shipmentCosts);
+        var price = text.split(' - ')[1]
+        var newCost = parseFloat(price);
+        self.setState({shipmentCost: newCost});
     }
 
     onSelectPayment(index, value) {
