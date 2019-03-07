@@ -83,17 +83,6 @@ export default class ReviewOrder extends Component {
                     self.setState({paymentMethods: paymentObj.d});
                 }
             })
-            // AsyncStorage.getItem('id_token').then((token) => {
-            //     const URL6 = API + PROFILE + '?token=' + token;
-            //     fetch(URL6)
-            //         .then((response) => response.json())
-            //         .then((responseJson) => {
-            //             console.log("ini user : ");
-            //             console.log(responseJson);
-            //             var userObj = responseJson;
-            //             self.setState({user: userObj});
-            //         })
-            // })
             AsyncStorage.getItem('id_token').then((token) => {
                 self.setState({token:token});
                 console.log("ini tokenneww: ");
@@ -135,9 +124,15 @@ export default class ReviewOrder extends Component {
         this.state.items.map(function(product){
             products.push({product_id: product.id, quantity: product.quantity});
         })
+        AsyncStorage.getItem('id_token').then((token) => {
+            self.setState({token:token});
+            
+        });
         var params = {
+            token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyaWQiOiIxMDYzNzMiLCJpYXQiOjE1NTE2MTExNTAsImV4cCI6MTU1MTg3MDM1MH0.9pqZAP3_EaO11TJOniMuW1bCXZkltFHkyR8ldb3JOTA",
             user_id: this.state.user.user_id, 
             bank_id: this.state.paymentMethod.id, 
+            payment_method: this.state.paymentMethod.type,
             courier_name: this.state.courier.name,
             courier_cost: this.state.shipmentCost,
             cust_name: this.state.address.name,
@@ -153,15 +148,14 @@ export default class ReviewOrder extends Component {
             postcode: this.state.address.postcode,
             order: products
         }
-        // console.log('params');
-        // console.log(params);
-        // console.log(JSON.stringify(params));
-        PostOrderPayment(params)
+        PostOrderPayment(params, this.state.token)
             .then((res) => {
                 console.log('params');
                 console.log(params);
                 console.log(res);
-                this.props.navigation.navigate('PaymentWaiting');
+                if (res.s){
+                    this.props.navigation.navigate('PaymentWaiting');
+                }
             })
     }
 
@@ -218,7 +212,7 @@ export default class ReviewOrder extends Component {
         })
         let radioBtn =  this.state.paymentMethods.map(function(payment, i){
             return <RadioButton key={payment.id} value={payment.value} >
-                    {/* <Text>{payment.label}</Text> */}
+                    <Text>{payment.type}</Text>
                     <Image width={50}
                         source={{uri:payment.picture}}/>
                    </RadioButton>;
@@ -254,7 +248,7 @@ export default class ReviewOrder extends Component {
                                         minimumFractionDigits: 0, 
                                         maximumFractionDigits: 0 
                                             }).format(product.price)}</Text>
-                                    <Text style={{marginTop:30}}>Jumlah: {product.quantity}</Text>
+                                    <Text style={{marginTop:20}}>Jumlah: {product.quantity}</Text>
                                 </View>
                             </View>
                         ))

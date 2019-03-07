@@ -70,16 +70,10 @@ export default class Basket extends Component {
        
       const URL = API + CART + '?token=' + token;
       fetch(URL)  
-        .then(function(res) {
-          console.log("Testing res basket: ");
-          console.log(res);
-          console.log(res.json());
-          var resObj = JSON.parse(res.data);
-          console.log("ini resObj: ");
-          console.log(resObj);
-          if ((resObj.r) || (res.status == 200)) {
-            console.log("resObj.d");
-            console.log(resObj.d);
+        .then((response) => response.json())
+        .then((responseJson) => {
+          var resObj = responseJson;
+          if ((responseJson.s)){
             self.setState({carts: resObj.d});
           }
         })
@@ -173,9 +167,10 @@ export default class Basket extends Component {
                           maximumFractionDigits: 0 
                       }).format(product.price)}
                     </Text>
-                    <NumericInput 
+                    <Text style={{marginTop:20}}>Jumlah: {product.quantity}</Text>
+                    {/* <NumericInput 
                       onChange={value => this.setState({quantity: value})}
-                      value={product.quantity}/>            
+                      value={product.quantity}/>             */}
                   </View>
                 </View>
               ))
