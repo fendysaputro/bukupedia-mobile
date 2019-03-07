@@ -37,6 +37,7 @@ export default class ReviewOrder extends Component {
         super(props);
         this.state = {
             user_id: '',
+            email: '',
           items: [],
           address: {
             name: '',
@@ -85,8 +86,6 @@ export default class ReviewOrder extends Component {
             })
             AsyncStorage.getItem('id_token').then((token) => {
                 self.setState({token:token});
-                console.log("ini tokenneww: ");
-                console.log(this.state.token);
             });
               
             AsyncStorage.getItem('user').then((user) => {
@@ -116,7 +115,7 @@ export default class ReviewOrder extends Component {
                         self.setState({couriers: resp.d});
                     }
                 })
-        });
+            });
         }
 
     onSubmitOrder() {
@@ -130,13 +129,13 @@ export default class ReviewOrder extends Component {
         });
         var params = {
             token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyaWQiOiIxMDYzNzMiLCJpYXQiOjE1NTE2MTExNTAsImV4cCI6MTU1MTg3MDM1MH0.9pqZAP3_EaO11TJOniMuW1bCXZkltFHkyR8ldb3JOTA",
-            user_id: this.state.user.user_id, 
+            user_id: this.state.user.id, 
             bank_id: this.state.paymentMethod.id, 
             payment_method: this.state.paymentMethod.type,
             courier_name: this.state.courier.name,
             courier_cost: this.state.shipmentCost,
             cust_name: this.state.address.name,
-            // cust_email: this.state.user.email,
+            cust_email: this.state.user.email,
             cust_company: this.state.address.company,
             cust_division: this.state.address.division_company,
             cust_phone: this.state.address.phone,
@@ -146,6 +145,7 @@ export default class ReviewOrder extends Component {
             regency: this.state.address.regency,
             province: this.state.address.province,
             postcode: this.state.address.postcode,
+            cart_id: this.state.items[0].id,
             order: products
         }
         PostOrderPayment(params, this.state.token)

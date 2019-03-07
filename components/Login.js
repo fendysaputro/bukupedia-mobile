@@ -15,6 +15,8 @@ import Account from "../components/Account";
 import WelcomeAccount from "../components/WelcomeAccount";
 import Password from "./Password";
 import SafeAreaView from "react-native-safe-area-view";
+import { API, PROFILE } from "./Global";
+import { getProfile } from "../services/FetchProfile";
 
 export default class Login extends Component {
     static navigationOptions = {
@@ -52,14 +54,29 @@ export default class Login extends Component {
     onLogin(params){
         postLogin(params)
             .then((res) => {
-                console.log(res);
                 AsyncStorage.setItem('id_token', res.token);
-                AsyncStorage.setItem('user', JSON.stringify(res.d));
-        
+
                 AsyncStorage.getItem('id_token').then((token) => {
-                    console.log("token ketika login: ");
-                    console.log(token);
+                    var self = this;
+                    const URL = API + PROFILE + '?token=' + token;
+                    fetch(URL)
+                        .then((res) => res.json())
+                        .then((responseJson) => {
+                            var resp = responseJson;
+                            if ((responseJson.s)) {
+                                AsyncStorage.setItem('user', JSON.stringify(resp.d));
+                                console.log('ini user');
+                                console.log(resp.d);
+                            }
+                        }) 
                 });
+
+                // AsyncStorage.getItem('user').then((Suser) => {
+                //     var userObj = JSON.parse(Suser);
+                //     this.setState({user: userObj});
+                //     console.log('ini user: ');
+                //     console.log(this.state.user);
+                // })
 
                 // this.props.navigation.navigate("WelcomeAccount");
                 this.props.navigation.navigate("Main");
