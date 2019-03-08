@@ -66,15 +66,10 @@ export default class Checkout extends Component {
                         self.setState({address: resp.d[0]});
                     }
                 })
-            // getAddressList(token)
-            //     .then((res) => {
-            //         console.log(res);
-            //     }) 
         });
     }    
 
     render(){
-        console.log(this.state.address);
         return(
             <ScrollView contentContainer={styles.contentContainer}>
             <View style={styles.container}>

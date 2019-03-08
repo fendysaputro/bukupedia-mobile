@@ -128,6 +128,7 @@ export default class ReviewOrder extends Component {
             
         });
         var params = {
+            // id: this.state.items[0].id,
             token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyaWQiOiIxMDYzNzMiLCJpYXQiOjE1NTE2MTExNTAsImV4cCI6MTU1MTg3MDM1MH0.9pqZAP3_EaO11TJOniMuW1bCXZkltFHkyR8ldb3JOTA",
             user_id: this.state.user.id, 
             bank_id: this.state.paymentMethod.id, 
