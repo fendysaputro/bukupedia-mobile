@@ -12,7 +12,7 @@ import { AppRegistry,
   AsyncStorage } from "react-native";
 import { Card, ButtonGroup } from 'react-native-elements'
 import { COLOR_PRIMARY } from "../styles/common";
-import { API, CART, ADDRESS, SHIPMENT_METHOD, SHIPPING_COST, PAYMENT_METHOD, PROFILE } from '../components/Global';
+import { API, CART, ADDRESS, SHIPMENT_METHOD, SHIPPING_COST, PAYMENT_METHOD, PROFILE, ORDER_PAYMENT } from '../components/Global';
 import Image from 'react-native-scalable-image';
 import {RadioGroup, RadioButton} from 'react-native-flexi-radio-button';
 import { Dropdown } from 'react-native-material-dropdown';
@@ -72,6 +72,8 @@ export default class ReviewOrder extends Component {
         const address = navigation.getParam('address', 'NO-address');
         this.setState({loading: true, address: address});
         const URL = API + PAYMENT_METHOD;
+        console.log("ini bank");
+        console.log(URL);
         fetch(URL)
             .then((response) => response.json())
             .then((responseJson) => {
@@ -121,7 +123,7 @@ export default class ReviewOrder extends Component {
     onSubmitOrder() {
         var products = [];
         this.state.items.map(function(product){
-            products.push({product_id: product.id, quantity: product.quantity});
+            products.push({cart_id: product.id, quantity: product.quantity});
         })
         AsyncStorage.getItem('id_token').then((token) => {
             self.setState({token:token});

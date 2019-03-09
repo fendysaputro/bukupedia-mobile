@@ -70,15 +70,6 @@ export default class Login extends Component {
                             }
                         }) 
                 });
-
-                // AsyncStorage.getItem('user').then((Suser) => {
-                //     var userObj = JSON.parse(Suser);
-                //     this.setState({user: userObj});
-                //     console.log('ini user: ');
-                //     console.log(this.state.user);
-                // })
-
-                // this.props.navigation.navigate("WelcomeAccount");
                 this.props.navigation.navigate("Main");
             });
     }

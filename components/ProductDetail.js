@@ -103,6 +103,8 @@ export default class ProductDetail extends Component {
     getQtyCart(token, callback) {
         var self = this;
         self.setState({qty_cart: []});
+        console.log("ini cart");
+        console.log(this.state.qty_cart);
         const URL = API + CART + '?token=' + token;
         fetch(URL)
             .then((response) => response.json())
@@ -174,7 +176,7 @@ export default class ProductDetail extends Component {
                 console.log(res);
                 if (res.s){
                     this.props.navigation.navigate('Basket');
-                    // hideFadeAnimationDialog();
+                    // handleOnCloseButton();
                 }
             }); 
             return 
