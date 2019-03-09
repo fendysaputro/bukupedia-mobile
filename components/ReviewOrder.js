@@ -72,8 +72,6 @@ export default class ReviewOrder extends Component {
         const address = navigation.getParam('address', 'NO-address');
         this.setState({loading: true, address: address});
         const URL = API + PAYMENT_METHOD;
-        console.log("ini bank");
-        console.log(URL);
         fetch(URL)
             .then((response) => response.json())
             .then((responseJson) => {
@@ -121,6 +119,7 @@ export default class ReviewOrder extends Component {
         }
 
     onSubmitOrder() {
+        var self;
         var products = [];
         this.state.items.map(function(product){
             products.push({cart_id: product.id, quantity: product.quantity});
@@ -131,9 +130,8 @@ export default class ReviewOrder extends Component {
         });
         var params = {
             // id: this.state.items[0].id,
-            token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyaWQiOiIxMDYzNzMiLCJpYXQiOjE1NTE2MTExNTAsImV4cCI6MTU1MTg3MDM1MH0.9pqZAP3_EaO11TJOniMuW1bCXZkltFHkyR8ldb3JOTA",
             user_id: this.state.user.id, 
-            bank_id: this.state.paymentMethod.id, 
+            bank_id: this.state.paymentMethod.code, 
             payment_method: this.state.paymentMethod.type,
             courier_name: this.state.courier.name,
             courier_cost: this.state.shipmentCost,
@@ -142,7 +140,6 @@ export default class ReviewOrder extends Component {
             cust_company: this.state.address.company,
             cust_division: this.state.address.division_company,
             cust_phone: this.state.address.phone,
-            // cust_email: this.state.address.email,
             cust_address: this.state.address.address,
             subdistrict: this.state.address.subdistrict,
             regency: this.state.address.regency,

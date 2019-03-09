@@ -102,9 +102,7 @@ export default class ProductDetail extends Component {
 
     getQtyCart(token, callback) {
         var self = this;
-        self.setState({qty_cart: []});
-        console.log("ini cart");
-        console.log(this.state.qty_cart);
+            self.setState({qty_cart: []});
         const URL = API + CART + '?token=' + token;
         fetch(URL)
             .then((response) => response.json())
@@ -117,7 +115,6 @@ export default class ProductDetail extends Component {
             .catch((error) => {
                 console.log(error);
             })  
-         
     }
 
     componentWillMount(){
@@ -137,8 +134,6 @@ export default class ProductDetail extends Component {
         AsyncStorage.getItem('user').then((sUser) => {
             var userObj = JSON.parse(sUser);
             self.setState({ user: userObj });
-            console.log("user di product detail: ");
-            console.log(this.state.user);
         });
         AsyncStorage.getItem('id_token').then((token) => {
             self.setState({ token: token });
@@ -150,7 +145,7 @@ export default class ProductDetail extends Component {
         getProductDetail(state.params.url)
             .then((res) => {
                 self.setState({ data: res.d[0], isDataLoaded: true });
-                console.log('getProductDetail data');
+                // console.log('getProductDetail data');
                 console.log(JSON.stringify(res.d[0]));
         });
     }
@@ -172,8 +167,6 @@ export default class ProductDetail extends Component {
     doAddToBasket(params) {
         addShoppingCart(params, this.state.token)
             .then((res) => {
-                console.log("ini res di product")
-                console.log(res);
                 if (res.s){
                     this.props.navigation.navigate('Basket');
                     // handleOnCloseButton();
@@ -297,7 +290,7 @@ export default class ProductDetail extends Component {
                     <View style={styles.dialogContentView}>
                         <Button
                             onPress={() => this.doAddToBasket({
-                                user_id:this.state.user.user_id,
+                                user_id:this.state.user.id,
                                 product_id: this.state.data.id,
                                 quantity: this.state.quantity
                                 })}
