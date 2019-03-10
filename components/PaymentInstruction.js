@@ -29,7 +29,7 @@ export default class PaymentInstruction extends Component {
     constructor (props){
         super(props);
         this.state = {
-            invoiceNumber: '',
+            invoices: [],
             totalPay: '',
             orderPayment: [],
             orderDetail: []
@@ -37,30 +37,33 @@ export default class PaymentInstruction extends Component {
     }
 
     componentDidMount (){
+        var self;
         AsyncStorage.getItem('id_token').then((token) => {
             const URL = API + LIST_ORDER + '?token=' + token;
             fetch(URL)
                 .then((response) => response.json())
                 .then((responseJson) => {
+                    console.log("ini list order: ");
+                        console.log(responseJson);
                     var orderObj = responseJson;
                     if (responseJson.s) {
                         self.setState({orderPayment: orderObj.d});
                     }
                 })
         });
-        AsyncStorage.getItem('id_token').then((token) => {
-            const URL2 = API + LIST_ORDER + '?token=' + token + '?id=' + id;
-            console.log("ini orderPayment");
-            console.log(URL2);
-            fetch(URL2)
-                .then((response) => response.json())
-                .then((responseJson) => {
-                    var orderDetailObj = responseJson;
-                    if (responseJson.s) {
-                        self.setState({orderDetail: orderDetailObj.d});
-                    }
-                })
-        });
+        // AsyncStorage.getItem('id_token').then((token) => {
+        //     const URL2 = API + LIST_ORDER + '?token=' + token + '?id=' + id;
+        //     console.log("ini orderPayment");
+        //     console.log(URL2);
+        //     fetch(URL2)
+        //         .then((response) => response.json())
+        //         .then((responseJson) => {
+        //             var orderDetailObj = responseJson;
+        //             if (responseJson.s) {
+        //                 self.setState({orderDetail: orderDetailObj.d});
+        //             }
+        //         })
+        // });
         // getOrderDetail(token)
         //     .then((res) => {
         //         console.log('params');
@@ -73,8 +76,12 @@ export default class PaymentInstruction extends Component {
     }
 
     render () {
+        var invoices = [];
+        this.state.invoices.map((invoice) => {
+            invoices.push({id: invoice.invoice_no});
+        })
         return (
-            <View style={styles.itemBox}>
+            <View style={styles.containerTwo}>
                 {/* {
                     this.state.items.map((product, index) => (
                         <View key={index} style = {styles.containerTwo}>
@@ -97,8 +104,8 @@ export default class PaymentInstruction extends Component {
                         </View>
                     ))
                 } */}
-                <Text>
-                    ini PaymentInstruction
+                <Text style={styles.reviewShop}>
+                    Nomor Invoice Pesanan : {invoices}
                 </Text>
             </View>
         );
@@ -119,6 +126,17 @@ const styles = StyleSheet.create({
     itemBox: {
         flex: 1,
         width: '100%',
+    },
+    containerTwo: {
+        padding: 10,
+        marginTop: 5,
+        height: 110,
+        backgroundColor: 'white' 
+    },
+    reviewShop: {
+        flex: 1,
+        paddingLeft: 10,
+        justifyContent: 'flex-start'
     },
 });
 

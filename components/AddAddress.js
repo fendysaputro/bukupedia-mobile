@@ -84,11 +84,8 @@ export default class AddAddress extends Component {
             self.setState({token:token});
         });
         AsyncStorage.getItem('user').then((user) => {
-            console.log(user);
             var userObj = JSON.parse(user);
             self.setState({user_id:userObj.user_id});
-            console.log('self.state.user_id');
-            console.log(self.state.user_id);
         })
       }    
 
