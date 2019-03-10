@@ -17,7 +17,7 @@ import Image from 'react-native-scalable-image';
 import {RadioGroup, RadioButton} from 'react-native-flexi-radio-button';
 import { Dropdown } from 'react-native-material-dropdown';
 import { PostOrderPayment } from '../services/FetchPayment';
-import PaymentWaiting from '../components/PaymentWaiting';
+import PaymentInstruction from '../components/PaymentInstruction';
 
 export default class ReviewOrder extends Component {
     static navigationOptions = {
@@ -58,7 +58,8 @@ export default class ReviewOrder extends Component {
           shipmentCostsO: [],
           shipmentCost: 0,
           paymentMethods: [],
-          paymentMethod: {}
+          paymentMethod: {},
+          shippingCost: 0
         }
         this.onChangeTextKurir = this.onChangeTextKurir.bind(this);
         this.onChangeTextKurirCost = this.onChangeTextKurirCost.bind(this);
@@ -154,7 +155,7 @@ export default class ReviewOrder extends Component {
                 console.log(params);
                 console.log(res);
                 if (res.s){
-                    this.props.navigation.navigate('PaymentWaiting');
+                    this.props.navigation.navigate('PaymentInstruction');
                 }
             })
     }

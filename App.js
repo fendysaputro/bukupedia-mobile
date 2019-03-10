@@ -31,6 +31,7 @@ import Webview from "./components/Webview";
 import WebviewBanner from "./components/WebviewBanner";
 import Content from "./components/Content";
 import PaymentWaiting from "./components/PaymentWaiting";
+import PaymentInstruction from "./components/PaymentInstruction";
 // import { MainStack } from "./config/Router";
 
 let listener = null;
@@ -214,6 +215,12 @@ export default App = StackNavigator({
     screen: PaymentWaiting,
     navigationOptions: {
 
+    }
+  },
+  PaymentInstruction: {
+    screen: PaymentInstruction,
+    navigationOptions: {
+      
     }
   }
 },{
