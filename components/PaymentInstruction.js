@@ -38,8 +38,8 @@ export default class PaymentInstruction extends Component {
 
     componentDidMount (){
         var self;
-        AsyncStorage.getItem('id_token').then((token) => {
-            const URL = API + LIST_ORDER + '?id=' + id  + '?token=' + token;
+        AsyncStorage.getItem('id_token').then((token, id) => {
+            const URL = API + LIST_ORDER + '?token=' + token + '?id=' + id;
             console.log("ini list order: ");
                         console.log(URL);
             fetch(URL)
