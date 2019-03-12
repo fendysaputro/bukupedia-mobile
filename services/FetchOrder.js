@@ -1,4 +1,4 @@
-import { API, LIST_ORDER } from '../components/Global';
+import { API, LIST_ORDER, ORDER_DETAIL } from '../components/Global';
 
 export const getListOrder = async (token) => {
     const URL = API + LIST_ORDER + '?token=' + token;
@@ -6,8 +6,8 @@ export const getListOrder = async (token) => {
             .then((res) => res.json());
 }
 
-export const getOrderDetail = async (token, id) => {
-    const URL = API + LIST_ORDER + '?token=' + token + '?id=' + id;
+export const getOrderDetail = async (id, token) => {
+    const URL = API + LIST_ORDER + '?id=' + id + '?token=' + token;
     return fetch(URL)
             .then((res) => res.json());
 }
