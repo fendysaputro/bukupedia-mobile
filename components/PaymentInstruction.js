@@ -8,8 +8,7 @@ import { StyleSheet,
         AsyncStorage,
         ScrollView } from "react-native";
 import { COLOR_PRIMARY } from "../styles/common";
-import {API, ORDER_PAYMENT, LIST_ORDER } from "./Global";
-import { ORDER_DETAIL } from "../services/FetchOrder";
+import {getOrderDetail } from "../services/FetchOrder";
 
 export default class PaymentInstruction extends Component {
     static navigationOptions = {
@@ -29,7 +28,7 @@ export default class PaymentInstruction extends Component {
     constructor (props){
         super(props);
         this.state = {
-            invoices: [],
+            invoice: [],
             totalPay: '',
             orderPayment: [],
             orderDetail: []
@@ -37,59 +36,29 @@ export default class PaymentInstruction extends Component {
     }
 
     componentDidMount (){
-        var self;
-        AsyncStorage.getItem('id_token').then((token, id) => {
-            const URL = API + LIST_ORDER + '?token=' + token + '?id=' + id;
-            console.log("ini list order: ");
-                        console.log(URL);
-            fetch(URL)
-                .then((response) => response.json())
-                .then((responseJson) => {
-                    var orderObj = responseJson;
-                    if (responseJson.s) {
-                        self.setState({orderPayment: orderObj.d});
-                    }
-                })
+        var self = this;
+        const { state } = this.props.navigation;
+        var id = state.params.id;
+        console.log(id);
+        AsyncStorage.getItem('id_token').then((token) => {
+            getOrderDetail(token, id)
+            .then(res => {
+                self.setState({invoice: res.d});    
+            })
         });
-        // AsyncStorage.getItem('id_token').then((token) => {
-        //     const URL2 = API + LIST_ORDER + '?id=' + id + '?token=' + token;
-        //     console.log("ini orderPayment");
-        //     console.log(URL2);
-        //     fetch(URL2)
-        //         .then((response) => response.json())
-        //         .then((responseJson) => {
-        //             var orderDetailObj = responseJson;
-        //             if (responseJson.s) {
-        //                 self.setState({orderDetail: orderDetailObj.d});
-        //             }
-        //         })
-        // });
-        // getOrderDetail(token)
-        //     .then((res) => {
-        //         console.log('params');
-        //         // console.log(params);
-        //         console.log(res);
-        //         if (res.s){
-        //             // this.props.navigation.navigate('PaymentInstruction');
-        //         }
-        //     })
     }
 
     render () {
-        var invoices = [];
-        this.state.invoices.map((invoice) => {
-            invoices.push({id: invoice.invoice_no});
-        })
         return (
             <View style={styles.root}>
                 <View style={styles.containerTwo}>
                     <Text style={styles.reviewShop}>
-                        Nomor Invoice Pesanan : {invoices}
+                        Nomor Invoice Pesanan : {this.state.invoice.invoice_no}
                     </Text>
                 </View>
                 <View style={styles.containerThree}>
                     <Text style={styles.reviewShop}>
-                        Total yang Harus Anda Bayar : {invoices}
+                        Total yang Harus Anda Bayar : {this.state.invoice.grand_total}
                     </Text>
                 </View>
                 <TouchableOpacity 

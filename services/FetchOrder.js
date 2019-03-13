@@ -6,8 +6,8 @@ export const getListOrder = async (token) => {
             .then((res) => res.json());
 }
 
-export const getOrderDetail = async (id, token) => {
-    const URL = API + LIST_ORDER + '?id=' + id + '?token=' + token;
+export const getOrderDetail = async (token, id) => {
+    const URL = API + ORDER_DETAIL + '?id=' + id + '&token=' + token;
     return fetch(URL)
             .then((res) => res.json());
 }
