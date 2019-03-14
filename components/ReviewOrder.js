@@ -120,7 +120,7 @@ export default class ReviewOrder extends Component {
         }
 
     onSubmitOrder() {
-        var self;
+        var self = this;
         var products = [];
         this.state.items.map(function(product){
             products.push({cart_id: product.id, quantity: product.quantity});
@@ -152,6 +152,9 @@ export default class ReviewOrder extends Component {
         PostOrderPayment(params, this.state.token)
             .then((res) => {
                 if (res.s){
+                    console.log("params");
+                    console.log(params);
+                    console.log(res);
                     this.props.navigation.navigate('PaymentInstruction', {id: res.d.id});
                 }
             })

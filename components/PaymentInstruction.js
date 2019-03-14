@@ -43,7 +43,9 @@ export default class PaymentInstruction extends Component {
         AsyncStorage.getItem('id_token').then((token) => {
             getOrderDetail(token, id)
             .then(res => {
-                self.setState({invoice: res.d});    
+                self.setState({invoice: res.d});
+                console.log("ini order_detail: ");
+                console.log(this.state.invoice);    
             })
         });
     }
@@ -53,12 +55,34 @@ export default class PaymentInstruction extends Component {
             <View style={styles.root}>
                 <View style={styles.containerTwo}>
                     <Text style={styles.reviewShop}>
-                        Nomor Invoice Pesanan : {this.state.invoice.invoice_no}
+                        Nomor Invoice Pesanan
                     </Text>
+                <View style={{alignSelf: 'flex-end', alignItems: 'flex-end', 
+                    position: 'absolute', paddingTop: 10}}>
+                    <Text style={styles.reviewShop}>
+                    {this.state.invoice.invoice_no}
+                    </Text>
+                </View>
                 </View>
                 <View style={styles.containerThree}>
                     <Text style={styles.reviewShop}>
-                        Total yang Harus Anda Bayar : {this.state.invoice.grand_total}
+                        Total yang Harus Anda Bayar
+                    </Text>
+                </View>
+                <View style={{alignSelf: 'flex-end', alignItems: 'flex-end', 
+                    position: 'absolute', paddingTop: 60}}>
+                    <Text style={styles.text}>
+                        {new Intl.NumberFormat('en-GB', { 
+                        style: 'currency', 
+                        currency: 'IDR',
+                        minimumFractionDigits: 0, 
+                        maximumFractionDigits: 0 
+                            }).format(this.state.invoice.grand_total)}
+                    </Text>
+                </View>
+                <View style={styles.containerFour}>
+                    <Text style={styles.reviewShop}>
+                        Transfer/setor ke {this.state.invoice.bank}
                     </Text>
                 </View>
                 <TouchableOpacity 
@@ -66,6 +90,9 @@ export default class PaymentInstruction extends Component {
                         onPress = {console.log("ini testing") }>
                     <Text style={styles.submitButtonText}>Kembali ke Beranda</Text>
                 </TouchableOpacity>
+                <View style={styles.bottomView}>
+                    
+                </View>
             </View>
         );
       }
@@ -105,10 +132,38 @@ const styles = StyleSheet.create({
         width: '100%',
         backgroundColor: 'white' 
     },
+    containerFour: {
+        padding: 10,
+        marginTop: 10,
+        height: 150,
+        width: '100%',
+        backgroundColor: 'white' 
+    },
+    bottomView: {
+        width: '100%',
+        height: 50,
+        backgroundColor: 'white',
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: 'absolute',
+        bottom: 0,
+    },
     reviewShop: {
         flex: 1,
         paddingLeft: 10,
         justifyContent: 'flex-start',
+        fontWeight: 'bold' 
+    },
+    text: {
+        fontWeight: 'bold',
+        color: 'red'
+    },
+    invoiceStyle: {
+        flex: 1,
+        marginLeft: '70%',
+        justifyContent: 'flex-end',
+        alignSelf: 'flex-end', 
+        alignItems: 'flex-end',
         fontWeight: 'bold' 
     },
     submitButton: {
@@ -116,7 +171,7 @@ const styles = StyleSheet.create({
         padding: 10,
         margin: 15,
         height: 35,
-        width: 290
+        width: 310
      },
     submitButtonText:{
         color: "white",
@@ -124,7 +179,8 @@ const styles = StyleSheet.create({
         textAlign: "center",
         alignItems: "center",
         alignSelf: "center",
-        fontSize: 15
+        fontSize: 15,
+        fontWeight: 'bold'
      }
 });
 
