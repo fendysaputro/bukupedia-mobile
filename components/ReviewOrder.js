@@ -132,8 +132,8 @@ export default class ReviewOrder extends Component {
         var params = {
             // id: this.state.items[0].id,
             user_id: this.state.user.id, 
-            bank_id: this.state.paymentMethod.code, 
-            payment_method: this.state.paymentMethod.type,
+            bank_id: this.state.paymentMethod.id, 
+            payment_method: this.state.paymentMethod.code,
             courier_name: this.state.courier.name,
             courier_cost: this.state.shipmentCost,
             cust_name: this.state.address.name,
