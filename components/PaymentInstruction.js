@@ -31,7 +31,8 @@ export default class PaymentInstruction extends Component {
             invoice: [],
             totalPay: '',
             orderPayment: [],
-            orderDetail: []
+            orderDetail: [],
+            payment_method: []
         }
     }
 
@@ -39,13 +40,12 @@ export default class PaymentInstruction extends Component {
         var self = this;
         const { state } = this.props.navigation;
         var id = state.params.id;
-        console.log(id);
+        var payment_method = state.params.bank;
+        self.setState({payment_method: payment_method});
         AsyncStorage.getItem('id_token').then((token) => {
             getOrderDetail(token, id)
             .then(res => {
-                self.setState({invoice: res.d});
-                console.log("ini order_detail: ");
-                console.log(this.state.invoice);    
+                self.setState({invoice: res.d});    
             })
         });
     }
@@ -60,7 +60,7 @@ export default class PaymentInstruction extends Component {
                 <View style={{alignSelf: 'flex-end', alignItems: 'flex-end', 
                     position: 'absolute', paddingTop: 10}}>
                     <Text style={styles.reviewShop}>
-                    {this.state.invoice.invoice_no}
+                        {this.state.invoice.invoice_no}
                     </Text>
                 </View>
                 </View>
@@ -82,7 +82,7 @@ export default class PaymentInstruction extends Component {
                 </View>
                 <View style={styles.containerFour}>
                     <Text style={styles.reviewShop}>
-                        Transfer/setor ke {this.state.invoice.bank}
+                        Transfer/setor ke {this.state.payment_method.bank}
                     </Text>
                 </View>
                 <TouchableOpacity 

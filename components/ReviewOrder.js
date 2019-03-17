@@ -130,7 +130,6 @@ export default class ReviewOrder extends Component {
             
         });
         var params = {
-            // id: this.state.items[0].id,
             user_id: this.state.user.id, 
             bank_id: this.state.paymentMethod.id, 
             payment_method: this.state.paymentMethod.code,
@@ -151,11 +150,11 @@ export default class ReviewOrder extends Component {
         }
         PostOrderPayment(params, this.state.token)
             .then((res) => {
-                if (res.s){
-                    console.log("params");
+                console.log("params");
                     console.log(params);
+                if (res.s){
                     console.log(res);
-                    this.props.navigation.navigate('PaymentInstruction', {id: res.d.id});
+                    this.props.navigation.navigate('PaymentInstruction', {id: res.d.id, bank: res.d.payment_method});
                 }
             })
     }
