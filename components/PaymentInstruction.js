@@ -82,7 +82,7 @@ export default class PaymentInstruction extends Component {
                 </View>
                 <View style={styles.containerFour}>
                     <Text style={styles.reviewShop}>
-                        Transfer/setor ke {this.state.payment_method.bank} ke nomor rekening
+                        Transfer/setor ke {this.state.payment_method.bank} ke nomor rekening {"\n"} 
                         berikut ini :
                     </Text>
                 </View>
@@ -158,7 +158,7 @@ const styles = StyleSheet.create({
     bankStyle: {
         flex: 1,
         paddingLeft: 10,
-        paddingTop: 2,
+        marginTop: 0,
         justifyContent: 'flex-start' 
     },
     text: {
