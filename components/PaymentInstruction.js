@@ -83,7 +83,10 @@ export default class PaymentInstruction extends Component {
                 <View style={styles.containerFour}>
                     <Text style={styles.reviewShop}>
                         Transfer/setor ke {this.state.payment_method.bank} ke nomor rekening {"\n"} 
-                        berikut ini :
+                        berikut ini : {"\n"} {this.state.payment_method.name_rek}
+                    </Text>
+                    <Text style={styles.rekeningText}>
+                        Nomor Rek {this.state.payment_method.no_rek}
                     </Text>
                 </View>
                 <TouchableOpacity 
@@ -164,6 +167,11 @@ const styles = StyleSheet.create({
     text: {
         fontWeight: 'bold',
         color: 'red'
+    },
+    rekeningText: {
+        paddingLeft: 10,
+        fontWeight: 'bold',
+        fontSize: 15
     },
     invoiceStyle: {
         flex: 1,
