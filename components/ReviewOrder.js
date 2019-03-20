@@ -152,9 +152,11 @@ export default class ReviewOrder extends Component {
             .then((res) => {
                 console.log("params");
                     console.log(params);
-                if (res.s){
                     console.log(res);
-                    this.props.navigation.navigate('PaymentInstruction', {id: res.d.id, bank: res.d.payment_method});
+                if (res.s){
+                    // console.log(res);
+                    this.props.navigation.navigate('PaymentInstruction', 
+                    {id: res.d.id, bank: res.d.payment_method});
                 }
             })
     }

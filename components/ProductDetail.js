@@ -168,15 +168,17 @@ export default class ProductDetail extends Component {
         addShoppingCart(params, this.state.token)
             .then((res) => {
                 if (res.s){
-                    this.props.navigation.navigate('Basket');
-                    // handleOnCloseButton();
+                    this.props.navigation.goBack();
+                    this.props.navigation.navigate("Basket");
+                    // this.props.navigation.navigate('Basket');
+                    // handleOnCloseButton=()=>{};
                 }
             }); 
             return 
             this.props.navigation.navigate("Login");
     }
 
-    handleOnCloseButton = () => {
+    handleOnCloseButton = () =>{
         this.props.navigation.goBack();
         this.props.navigation.navigate("Basket");
     }

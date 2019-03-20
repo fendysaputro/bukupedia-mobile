@@ -32,7 +32,7 @@ export default class PaymentInstruction extends Component {
             totalPay: '',
             orderPayment: [],
             orderDetail: [],
-            payment_method: []
+            payment_method: {}
         }
     }
 
@@ -40,14 +40,36 @@ export default class PaymentInstruction extends Component {
         var self = this;
         const { state } = this.props.navigation;
         var id = state.params.id;
+        console.log("ini cobacoba");
+        console.log(state.params);
         var payment_method = state.params.bank;
         self.setState({payment_method: payment_method});
+        console.log("ini payment method");
+        console.log(this.state.payment_method);
         AsyncStorage.getItem('id_token').then((token) => {
             getOrderDetail(token, id)
             .then(res => {
                 self.setState({invoice: res.d});    
             })
         });
+        // const URL = API + PAYMENT_METHOD;
+        // fetch(URL)
+        //     .then((response) => response.json())
+        //     .then((responseJson) => {
+        //         var paymentObj = responseJson;
+        //         if (responseJson.s) {
+        //             paymentObj.d.map(function(payment) {
+        //                 payment['label'] = payment.bank_name;
+        //                 payment['value'] = payment.id;
+        //             })
+        //             self.setState({paymentMethods: paymentObj.d});
+        //             console.log("ini payment method 2");
+        // console.log(this.state.paymentMethods);
+        //         }
+        //     })
+        //     AsyncStorage.getItem('id_token').then((token) => {
+        //         self.setState({token:token});
+        // });
     }
 
     render () {
@@ -85,13 +107,15 @@ export default class PaymentInstruction extends Component {
                         Transfer/setor ke {this.state.payment_method.bank} ke nomor rekening {"\n"} 
                         berikut ini : {"\n"} {this.state.payment_method.name_rek}
                     </Text>
+                    {/* <Image width={50}
+                        source={{uri:payment_method.picture}}/> */}
                     <Text style={styles.rekeningText}>
                         Nomor Rek {this.state.payment_method.no_rek}
                     </Text>
                 </View>
                 <TouchableOpacity 
                     style = {styles.submitButton}
-                        onPress = {console.log("ini testing") }>
+                        onPress = {console.log("") }>
                     <Text style={styles.submitButtonText}>Kembali ke Beranda</Text>
                 </TouchableOpacity>
                 <View style={styles.bottomView}>
