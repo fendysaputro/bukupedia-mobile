@@ -151,12 +151,11 @@ export default class ReviewOrder extends Component {
         PostOrderPayment(params, this.state.token)
             .then((res) => {
                 console.log("params");
-                    console.log(params);
-                    console.log(res);
+                console.log(res);
                 if (res.s){
-                    // console.log(res);
+                    console.log(res);
                     this.props.navigation.navigate('PaymentInstruction', 
-                    {id: res.d.id, bank: res.d.payment_method});
+                    {id: res.d.id, bank: res.d.payment_method, bank_image: this.state.paymentMethod.picture});
                 }
             })
     }

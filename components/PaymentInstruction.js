@@ -46,6 +46,10 @@ export default class PaymentInstruction extends Component {
         self.setState({payment_method: payment_method});
         console.log("ini payment method");
         console.log(this.state.payment_method);
+        var bank_image = state.bank_image;
+        self.setState({bank_image: bank_image});
+        console.log("ini payment method");
+        console.log(this.state.picture_url);
         AsyncStorage.getItem('id_token').then((token) => {
             getOrderDetail(token, id)
             .then(res => {
@@ -64,12 +68,15 @@ export default class PaymentInstruction extends Component {
         //             })
         //             self.setState({paymentMethods: paymentObj.d});
         //             console.log("ini payment method 2");
-        // console.log(this.state.paymentMethods);
+        //             console.log(this.state.paymentMethods);
         //         }
         //     })
         //     AsyncStorage.getItem('id_token').then((token) => {
         //         self.setState({token:token});
         // });
+        // if (payment_method.type == paymentMethods.code){
+        //     console.log("testingbroeww");
+        // }
     }
 
     render () {
@@ -107,8 +114,8 @@ export default class PaymentInstruction extends Component {
                         Transfer/setor ke {this.state.payment_method.bank} ke nomor rekening {"\n"} 
                         berikut ini : {"\n"} {this.state.payment_method.name_rek}
                     </Text>
-                    {/* <Image width={50}
-                        source={{uri:payment_method.picture}}/> */}
+                    <Image width={50}
+                        source={{uri:bank_image}}/>
                     <Text style={styles.rekeningText}>
                         Nomor Rek {this.state.payment_method.no_rek}
                     </Text>
