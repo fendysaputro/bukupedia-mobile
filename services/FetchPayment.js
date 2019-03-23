@@ -1,24 +1,20 @@
 import {API, PAYMENT_METHOD, ORDER_PAYMENT} from "../components/Global";
 
-export const getPaymentMethod = () => {
+export const getPaymentMethod = async () => {
     const URL = API + PAYMENT_METHOD;
-    return fetch(URL)
-            .then((res) => res.json());
+    const res = await fetch(URL);
+    return await res.json();
 }
 
-export const PostOrderPayment = async (params, token) => {
+export const PostOrderPayment =  async (params, token) => {
     const URL = API + ORDER_PAYMENT + '?token=' + token;
-    console.log("ini link");
-    console.log(URL);
-    return fetch(URL, {
+    const res = await fetch(URL, {
         method: 'POST',
         headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(params),
-    }).then((response) => response.json())
-    .then((responseJson) => {
-        return responseJson.body;
-    })
+    });
+    return await res.json();
 }

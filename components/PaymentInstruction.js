@@ -2,13 +2,13 @@ import React, { Component } from "react";
 import { StyleSheet, 
         Text, 
         View, 
-        Image, 
-        TextInput, 
+        Dimensions,
         TouchableOpacity, 
         AsyncStorage,
         ScrollView } from "react-native";
 import { COLOR_PRIMARY } from "../styles/common";
 import {getOrderDetail } from "../services/FetchOrder";
+import Image from 'react-native-scalable-image';
 
 export default class PaymentInstruction extends Component {
     static navigationOptions = {
@@ -32,7 +32,8 @@ export default class PaymentInstruction extends Component {
             totalPay: '',
             orderPayment: [],
             orderDetail: [],
-            payment_method: {}
+            payment_method: {},
+            bank_image: {}
         }
     }
 
@@ -42,7 +43,7 @@ export default class PaymentInstruction extends Component {
         var id = state.params.id;
         var payment_method = state.params.bank;
         self.setState({payment_method: payment_method});
-        var bank_image = state.bank_image;
+        var bank_image = state.params.bank_image;
         self.setState({bank_image: bank_image});
         console.log("ini payment method");
         console.log(this.state.bank_image);
@@ -87,10 +88,12 @@ export default class PaymentInstruction extends Component {
                 <View style={styles.containerFour}>
                     <Text style={styles.reviewShop}>
                         Transfer/setor ke {this.state.payment_method.bank} ke nomor rekening {"\n"} 
-                        berikut ini : {"\n"} {this.state.payment_method.name_rek}
-                    </Text>
-                    <Image width={30}
-                        source={{uri:this.state.bank_image}}/>
+                        berikut ini : {"\n"} 
+                        <Image width={100}
+                            // style = {{paddingLeft: 10}}
+                            source={{uri:this.state.bank_image.picture}}/>
+                        {this.state.payment_method.name_rek} 
+                    </Text>  
                     <Text style={styles.rekeningText}>
                         Nomor Rek {this.state.payment_method.no_rek}
                     </Text>

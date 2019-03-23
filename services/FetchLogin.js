@@ -1,13 +1,14 @@
 import { API, LOGIN } from "../components/Global";
 
-export const postLogin = (params) => {
+export const postLogin = async (params) => {
     const URL = API + LOGIN;
-    return fetch(URL, {
+    const res = await fetch(URL, {
         method: 'POST',
         headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(params),
-    }).then((res) => res.json());
+    });
+    return await res.json();
 }

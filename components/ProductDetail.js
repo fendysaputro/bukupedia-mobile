@@ -74,8 +74,6 @@ export default class ProductDetail extends Component {
     })
 
     static propTypes = {
-        MainElement: PropTypes.element.isRequired,
-        BadgeElement: PropTypes.element.isRequired,
         MainViewStyle: PropTypes.object,
         IconBadgeStyle: PropTypes.object,
         Hidden: PropTypes.bool,
