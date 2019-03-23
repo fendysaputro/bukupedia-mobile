@@ -169,8 +169,7 @@ export default class ProductDetail extends Component {
             .then((res) => {
                 if (res.s){
                     this.props.navigation.goBack();
-                    this.props.navigation.navigate("Basket");
-                    // this.props.navigation.navigate('Basket');
+                    this.props.navigation.navigate('Basket');
                     // handleOnCloseButton=()=>{};
                 }
             }); 
@@ -184,14 +183,6 @@ export default class ProductDetail extends Component {
     }
 
 	render() {
-        const {
-            MainViewStyle,
-            MainElement,
-            Hidden,
-            IconBadgeStyle,
-            BadgeElement,
-          } = this.props;
-        console.log(this.state);
         let screenHeight = Dimensions.get('window').height;
         let sreadyStock = '';
         if (this.state.data.stock > 0) {
@@ -263,7 +254,7 @@ export default class ProductDetail extends Component {
                                     backgroundColor: '#3bafff'
                                 }
                             }
-                            Hidden={this.state.BadgeCount==0}
+                            Hidden={this.state.BadgeCount=0}
                         />                  
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.buttonOne}

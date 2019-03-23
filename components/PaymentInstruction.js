@@ -40,43 +40,18 @@ export default class PaymentInstruction extends Component {
         var self = this;
         const { state } = this.props.navigation;
         var id = state.params.id;
-        console.log("ini cobacoba");
-        console.log(state.params);
         var payment_method = state.params.bank;
         self.setState({payment_method: payment_method});
-        console.log("ini payment method");
-        console.log(this.state.payment_method);
         var bank_image = state.bank_image;
         self.setState({bank_image: bank_image});
         console.log("ini payment method");
-        console.log(this.state.picture_url);
+        console.log(this.state.bank_image);
         AsyncStorage.getItem('id_token').then((token) => {
             getOrderDetail(token, id)
             .then(res => {
                 self.setState({invoice: res.d});    
             })
         });
-        // const URL = API + PAYMENT_METHOD;
-        // fetch(URL)
-        //     .then((response) => response.json())
-        //     .then((responseJson) => {
-        //         var paymentObj = responseJson;
-        //         if (responseJson.s) {
-        //             paymentObj.d.map(function(payment) {
-        //                 payment['label'] = payment.bank_name;
-        //                 payment['value'] = payment.id;
-        //             })
-        //             self.setState({paymentMethods: paymentObj.d});
-        //             console.log("ini payment method 2");
-        //             console.log(this.state.paymentMethods);
-        //         }
-        //     })
-        //     AsyncStorage.getItem('id_token').then((token) => {
-        //         self.setState({token:token});
-        // });
-        // if (payment_method.type == paymentMethods.code){
-        //     console.log("testingbroeww");
-        // }
     }
 
     render () {
@@ -114,8 +89,8 @@ export default class PaymentInstruction extends Component {
                         Transfer/setor ke {this.state.payment_method.bank} ke nomor rekening {"\n"} 
                         berikut ini : {"\n"} {this.state.payment_method.name_rek}
                     </Text>
-                    <Image width={50}
-                        source={{uri:bank_image}}/>
+                    <Image width={30}
+                        source={{uri:this.state.bank_image}}/>
                     <Text style={styles.rekeningText}>
                         Nomor Rek {this.state.payment_method.no_rek}
                     </Text>
