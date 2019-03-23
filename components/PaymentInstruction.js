@@ -88,12 +88,14 @@ export default class PaymentInstruction extends Component {
                 <View style={styles.containerFour}>
                     <Text style={styles.reviewShop}>
                         Transfer/setor ke {this.state.payment_method.bank} ke nomor rekening {"\n"} 
-                        berikut ini : {"\n"} 
-                        <Image width={100}
-                            // style = {{paddingLeft: 10}}
-                            source={{uri:this.state.bank_image.picture}}/>
-                        {this.state.payment_method.name_rek} 
-                    </Text>  
+                        berikut ini :  
+                    </Text> 
+                    <Image width={100}
+                        style = {{paddingLeft: 10, marginTop: 2}}
+                        source={{uri:this.state.bank_image.picture}}/>
+                    <Text style={styles.bankStyle}>
+                        {this.state.payment_method.name_rek}    
+                    </Text> 
                     <Text style={styles.rekeningText}>
                         Nomor Rek {this.state.payment_method.no_rek}
                     </Text>
@@ -170,8 +172,9 @@ const styles = StyleSheet.create({
     bankStyle: {
         flex: 1,
         paddingLeft: 10,
-        marginTop: 0,
-        justifyContent: 'flex-start' 
+        marginTop: 3,
+        justifyContent: 'flex-start',
+        fontWeight: 'bold' 
     },
     text: {
         fontWeight: 'bold',
