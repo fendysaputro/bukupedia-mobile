@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { StyleSheet, 
         Text, 
         View,
-        TouchableOpacity, Clipboard, 
+        TouchableOpacity, Clipboard, ToastAndroid, 
         AsyncStorage } from "react-native";
 import { COLOR_PRIMARY } from "../styles/common";
 import {getOrderDetail } from "../services/FetchOrder";
@@ -48,7 +48,7 @@ export default class PaymentInstruction extends Component {
     writeToClipboard = async () => {
         var text = this.state.payment_method.no_rek;
         Clipboard.setString(text);
-        alert('Copied to Clipboard!');
+        ToastAndroid.show('Nomor Rekening Tersalin', ToastAndroid.SHORT);
     }
 
     goToMain = () => {
