@@ -2,14 +2,14 @@ import React, { Component } from "react";
 import { StyleSheet, 
         Text, 
         View,
-        TouchableOpacity, 
+        TouchableOpacity, Clipboard, 
         AsyncStorage } from "react-native";
 import { COLOR_PRIMARY } from "../styles/common";
 import {getOrderDetail } from "../services/FetchOrder";
 import Image from 'react-native-scalable-image';
 import { Card } from "react-native-elements";
 import Button from "react-native-button";
-import Clipboard from "react-native-clipboard";
+import Main from '../components/Main';
 
 export default class PaymentInstruction extends Component {
     static navigationOptions = {
@@ -40,11 +40,20 @@ export default class PaymentInstruction extends Component {
         }
     }
 
+    readFromClipboard = async () => {
+        const clipboardContent = await Clipboard.getString();   
+        this.setState({clipboardContent}); 
+      };
+
     writeToClipboard = async () => {
-        Clipboard.setString(this.state.payment_method.no_rek);
-        console.log("ini clipboard");
+        var text = this.state.payment_method.no_rek;
+        Clipboard.setString(text);
         alert('Copied to Clipboard!');
     }
+
+    goToMain = () => {
+        this.props.navigation.navigate("Main");
+    } 
 
     componentDidMount (){
         var self = this;
@@ -121,7 +130,7 @@ export default class PaymentInstruction extends Component {
                 </Card>
                 <TouchableOpacity 
                     style = {styles.submitButton}
-                        onPress = {console.log("") }>
+                        onPress = {() => this.goToMain()}>
                     <Text style={styles.submitButtonText}>Kembali ke Beranda</Text>
                 </TouchableOpacity>
                 <View style={styles.bottomView}>
