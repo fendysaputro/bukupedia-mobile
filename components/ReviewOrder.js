@@ -4,15 +4,11 @@ import { AppRegistry,
   Text, 
   ScrollView,
   View,
-  Button, 
-  Dimensions,
   TouchableOpacity,
-  FlatList,
-  ListView,
   AsyncStorage } from "react-native";
-import { Card, ButtonGroup } from 'react-native-elements'
+import { Card } from 'react-native-elements'
 import { COLOR_PRIMARY } from "../styles/common";
-import { API, CART, ADDRESS, SHIPMENT_METHOD, SHIPPING_COST, PAYMENT_METHOD, PROFILE, ORDER_PAYMENT } from '../components/Global';
+import { API, CART, SHIPMENT_METHOD, SHIPPING_COST, PAYMENT_METHOD } from '../components/Global';
 import Image from 'react-native-scalable-image';
 import {RadioGroup, RadioButton} from 'react-native-flexi-radio-button';
 import { Dropdown } from 'react-native-material-dropdown';
@@ -150,7 +146,9 @@ export default class ReviewOrder extends Component {
         PostOrderPayment(params, this.state.token)
             .then((res) => {
                 if (res.s){
-                    this.props.navigation.navigate('PaymentInstruction', {id: res.d.id, bank: res.d.payment_method, bank_image: this.state.paymentMethod});
+                    this.props.navigation.navigate('PaymentInstruction', 
+                    {id: res.d.id, bank: res.d.payment_method, 
+                    bank_image: this.state.paymentMethod, date: res.d.order_date});
                 }
             })
     }

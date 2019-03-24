@@ -1,14 +1,15 @@
 import React, { Component } from "react";
 import { StyleSheet, 
         Text, 
-        View, 
-        Dimensions,
+        View,
         TouchableOpacity, 
-        AsyncStorage,
-        ScrollView } from "react-native";
+        AsyncStorage } from "react-native";
 import { COLOR_PRIMARY } from "../styles/common";
 import {getOrderDetail } from "../services/FetchOrder";
 import Image from 'react-native-scalable-image';
+import { Card } from "react-native-elements";
+import Button from "react-native-button";
+import Clipboard from "react-native-clipboard";
 
 export default class PaymentInstruction extends Component {
     static navigationOptions = {
@@ -33,8 +34,16 @@ export default class PaymentInstruction extends Component {
             orderPayment: [],
             orderDetail: [],
             payment_method: {},
-            bank_image: {}
+            bank_image: {},
+            text: '',
+            clipboardContent: null
         }
+    }
+
+    writeToClipboard = async () => {
+        Clipboard.setString(this.state.payment_method.no_rek);
+        console.log("ini clipboard");
+        alert('Copied to Clipboard!');
     }
 
     componentDidMount (){
@@ -45,8 +54,8 @@ export default class PaymentInstruction extends Component {
         self.setState({payment_method: payment_method});
         var bank_image = state.params.bank_image;
         self.setState({bank_image: bank_image});
-        console.log("ini payment method");
-        console.log(this.state.bank_image);
+        var date = state.params.date;
+        self.setState({date: date});
         AsyncStorage.getItem('id_token').then((token) => {
             getOrderDetail(token, id)
             .then(res => {
@@ -62,20 +71,14 @@ export default class PaymentInstruction extends Component {
                     <Text style={styles.reviewShop}>
                         Nomor Invoice Pesanan
                     </Text>
-                <View style={{alignSelf: 'flex-end', alignItems: 'flex-end', 
-                    position: 'absolute', paddingTop: 10}}>
                     <Text style={styles.reviewShop}>
                         {this.state.invoice.invoice_no}
                     </Text>
-                </View>
                 </View>
                 <View style={styles.containerThree}>
                     <Text style={styles.reviewShop}>
                         Total yang Harus Anda Bayar
                     </Text>
-                </View>
-                <View style={{alignSelf: 'flex-end', alignItems: 'flex-end', 
-                    position: 'absolute', paddingTop: 60}}>
                     <Text style={styles.text}>
                         {new Intl.NumberFormat('en-GB', { 
                         style: 'currency', 
@@ -95,11 +98,27 @@ export default class PaymentInstruction extends Component {
                         source={{uri:this.state.bank_image.picture}}/>
                     <Text style={styles.bankStyle}>
                         {this.state.payment_method.name_rek}    
-                    </Text> 
-                    <Text style={styles.rekeningText}>
-                        Nomor Rek {this.state.payment_method.no_rek}
                     </Text>
+                    <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                        <Text style={styles.rekeningText}>
+                            Nomor Rek {this.state.payment_method.no_rek}
+                        </Text>
+                        <Button style={styles.copyButton} 
+                        onPress={() => this.writeToClipboard()}>
+                            salin
+                        </Button>
+                    </View>
                 </View>
+                <Card containerStyle={{padding: 0, width: "100%", marginTop: 0, height: 40}}>
+                    <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                        <Text style={{paddingLeft: 20, marginTop: 8, fontWeight: 'bold'}}>
+                            Batas Pembayaran Terakhir 
+                        </Text>
+                        <Text style={{marginTop: 8, fontWeight: 'bold', color: 'red'}}>
+                            {this.state.date}   
+                        </Text>
+                    </View>
+                </Card>
                 <TouchableOpacity 
                     style = {styles.submitButton}
                         onPress = {console.log("") }>
@@ -133,7 +152,14 @@ const styles = StyleSheet.create({
         flex: 1,
         width: '100%',
     },
+    containerOne: {
+        padding: 12,
+        marginBottom: 15, 
+        backgroundColor: 'white'
+      },
     containerTwo: {
+        flexDirection: 'row', 
+        justifyContent: 'space-between',
         padding: 10,
         marginTop: 0,
         height: 40,
@@ -143,6 +169,8 @@ const styles = StyleSheet.create({
     containerThree: {
         padding: 10,
         marginTop: 10,
+        flexDirection: 'row', 
+        justifyContent: 'space-between',
         height: 40,
         width: '100%',
         backgroundColor: 'white' 
@@ -208,6 +236,16 @@ const styles = StyleSheet.create({
         alignSelf: "center",
         fontSize: 15,
         fontWeight: 'bold'
+     }, 
+     copyButton: {
+        width: 80,
+        height: 25,
+        fontSize: 15, 
+        color: '#dcdcdc', 
+        borderColor: 'black',
+        borderWidth: 1,
+        backgroundColor: '#FFFFFF', 
+        alignSelf: 'flex-end'
      }
 });
 
