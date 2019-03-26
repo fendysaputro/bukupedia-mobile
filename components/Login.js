@@ -65,8 +65,6 @@ export default class Login extends Component {
                             var resp = responseJson;
                             if ((responseJson.s)) {
                                 AsyncStorage.setItem('user', JSON.stringify(resp.d));
-                                console.log('ini user');
-                                console.log(resp.d);
                             }
                         }) 
                 });

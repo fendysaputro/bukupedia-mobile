@@ -250,7 +250,7 @@ const styles = StyleSheet.create({
         width: 80,
         height: 25,
         fontSize: 15, 
-        color: '#dcdcdc', 
+        color: 'black', 
         borderColor: 'black',
         borderWidth: 1,
         backgroundColor: '#FFFFFF', 

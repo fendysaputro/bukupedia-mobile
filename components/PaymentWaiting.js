@@ -4,6 +4,7 @@ import {
   StyleSheet, 
   Text, 
   View, 
+  ScrollView,
   AsyncStorage,
   TouchableOpacity } from "react-native";
 import { COLOR_PRIMARY } from "../styles/common";
@@ -39,21 +40,21 @@ export default class PaymentWaiting extends Component {
   }
 
   componentDidMount() {
+    var self = this;
     AsyncStorage.getItem('id_token').then((token) => {
       const URL = API + LIST_ORDER + '?token=' + token;
       fetch(URL)
-            .then((res) => {
-              var resObj = JSON.parse(res._bodyText);
-              if (resObj.r) {
-                this.setState({orders: resObj.d})
+            .then((response) => response.json())
+            .then((responseJson) => {
+              var resObj = responseJson;
+              if (responseJson.s) {
+                self.setState({orders: resObj.d});
               }
-            });
+            })
     });
   }
 
   render () {
-    console.log('PaymentWaiting orders');
-    console.log(this.state.orders);
     var contentPayment = <View></View>;
     if (this.state.orders.length == 0) {
       contentPayment = <View style={styles.container}>
@@ -81,12 +82,13 @@ export default class PaymentWaiting extends Component {
                             return (
                               <Card
                                 key={i}
-                                title={'INVOICE NO. '+order.invocie_no}>
+                                title={'INVOICE NO. '+order.invoice_no}>
                                 <Text style={{marginBottom: 10}}>
+                                  Status Pembayaran : 
                                   {order.status}
                                 </Text>
                                 <Text style={{marginBottom: 10}}>
-                                  Total Pembayaran: 
+                                  Total Pembayaran : 
                                   {new Intl.NumberFormat('en-GB', { 
                                       style: 'currency', 
                                       currency: 'IDR',
@@ -101,9 +103,11 @@ export default class PaymentWaiting extends Component {
                       </View>
     }
     return (
-      <View>
-        { contentPayment }
-      </View>
+      <ScrollView>
+        <View>
+          { contentPayment }
+        </View>
+      </ScrollView>
     );
   }
 }
