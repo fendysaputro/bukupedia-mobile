@@ -53,6 +53,8 @@ export default class EditProfile extends Component {
         var self = this;
         AsyncStorage.getItem('id_token').then((token) => {
           const URL3 = API + PROFILE + '?token=' + token;
+          console.log("ini edit profile");
+          console.log(URL3);
           fetch(URL3)
             .then((response) => response.json())
             .then((responseJson) => {
