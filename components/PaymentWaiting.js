@@ -49,6 +49,8 @@ export default class PaymentWaiting extends Component {
               var resObj = responseJson;
               if (responseJson.s) {
                 self.setState({orders: resObj.d});
+                console.log("omdo");
+                console.log(this.state.orders);
               }
             })
     });
@@ -80,23 +82,37 @@ export default class PaymentWaiting extends Component {
                         {
                           this.state.orders.map(function(order, i){
                             return (
+                              <TouchableOpacity
+                              onPress = {console.log("ini paymentWaiting")}>
                               <Card
                                 key={i}
                                 title={'INVOICE NO. '+order.invoice_no}>
                                 <Text style={{marginBottom: 10}}>
-                                  Status Pembayaran : 
-                                  {order.status}
+                                  Status Pembayaran :
+                                  <Text >{" "}</Text>
+                                  <Text style={{fontWeight: 'bold'}}> 
+                                    {order.status}
+                                  </Text>
                                 </Text>
                                 <Text style={{marginBottom: 10}}>
-                                  Total Pembayaran : 
-                                  {new Intl.NumberFormat('en-GB', { 
-                                      style: 'currency', 
-                                      currency: 'IDR',
-                                      minimumFractionDigits: 0, 
-                                      maximumFractionDigits: 0 
-                                  }).format(order.grand_total)}
+                                  Total Pembayaran : <Text >{" "}</Text>
+                                  <Text style={{fontWeight: 'bold'}}>
+                                    {new Intl.NumberFormat('en-GB', { 
+                                        style: 'currency', 
+                                        currency: 'IDR',
+                                        minimumFractionDigits: 0, 
+                                        maximumFractionDigits: 0 
+                                    }).format(order.grand_total)}
+                                  </Text>
+                                </Text>
+                                <Text style={{marginBottom: 10}}>
+                                    Batas Terakhir Pembayaran : <Text>{" "}</Text>
+                                    <Text style={{fontWeight: 'bold', color: 'red'}}>
+                                      {order.order_date}
+                                    </Text>
                                 </Text>
                               </Card>
+                              </TouchableOpacity>
                             );
                           })
                         }
@@ -105,7 +121,9 @@ export default class PaymentWaiting extends Component {
     return (
       <ScrollView>
         <View>
-          { contentPayment }
+         
+            { contentPayment }
+         
         </View>
       </ScrollView>
     );
