@@ -28,7 +28,7 @@ import { ProductDetail } from '../components/ProductDetail';
 import Carousel from 'react-native-carousel-view';
 import Swiper from 'react-native-swiper';
 import WebviewBanner from '../components/WebviewBanner';
-import { postSearch } from '../services/FetchSearch';
+import { postSearch, getPublisher } from '../services/FetchSearch';
 
 var { height, width } = Dimensions.get('window');
 const arrayHolder = [];
@@ -40,7 +40,8 @@ export default class Home extends Component {
       this.state = { 
         banners: [], 
         banners_small: [], 
-        new_products: [],  
+        new_products: [],
+        publisherProduct: [],
         isLoading: true,
         text: ''
       };
@@ -49,7 +50,7 @@ export default class Home extends Component {
       this.arrayholder = [];
   }
 
-  componentWillMount() {
+  componentDidMount() {
     getBanner()
           .then((res) => {
               this.setState({ banners: res.d });
@@ -82,7 +83,7 @@ export default class Home extends Component {
     };
   }
 
-SearchFilterFunction(text){     
+SearchFilterFunction = (text) => {     
      const newData = this.arrayholder.filter(function(item){
        console.log(item);
          const itemData = item.title.toUpperCase()

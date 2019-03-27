@@ -11,3 +11,8 @@ export const postSearch = async (params) => {
         body: JSON.stringify(params),
     }).then((res) => res.json());
 }
+
+export const getPublisher = async(url) => {
+    return fetch(url)
+    .then((res) => res.json());
+}

@@ -143,7 +143,6 @@ export default class ProductDetail extends Component {
         getProductDetail(state.params.url)
             .then((res) => {
                 self.setState({ data: res.d[0], isDataLoaded: true });
-                // console.log('getProductDetail data');
                 console.log(JSON.stringify(res.d[0]));
         });
     }
@@ -168,7 +167,6 @@ export default class ProductDetail extends Component {
                 if (res.s){
                     this.props.navigation.goBack();
                     this.props.navigation.navigate('Basket');
-                    // handleOnCloseButton=()=>{};
                 }
             }); 
             return 
