@@ -56,9 +56,9 @@ export default class Category extends Component {
   componentDidMount(){
     var self = this;
     getCategory()
-          .then((res) => {
-            self.setState({ categories: res.d });
-          });
+      .then((res) => {
+        self.setState({ categories: res.d });
+      });
   }
 
   onSelectedItemsChange = (subCategories) => {
@@ -66,9 +66,6 @@ export default class Category extends Component {
   }
 
   handleTouchCategory = link => { 
-    console.log('product_link');
-    console.log(link);
-    console.log('---');
     this.props.navigation.navigate('ProductCategory', {url: link});
   }
 
