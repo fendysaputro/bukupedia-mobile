@@ -49,8 +49,6 @@ export default class PaymentWaiting extends Component {
               var resObj = responseJson;
               if (responseJson.s) {
                 self.setState({orders: resObj.d});
-                console.log("omdo");
-                console.log(this.state.orders);
               }
             })
     });

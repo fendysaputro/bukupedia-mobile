@@ -15,6 +15,7 @@ import { CheckBox } from "react-native-elements";
 import Login from "../components/Login";
 import getAddress from "../services/FetchAddress";
 import { API, ADDRESS, PROFILE } from '../components/Global';
+import {postEditProfile} from '../services/FetchEditProfile';
 import ReviewOrder from '../components/ReviewOrder';
 
 export default class EditProfile extends Component {
@@ -38,17 +39,6 @@ export default class EditProfile extends Component {
         }
       }
     
-      async retrieveUser() {
-        try {
-          const retrievedUser =  await AsyncStorage.getItem('user');
-          const user = JSON.parse(retrievedUser);
-          return user;
-        } catch (error) {
-          console.log(error.message);
-        }
-        return
-      }
-    
       componentDidMount() {
         var self = this;
         AsyncStorage.getItem('id_token').then((token) => {
@@ -64,6 +54,21 @@ export default class EditProfile extends Component {
               }
             })
         })
+      }
+
+      onEditProfile(params){
+        var self = this;
+        AsyncStorage.getItem('id_token').then((token) => {
+          self.setState({token:token}); 
+        });
+        postEditProfile(params, this.state.token)
+          .then((res) => {
+            console.log("ini resUser");
+            console.log(res);
+            if (res.s){
+
+            }
+          })
       }
 
     render(user){
@@ -117,7 +122,7 @@ export default class EditProfile extends Component {
                       />
                   </View>
                   <TouchableOpacity style = {styles.submitButton}
-                    onPress = {() => this.props.navigation.navigate("Main")}>
+                    onPress = {() => this.onEditProfile()}>
                     <Text style={styles.submitButtonText}>Simpan</Text>
                   </TouchableOpacity>   
             </TouchableOpacity>

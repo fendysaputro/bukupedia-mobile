@@ -21,14 +21,14 @@ export default class Category extends Component {
         onChangeText={function(text){
           console.log("ini text");
           console.log(text);
-          console.log("============");
-          console.log(arrayHolder);
-          // dataSearch = this.getCategory.filter(i => {
+          // console.log("============");
+          // console.log(arrayHolder);
+          // dataSearch = this.category.filter(i => {
           //   return i.category.name.toLowerCase().match( searchText );
           // });
         }}
         // onChangeText={this.searchFilterFunction}
-        // value={this.focusTextInput}
+        // value={this.state.text}
         autoCorrect={false}
         round
         // onClearText={someMethod}
@@ -70,29 +70,30 @@ export default class Category extends Component {
   }
 
   searchFilterFunction = text => {
-    console.log("ini text");
-    console.log(text);
-    console.log("============");
+    // console.log("ini text");
+    // console.log(text);
+    // console.log("============");
     // searchText = event.nativeEvent.text;
     // dataSearch = this.state.categories;
     // searchText = searchText.trim().toLowerCase();
 
     // dataSearch = dataSearch.filter(i => {
-    //   return i.category.name.toLowerCase().match( searchText );
+    //   return i.category.d.name.toLowerCase().match( searchText );
     // });
 
     // this.setState({
     //   dataSearch : dataSearch
     // });
 
-    // const newData = this.arrayHolder.filter(item => {
-    //   const itemData = `${item.category.name.toUpperCase()}`;
-    //   const TextData = text.toUpperCase();
-    //   return itemData.indexOf(textData) > -1;
-    // });
-    // this.setState({
-    //   dataSearch: newData,
-    // })
+    const newData = this.categories.filter(item => {
+      const itemData = `${item.category.name.toUpperCase()}`;
+      const textData = text.toUpperCase();
+      return itemData.indexOf(textData) > -1;
+    });
+    this.setState({
+      dataSearch: newData,
+      text: text
+    })
   }
 
   render () {
