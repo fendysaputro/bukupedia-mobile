@@ -54,9 +54,9 @@ export default class Content extends Component{
                 {
                     this.state.list.map((item, index) => (
                         <TouchableOpacity
-                        key = {item.id}
-                        style = {styles.containerTwo}
-                        onPress = {() => this.props.navigation.navigate(item.link)}
+                          key = {item.id}
+                          style = {styles.containerTwo}
+                          onPress = {() => this.props.navigation.navigate(item.link)}
                         >
                         <Text style = {styles.text}>
                             {item.title}

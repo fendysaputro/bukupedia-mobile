@@ -61,6 +61,7 @@ export default class EditProfile extends Component {
         AsyncStorage.getItem('id_token').then((token) => {
           self.setState({token:token}); 
         });
+        
         postEditProfile(params, this.state.token)
           .then((res) => {
             console.log("ini resUser");

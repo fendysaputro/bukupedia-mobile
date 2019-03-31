@@ -1,23 +1,13 @@
 import React, { Component } from "react";
-import { AppRegistry, 
+import {  
   StyleSheet, 
   Text, 
-  TextInput,
   ScrollView,
   View,
-  Button, 
-  Dimensions,
   TouchableOpacity,
-  Image,
   AsyncStorage } from "react-native";
 import { COLOR_PRIMARY } from "../styles/common";
-import { CheckBox } from "react-native-elements";
-import Login from "../components/Login";
-import getAddress from "../services/FetchAddress";
 import { API, ADDRESS, PROFILE } from '../components/Global';
-import ReviewOrder from '../components/ReviewOrder';
-import { postCreateAddress, getAddressList } from '../services/FetchAddress';
-import AddAddress from '../components/AddAddress';
 
 export default class Address extends Component {
     static navigationOptions = {
@@ -39,17 +29,6 @@ export default class Address extends Component {
           user: {},
           address: {}
         }
-      }
-    
-    async retrieveUser() {
-        try {
-          const retrievedUser =  await AsyncStorage.getItem('user');
-          const user = JSON.parse(retrievedUser);
-          return user;
-        } catch (error) {
-          console.log(error.message);
-        }
-        return
       }
 
     componentDidMount() {

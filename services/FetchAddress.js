@@ -3,7 +3,7 @@ import { API, ADDRESS } from '../components/Global';
 export const getAddressList = async (token) => { 
     const URL = API + ADDRESS + '?token=' + token;
     return fetch(URL)
-            .then((res) => {res._bodyText});
+        .then((res) => res.json());
 }
 
 export const postCreateAddress = async (params, token) => {
