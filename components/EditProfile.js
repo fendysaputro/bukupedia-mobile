@@ -3,6 +3,7 @@ import { AppRegistry,
   StyleSheet, 
   Text, 
   TextInput,
+  TextInputEndEditingEventData,
   ScrollView,
   View,
   Button, 
@@ -37,6 +38,13 @@ export default class EditProfile extends Component {
         this.state = {
           user: {}
         }
+        this.handleChangeText = this.handleChangeText.bind(this)
+      }
+
+      handleChangeText(newText) {
+        this.setState({
+          value: newText
+        });
       }
     
       componentDidMount() {
@@ -61,13 +69,25 @@ export default class EditProfile extends Component {
         AsyncStorage.getItem('id_token').then((token) => {
           self.setState({token:token}); 
         });
+
+        var params = {
+          name: this.state.user.name,
+          email: this.state.user.email
+        }
         
         postEditProfile(params, this.state.token)
           .then((res) => {
-            console.log("ini resUser");
+            console.log("ini res");
             console.log(res);
             if (res.s){
-
+              Alert.alert(
+                'Message',
+                'Update success.',
+                [
+                    {text: 'OK', onPress: () => console.log('OK Pressed')},
+                ],
+                { cancelable: false }
+            ) 
             }
           })
       }
@@ -91,7 +111,7 @@ export default class EditProfile extends Component {
                         placeholderTextColor="#696969"
                         underlineColorAndroid = "transparent"
                         autoCapitalize = "none"
-                        value={this.state.user.name}
+                        defaultValue={this.state.user.name}
                         onChangeText = {(text) => this.setState({name: text})}
                       />
                     
@@ -100,27 +120,37 @@ export default class EditProfile extends Component {
                         placeholderTextColor="#696969"
                         underlineColorAndroid = "transparent"
                         autoCapitalize = "none"
-                        value={this.state.user.email}
-                        onChangeText = {(text) => this.setState({name: text})}
+                        defaultValue={this.state.user.email}
+                        onChangeText = {(text) => this.setState({email: text})}
                       />
 
-                    <Text style={styles.textLogin}>Birth_Date</Text>
+                    <Text style={styles.textLogin}>Tanggal Lahir</Text>
                       <TextInput style={styles.input}
                         placeholderTextColor="#696969"
                         underlineColorAndroid = "transparent"
                         autoCapitalize = "none"
-                        value={this.state.user.birth_date}
-                        onChangeText = {(text) => this.setState({name: text})}
+                        defaultValue={this.state.user.birth_date}
+                        onChangeText = {(text) => this.setState({birth_date: text})}
                       />
 
-                    <Text style={styles.textLogin}>Phone</Text>
+                    <Text style={styles.textLogin}>No Handphone</Text>
                       <TextInput style={styles.input}
                         placeholderTextColor="#696969"
                         underlineColorAndroid = "transparent"
                         autoCapitalize = "none"
-                        value={this.state.user.phone}
-                        onChangeText = {(text) => this.setState({name: text})}
+                        defaultValue={this.state.user.phone}
+                        onChangeText = {(text) => this.setState({phone: text})}
                       />
+
+                    <Text style={styles.textLogin}>Alamat</Text>
+                      <TextInput style={styles.input}
+                        placeholderTextColor="#696969"
+                        underlineColorAndroid = "transparent"
+                        autoCapitalize = "none"
+                        defaultValue={this.state.user.address}
+                        onChangeText = {(text) => this.setState({address: text})}
+                      />
+
                   </View>
                   <TouchableOpacity style = {styles.submitButton}
                     onPress = {() => this.onEditProfile()}>

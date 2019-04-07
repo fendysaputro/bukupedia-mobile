@@ -32,19 +32,6 @@ export default class WelcomeAccount extends Component {
     }
   }
 
-  async retrieveUser() {
-    try {
-      const retrievedUser =  await AsyncStorage.getItem('user');
-      const user = JSON.parse(retrievedUser);
-      console.log("isi dari user");
-      console.log(this.state.user);
-      return user;
-    } catch (error) {
-      console.log(error.message);
-    }
-    return
-  }
-
   componentDidMount() {
     AsyncStorage.getItem('id_token').then((token) => {
       this.setState({ hasToken: token !== null, isLoaded: true });
