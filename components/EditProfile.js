@@ -58,7 +58,8 @@ export default class EditProfile extends Component {
             .then((responseJson) => {
               var profileObj = responseJson;
               if ((profileObj.s)){
-                self.setState({user: profileObj.d});
+                self.setState(profileObj.d);
+                // self.setState({name: profileObj.d.name});
               }
             })
         })
@@ -70,10 +71,18 @@ export default class EditProfile extends Component {
           self.setState({token:token}); 
         });
 
-        var params = {
-          name: this.state.user.name,
-          email: this.state.user.email
-        }
+        // var params = {
+        //   name: this.state.name,
+        //   email: this.state.email,
+        //   phone: this.state.phone,
+        //   birth_date: this.state.birth_date,
+        //   gender: this.state.gender,
+        //   address: this.state.address
+        // }
+
+        var params = this.state;
+        console.log("ini params");
+        console.log(params);
         
         postEditProfile(params, this.state.token)
           .then((res) => {
@@ -111,7 +120,7 @@ export default class EditProfile extends Component {
                         placeholderTextColor="#696969"
                         underlineColorAndroid = "transparent"
                         autoCapitalize = "none"
-                        defaultValue={this.state.user.name}
+                        defaultValue={this.state.name}
                         onChangeText = {(text) => this.setState({name: text})}
                       />
                     
@@ -120,7 +129,7 @@ export default class EditProfile extends Component {
                         placeholderTextColor="#696969"
                         underlineColorAndroid = "transparent"
                         autoCapitalize = "none"
-                        defaultValue={this.state.user.email}
+                        defaultValue={this.state.email}
                         onChangeText = {(text) => this.setState({email: text})}
                       />
 
@@ -129,8 +138,17 @@ export default class EditProfile extends Component {
                         placeholderTextColor="#696969"
                         underlineColorAndroid = "transparent"
                         autoCapitalize = "none"
-                        defaultValue={this.state.user.birth_date}
+                        defaultValue={this.state.birth_date}
                         onChangeText = {(text) => this.setState({birth_date: text})}
+                      />
+
+                    <Text style={styles.textLogin}>Jenis Kelamin</Text>
+                      <TextInput style={styles.input}
+                        placeholderTextColor="#696969"
+                        underlineColorAndroid = "transparent"
+                        autoCapitalize = "none"
+                        defaultValue={this.state.gender}
+                        onChangeText = {(text) => this.setState({gender: text})}
                       />
 
                     <Text style={styles.textLogin}>No Handphone</Text>
@@ -138,7 +156,7 @@ export default class EditProfile extends Component {
                         placeholderTextColor="#696969"
                         underlineColorAndroid = "transparent"
                         autoCapitalize = "none"
-                        defaultValue={this.state.user.phone}
+                        defaultValue={this.state.phone}
                         onChangeText = {(text) => this.setState({phone: text})}
                       />
 
@@ -147,7 +165,7 @@ export default class EditProfile extends Component {
                         placeholderTextColor="#696969"
                         underlineColorAndroid = "transparent"
                         autoCapitalize = "none"
-                        defaultValue={this.state.user.address}
+                        defaultValue={this.state.address}
                         onChangeText = {(text) => this.setState({address: text})}
                       />
 
