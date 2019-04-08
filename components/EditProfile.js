@@ -10,6 +10,7 @@ import { AppRegistry,
   Dimensions,
   TouchableOpacity,
   Image,
+  Alert,
   AsyncStorage } from "react-native";
 import { COLOR_PRIMARY } from "../styles/common";
 import { CheckBox } from "react-native-elements";
@@ -36,15 +37,8 @@ export default class EditProfile extends Component {
     constructor (props) {
         super(props);
         this.state = {
-          user: {}
+          
         }
-        this.handleChangeText = this.handleChangeText.bind(this)
-      }
-
-      handleChangeText(newText) {
-        this.setState({
-          value: newText
-        });
       }
     
       componentDidMount() {
@@ -58,11 +52,15 @@ export default class EditProfile extends Component {
             .then((responseJson) => {
               var profileObj = responseJson;
               if ((profileObj.s)){
-                self.setState(profileObj.d);
+                self.setState(profileObj.d); 
                 // self.setState({name: profileObj.d.name});
               }
             })
         })
+      }
+
+      handleBack = () => {
+        this.props.navigation.goBack();
       }
 
       onEditProfile(params){
@@ -71,16 +69,7 @@ export default class EditProfile extends Component {
           self.setState({token:token}); 
         });
 
-        // var params = {
-        //   name: this.state.name,
-        //   email: this.state.email,
-        //   phone: this.state.phone,
-        //   birth_date: this.state.birth_date,
-        //   gender: this.state.gender,
-        //   address: this.state.address
-        // }
-
-        var params = this.state;
+        var params = this.state; // this state merupakan isi dari profileObj.d
         console.log("ini params");
         console.log(params);
         
@@ -93,7 +82,7 @@ export default class EditProfile extends Component {
                 'Message',
                 'Update success.',
                 [
-                    {text: 'OK', onPress: () => console.log('OK Pressed')},
+                    {text: 'OK', onPress: () => this.handleBack()},
                 ],
                 { cancelable: false }
             ) 
@@ -105,7 +94,6 @@ export default class EditProfile extends Component {
       return(
         <ScrollView contentContainer={styles.contentContainer}> 
           <View style = {styles.container}>
-            {
             <TouchableOpacity
                 key = '1'
                 style = {styles.container}
@@ -114,6 +102,8 @@ export default class EditProfile extends Component {
                     <Text style={styles.text}>
                         Edit Foto
                     </Text>
+            </TouchableOpacity>
+
                   <View style={styles.containerTwo}>
                     <Text style={styles.textLogin}>Nama</Text>
                       <TextInput style={styles.input}
@@ -138,6 +128,8 @@ export default class EditProfile extends Component {
                         placeholderTextColor="#696969"
                         underlineColorAndroid = "transparent"
                         autoCapitalize = "none"
+                        keyboardType="numeric"
+                        maxLength={12}
                         defaultValue={this.state.birth_date}
                         onChangeText = {(text) => this.setState({birth_date: text})}
                       />
@@ -156,6 +148,8 @@ export default class EditProfile extends Component {
                         placeholderTextColor="#696969"
                         underlineColorAndroid = "transparent"
                         autoCapitalize = "none"
+                        keyboardType="numeric"
+                        maxLength={12}
                         defaultValue={this.state.phone}
                         onChangeText = {(text) => this.setState({phone: text})}
                       />
@@ -174,8 +168,6 @@ export default class EditProfile extends Component {
                     onPress = {() => this.onEditProfile()}>
                     <Text style={styles.submitButtonText}>Simpan</Text>
                   </TouchableOpacity>   
-            </TouchableOpacity>
-            }
           </View>
         </ScrollView>
       )
