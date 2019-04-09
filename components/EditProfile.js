@@ -13,12 +13,9 @@ import { AppRegistry,
   Alert,
   AsyncStorage } from "react-native";
 import { COLOR_PRIMARY } from "../styles/common";
-import { CheckBox } from "react-native-elements";
-import Login from "../components/Login";
-import getAddress from "../services/FetchAddress";
-import { API, ADDRESS, PROFILE } from '../components/Global';
+import { API, PROFILE } from '../components/Global';
 import {postEditProfile} from '../services/FetchEditProfile';
-import ReviewOrder from '../components/ReviewOrder';
+import {WelcomeAccount} from '../components/WelcomeAccount';
 
 export default class EditProfile extends Component {
     static navigationOptions = {
@@ -37,7 +34,7 @@ export default class EditProfile extends Component {
     constructor (props) {
         super(props);
         this.state = {
-          
+          selected: false
         }
       }
     
@@ -45,8 +42,6 @@ export default class EditProfile extends Component {
         var self = this;
         AsyncStorage.getItem('id_token').then((token) => {
           const URL3 = API + PROFILE + '?token=' + token;
-          console.log("ini edit profile");
-          console.log(URL3);
           fetch(URL3)
             .then((response) => response.json())
             .then((responseJson) => {
@@ -59,8 +54,9 @@ export default class EditProfile extends Component {
         })
       }
 
-      handleBack = () => {
-        this.props.navigation.goBack();
+      handleBack(){
+        // var newParams = this.state;
+        this.props.navigation.navigate("Main");
       }
 
       onEditProfile(params){
@@ -70,17 +66,13 @@ export default class EditProfile extends Component {
         });
 
         var params = this.state; // this state merupakan isi dari profileObj.d
-        console.log("ini params");
-        console.log(params);
         
         postEditProfile(params, this.state.token)
           .then((res) => {
-            console.log("ini res");
-            console.log(res);
             if (res.s){
               Alert.alert(
                 'Message',
-                'Update success.',
+                res.m,
                 [
                     {text: 'OK', onPress: () => this.handleBack()},
                 ],

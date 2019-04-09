@@ -51,7 +51,7 @@ export default class Register extends Component {
                     AsyncStorage.setItem('token', JSON.stringify(false));
                     Alert.alert(
                         'Message',
-                        'Register success.',
+                        res.m,
                         [
                             {text: 'OK', onPress: () => this.props.navigation.navigate("Login")},
                         ],

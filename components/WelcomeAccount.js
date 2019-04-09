@@ -10,20 +10,6 @@ import {
   AsyncStorage, RefreshControl } from "react-native";
 import { COLOR_PRIMARY } from "../styles/common";
 import { API, PROFILE } from '../components/Global';
-import TabNavigator from "react-native-tab-navigator";
-import Button from "react-native-button";
-import { List, ListItem } from "react-native-elements";
-import Login from "./Login"
-import { Header } from "react-native-elements";
-import EditProfile from "../components/EditProfile";
-import AddAddress from "../components/AddressMain";
-import NewRating from "../components/NewRating";
-import Wishlist from "../components/Wishlist";
-import Content from "../components/Content";
-import Blog from "../components/Blog";
-import { getLogout } from "../services/FetchLogout";
-import Home from "../components/Home";
-import Account from "../components/Account";
 
 export default class WelcomeAccount extends Component {
 
@@ -51,21 +37,35 @@ export default class WelcomeAccount extends Component {
 
   componentDidMount() {
     var self = this;
+    // AsyncStorage.getItem('id_token').then((token) => {
+    //   const URL3 = API + PROFILE + '?token=' + token;
+    //   fetch(URL3)
+    //     .then((response) => response.json())
+    //     .then((responseJson) => {
+    //       var profileObj = responseJson;
+    //       if ((profileObj.s)){
+    //         self.setState(profileObj.d); 
+    //         // self.setState({user: profileObj.d});
+    //       }
+    //     })
+    // });
     AsyncStorage.getItem('id_token').then((token) => {
       const URL3 = API + PROFILE + '?token=' + token;
-      console.log("ini edit profile");
-      console.log(URL3);
-      fetch(URL3)
-        .then((response) => response.json())
-        .then((responseJson) => {
-          var profileObj = responseJson;
-          if ((profileObj.s)){
-            // self.setState(profileObj.d); 
-            self.setState({user: profileObj.d});
-          }
-        })
-    })
+        fetch(URL3)
+          .then((response) => response.json())
+          .then((responseJson) => {
+            var profileObj = responseJson;
+              self.setState(profileObj.d); 
+          })
+    });
   }
+
+  // onHandleRefresh = () => {
+  //   this.setState({refreshing: true});
+  //   var newUser = this.state.user;
+  //   console.log("ini new user");
+  //   console.log(newUser);
+  // }
 
   replaceScreen = () => {
     // this.props.navigation.dispatch({
@@ -74,15 +74,6 @@ export default class WelcomeAccount extends Component {
     //   key: 'WelcomeAccount',
     // });
   };
-
-  _onRefresh = () => {
-    var newUser = this.state.user.name;
-    this.setState({refreshing: true});
-    fetch(newUser).then(() => {
-      this.setState({refreshing: false});
-    });
-  }
-
 
   onLogout = () => {
     AsyncStorage.clear();
@@ -142,14 +133,13 @@ export default class WelcomeAccount extends Component {
   render () {
     let userObj = userObj;
     return (
-      <ScrollView
-      refreshControl={
-        <RefreshControl
-          refreshing={this.state.refreshing}
-          onRefresh={this._onRefresh}
-        />
-      }>
-
+      // <ScrollView 
+      // refreshControl={
+      //   <RefreshControl 
+      //     refreshing = {this.state.refreshing}
+      //     onRefresh = {this.onHandleRefresh()}>
+      //   </RefreshControl>
+      // }>
      <View style = {styles.container}>
         {
         <TouchableOpacity
@@ -158,7 +148,7 @@ export default class WelcomeAccount extends Component {
             onPress = {() => this.props.navigation.navigate('EditProfile')}>
             <Image source={require('../styles/icon/edit-foto.png')} style={{ width: 24, height: 24, alignItems: 'flex-start' }}/> 
             <Text style = {styles.textNew}>
-              Hi, {this.state.user.name}
+              Hi, {this.state.name}
             </Text>   
         </TouchableOpacity>
         }
@@ -186,7 +176,7 @@ export default class WelcomeAccount extends Component {
           </TouchableOpacity>
         }
       </View>
-      </ScrollView>
+      //  </ScrollView>
     )
   }
 }
