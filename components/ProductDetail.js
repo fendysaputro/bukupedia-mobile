@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import {  AppRegistry, Text, ScrollView, FlatList,
-          StyleSheet, View, TouchableOpacity, 
+          StyleSheet, View, TouchableOpacity, ToastAndroid, 
           Button, Dimensions, AsyncStorage } from "react-native";
 import { COLOR_PRIMARY } from "../styles/common";
 import HeaderButtons from "react-navigation-header-buttons";
@@ -165,9 +165,10 @@ export default class ProductDetail extends Component {
         addShoppingCart(params, this.state.token)
             .then((res) => {
                 if (res.s){
-                    this.handleOnCloseButton();
+                    // this.handleOnCloseButton();
                     // this.props.navigation.goBack();
-                    // this.props.navigation.navigate('Basket');
+                    ToastAndroid.show('Pesanan anda berhasil masuk ke keranjang', ToastAndroid.LONG);
+                    this.props.navigation.navigate('Main');
                 }
             }); 
             return 

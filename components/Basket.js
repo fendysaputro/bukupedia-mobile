@@ -143,7 +143,6 @@ export default class Basket extends Component {
       carts.map((product, index) => {
         product_price = product.price * product.quantity;
         total_price = total_price + product_price;
-        console.log(total_price);
       });
       return(
         <ScrollView>
