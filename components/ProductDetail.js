@@ -165,8 +165,9 @@ export default class ProductDetail extends Component {
         addShoppingCart(params, this.state.token)
             .then((res) => {
                 if (res.s){
-                    this.props.navigation.goBack();
-                    this.props.navigation.navigate('Basket');
+                    this.handleOnCloseButton();
+                    // this.props.navigation.goBack();
+                    // this.props.navigation.navigate('Basket');
                 }
             }); 
             return 

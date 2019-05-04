@@ -89,6 +89,7 @@ export default class Basket extends Component {
     self.setState({carts: []});
     AsyncStorage.getItem('id_token').then((token) => {
       const URL = API + CART + '?token=' + token;
+      console.log(URL);
       fetch(URL)
       .then((response) => response.json())
       .then((responseJson) => {
@@ -138,9 +139,11 @@ export default class Basket extends Component {
           </View>
         )
       }
-      let total = 0;
+      let total_price = 0;
       carts.map((product, index) => {
-        total = total + product.price;
+        product_price = product.price * product.quantity;
+        total_price = total_price + product_price;
+        console.log(total_price);
       });
       return(
         <ScrollView>
@@ -168,9 +171,6 @@ export default class Basket extends Component {
                       }).format(product.price)}
                     </Text>
                     <Text style={{marginTop:20}}>Jumlah: {product.quantity}</Text>
-                    {/* <NumericInput 
-                      onChange={value => this.setState({quantity: value})}
-                      value={product.quantity}/>             */}
                   </View>
                 </View>
               ))
@@ -182,7 +182,7 @@ export default class Basket extends Component {
                                     currency: 'IDR',
                                     minimumFractionDigits: 0, 
                                     maximumFractionDigits: 0 
-                                }).format(total)}
+                                }).format(total_price)}
               </Text>
               <TouchableOpacity style={styles.button}
                 onPress = {() => this.props.navigation.navigate("Checkout")}>

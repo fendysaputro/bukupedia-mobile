@@ -60,6 +60,14 @@ export default class WelcomeAccount extends Component {
     });
   }
 
+  onUpdate = data => {
+        this.setState(data);
+      };
+   
+      _onUpdate() { 
+        this.props.navigation.navigate('EditProfile', { _onUpdate : this._onUpdate });
+      }
+
   // onHandleRefresh = () => {
   //   this.setState({refreshing: true});
   //   var newUser = this.state.user;

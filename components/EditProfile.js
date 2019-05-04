@@ -55,9 +55,16 @@ export default class EditProfile extends Component {
       }
 
       handleBack(){
-        // var newParams = this.state;
+        var newParams = this.state;
         this.props.navigation.navigate("Main");
       }
+
+      // goBack() {
+      //   // const { navigation } = this.props;
+      //   // navigation.goBack();
+      //   // navigation.state.params.onUpdate({ selected: true });
+      //   this.navigation.state.params.goBack();
+      // }
 
       onEditProfile(params){
         var self = this;
@@ -65,7 +72,7 @@ export default class EditProfile extends Component {
           self.setState({token:token}); 
         });
 
-        var params = this.state; // this state merupakan isi dari profileObj.d
+        var params = this.state; // this.state merupakan isi dari profileObj.d
         
         postEditProfile(params, this.state.token)
           .then((res) => {
